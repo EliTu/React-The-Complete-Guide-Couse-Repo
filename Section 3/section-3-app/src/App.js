@@ -8,9 +8,13 @@ class App extends Component {
 		return (
 			<div className="App">
 				<h1>Hi, I'm a React App</h1>
-				<Person />
-				<Person />
-				<Person />
+				<Person name="Eliad" age="27">
+					is a Future Programmer
+				</Person>
+				<Person name="Jakob" age="27">
+					is a Future MD
+				</Person>
+				<Person name="Ada" age="21" />
 				<img
 					src={logo}
 					alt="React logo"

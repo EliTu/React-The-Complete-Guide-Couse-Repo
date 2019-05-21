@@ -160,3 +160,60 @@ const Person = () => {
 Now when we refresh the page, we will see each `Person` component has the string with a random number between 0 and 30.
 
 ## Working with Props (Section 3, lecture 35)
+
+As in normal HTML, we can pass attributes, such as `class`, `id`, `value` for `<input>` etc. For our custom elements, our components, we could also pass in custom attributes into them, that later we could use as data that we can pass into the component, making it more dynamic and flexible.
+
+```js
+    <Person name="Eliad" age="27">
+    is a Future Programmer
+    </Person>
+    <Person name="Jakob" age="27">
+    is a Future MD
+    </Person>
+    <Person name="Ada" age="21" />
+```
+
+These attributes are called `props` in React, and we could pass `props` at the parent component level, where the components are being rendered, and use them inside the component which they were passed again. At the component itself, we can access the props by passing `props` in the component function arguments. Then, inside the curly braces block where we pass the JavaScript expressions, we can access the specific props by passing the "attribute" name, like `props.name`.
+
+```js
+const Person = props => {
+	return (
+		<p>
+			I'm {props.name}, I'm {props.age} years old
+		</p>
+	);
+};
+```
+
+In turn, each component will render itself with its coresponding props data. We should note that if it is a class based component, we should access the props with `this`, so we will pass `this.props.name`, for example.
+
+## Understanding the Children Property (Section 3, lecture 36)
+
+How would we output whatever we passed between our opening and closing tags of our components? We would first want to go to the component, wrap the `return` statement with parantheses, as we will output a multi-line JSX statement, and pass another element, for example another `<p>` tag. Inside the tag, we will pass `{props.children}`. The `children` is a reserved React property, which basically points out to the content being passed between the custom component tags.
+
+```js
+<Person name="Eliad" age="27">
+	is a Future Programmer
+</Person>
+<Person name="Jakob" age="27">
+	is a Future MD
+</Person>
+<Person name="Ada" age="21" />
+```
+
+```js
+const Person = props => {
+	return (
+		<div>
+			<p>
+				I'm {props.name}, I'm {props.age} years old
+			</p>
+			<p>{props.children}</p>
+		</div>
+	);
+};
+```
+
+This in turn will create another `<p>` tag in the DOM that will display the contents of the component. This content could also be complex HTML code, React components etc, and not only text. If we inspect the elements on the page, we will see that the `<p>` tag are being rendered with the text inside of them, while the component without the inner contnet has an empty `<p>` tag, since its `children` property values is `null`.
+
+## Understanding and using State (Section 3, lecture 37)

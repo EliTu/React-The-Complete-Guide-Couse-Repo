@@ -69,3 +69,62 @@ render() {
 We can do this thanks to the `React` library we're importing, and it is important to use it when writing JSX, even though we're not specifically passing it anywhere in our code, but at compile time it is used to access the `createElement` method, that allows us to create the DOM nodes.
 
 ## JSX Restrictions (Section 3, lecture 29)
+
+JSX has some limitations:
+
+-   Most attributes could be passed as we would with regular HTML attributes, but in other cases, we will need to pass them as we would when we write JavaScript, since as we know JSX is actually JavaScript. And so, this is why we pass `className` and not `class`, as this is the JavaScript way to pass a class on an HTML element.
+-   We cannot `return` multiple nodes, all the code needs to be wrapped in a single root element, usually a `<div>`. React version 16+ does introduce a way to pass adjacent elements, but we will only touch this subject by the end of the course.
+
+The `return` statement has parantheses because it allows us to create a single multi-line expression, that then we could structure like a normal HTML structure, and allow us to avoid errors.
+
+## Creating a Functional Component (Section 3, lecture 30)
+
+As stated before, React is all about building and working with components, and so this is what we will do now. WE will create a function based component (In contrast with the class based component we saw our root App component is made with).
+
+For this, in the `src` folder we will add a new folder which will bear our component name, and inside will host the component .js file, which will also has the same name - `Person`. It is a convention to create a separate folder for each component, and name them with a capital first letter, and try to make the name as descriptive as possible. It is important to provide components a capital first letter since lower case tags are reserved for HTML code, and so to prevent errors and distinguish components, we will pass them with a capital first letter.
+
+Inside the `Person.js` file, we will create a new functional component, which is also known as a 'dumb' component, since (up until React Hooks) does not hold its own state, but simply renders JSX. We can create it easily using the React snippets and passing `rface`, to immediately create an arrow function component, with the proper `import` and `export` statements. We don't `import` or use `Component` because we're not passing a class based Component, and so we do not need to `extend` the React `Component` superclass.
+
+```js
+import React from 'react';
+
+const Person = () => {
+	return <div />;
+};
+
+export default Person;
+```
+
+This will be the default skeleton of a functional component. inside the `return` statement we could pass JSX code. And so we could pass any valid DOM node that will be converted to HTML and presented in the DOM, as long as it is a single expression (a single Node or couple of elements wrapped inside a single node), and so we will just pass a `<p>` that has some text inside of it. Because it is a single line `return` statement, we won't need parentheses.
+
+```js
+import React from 'react';
+
+const Person = () => {
+	return <p>I'm a person component!</p>;
+};
+
+export default Person;
+```
+
+Now due to having the `export` statement, we could pass this component to different files, between different components, using the `import` statement to import the file from the `Person` folder. We will go ahead and insert it inside of the root App component, when we pass an HTML element that bears the component name, and since it does not nest any content or other components inside of it, we can make it a self-closing tag: `<Person />`.
+
+```js
+import Person from './Person/Person';
+
+class App extends Component {
+	render() {
+		return (
+			<div className="App">
+				<h1>Hi, I'm a React App</h1>
+				<Person />
+				<img src={logo} alt="" style={{ height: 300, width: 300 }} />
+			</div>
+		);
+	}
+}
+```
+
+Now the page renders the `<p>` tag element to the DOM, having the text we passed between the `Person` component `<p>` tags.
+
+## Working with Components & Re-using Them (Section 3, lecture 33)

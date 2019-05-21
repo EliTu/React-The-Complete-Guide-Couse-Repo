@@ -128,3 +128,35 @@ class App extends Component {
 Now the page renders the `<p>` tag element to the DOM, having the text we passed between the `Person` component `<p>` tags.
 
 ## Working with Components & Re-using Them (Section 3, lecture 33)
+
+Componenets are essentially a reusable pieces of code, where we should be able to use them throughout our app, as they all should be modular and independent. Keeping this in mind, we can simply pass our `Person` component as many times as we would like, and it we render out whatever we've input inside of its `return` statement. This makes the notion of building an app composed of many components more simple and awesome.
+
+```js
+class App extends Component {
+	render() {
+		return (
+			<div className="App">
+				<h1>Hi, I'm a React App</h1>
+				<Person />
+				<Person />
+				<Person />
+				<img src={logo} alt="" style={{ height: 300, width: 300 }} />
+			</div>
+		);
+	}
+}
+```
+
+## Outputing Dynamic Components (Section 3, lecture 34)
+
+What if we want to pass some dynamic, JavaScript code into a component JSX so it will be displayed in the DOM? We can pass JavaScript expressions into component by passing valid JavaScript code between single curly braces. We can pass variables, functions, one line expressions etc, though we can't define a a JavaScript class inside of it or any complex expression like that.
+
+```js
+const Person = () => {
+	return <p>I'm a person, I'm {Math.floor(Math.random() * 30)} years old</p>;
+};
+```
+
+Now when we refresh the page, we will see each `Person` component has the string with a random number between 0 and 30.
+
+## Working with Props (Section 3, lecture 35)

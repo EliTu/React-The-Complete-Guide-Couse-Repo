@@ -9,7 +9,13 @@ class App extends Component {
 			<div className="App">
 				<h1>Hi, I'm a React App</h1>
 				<Person />
-				<img src={logo} alt="" style={{ height: 300, width: 300 }} />
+				<Person />
+				<Person />
+				<img
+					src={logo}
+					alt="React logo"
+					style={{ height: 300, width: 300 }}
+				/>
 			</div>
 		);
 	}

@@ -217,3 +217,92 @@ const Person = props => {
 This in turn will create another `<p>` tag in the DOM that will display the contents of the component. This content could also be complex HTML code, React components etc, and not only text. If we inspect the elements on the page, we will see that the `<p>` tag are being rendered with the text inside of them, while the component without the inner contnet has an empty `<p>` tag, since its `children` property values is `null`.
 
 ## Understanding and using State (Section 3, lecture 37)
+
+We saw that Props allowed us to pass some data outside of a component as an attribute, at the parent level, and get that data inside of the component using the `props` argument. But what if we want to have data inside of the component? something that allows us to store data inside of the component and allow the component to interact and change it too. That's the concept of State.
+
+In our App.js file, lets say we also want to add a `<button>` that will have a name switch functionality. But first, we would like to define the names of the Person components in a non-hardcoded way, basically in a more dynamic way.
+
+### The `state`
+
+The App component is a `class`, or more precisely a subclass that extends the React `Component` superclass, thus it has properties. And so, whenever we `import` React and extend `Component`, we get access to the `state` property, which is a special and reserved React property which will allow us to store data that is relevant to that component (or children of that component), and also to dynamically change that data. The `state` is an object that allows us to store various data properties which we could also use in the component.
+
+This is in contrast to the `props`; as they are set and passed from outside of the component, as we set `name` and `age` to the `Person` component at the `App` component, in the App.js file (and not within the Person.js file), `state` is managed within the component.
+
+```js
+class App extends Component {
+	state = {
+		// An object that stores the component Data
+	};
+
+	render() {
+		// Render JSX
+	}
+}
+```
+
+**Note on `state` and non-class based components -** Up until the introduction of Hooks in React 16.8, `state` was only possible to set and pass in a class based components, meaning that only components which extend `Component` could have access to the `state` property. So up to the part where we will learn about Hooks, later in the course, `state` will only be set in class based components, and we will never set it in a functional component. Still, we would like to use functional components as much as possible, because we should use State with care and responsibility.
+
+The special thing is, that upon changing the data, or setting the state, React will automatically re-render the page to match the changes that were made in the state of the component with what is being presented in the DOM.
+
+In our case, we would like to pass an array of `persons` in the state, which will be made of objects that include all the data about a person which we could input into the `Person` component. Note that in contrast with the hard-coded code that we passed as props, the `state` is a pure JavaScript code, and so, for example, the `age` will have a number which is a number type, and not a string.
+
+```js
+class App extends Component {
+	state = {
+		persons: [
+			{
+				name: 'Eliad',
+				age: 27,
+			},
+			{
+				name: 'Jakob',
+				age: 27,
+			},
+			{
+				name: 'Ada',
+				age: 21,
+			},
+		],
+	};
+}
+```
+
+### Passing the state as `props` to the child components
+
+Now that we have our `state` property data, we could pass it to the `<Person>` component instead of the hard-coded name and age. We could do that by opening curly braces to input a JavaScript expression, and then pass the relevant state property using `this`, since we're still inside the `class` and have access to the `this` keyword.
+
+```js
+render() {
+		return (
+			<div className="App">
+				<h1>Hi, I'm a React App</h1>
+				<button>Switch name!</button>
+				<Person
+					name={this.state.persons[0].name}
+					age={this.state.persons[0].age}
+				>
+					is a Future Programmer
+				</Person>
+				<Person
+					name={this.state.persons[1].name}
+					age={this.state.persons[1].age}
+				>
+					is a Future MD
+				</Person>
+				<Person
+					name={this.state.persons[2].name}
+					age={this.state.persons[2].age}
+				/>
+				<img
+					src={logo}
+					alt="React logo"
+					style={{ height: 300, width: 300 }}
+				/>
+			</div>
+		);
+	}
+```
+
+Now upon reloading the app we see the same output as before, but this time we use the `state` property. If we were to change one of the properties or values in the state, it will lead React to automatically update, or re-render, the DOM without the need to reload the page.
+
+## Props & State (Section 3, lecture 37)

@@ -4,17 +4,55 @@ import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
+	state = {
+		persons: [
+			{
+				name: 'Eliad',
+				age: 27,
+			},
+			{
+				name: 'Jakob',
+				age: 27,
+			},
+			{
+				name: 'Ada',
+				age: 21,
+			},
+		],
+	};
+
+	reverse = () => {
+		this.setState({
+			persons: this.state.persons.map(el =>
+				el.name
+					.split('')
+					.reverse()
+					.join('')
+			),
+		});
+	};
+
 	render() {
 		return (
 			<div className="App">
 				<h1>Hi, I'm a React App</h1>
-				<Person name="Eliad" age="27">
+				<button onClick={this.reverse}>Switch name!</button>
+				<Person
+					name={this.state.persons[0].name}
+					age={this.state.persons[0].age}
+				>
 					is a Future Programmer
 				</Person>
-				<Person name="Jakob" age="27">
+				<Person
+					name={this.state.persons[1].name}
+					age={this.state.persons[1].age}
+				>
 					is a Future MD
 				</Person>
-				<Person name="Ada" age="21" />
+				<Person
+					name={this.state.persons[2].name}
+					age={this.state.persons[2].age}
+				/>
 				<img
 					src={logo}
 					alt="React logo"

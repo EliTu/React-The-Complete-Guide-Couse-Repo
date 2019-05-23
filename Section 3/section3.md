@@ -329,3 +329,40 @@ clickHandler = () => {};
 ```
 
 ## Manipulating The Satate (Section 2, lecture 41)
+
+When we want to manipulate the state, change it in any way in our code, we could not do it by directly mutating the `state` object, by doing this:
+
+```js
+clickHandler = () => {
+	this.state.persons[0].name = // Some code
+};
+```
+
+Directly mutating the state object is forbiden in React, and React will not recognize these changes and actually will throw warnings in the console. Instead we need to use a built in method of the React `Component` superclass, the `this.setState` method.
+
+This method allows us to specifically change the state of the component in a way that will not mutate the original state. The changes to the State that we will pass to the `setState` method will be compared to the original state, and then React will reflect the changes in the DOM.
+
+The method takes an object, and inside we can pass the `persons` array again, and make some changes to it. React will then "merge" the new state with the old state and reflect the changes in the DOM, causing a re-render when the State changes take effect, in our case, upon clicking on the button with the callback function that calls the `setState` method.
+
+```js
+clickHandler = () => {
+	this.setState({
+		persons: [
+			{
+				name: 'Eliad Touksher',
+				age: 27,
+			},
+			{
+				name: 'Jakob Blecher',
+				age: 27.5,
+			},
+			{
+				name: 'Ada Chen',
+				age: 21,
+			},
+		],
+	});
+};
+```
+
+React will only update the relevant data in the `state` object, and will leave the other unchanged State as it was. Now when we will click on the button, only the values of `name` and `age` that were changed from the original state will be changed in the DOM immediately. This means that React will only look for the specific changes that we made for the state and will only reflect these changes, which is good since we're not interested in affecting the whole State data structure anew.

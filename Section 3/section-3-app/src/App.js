@@ -21,7 +21,24 @@ class App extends Component {
 		],
 	};
 
-	clickHandler = () => {};
+	clickHandler = () => {
+		this.setState({
+			persons: [
+				{
+					name: 'Eliad Touksher',
+					age: 27,
+				},
+				{
+					name: 'Jakob Blecher',
+					age: 27.5,
+				},
+				{
+					name: 'Ada Chen',
+					age: 21,
+				},
+			],
+		});
+	};
 
 	render() {
 		return (

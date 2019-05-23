@@ -366,3 +366,257 @@ clickHandler = () => {
 ```
 
 React will only update the relevant data in the `state` object, and will leave the other unchanged State as it was. Now when we will click on the button, only the values of `name` and `age` that were changed from the original state will be changed in the DOM immediately. This means that React will only look for the specific changes that we made for the state and will only reflect these changes, which is good since we're not interested in affecting the whole State data structure anew.
+
+So what basically triggers the DOM re-render? The changes we made in the State, but also the changes made in the Props! We need to remember that the changes we made now in the State are actually being passed as Props to the `Person` component and used in the `render` method, and so this triggers updates in that component too, although it does not hold any state.
+
+## Using the useState() Hook for State Manipulation (Section 3, lecture 43)
+
+Now we will have q sneak peak to the new React 16.8+ feature of Hooks, which will allow us to set and manipulate State on functional based components, instead of having State available only to class based components. We will see it now in action, but we will not use it up until the 2 modules that will dive deep into the hooks features, and rebuilding the entire course project with hooks, and so up until then we will continue to use the class based components for the State.
+
+### What are Hooks and how do they look like?
+
+React Hooks is a new feature that was introduced by React on version 16.8, and its basically a name for a collection of functions exposed by React and could be used to a functional components, and so for our demonstration we will convert our `App` class based component to a functional component for now. Because of that, we can get rid of the `state` object we had and the event handler callback function that changes the state, and we can get rid of the `render` method, and just have a `return` statement that returns a JSX expression.
+
+```js
+const App = props => {
+	return (
+		<div className="App">
+			<h1>Hi, I'm a React App</h1>
+			<button onClick={this.clickHandler}>Switch name!</button>
+			<Person
+				name={this.state.persons[0].name}
+				age={this.state.persons[0].age}
+			>
+				is a Future Programmer
+			</Person>
+			<Person
+				name={this.state.persons[1].name}
+				age={this.state.persons[1].age}
+			>
+				is a Future MD
+			</Person>
+			<Person
+				name={this.state.persons[2].name}
+				age={this.state.persons[2].age}
+			/>
+			<img
+				src={logo}
+				alt="React logo"
+				style={{ height: 300, width: 300 }}
+			/>
+		</div>
+	);
+};
+export default App;
+```
+
+Now our `App` component is a normal functional component, and we can use the React Hooks functions on it.
+
+### Importing the `useState` Hook
+
+If we have React 16.8+ then we should have the React Hooks functions available for us from the React package. We go to the `import` statement where we get import `React` and `{ Component }`, and instead of the `Component`, which we won't need since we're not extending a class, we will import `{ useState }`. All of the React Hooks functions start with a `use` and then pass the name of the Hook we need.
+
+```js
+import React, { useState } from 'react';
+```
+
+### The `useState` hook functionality
+
+Inside of our functional component, we call the `useState` hook as a function, and inside of it we can pass our original State object of `persons`.
+
+```js
+const stateArr = useState({
+	persons: [
+		{
+			name: 'Eliad',
+			age: 27,
+		},
+		{
+			name: 'Jakob',
+			age: 27,
+		},
+		{
+			name: 'Ada',
+			age: 21,
+		},
+	],
+});
+```
+
+This function will always return an array with exactly 2 elements, and always 2 elements:
+
+-   The current state element - The original state object that we passed into the `useState` function, and whenever we change it, it will be the updated state.
+-   a function that allows us to update the state - This will allow React to note the changes made in the State and re-render the component upon detecting changes, which is exactly what happens with `setState` method in a class-based component.
+
+Since the `useState` function returns 2 elements in ana array, we can use array destructuring to set these 2 elements into their own variables, one which will represent the current state, which we will name `personsState` and the second one which sets the state will be `setPersonsState`. Now we will change all the `this.state` statements in the `return` body, to `personsState`.
+
+```js
+const [personsState, setPersonsState] = useState({
+	persons: [
+		{
+			name: 'Eliad',
+			age: 27,
+		},
+		{
+			name: 'Jakob',
+			age: 27,
+		},
+		{
+			name: 'Ada',
+			age: 21,
+		},
+	],
+});
+
+return (
+	<div className="App">
+		<h1>Hi, I'm a React App</h1>
+		<button onClick={this.clickHandler}>Switch name!</button>
+		<Person
+			name={personsState.persons[0].name}
+			age={personsState.persons[0].age}
+		>
+			is a Future Programmer
+		</Person>
+		<Person
+			name={personsState.persons[1].name}
+			age={personsState.persons[1].age}
+		>
+			is a Future MD
+		</Person>
+		<Person
+			name={personsState.persons[2].name}
+			age={personsState.persons[2].age}
+		/>
+		<img src={logo} alt="React logo" style={{ height: 300, width: 300 }} />
+	</div>
+);
+```
+
+This in turn will allow us to pass the state as Props to the JSX code, and now the data in the State that we pass to the Props will be displayed in the DOM.
+
+### Changing the State
+
+Now we would like to change the state by clicking on the button. We will create a function inside of the functional component and set our `clickHandler` function inside of it, allowing us to have the same callback function available to us. We should note though that we need to remove the `this` keyword from the call on the event handler, in the `return` statement.
+
+Now we won't call `setState` anymore, but switch it with `setPersonsState` as the function that will update our state.
+
+```js
+const [personsState, setPersonsState] = useState({
+	persons: [
+		{
+			name: 'Eliad',
+			age: 27,
+		},
+		{
+			name: 'Jakob',
+			age: 27,
+		},
+		{
+			name: 'Ada',
+			age: 21,
+		},
+	],
+});
+
+const clickHandler = () => {
+	setPersonsState({
+		persons: [
+			{
+				name: 'Eliad Touksher',
+				age: 27,
+			},
+			{
+				name: 'Jakob Blecher',
+				age: 27.5,
+			},
+			{
+				name: 'Ada Chen',
+				age: 21,
+			},
+		],
+	});
+};
+```
+
+Now upon the click of the button, the State will be updated and it will trigger a DOM re-render. Extracting the current state, the update function, setting the state object and assigning a function to trigger the state change all works just as it would in class-baded component.
+
+### Differences from the class-based component `setState` method
+
+To see the difference, we will first add another property to the initial state object, a simple string.
+
+```js
+const App = props => {
+	const [personsState, setPersonsState] = useState({
+		persons: [
+			{
+				name: 'Eliad',
+				age: 27,
+			},
+			{
+				name: 'Jakob',
+				age: 27,
+			},
+			{
+				name: 'Ada',
+				age: 21,
+			},
+		],
+		otherState: 'Some other value'
+	});
+```
+
+If we will log `personState` to the console to see what the State holds now, we will see an object with 2 properties, as expected. By clicking on the button and changing the state, upon checking the State now in the console we see that the state does not include `otherState` anymore, but only the `persons` array. When we're using React Hooks, the second function which we call to perform the update of the array **does not merge the new state with the old state, but simply returns the new state that replace the old state.**
+
+This is very important because now we need to make sure that whenever we update a certain piece of the State, we need to make sure we will also include the old state, or it will be gone upon the update. This could be done in different ways:
+
+-   Manually adding the other pieces of the state to the update function. This will make sure that the update function will include the other part of the State, that will just be whatever is in the same place in the original state variable.
+
+```js
+const clickHandler = () => {
+	setPersonsState({
+		persons: [
+			{
+				name: 'Eliad Touksher',
+				age: 27,
+			},
+			{
+				name: 'Jakob Blecher',
+				age: 27.5,
+			},
+			{
+				name: 'Ada Chen',
+				age: 21,
+			},
+		],
+		otherState: personsState.otherState,
+	});
+};
+```
+
+-   Another more "elegant" way to approach this is by calling `useState` again and there pass our other non-changed state properties, this in turn will evaluate the state again and will add the non-changed state properties to the component state. We could actually have as many `useState` calls as we want.
+
+```js
+const [otherState, setOtherState] = useState({
+	otherState: 'Some other value',
+});
+```
+
+If what we're passing is a string, we could just pass it as the default value, we don't have to make it an object. It could then also be any primitive data type.
+
+```js
+const [otherState, setOtherState] = useState('Some other value');
+```
+
+Now as we set the `otherState` variable but we do not call `setOtherState` at all, it will just return the default state. This way we have couple of `useState` slices that set the state of our component.
+
+## Stateless VS St stateful components (Section 3, lecture 44)
+
+We learned a lot about State and Props, we learned that components, class-based or using hooks, can get and set State, but also get and use Props. If we have a component that has its own State, no matter if it's a class-based or functional using Hooks, it is a Stateful component, in a contrast with a Stateless component. A stateful component is a component that manages State, either with a `state` property or a `useState` hook. A component without its own state or any internal state management, like the `Person` component that we've created, is a stateless component.
+
+More names for Stateful components can be: smart components, container components.
+More names for Stateless components can be: dumb components, presentational components.
+
+It is a good practice to create as many as possible stateless component and having as few state management as possible, because having a lot of State to manage is hard to maintain and can get the code very entangled and unmanageable fast. Also it is easier to track the data and know where it sits and why and how it is changed, this way we can better trace the code and not get lost in a spaghetti code.
+
+## Passing Method References Between Componenets (Section 3, lecture 45)

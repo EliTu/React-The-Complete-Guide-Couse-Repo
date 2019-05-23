@@ -306,3 +306,26 @@ render() {
 Now upon reloading the app we see the same output as before, but this time we use the `state` property. If we were to change one of the properties or values in the state, it will lead React to automatically update, or re-render, the DOM without the need to reload the page.
 
 ## Props & State (Section 3, lecture 37)
+
+In React, to add an event listener to a JSX element, we would do that by passing an inline attribute named `on(Event)`, and so in our case, since we want to listen to a click of a button, it will be `onClick`. Then we pass a JavaScript expression, within curly braces, that will refer to a callback function we will input within the class, above the `render` method, using the `this` keyword since we're refering to a method within our class component.
+
+The callback function we will declare is a method of our Person class based component. The convention about its name is to indicate it is a handler, corresponding to an event listener set up in our JSX code. We will write it in the ES6 syntax, using an arrow function, so we will automatically refer `this` to the class itself, and not to the global object.
+
+```js
+clickHandler = () => {};
+
+	render() {
+		return (
+			<div className="App">
+				<h1>Hi, I'm a React App</h1>
+				<button onClick={this.clickHandler}>Switch name!</button>
+				<Person
+					name={this.state.persons[0].name}
+					age={this.state.persons[0].age}
+				>
+				{//...}
+		)
+	}
+```
+
+## Manipulating The Satate (Section 2, lecture 41)

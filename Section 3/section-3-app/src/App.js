@@ -21,22 +21,13 @@ class App extends Component {
 		],
 	};
 
-	reverse = () => {
-		this.setState({
-			persons: this.state.persons.map(el =>
-				el.name
-					.split('')
-					.reverse()
-					.join('')
-			),
-		});
-	};
+	clickHandler = () => {};
 
 	render() {
 		return (
 			<div className="App">
 				<h1>Hi, I'm a React App</h1>
-				<button onClick={this.reverse}>Switch name!</button>
+				<button onClick={this.clickHandler}>Switch name!</button>
 				<Person
 					name={this.state.persons[0].name}
 					age={this.state.persons[0].age}

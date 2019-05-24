@@ -620,3 +620,84 @@ More names for Stateless components can be: dumb components, presentational comp
 It is a good practice to create as many as possible stateless component and having as few state management as possible, because having a lot of State to manage is hard to maintain and can get the code very entangled and unmanageable fast. Also it is easier to track the data and know where it sits and why and how it is changed, this way we can better trace the code and not get lost in a spaghetti code.
 
 ## Passing Method References Between Componenets (Section 3, lecture 45)
+
+Let's say we want to call our `handleClick` function not only upon clicking on th button, but also when we click on one of the `<p>` tags in our `Person` component, meaning that we want to pass the `handleClick` event handler from our `App` component to our `Person` component, and this is possible by utilizing Props, and passing the reference for this handler to the child component. THis is a very common pattern in React, and is utilized for a great effect.
+
+Fist we will create a new prop for the `Person` component named `click`, where we will pass the event handler callback function.
+
+```js
+render() {
+		return (
+				{...}
+				<Person
+					name={this.state.persons[1].name}
+					age={this.state.persons[1].age}
+					click={this.clickHandler}
+				>
+					is a Future MD
+				</Person>
+				{...}
+		);
+```
+
+Next, we can go to the `Person` component code and add the `click` prop on one of the `<p>` tags as the callback function to an `onClick` handler.
+
+```js
+const Person = props => {
+	return (
+		<div>
+			<p onClick={props.click}>
+				I'm {props.name}, I'm {props.age} years old
+			</p>
+			<p>{props.children}</p>
+		</div>
+	);
+};
+```
+
+Now upon clicking on that `<p>` tag text in the DOM, the `setState` method is being called and will change the state, just as it would if we will click the button. This shows that we can pass methods as props and use it to change the state at methods that don't have, and shouldn't have, access to the state.
+
+### Passing arguments to the callback function
+
+We can also pass arguments into the callback function so that the state will change to the value of the argument we pass. We will pass `newName` to the `handleClick` callback function as a parameter, and then expect to receive an argument that would change the state.
+
+```js
+clickHandler = newName => {
+	this.setState({
+		persons: [
+			{
+				name: newName,
+				age: 27,
+			},
+			{
+				name: 'JB',
+				age: 27.5,
+			},
+			{
+				name: 'Ada Chen',
+				age: 21,
+			},
+		],
+	});
+};
+```
+
+How would we go about passing the arguments? There are 2 ways to do that:
+
+-   Using `bind`: We can call `bind` on the callback function that we pass in the `onClick` event listener, binding `this` and then passing one or more arguments that will act as the arguments that we pass in the method parameters.
+
+```js
+<Person
+	name={this.state.persons[1].name}
+	age={this.state.persons[1].age}
+	click={this.clickHandler.bind(this, 'kewliyo')}
+>
+```
+
+-   Using and arrow function: Another way is to pass a high order arrow function into the `onClick` event listener that would return the callback function, that will have arguments, and call it because it has parantheses. This way is a bit more "cleaner" than the `bind` method, but counts as having worse performance, as we have a function that calls a function, and should probably used less, although it depends on the size of our app.
+
+```js
+<button onClick={() => this.clickHandler('Eli T')}>Switch name!</button>
+```
+
+## Addint Two Way Binding (Section 3, lecture 45)

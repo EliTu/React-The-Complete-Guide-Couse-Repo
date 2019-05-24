@@ -794,6 +794,88 @@ const Person = props => {
 
 When we reload the page, we can see that all of the input fields are already set with the value of the `name` that is set in the state of the `App` component.
 
-We get a warning in the console saying that we should attach an `onChange` listener to all of the `Person` components, and that is because we only have the actual callback function set to affect the middle `Person` tag, but the 2-way binding still works.
+We get a warning in the console saying that we should attach an `onChange` listener to all of the `Person` components, and that is because we only have the actual callback function set to affect the middle `Person` tag, but the 2-way binding still works, but we will fix this issue when we will see a better way to render a list of components in the future.
 
 ## Adding Styling with Stylesheets (Section 3, lecture 47)
+
+We can style a bit our app, for example our Person component, would be nice if it will look more like a card, with borders, margins, text centered and all of the rest. There are 2 ways to style a component, in this lecture we will look at the first one: a speerate stylesheet.
+
+First we will create a separate CSS file in the `Person` component folder, named `Person.css`. We need to remember that whatever CSS code we will write inside CSS file will not be automatically scoped to the Person component, it will still be global CSS code. Inside we will define a new class named `.Person` (with a capital P) which we will apply to the entire `Person` component, making the encapsulation of the CSS better by using the same name as the component.
+
+```css
+.Person {
+	width: 40%;
+	margin: 10px auto;
+	border: 1px solid #eee;
+	box-shadow: 0 2px 3px rgba(64, 123, 212, 0.8);
+	padding: 16px;
+	text-align: center;
+}
+```
+
+Now we will apply it to the component `<div>` tag using `className`.
+
+```js
+const Person = props => {
+	return (
+		<div className="Person">
+			{...}
+		</div>
+	);
+```
+
+If we will reload the page now, nothing will happen. This is because the stylesheet is not added automatically through the bundling tools or React code, so at this moment assigning the class of `Person` has absolutely no effect. We first need to `import` the stylesheet to the `Person.js` file.
+
+```js
+import './Person.css';
+```
+
+Thanks to Webpack we can actually import CSS into JavaScript files, but it will not merge the files automatically, and so we would just be able to use the code we set in the stylesheets. Also we should note that when we `import` CSS files, we cannot omit the .css extension, that allowed only for .js files.
+
+Now upon reloading our app we see the extra styling on our components. Upon inspection of the code, in the elements section, we could see that there are `<style>` tags that were added to the HTML file, that are not present in the default `index.html` file we have in our IDE, they were added by the bundler and they represent the component CSS code. Also, the style tags come already preset with the vendor prefixes for the other browsers, making sure that our styles could run on as many browsers as possible.
+
+## Working with Inline Styles (Section 3, lecture 48)
+
+As for the button, we will use the 2nd way to style it - using inline `style` attribute and applying JavaScript object with styles to it. We will go to the `App` component and at the `render` method, just above the `return` statement we will create a new variable called `buttonStyle` that will hold an object. Inside we will pass CSS styles that are written in JavaScript syntax, camelCased. Their values will all be strings that correspond to CSS values and units.
+
+```js
+	render() {
+		const buttonStyle = {
+			backgroundColor: 'white',
+			font: 'inherit',
+			border: '1px solid blue',
+			padding: '8px',
+			cursor: 'pointer',
+		};
+
+		return (
+			<div className="App">
+				<h1>Hi, I'm a React App</h1>
+				<button
+					onClick={() => this.clickHandler('Eli T')}
+				>
+					Switch name!
+				</button>
+				{...}
+		)
+	}
+```
+
+Now we can go to the button and add a `style` property that is available for us with the JSX. Inside we will pass a JavaScript expression that will simply hold `buttonStyle`. We do not need to pass it with `this` as this is not a class based property, but a variables available inside of the `render` method. This will automatically apply all of the properties and their values of that object as valid CSS styles, that are added inline to the button.
+
+```js
+<button
+	onClick={() => this.clickHandler('Eli T')}
+	style={buttonStyle}
+>
+```
+
+The button takes all of the styles now.
+
+### Restrictions of the style methods
+
+Both of our ways to style the JSX code, either by separate stylesheets or by inline styles, have their own restrictions. The inline styles are not a good way to use the full power of CSS, as we can't apply pseudo-elements and classes like `:hover` for example, and in the CSS stylesheets we can't get scoping to be 100% guaranteed to be encapsulated and specific to that very component.
+
+There is another way in the middle that will allow us to have the best of both worlds which we will see later in a different module.
+
+## Assignment 1

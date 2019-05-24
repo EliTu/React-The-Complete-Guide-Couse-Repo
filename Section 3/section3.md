@@ -701,3 +701,99 @@ How would we go about passing the arguments? There are 2 ways to do that:
 ```
 
 ## Addint Two Way Binding (Section 3, lecture 45)
+
+What if we want to change the name of one of our `Person` components on our own by passing it into a text input field? We could set a 2 way binding feature that will allow us to set the state of our `Person` component by passing in the value of the input field as the new state, as we type it.
+
+First we will create a normal `<input>` element at the `Person` component, basically making every `Person` component also have an empty input field. That `<input>` tag will also have an `onChange` event listener that will listen to any change happening on this elements value, this will be effective to listen to inputing text. In the event listener we would like to call a callback function that will update the state upon change in the value of the input field.
+
+```js
+const Person = props => {
+	return (
+		<div>
+			<p onClick={props.click}>
+				I'm {props.name}, I'm {props.age} years old
+			</p>
+			<p>{props.children}</p>
+			<input type="text" onChange={} />
+		</div>
+	);
+};
+```
+
+### The callback function
+
+Now back in our `App` component, we would like to define our callback function for our `onChange` listener. We will call it `handleNameChange`, it takes the `event` object as a parameter (which I'll name `e`) and we would like to also call the `setState` method on it, as we do in the `handleClick` method.
+
+We can use the `event` object to get access to the `value` property of our input field, and so we will set one of the names of one of the `persons` objects to have the value of whatever we will type in that input field, basically allowing us to render the new name "live".
+
+```js
+handleNameChange = e => {
+	this.setState({
+		persons: [
+			{
+				name: 'Eliad',
+				age: 27,
+			},
+			{
+				name: e.target.value,
+				age: 27.5,
+			},
+			{
+				name: 'Ada Chen',
+				age: 21,
+			},
+		],
+	});
+};
+```
+
+Now we would need to pass `handleNameChange` as a Prop to the `Person` component so we could pass it into the `onChange` listener at the `<input>` tag. We would do that by setting a prop named `change` to one of the `Person` elements, which we will then pass to the `Person` component as a prop.
+
+```js
+<Person
+	name={this.state.persons[1].name}
+	age={this.state.persons[1].age}
+	click={this.clickHandler.bind(this, 'kewliyo')}
+	change={this.handleNameChange}
+>
+```
+
+```js
+const Person = props => {
+	return (
+		<div>
+			<p onClick={props.click}>
+				I'm {props.name}, I'm {props.age} years old
+			</p>
+			<p>{props.children}</p>
+			<input type="text" onChange={props.change} />
+		</div>
+	);
+};
+```
+
+Now when we reload the page we see that all of the `Person` components have an empty text input fields. In the first and last input fields, if we will start typing, nothing will happen, but if we will pass something to the middle one, we will see that the name will change to whatever we pass in the input field dynamically. The `handleNameChange` method gets fired upon each letter that is being passed in the input field, changing the state dynamically.
+
+### Adding the 2-way binding to also see the current value
+
+If we really want to have a 2-way binding set to that input field, meaning that we will also see the initial value of the name being reflected in the input field by default, we could just add `props.name` into a `value` attribute, which is a default HTML attribute of the `<input>` element.
+
+```js
+const Person = props => {
+	return (
+		<div>
+			<p onClick={props.click}>
+				I'm {props.name}, I'm {props.age} years old
+			</p>
+			<p>{props.children}</p>
+			<input type="text" onChange={props.change} value={props.name} />
+		</div>
+	);
+};
+```
+
+When we reload the page, we can see that all of the input fields are already set with the value of the `name` that is set in the state of the `App` component.
+
+We get a warning in the console saying that we should attach an `onChange` listener to all of the `Person` components, and that is because we only have the actual callback function set to affect the middle `Person` tag, but the 2-way binding still works.
+
+## Adding Styling with Stylesheets (Section 3, lecture 47)

@@ -1,9 +1,17 @@
 import React from 'react';
+import './UserInput.css';
 
-const UserInput = () => {
+const UserInput = props => {
+	const placeholder = 'Enter something here';
 	return (
 		<div>
-			<input type="text" />
+			<input
+				className="UserInput"
+				type="text"
+				onChange={props.event}
+				value={props.username}
+				placeholder={placeholder}
+			/>
 		</div>
 	);
 };

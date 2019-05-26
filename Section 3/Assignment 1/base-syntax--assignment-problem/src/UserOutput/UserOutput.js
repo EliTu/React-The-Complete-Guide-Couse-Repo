@@ -1,10 +1,17 @@
 import React from 'react';
+import '../UserOutput/UserOutput.css';
 
-const UserOutput = () => {
+const UserOutput = props => {
+	const spanStyle = {
+		color: props.stateChangeBool === 'No' ? 'red' : 'green',
+	};
 	return (
-		<div>
-			<p>This is the first user output</p>
-			<p>This is the second user output</p>
+		<div className="UserOutput">
+			<p>Your username is: {props.username}</p>
+			<p>
+				Has the state changed?{' '}
+				<span style={spanStyle}>{props.stateChangeBool}</span>
+			</p>
 		</div>
 	);
 };

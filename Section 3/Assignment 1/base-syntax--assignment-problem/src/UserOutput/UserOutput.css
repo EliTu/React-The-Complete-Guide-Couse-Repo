@@ -1,0 +1,10 @@
+.UserOutput {
+    color: rgba(16, 16, 24, 0.904);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1rem;
+    border: 1px solid #6d6a6a;
+    margin: 1.7rem;
+    padding: 1.2rem;
+    box-shadow: 0 3px 3px #535353c4;
+    border-radius: 7px;
+}

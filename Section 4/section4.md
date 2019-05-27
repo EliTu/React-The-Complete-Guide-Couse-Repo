@@ -105,3 +105,82 @@ We set this callback function inside the `onClick` event listener on the `<butto
 
 ## Handling Dynamic Content "The JavaScript Way" (Section 4, lecture 53)
 
+Let's use the fact that we write everything in JavaScript and take it a step further. Using the ternary operator as we did in the last lecture is not the most optimal or clean way to conditionally render elements to the page, and it can get messier if we have multiple conditional render cases on our JSX code and keep track of which expression renders which element, as our app grows.
+
+There's a cleaner solution which will allow our JSX code in the `return` statement to look cleaner. As we said before, everything in React is JavaScript, and we're basically returning a JavaScript expression in the form of JSX inside a `render` method. When React decides what to render to the screen, it executes this `render` method, computing the entire code it holds, and not only what's inside the `return` statement. We can take advantage of this and pass some code to be checked and executed before the `return` statememt will be evaluated and returned. 
+
+First, we will remove the ternary operator and the curly braces inside the `return` statement block. Inside the `render` method, before the `return` block, and there pass some code. We will create a variable called `persons` and set it to `null` by default, next up we can set an `if` statement, checking if `this.state.showPersons` is `true`, then we would like to set `persons` to output the `<div>` with the `<Person>` components.
+
+```js
+	let persons = null;
+    if (this.state.showPersons) {
+        persons = (
+            <div>
+                <Person
+                    name={this.state.persons[0].name}
+                    age={this.state.persons[0].age}
+                >
+                    is a Future Programmer
+                </Person>
+                <Person
+                    name={this.state.persons[1].name}
+                    age={this.state.persons[1].age}
+                    click={this.clickHandler.bind(this, 'kewliyo')}
+                    change={this.handleNameChange}
+                >
+                    is a Future MD
+                </Person>
+                <Person
+                    name={this.state.persons[2].name}
+                    age={this.state.persons[2].age}
+                />
+            </div>
+        );
+    }
+```
+
+With the code that should be rendered bound to a single variable, we can remove the conditional in the `return` block and simply output the `persons` variable inside between the JSX code inside the curly braces, where the `<div>` used to be.
+
+```js
+    return (
+        <div className="App">
+            <h1>Hi, I'm a React App</h1>
+            {persons}
+            <button onClick={this.clickHandler} style={buttonStyle}>
+                Toggle Persons!
+            </button>
+        </div>
+    );
+```
+
+We could also set `persons` to a ternary operator, making the conditional code a bit shorter.
+
+```js
+let persons = this.state.showPersons ? (
+        <div>
+            <Person
+                name={this.state.persons[0].name}
+                age={this.state.persons[0].age}
+            >
+                is a Future Programmer
+            </Person>
+            <Person
+                name={this.state.persons[1].name}
+                age={this.state.persons[1].age}
+                click={this.clickHandler.bind(this, 'kewliyo')}
+                change={this.handleNameChange}
+            >
+                is a Future MD
+            </Person>
+            <Person
+                name={this.state.persons[2].name}
+                age={this.state.persons[2].age}
+            />
+        </div>
+    ) : null;
+```
+
+This in turn gives us the same desired result of rendering the `<div>` conditionally, but in a more elegant and cleaner way, and this is the preferred way to handle conditionally displaying JSX.
+
+## Outputting Lists - Intro (Section 4, lecture 54)
+

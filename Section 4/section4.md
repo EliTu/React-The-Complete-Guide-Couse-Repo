@@ -187,3 +187,24 @@ This in turn gives us the same desired result of rendering the `<div>` condition
 We learned to take advantage of the full power of JavaScript to handle various tasks with React, and now we should continue with this notion and use JavaScript to dynamically output lists. We have in our state, our "single source of truth" an array of persons, and we output them into our code by seeting them into the Person component and outputing 3 of them, hardcoding their values into each `<Person>` tag. This is extremely inflexible and not dynamic at all, what if we had a database with 1000 persons? we would like to loop over the `persons` array and output an element for each one, and if we will add or remove elements in that array, it will be represented in the UI as well, dynamically.
 
 ## Outputing Lists (Section 4, lecture 55)
+
+If we look at our `state` property, we can see that we have an array with 3 objects. Once again, due to React being all about JavaScript, we can utilize this in order to generate a list in a dynamic way. We start with inserting curly braces into the the `<div>` that should hold all the `<Person>` tags. We would like to render the objects in our `persons` array in the state, each object will have its own `<Person>` tag. For React to recognize this array and be able to display it properly in the DOM, we need to convert this array or JavaScript objects to JSX.
+
+JavaScript offers us a method to convert arrays, and that is the `map` method. This method maps over the elements in the given array and performs an action we specify in an inline callback function we set in the method parentheses. This allow us to perform a variety of actions on each array element, including converting into different forms. We take an argument of the current element in the array, in our case we will call it `person`, and we will use the callback function to `return` JSX element for each object in the array, because that way React could input the code into the UI. 
+
+So what shall be returned is a `<Person>` tag that also pass Props to the `Person` component, as `name` and `age`, like we done before when we hard-coded the components. Because we're accessing the current element in the `map` method, we can use it to refer to the elements properties, and then pass them as Props for each element.
+
+```js
+let persons = this.state.showPersons ? (
+        <div>
+            {this.state.persons.map(person => {
+                return <Person name={person.name} age={person.age} />;
+            })}
+        </div>
+    ) : null;
+```
+
+Upon clicking on the button, the persons appear again on the DOM. The `<Person>` tags were rendered again inside the `<div>` element. If we open the console, we can see that there's a warning, saying that each element in the list should have a `key` prop, which is an indication that the maping of a list of array elements from the State does work.
+
+## Lists & State (Section 4, lecture 56)
+

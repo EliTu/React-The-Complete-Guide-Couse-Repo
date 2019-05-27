@@ -184,3 +184,6 @@ This in turn gives us the same desired result of rendering the `<div>` condition
 
 ## Outputting Lists - Intro (Section 4, lecture 54)
 
+We learned to take advantage of the full power of JavaScript to handle various tasks with React, and now we should continue with this notion and use JavaScript to dynamically output lists. We have in our state, our "single source of truth" an array of persons, and we output them into our code by seeting them into the Person component and outputing 3 of them, hardcoding their values into each `<Person>` tag. This is extremely inflexible and not dynamic at all, what if we had a database with 1000 persons? we would like to loop over the `persons` array and output an element for each one, and if we will add or remove elements in that array, it will be represented in the UI as well, dynamically.
+
+## Outputing Lists (Section 4, lecture 55)

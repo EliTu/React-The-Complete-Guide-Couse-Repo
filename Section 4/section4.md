@@ -208,3 +208,50 @@ Upon clicking on the button, the persons appear again on the DOM. The `<Person>`
 
 ## Lists & State (Section 4, lecture 56)
 
+Now we will look at how the lists we input using JavaScript, like we did with the `map` method, can work and be updated with the State of the app. For this, we will upgrade the event listener we have on the `Person` component, which calls the `props.click` reference to a callback function, instead of listening to clicks to change the name when we click on the `<p>` tag, now we would like it to delete that `<Person>` tag.
+
+```js
+const Person = props => {
+	return (
+		<div className="Person">
+			<p onClick={props.click}>
+				I'm {props.name}, I'm {props.age} years old
+			</p>
+			<p>{props.children}</p>
+			<input type="text" onChange={props.change} value={props.name} />
+		</div>
+	);
+};
+```
+
+In the `App.js` we will create a new callback function that is called `handleDelete` and we will leave it empty for now, but it will handle the change in the State to remove an object from the `persons` array in the state, which will reflect a removal of a `<Person>` element, since it is being output as a list that is based on the array, dynamically. To the `<Person>` element we will render, we pass a prop named `click` (corresponding to the `props.click` in the `Person` component file), and pass `this.handleDelete` as the callback function.
+
+Now how would we know which person we want to delete, and subsequently remove from the array in the State when we click? We can use the `index` property which the `map` method allow to have in our arguments, which points to the index value of the current iteration of the `map` method. We pass it as a second argument in the `map` argument, and then pass it to the `this.handleDelete` callback function as an argument, and for that we will turn the callback function call into an arrow function, so we could pass the argument (and avoid using `.bind` on it otherwise).
+
+```js
+{this.state.persons.map((person, index) => {
+            return (
+                <Person
+                    name={person.name}
+                    age={person.age}
+                    click={() => this.handleDelete(index)}
+                />
+            );
+        })}
+```
+
+Now back at the `handleDelete` callback function, we will take `index` as a parameter, and we will use it to update the state. Next we will create a new variable named `persons` which will reflect the current state, then we will call the `splice` method against it and pass `index` as the first argument, indicating the starting position, and 1 as the number of items to remove. Lastly, we will call the `this.setState` method and set `persons` in the state to the value of the `persons` variable in the function, basically assigning the new spliced array as the new current state.
+
+```js
+handleDelete = index => {
+		const persons = this.state.persons;
+		persons.splice(index, 1);
+		this.setState({ persons: persons });
+	};
+```
+
+Now upon reloading the app, and clicking on one of the `<p>` tags inside the `<Person>` in the UI, the card gets deleted entirely and the page re-renders automatically to reflect the change. We can do that to any `Person` component, since they are being rendered as a list that is being reflected by the current State of the app. 
+
+This approach has a a flaw though, which we will look up next.
+
+## Updating State Immutably (Section 4, lectrue 57)

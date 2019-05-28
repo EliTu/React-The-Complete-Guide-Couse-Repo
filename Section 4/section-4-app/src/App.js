@@ -47,6 +47,12 @@ class App extends Component {
 		});
 	};
 
+	handleDelete = index => {
+		const persons = this.state.persons;
+		persons.splice(index, 1);
+		this.setState({ persons: persons });
+	};
+
 	render() {
 		const buttonStyle = {
 			backgroundColor: 'white',
@@ -58,8 +64,14 @@ class App extends Component {
 
 		let persons = this.state.showPersons ? (
 			<div>
-				{this.state.persons.map(person => {
-					return <Person name={person.name} age={person.age} />;
+				{this.state.persons.map((person, index) => {
+					return (
+						<Person
+							name={person.name}
+							age={person.age}
+							click={() => this.handleDelete(index)}
+						/>
+					);
 				})}
 			</div>
 		) : null;

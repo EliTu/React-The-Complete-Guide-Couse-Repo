@@ -255,3 +255,29 @@ Now upon reloading the app, and clicking on one of the `<p>` tags inside the `<P
 This approach has a a flaw though, which we will look up next.
 
 ## Updating State Immutably (Section 4, lectrue 57)
+
+The only problem with what what we done in the `handleDelete` function is that we're mutating the State of our app directly by assigning persons to the same reference of the `persons` array. To solve that issue, we need to create a shallow copy of the `person` array, and then mutate that copy and the assign in to the State with the `setState` method.
+
+We have 2 ways to copy the array:
+
+- We can use the `slice` method on the array when assigning it to a different value, essentially copying the content of the array to a different reference.
+
+```js
+handleDelete = index => {
+		const persons = this.state.persons.slice();
+		persons.splice(index, 1);
+		this.setState({ persons: persons });
+	};
+```
+
+- The more modern way will be to use the spread operator to create a copy of that array into a new one, and then assign the new array to the `persons` variable.
+
+```js
+handleDelete = index => {
+		const persons = [...this.state.persons];
+		persons.splice(index, 1);
+		this.setState({ persons: persons });
+	};
+```
+
+## Lists & Keys (Section 4, lecture 58)

@@ -6,14 +6,17 @@ class App extends Component {
 	state = {
 		persons: [
 			{
+				id: 'aaa21',
 				name: 'Eliad',
 				age: 27,
 			},
 			{
+				id: '1bbb2',
 				name: 'Jakob',
 				age: 27,
 			},
 			{
+				id: 'cc3c1',
 				name: 'Ada',
 				age: 21,
 			},
@@ -25,25 +28,6 @@ class App extends Component {
 		let showPersonBool = this.state.showPersons;
 		this.setState({
 			showPersons: !showPersonBool,
-		});
-	};
-
-	handleNameChange = e => {
-		this.setState({
-			persons: [
-				{
-					name: 'Eliad',
-					age: 27,
-				},
-				{
-					name: e.target.value,
-					age: 27.5,
-				},
-				{
-					name: 'Ada Chen',
-					age: 21,
-				},
-			],
 		});
 	};
 
@@ -67,6 +51,7 @@ class App extends Component {
 				{this.state.persons.map((person, index) => {
 					return (
 						<Person
+							key={person.id}
 							name={person.name}
 							age={person.age}
 							click={() => this.handleDelete(index)}

@@ -281,3 +281,55 @@ handleDelete = index => {
 ```
 
 ## Lists & Keys (Section 4, lecture 58)
+
+Next we would like to take care of that "key" warning message we get in the console when we render the list. We get this warning as when we render lists, React wants to keep track of the elements in the list so it can better re-render the list in the DOM, in case the list changes. Basically, the `key` prop is set to a unique value for each item, and that helps React to keep track of the list items, their position and status, and so whenever we output a list of elements, we should also assign the `key` prop to be equal to unique key.
+
+This is done thanks to the Virtual DOM React employs, it is essentially a copy of the DOM React keeps, and whenever React needs to update the DOM, whenever the State or Props have a change in them, it compares the state of the Virtual DOM copy with the current actual DOM, and then re-renders the changes from the Virtual DOM to the actual DOM in the right places, instead of re-rendering the entire DOM a new. We will look at the Virtual DOM in depth later.
+
+And so, we would first like to go to our `state` object and assign some unique values to it. Note that we can't use the `index` argument as a unique id, as the index values in arrays change when we remove/add elements to the array, they are not unique, but dynamic.
+
+```js
+state = {
+		persons: [
+			{
+				id: 'aaa21',
+				name: 'Eliad',
+				age: 27,
+			},
+			{
+				id: '1bbb2',
+				name: 'Jakob',
+				age: 27,
+			},
+			{
+				id: 'cc3c1',
+				name: 'Ada',
+				age: 21,
+			},
+		],
+		showPersons: false,
+	};
+```
+
+Now we will simply pass the `id` property as a prop named `key` to the `<Person>` element.
+
+```js
+let persons = this.state.showPersons ? (
+			<div>
+				{this.state.persons.map((person, index) => {
+					return (
+						<Person
+							key={person.id}
+							name={person.name}
+							age={person.age}
+							click={() => this.handleDelete(index)}
+						/>
+					);
+				})}
+			</div>
+		) : null;
+```
+
+Now when we reload the app, we see that the warning is gone and that every element in the list has its own unique id. Now React can inspect the elements in the list better, maping and observing which elements had changes in them and which didn't, and re-rendering the DOM accordingly.
+
+## Flexible Lists (Section 4, lecture 59)

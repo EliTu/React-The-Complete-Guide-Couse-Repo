@@ -333,3 +333,51 @@ let persons = this.state.showPersons ? (
 Now when we reload the app, we see that the warning is gone and that every element in the list has its own unique id. Now React can inspect the elements in the list better, maping and observing which elements had changes in them and which didn't, and re-rendering the DOM accordingly.
 
 ## Flexible Lists (Section 4, lecture 59)
+
+We still have the `<input>` with the `onChange` event listener that listen to changes passed on the name in a specific element in the `persons` array. Now that we set lists in a dynamic way, we can also make changes in the State in a dynamic way, basically applying a callback function that will run and could change every name in the list that is being rendered.
+
+For that we need to change the State correctly, and we could use the `id` property we've set to each element in the `persons` array to assign an element for changes. we have the `handleChange` callback function we've already set before, and so we will modify it to reflect the changes dynamically.
+
+First we will set what kind of parameters we should get into the callback function to make the dynamic changes work: the `event`, as we had before, to access the `target.event` property, and the second one will be the `id` which will be the property with the unique id we passed to the State earlier. In the `render` method, we will pass these as arguments inside the prop we named `change`.
+
+```js
+handleChange = (e, id) => {
+
+    };
+{....}
+<Person
+	key={person.id}
+	name={person.name}
+	age={person.age}
+	click={() => this.handleDelete(index)}
+	change={event =>
+		this.handleChange(event, person.id)
+	}
+/>
+```
+
+We want to update the state to a specific element in the `persons` array, we can use the `id` and the `findIndex` method to find his position in the array, and that way we could target that specific `<Person>` element we're accessing its input field. The `findIndex` array method takes an element in the array as argument and executes a method on it which evaluates a boolean and returns the index of the element if its `true`. We would like to find the index of the element which his `id` matches the `id` we pass in the `handleChange` callback function. After we got that, we can assign a new variable named `person`, which will hold a copy of that specific element in the `persons` array that matches the `personIndex` value, since we're avoiding mutating the original `persons` array.
+
+```js
+handleChange = (e, id) => {
+		const personIndex = this.state.persons.findIndex(el => el.id === id);
+		const person = { ...this.state.persons[personIndex] };
+	};
+```
+
+Now that we have the specific person object, now we would like to update its `name` property, and we would like to assign it to the `e.target.value` property so it will match whatever being passed in the input field. Now that we have the updated value we would like to update the whole `persons` array, so once again we will first make a copy of that array using the spread operator, and next we would like to update it at the specified position with the `personIndex` variable, and assign in to the updated `person` variable. After all of that, we can call the `setState` method and set the `persons` array with the new `persons` variable we updated with the new changes.
+
+```js
+handleChange = (e, id) => {
+		const personIndex = this.state.persons.findIndex(el => el.id === id);
+		const person = { ...this.state.persons[personIndex] };
+		person.name = e.target.value;
+		const persons = [...this.state.persons];
+		persons[personIndex] = person;
+		this.setState({
+			persons: persons,
+		});
+	};
+```
+
+Now upon reloading the page we see that it doesn't hold anymore warnings regarding the input field, and that we can now edit each of the names in the `<Person>` tag output using the input field in a dynamic way.

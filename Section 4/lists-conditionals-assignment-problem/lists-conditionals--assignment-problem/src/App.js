@@ -25,13 +25,9 @@ class App extends Component {
 
 	render() {
 		const inputLength = this.state.userInput.length;
-		const characters = this.state.userInput.split('').map((char, i) => {
+		const charList = this.state.userInput.split('').map((char, i) => {
 			return (
-				<CharComponent
-					className="charComp"
-					key={i}
-					click={() => this.handleClick(i)}
-				>
+				<CharComponent key={i} click={() => this.handleClick(i)}>
 					{char}
 				</CharComponent>
 			);
@@ -55,7 +51,7 @@ class App extends Component {
 					The input length is{' '}
 					<span style={spanStyle}>{inputLength}</span>
 				</p>
-				{characters}
+				{charList}
 			</div>
 		);
 	}

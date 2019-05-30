@@ -1,0 +1,19 @@
+.CharComponent {
+    background-color: rgba(233, 225, 225, 0.329);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #000000a8;
+    display: inline-block;
+    padding: 1rem;
+    text-align: center;
+    margin: 0.7rem;
+    border: 2px solid black;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: 0.3s all;
+}
+
+.CharComponent:hover {
+    background-color: rgba(0, 0, 0, 0.767);
+    color: #eeee;
+    transform: scale(1.2);
+}

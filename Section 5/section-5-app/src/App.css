@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+.set-red {
+  color: red;
+  transition: all 0.7s ease-in-out;
+}
+
+.bold {
+  font-weight: 900;
+  font-size: 3rem;
+  transition: all 0.7s ease-in-out;
+}

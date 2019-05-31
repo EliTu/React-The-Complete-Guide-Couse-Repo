@@ -1,6 +1,13 @@
-/* @media (min-width: 450px) {
-    width: 450px;
-} */
+@media (max-width: 500px) {
+    .Person {
+        width: 350px;
+    }
+
+    .Person input {
+        width: 40%;
+
+    }
+}
 
 .Person {
     width: 40%;

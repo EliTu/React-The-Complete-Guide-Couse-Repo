@@ -1,0 +1,38 @@
+.Head {
+    text-align: center;
+}
+
+.setRed {
+    color: red;
+    transition: all 0.7s ease-in-out;
+}
+
+.bold {
+    font-weight: 900;
+    font-size: 3rem;
+    transition: all 0.7s ease-in-out;
+}
+
+.Head button {
+    background-color: lightgreen;
+    color: black;
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+    transition: all ease-in 0.4s;
+}
+
+.Head button:hover {
+    background-color: rgba(40, 146, 40, 0.952);
+    color: #f8f8f8d7;
+}
+
+.Head button.Red {
+    background-color: orangered;
+}
+
+.Head button.Red:hover {
+    background-color: salmon;
+    color: #f8f8f8d7;
+}

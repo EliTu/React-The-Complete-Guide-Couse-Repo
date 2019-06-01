@@ -1,19 +1,36 @@
 @media (max-width: 500px) {
-    .Person {
-        width: 350px;
-    }
+	.Person {
+		width: 350px;
+	}
 
-    .Person input {
-        width: 40%;
-
-    }
+	.Person input {
+		width: 40%;
+	}
 }
 
 .Person {
-    width: 40%;
-    margin: 10px auto;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 3px rgba(64, 123, 212, 0.8);
-    padding: 16px;
-    text-align: center;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	width: 40%;
+	margin: 15px auto;
+	border: 1px solid #eee;
+	box-shadow: 0 2px 3px rgba(64, 123, 212, 0.8);
+	padding: 16px;
+	text-align: center;
+	transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+
+.Person:hover {
+	background-color: rgba(148, 204, 250, 0.11);
+	transform: scale(1.05);
+}
+
+.Person input {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+		sans-serif;
+	font-size: 1.2rem;
+	color: #221f1fc4;
+	border: none;
+	border-bottom: 2px solid dodgerblue;
+	text-align: center;
+	outline: none;
 }

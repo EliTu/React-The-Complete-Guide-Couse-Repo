@@ -3,12 +3,13 @@ import styles from './Head.module.css';
 
 const Head = props => {
 	let buttonClass = '';
-	const classes = [];
+	let classes = [];
 
 	if (props.showPersons) buttonClass = styles.Red;
 
 	if (props.persons.length <= 2) classes.push(styles.setRed);
 	if (props.persons.length <= 1) classes.push(styles.bold);
+	if (props.persons.length === 0) classes.pop();
 
 	return (
 		<div className={styles.Head}>

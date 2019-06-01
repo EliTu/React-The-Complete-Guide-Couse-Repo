@@ -30,6 +30,7 @@ class App extends Component {
 		showPersons: false,
 	};
 
+	// Component creation Lifecycle hooks:
 	static getDerivedStateFromProps(props, state) {
 		console.log('App.js getDerviedSatateFRomProps', props);
 		return state;
@@ -39,6 +40,16 @@ class App extends Component {
 		console.log('App.js componentDidMount');
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log('App.js shouldComponentUpdate');
+		return this.state !== nextState;
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		console.log('App.js componentDidUpdate');
+	}
+
+	// Event handlers:
 	clickHandler = () => {
 		let showPersonBool = this.state.showPersons;
 		this.setState({
@@ -65,16 +76,6 @@ class App extends Component {
 
 	render() {
 		console.log('App.js render');
-		let persons = null;
-		if (this.state.showPersons) {
-			persons = (
-				<Persons
-					persons={this.state.persons}
-					deleteClick={this.handleDelete}
-					changeName={this.handleChange}
-				/>
-			);
-		}
 
 		return (
 			<div className={styles.App}>
@@ -84,7 +85,13 @@ class App extends Component {
 					showPersons={this.state.showPersons}
 					click={this.clickHandler}
 				/>
-				{persons}
+				{this.state.showPersons && (
+					<Persons
+						persons={this.state.persons}
+						deleteClick={this.handleDelete}
+						changeName={this.handleChange}
+					/>
+				)}
 			</div>
 		);
 	}

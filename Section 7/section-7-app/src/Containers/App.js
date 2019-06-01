@@ -4,6 +4,11 @@ import Persons from '../Components/Persons/Persons';
 import Head from '../Components/Head/Head';
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		console.log('App.js constructor');
+	}
+
 	state = {
 		persons: [
 			{
@@ -24,6 +29,15 @@ class App extends Component {
 		],
 		showPersons: false,
 	};
+
+	static getDerivedStateFromProps(props, state) {
+		console.log('App.js getDerviedSatateFRomProps', props);
+		return state;
+	}
+
+	componentDidMount() {
+		console.log('App.js componentDidMount');
+	}
 
 	clickHandler = () => {
 		let showPersonBool = this.state.showPersons;
@@ -50,6 +64,7 @@ class App extends Component {
 	};
 
 	render() {
+		console.log('App.js render');
 		let persons = null;
 		if (this.state.showPersons) {
 			persons = (

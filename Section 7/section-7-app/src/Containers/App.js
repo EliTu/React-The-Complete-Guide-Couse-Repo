@@ -28,6 +28,7 @@ class App extends Component {
 			},
 		],
 		showPersons: false,
+		showHead: true,
 	};
 
 	// Component creation Lifecycle hooks:
@@ -74,17 +75,26 @@ class App extends Component {
 		});
 	};
 
+	removeHead = () => {
+		this.setState({
+			showHead: false,
+		});
+	};
+
 	render() {
 		console.log('App.js render');
 
 		return (
 			<div className={styles.App}>
-				<Head
-					title={this.props.title}
-					persons={this.state.persons}
-					showPersons={this.state.showPersons}
-					click={this.clickHandler}
-				/>
+				<button onClick={this.removeHead}>Remove</button>
+				{this.state.showHead && (
+					<Head
+						title={this.props.title}
+						persons={this.state.persons}
+						showPersons={this.state.showPersons}
+						click={this.clickHandler}
+					/>
+				)}
 				{this.state.showPersons && (
 					<Persons
 						persons={this.state.persons}

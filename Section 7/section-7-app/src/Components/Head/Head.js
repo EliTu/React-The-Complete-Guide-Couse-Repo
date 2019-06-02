@@ -16,6 +16,9 @@ const Head = props => {
 		setTimeout(() => {
 			console.log('Saved data');
 		}, 1000);
+		return () => {
+			console.log('Head.js cleanup work');
+		};
 	}, []);
 
 	return (

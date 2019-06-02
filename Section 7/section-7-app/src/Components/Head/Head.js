@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Head.module.css';
 
 const Head = props => {
@@ -10,6 +10,10 @@ const Head = props => {
 	if (props.persons.length <= 2) classes.push(styles.setRed);
 	if (props.persons.length <= 1) classes.push(styles.bold);
 	if (props.persons.length === 0) classes.pop();
+
+	useEffect(() => {
+		console.log('Head.js useEffect');
+	});
 
 	return (
 		<div className={styles.Head}>

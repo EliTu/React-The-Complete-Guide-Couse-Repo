@@ -13,10 +13,11 @@ const Head = props => {
 
 	useEffect(() => {
 		console.log('Head.js useEffect');
-		setTimeout(() => {
+		const timer = setTimeout(() => {
 			console.log('Saved data');
 		}, 1000);
 		return () => {
+			clearTimeout(timer);
 			console.log('Head.js cleanup work');
 		};
 	}, []);

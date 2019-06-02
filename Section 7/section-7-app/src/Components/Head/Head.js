@@ -13,7 +13,10 @@ const Head = props => {
 
 	useEffect(() => {
 		console.log('Head.js useEffect');
-	});
+		setTimeout(() => {
+			console.log('Saved data');
+		}, 1000);
+	}, []);
 
 	return (
 		<div className={styles.Head}>

@@ -90,7 +90,7 @@ class App extends Component {
 				{this.state.showHead && (
 					<Head
 						title={this.props.title}
-						persons={this.state.persons}
+						personsLength={this.state.persons.length}
 						showPersons={this.state.showPersons}
 						click={this.clickHandler}
 					/>

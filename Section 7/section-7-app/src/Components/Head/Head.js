@@ -7,17 +7,16 @@ const Head = props => {
 
 	if (props.showPersons) buttonClass = styles.Red;
 
-	if (props.persons.length <= 2) classes.push(styles.setRed);
-	if (props.persons.length <= 1) classes.push(styles.bold);
-	if (props.persons.length === 0) classes.pop();
+	if (props.personsLength <= 2) classes.push(styles.setRed);
+	if (props.personsLength <= 1) classes.push(styles.bold);
+	if (props.personsLength === 0) classes.pop();
 
 	useEffect(() => {
 		console.log('Head.js useEffect');
-		const timer = setTimeout(() => {
+		setTimeout(() => {
 			console.log('Saved data');
 		}, 1000);
 		return () => {
-			clearTimeout(timer);
 			console.log('Head.js cleanup work');
 		};
 	}, []);
@@ -32,4 +31,4 @@ const Head = props => {
 	);
 };
 
-export default Head;
+export default React.memo(Head);

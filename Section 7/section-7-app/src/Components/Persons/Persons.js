@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
-	// Component update lifecycle methods:
-	// static getDerivedStateFromProps(props, state) {
-	// 	console.log('Persons.js getDerivedStateFromProps');
-	// 	return state;
+class Persons extends PureComponent {
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	console.log('Persons.js shouldComponentUpdate');
+	// 	if (
+	// 		this.props.persons !== nextProps.persons ||
+	// 		this.props.change !== nextProps.change ||
+	// 		this.props.click !== nextProps.click
+	// 	) {
+	// 		return true;
+	// 	} else {
+	// 		return false;
+	// 	}
 	// }
-	shouldComponentUpdate(nextProps, nextState) {
-		console.log('Persons.js shouldComponentUpdate');
-		return this.props !== nextProps;
-	}
 
 	getSnapshotBeforeUpdate = (prevProps, prevState) => {
 		console.log('Persons.js getSnapshotBeforeUpdate');

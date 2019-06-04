@@ -8,13 +8,13 @@ class Person extends Component {
 		const { name, age, click, children, change } = this.props;
 
 		return (
-			<div className={styles.Person}>
+			<React.Fragment className={styles.Person}>
 				<p onClick={click}>
 					I'm {name}, I'm {age} years old
 				</p>
 				<p>{children}</p>
 				<input type="text" onChange={change} value={name} />
-			</div>
+			</React.Fragment>
 		);
 	}
 }

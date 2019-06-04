@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Person.css';
 import styles from './Person.module.css';
+import WithClass from '../../../Containers/HigherOrderComponents/WithClass';
 
 class Person extends Component {
 	render() {
@@ -8,13 +9,13 @@ class Person extends Component {
 		const { name, age, click, children, change } = this.props;
 
 		return (
-			<React.Fragment className={styles.Person}>
+			<WithClass classes={styles.Person}>
 				<p onClick={click}>
 					I'm {name}, I'm {age} years old
 				</p>
 				<p>{children}</p>
 				<input type="text" onChange={change} value={name} />
-			</React.Fragment>
+			</WithClass>
 		);
 	}
 }

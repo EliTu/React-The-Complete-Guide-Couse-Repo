@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './App.module.css';
 import Persons from '../Components/Persons/Persons';
 import Head from '../Components/Head/Head';
+import WithClass from '../Containers/HigherOrderComponents/WithClass';
 
 class App extends Component {
 	constructor(props) {
@@ -29,6 +30,7 @@ class App extends Component {
 		],
 		showPersons: false,
 		showHead: true,
+		changedCounter: 0,
 	};
 
 	// Component creation Lifecycle hooks:
@@ -70,9 +72,13 @@ class App extends Component {
 		person.name = e.target.value;
 		const persons = [...this.state.persons];
 		persons[personIndex] = person;
-		this.setState({
-			persons: persons,
+		this.setState((prevState, props) => {
+			return {
+				persons: persons,
+				changedCounter: prevState.changedCounter + 1,
+			};
 		});
+		console.log(this.state.changedCounter);
 	};
 
 	removeHead = () => {
@@ -85,7 +91,7 @@ class App extends Component {
 		console.log('App.js render');
 
 		return (
-			<div className={styles.App}>
+			<WithClass classes={styles.App}>
 				<button onClick={this.removeHead}>Remove</button>
 				{this.state.showHead && (
 					<Head
@@ -102,7 +108,7 @@ class App extends Component {
 						changeName={this.handleChange}
 					/>
 				)}
-			</div>
+			</WithClass>
 		);
 	}
 }

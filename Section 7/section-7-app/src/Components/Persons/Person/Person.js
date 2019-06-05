@@ -4,6 +4,15 @@ import styles from './Person.module.css';
 import WithClass from '../../../Containers/HigherOrderComponents/WithClass';
 
 class Person extends Component {
+	constructor(props) {
+		super(props);
+		this.inputElementRef = React.createRef();
+	}
+
+	componentDidMount() {
+		this.inputElementRef.current.focus();
+	}
+
 	render() {
 		console.log('Person.js rendering...');
 		const { name, age, click, children, change } = this.props;
@@ -14,7 +23,13 @@ class Person extends Component {
 					I'm {name}, I'm {age} years old
 				</p>
 				<p>{children}</p>
-				<input type="text" onChange={change} value={name} />
+				<input
+					type="text"
+					onChange={change}
+					value={name}
+					//ref={(inputEl) => {this.inputElement = inputEl}}
+					ref={this.inputElementRef}
+				/>
 			</WithClass>
 		);
 	}

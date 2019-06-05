@@ -49,4 +49,5 @@
 
 .notAuthenticated {
 	color: #d81b1bd2;
+	transition: all 1.2s;
 }

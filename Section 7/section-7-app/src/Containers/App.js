@@ -92,7 +92,7 @@ class App extends Component {
 
 	handleLoginClick = () => {
 		this.setState({
-			authenticated: true,
+			authenticated: !this.state.authenticated,
 		});
 	};
 
@@ -114,7 +114,7 @@ class App extends Component {
 							personsLength={this.state.persons.length}
 							showPersons={this.state.showPersons}
 							click={this.clickHandler}
-							loginClick={this.handleLoginClick}
+							//loginClick={this.handleLoginClick}
 						/>
 					)}
 					{this.state.showPersons && (
@@ -122,6 +122,7 @@ class App extends Component {
 							persons={this.state.persons}
 							deleteClick={this.handleDelete}
 							changeName={this.handleChange}
+							//isAuthenticated={this.state.authenticated}
 						/>
 					)}
 				</AuthContext.Provider>

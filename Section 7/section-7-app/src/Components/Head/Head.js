@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import styles from './Head.module.css';
 import PropTypes from 'prop-types';
 import AuthContext from '../../Containers/Context/AuthContext';
 
 const Head = props => {
 	const toggleButtonRef = useRef();
+	const authContext = useContext(AuthContext);
 
 	let buttonClass = '';
 	let classes = [];
@@ -33,11 +34,9 @@ const Head = props => {
 			>
 				Toggle Persons!
 			</button>
-			<AuthContext.Consumer>
-				{context => (
-					<button onClick={() => context.login()}>Log in</button>
-				)}
-			</AuthContext.Consumer>
+			<button onClick={() => authContext.login()}>
+				Log {authContext.authenticated ? 'out' : 'in'}
+			</button>
 		</div>
 	);
 };

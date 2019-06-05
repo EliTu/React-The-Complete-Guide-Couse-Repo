@@ -32,6 +32,7 @@ class App extends Component {
 		showPersons: false,
 		showHead: true,
 		changedCounter: 0,
+		authenticated: false,
 	};
 
 	// Component creation Lifecycle hooks:
@@ -88,6 +89,12 @@ class App extends Component {
 		});
 	};
 
+	handleLoginClick = () => {
+		this.setState({
+			authenticated: true,
+		});
+	};
+
 	render() {
 		console.log('App.js render');
 
@@ -100,6 +107,7 @@ class App extends Component {
 						personsLength={this.state.persons.length}
 						showPersons={this.state.showPersons}
 						click={this.clickHandler}
+						loginClick={this.handleLoginClick}
 					/>
 				)}
 				{this.state.showPersons && (
@@ -107,6 +115,7 @@ class App extends Component {
 						persons={this.state.persons}
 						deleteClick={this.handleDelete}
 						changeName={this.handleChange}
+						isAuthenticated={this.state.authenticated}
 					/>
 				)}
 			</WithClass>

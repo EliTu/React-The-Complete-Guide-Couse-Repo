@@ -15,10 +15,22 @@ class Person extends Component {
 
 	render() {
 		console.log('Person.js rendering...');
-		const { name, age, click, children, change } = this.props;
+		const {
+			name,
+			age,
+			click,
+			children,
+			change,
+			isAuthenticated,
+		} = this.props;
 
 		return (
 			<WithClass classes={styles.Person}>
+				{isAuthenticated ? (
+					<p>User Authenticated</p>
+				) : (
+					<p>Please log in</p>
+				)}
 				<p onClick={click}>
 					I'm {name}, I'm {age} years old
 				</p>

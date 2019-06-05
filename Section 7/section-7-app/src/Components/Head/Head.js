@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './Head.module.css';
 import PropTypes from 'prop-types';
 
 const Head = props => {
+	const toggleButtonRef = useRef();
+
 	let buttonClass = '';
 	let classes = [];
 
@@ -14,9 +16,7 @@ const Head = props => {
 
 	useEffect(() => {
 		console.log('Head.js useEffect');
-		setTimeout(() => {
-			console.log('Saved data');
-		}, 1000);
+		toggleButtonRef.current.click();
 		return () => {
 			console.log('Head.js cleanup work');
 		};
@@ -25,9 +25,14 @@ const Head = props => {
 	return (
 		<div className={styles.Head}>
 			<h1 className={classes.join(' ')}>{props.title}</h1>
-			<button onClick={() => props.click()} className={buttonClass}>
+			<button
+				onClick={() => props.click()}
+				className={buttonClass}
+				ref={toggleButtonRef}
+			>
 				Toggle Persons!
 			</button>
+			<button onClick={() => props.loginClick()}>Log in</button>
 		</div>
 	);
 };

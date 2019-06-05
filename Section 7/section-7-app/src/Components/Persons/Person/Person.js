@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Person.css';
 import styles from './Person.module.css';
 import WithClass from '../../../Containers/HigherOrderComponents/WithClass';
+import AuthContext from '../../../Containers/Context/AuthContext';
 
 class Person extends Component {
 	constructor(props) {
@@ -15,22 +16,23 @@ class Person extends Component {
 
 	render() {
 		console.log('Person.js rendering...');
-		const {
-			name,
-			age,
-			click,
-			children,
-			change,
-			isAuthenticated,
-		} = this.props;
+		const { name, age, click, children, change } = this.props;
 
 		return (
 			<WithClass classes={styles.Person}>
-				{isAuthenticated ? (
-					<p>User Authenticated</p>
-				) : (
-					<p>Please log in</p>
-				)}
+				<AuthContext.Consumer>
+					{context =>
+						context.authenticated ? (
+							<p className={styles.authenticated}>
+								User Authenticated
+							</p>
+						) : (
+							<p className={styles.notAuthenticated}>
+								Please log in
+							</p>
+						)
+					}
+				</AuthContext.Consumer>
 				<p onClick={click}>
 					I'm {name}, I'm {age} years old
 				</p>

@@ -32,12 +32,7 @@ class Persons extends PureComponent {
 
 	render() {
 		console.log('Persons.js rendering...');
-		const {
-			persons,
-			deleteClick,
-			changeName,
-			isAuthenticated,
-		} = this.props;
+		const { persons, deleteClick, changeName } = this.props;
 
 		return persons.map((person, index) => {
 			return (
@@ -47,7 +42,6 @@ class Persons extends PureComponent {
 					age={person.age}
 					click={() => deleteClick(index)}
 					change={event => changeName(event, person.id)}
-					isAuthenticated={isAuthenticated}
 				/>
 			);
 		});

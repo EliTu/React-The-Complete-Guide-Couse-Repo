@@ -25,6 +25,7 @@
 }
 
 .Person input {
+	width: 35%;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
 		sans-serif;
 	font-size: 1.2rem;
@@ -33,4 +34,19 @@
 	border-bottom: 2px solid dodgerblue;
 	text-align: center;
 	outline: none;
+}
+
+.Person input:focus {
+	width: 60%;
+	border-bottom-color: rgba(6, 34, 99, 0.767);
+	transition: all 0.5s;
+}
+
+.authenticated {
+	color: rgba(27, 230, 27, 0.808);
+	transition: all 1.2s;
+}
+
+.notAuthenticated {
+	color: #d81b1bd2;
 }

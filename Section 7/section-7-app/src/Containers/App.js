@@ -4,6 +4,7 @@ import Persons from '../Components/Persons/Persons';
 import Head from '../Components/Head/Head';
 import WithClass from '../Containers/HigherOrderComponents/WithClass';
 import PropTypes from 'prop-types';
+import AuthContext from './Context/AuthContext';
 
 class App extends Component {
 	constructor(props) {
@@ -101,23 +102,29 @@ class App extends Component {
 		return (
 			<WithClass classes={styles.App}>
 				<button onClick={this.removeHead}>Remove</button>
-				{this.state.showHead && (
-					<Head
-						title={this.props.title}
-						personsLength={this.state.persons.length}
-						showPersons={this.state.showPersons}
-						click={this.clickHandler}
-						loginClick={this.handleLoginClick}
-					/>
-				)}
-				{this.state.showPersons && (
-					<Persons
-						persons={this.state.persons}
-						deleteClick={this.handleDelete}
-						changeName={this.handleChange}
-						isAuthenticated={this.state.authenticated}
-					/>
-				)}
+				<AuthContext.Provider
+					value={{
+						authenticated: this.state.authenticated,
+						login: this.handleLoginClick,
+					}}
+				>
+					{this.state.showHead && (
+						<Head
+							title={this.props.title}
+							personsLength={this.state.persons.length}
+							showPersons={this.state.showPersons}
+							click={this.clickHandler}
+							loginClick={this.handleLoginClick}
+						/>
+					)}
+					{this.state.showPersons && (
+						<Persons
+							persons={this.state.persons}
+							deleteClick={this.handleDelete}
+							changeName={this.handleChange}
+						/>
+					)}
+				</AuthContext.Provider>
 			</WithClass>
 		);
 	}

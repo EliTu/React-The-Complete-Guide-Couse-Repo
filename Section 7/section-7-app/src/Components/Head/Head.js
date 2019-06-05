@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './Head.module.css';
+import PropTypes from 'prop-types';
 
 const Head = props => {
 	let buttonClass = '';
@@ -29,6 +30,13 @@ const Head = props => {
 			</button>
 		</div>
 	);
+};
+
+Head.propTypes = {
+	personLength: PropTypes.number,
+	showPersons: PropTypes.bool,
+	click: PropTypes.func,
+	title: PropTypes.string,
 };
 
 export default React.memo(Head);

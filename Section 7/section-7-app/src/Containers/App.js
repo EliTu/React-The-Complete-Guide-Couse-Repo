@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import Persons from '../Components/Persons/Persons';
 import Head from '../Components/Head/Head';
 import WithClass from '../Containers/HigherOrderComponents/WithClass';
+import PropTypes from 'prop-types';
 
 class App extends Component {
 	constructor(props) {
@@ -113,4 +114,7 @@ class App extends Component {
 	}
 }
 
+App.propTypes = {
+	title: PropTypes.string,
+};
 export default App;

@@ -34,3 +34,56 @@ The pages that are hosted as the `Props.Children` will contain:
 
 ## Planning the State (Section 8, lecture 149)
 
+Now we can plan the State in our application, and this will also help us to decide which components will hold the State, and so which components will be stateful. 
+
+What data will we need to manage in our app then?
+
+- The ingredients that the user added, which will probably be a JavaScript object that holds the ingredient as a key and a quantitative value as a number.
+
+```js
+this.state = {
+    ingredients: {
+        meet: 1,
+        cheese: 2,
+        salad: 1,
+    },
+}
+```
+
+- We would also want to have a boolean value to check if the user has already purchased the burger or not.
+
+```js
+this.state = {
+    ingredients: {
+        meet: 1,
+        cheese: 2,
+        salad: 1,
+    },
+    purchased: false,
+}
+```
+
+- Another thing important piece of data is the total price of the burger, so we can always see the price, dynamically calculate it and display it.
+
+```js
+this.state = {
+    ingredients: {
+        meet: 1,
+        cheese: 2,
+        salad: 1,
+    },
+    purchased: false,
+    price: 12.25
+}
+```
+
+### Where to manage the State?
+
+We might think we should manage the State at the root `App` component (As we done with our state until now) but this would be the wrong thing to do. As we can see, our State has to do only with the burger build tool, basically having data regarding the burger itself, and so it would be much better to attach the State to the `BurgerBuilder` component, which is the page that holds all the features related to the building tool. Later when we will add other pages, like the order list page for example, they will not need to access that State, and so keeping the State at the root level will be redundant and useless, as it doesn't concern or affect the whole app, only one portion of it, which is the `BurgerBuilder` component, and so, for now, it will be our only stateful component.
+
+The `App` component by default starts as a class based component, but it doesn't need to be if it doesn't manages state, and so we could just convert it to a function component.
+
+As for `PureComponent` or `shouldComponentUpdate` lifecycle method, we shouldn't think about these now, as these will be decided as we code the components and realize that we would need to manage our rendering and previous state. This will be part of the optimization that we will do as we build the app, but in the case of our app, we might not even need to implement something like `PureComponent`.
+
+## Setting Up the Project (Section 8, lecture 150)
+

@@ -17,12 +17,17 @@ class Person extends Component {
 		console.log(this.context);
 	}
 
+	handleTransitionFade = () => {};
+
 	render() {
 		console.log('Person.js rendering...');
 		const { name, age, click, children, change } = this.props;
 
 		return (
-			<WithClass classes={styles.Person}>
+			<WithClass
+				classes={styles.Person}
+				ontransitionend={this.handleTransitionFade}
+			>
 				{this.context.authenticated ? (
 					<p className={styles.authenticated}>User Authenticated</p>
 				) : (

@@ -84,6 +84,3 @@ We might think we should manage the State at the root `App` component (As we don
 The `App` component by default starts as a class based component, but it doesn't need to be if it doesn't manages state, and so we could just convert it to a function component.
 
 As for `PureComponent` or `shouldComponentUpdate` lifecycle method, we shouldn't think about these now, as these will be decided as we code the components and realize that we would need to manage our rendering and previous state. This will be part of the optimization that we will do as we build the app, but in the case of our app, we might not even need to implement something like `PureComponent`.
-
-## Setting Up the Project (Section 8, lecture 150)
-

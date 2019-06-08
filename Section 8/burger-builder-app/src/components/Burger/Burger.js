@@ -17,10 +17,18 @@ const Burger = props => {
 		return changedArr;
 	});
 
+	const areNoIngredients = transformedIngredientsArr.every(
+		el => el.length === 0
+	);
+
 	return (
 		<div className={styles.Burger}>
 			<Ingredient type="bread-top" />
-			{transformedIngredientsArr}
+			{areNoIngredients ? (
+				<p>Please start adding ingredients!</p>
+			) : (
+				transformedIngredientsArr
+			)}
 			<Ingredient type="bread-bottom" />
 		</div>
 	);

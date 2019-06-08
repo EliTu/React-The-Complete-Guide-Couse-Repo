@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import Burger from '../../Burger/Burger';
 // import PropTypes from 'prop-types';
 
 class BurgerBuilder extends Component {
+	state = {
+		type: '',
+	};
+
 	render() {
 		return (
 			<>
-				<div>Burger</div>
-				<div>Build</div>
+				<Burger />
+				<div>Build controls</div>
 			</>
 		);
 	}

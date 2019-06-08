@@ -33,11 +33,11 @@ const Ingredient = props => {
 			ingredient = null;
 	}
 
-	Ingredient.PropTypes = {
-		type: PropTypes.string,
-	};
-
 	return ingredient;
+};
+
+Ingredient.propTypes = {
+	type: PropTypes.string,
 };
 
 export default Ingredient;

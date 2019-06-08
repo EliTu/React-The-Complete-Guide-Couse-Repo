@@ -4,13 +4,20 @@ import Burger from '../../Burger/Burger';
 
 class BurgerBuilder extends Component {
 	state = {
-		type: '',
+		ingredients: [
+			{ ingredient: 'salad', quantity: 1 },
+			{ ingredient: 'meat', quantity: 2 },
+			{ ingredient: 'cheese', quantity: 2 },
+			{ ingredient: 'bacon', quantity: 1 },
+		],
+		totalPrice: 0,
 	};
 
 	render() {
+		const { ingredients } = this.state;
 		return (
 			<>
-				<Burger />
+				<Burger ingredients={ingredients} />
 				<div>Build controls</div>
 			</>
 		);

@@ -84,6 +84,7 @@ class BurgerBuilder extends Component {
 					addIngredient={this.handleAddIngredientClick}
 					removeIngredient={this.handleRemoveIngredientClick}
 					disableRemove={isQuantityZero}
+					price={this.state.totalPrice}
 				/>
 			</>
 		);

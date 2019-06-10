@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Burger from '../../Burger/Burger';
+import BuildControls from '../../Burger/BuildControls/BuildControls';
 // import PropTypes from 'prop-types';
 
 class BurgerBuilder extends Component {
@@ -18,7 +19,7 @@ class BurgerBuilder extends Component {
 		return (
 			<>
 				<Burger ingredients={ingredients} />
-				<div>Build controls</div>
+				<BuildControls />
 			</>
 		);
 	}

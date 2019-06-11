@@ -11,25 +11,34 @@ const controls = [
 ];
 
 const BuildControls = props => {
+	// props:
+	const {
+		price,
+		addIngredient,
+		removeIngredient,
+		disableRemove,
+		purchasable,
+	} = props;
+
+	// CSS Modules styles:
+	const { BuildControls, Price, Sum, OrderButton } = styles;
+
 	return (
-		<div className={styles.BuildControls}>
-			<p className={styles.Price}>
+		<div className={BuildControls}>
+			<p className={Price}>
 				Total Price:
-				<span className={styles.Sum}>${props.price.toFixed(2)}</span>
+				<span className={Sum}>${price.toFixed(2)}</span>
 			</p>
 			{controls.map(control => (
 				<Controller
 					key={control.label}
 					label={control.label}
-					clickAdd={() => props.addIngredient(control.type)}
-					clickRemove={() => props.removeIngredient(control.type)}
-					DisableRemoveButton={props.disableRemove[control.position]}
+					clickAdd={() => addIngredient(control.type)}
+					clickRemove={() => removeIngredient(control.type)}
+					DisableRemoveButton={disableRemove[control.position]}
 				/>
 			))}
-			<button
-				className={styles.OrderButton}
-				disabled={!props.purchasable}
-			>
+			<button className={OrderButton} disabled={!purchasable}>
 				Order now
 			</button>
 		</div>

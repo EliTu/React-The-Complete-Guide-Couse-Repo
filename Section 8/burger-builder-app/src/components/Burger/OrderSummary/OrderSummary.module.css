@@ -1,0 +1,7 @@
+.UnorderedStyle {
+    list-style: none;
+}
+
+.IngredientStyle {
+    text-transform: capitalize;
+}

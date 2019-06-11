@@ -3,17 +3,23 @@ import styles from './Controller.module.css';
 import PropTypes from 'prop-types';
 
 const Controller = props => {
+	// props:
+	const { label, clickRemove, DisableRemoveButton, clickAdd } = props;
+
+	// CSS Modules styles:
+	const { Controller, Label, Less, More } = styles;
+
 	return (
-		<div className={styles.Controller}>
-			<div className={styles.Label}>{props.label}: </div>
+		<div className={Controller}>
+			<div className={Label}>{label}: </div>
 			<button
-				className={styles.Less}
-				onClick={props.clickRemove}
-				disabled={props.DisableRemoveButton}
+				className={Less}
+				onClick={clickRemove}
+				disabled={DisableRemoveButton}
 			>
 				-
 			</button>
-			<button className={styles.More} onClick={props.clickAdd}>
+			<button className={More} onClick={clickAdd}>
 				+
 			</button>
 		</div>

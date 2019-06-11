@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from './components/display/Layout/Layout';
 import BurgerBuilder from './components/containers/BurgerBuilder/BurgerBuilder';
 
-function App(props) {
+function App() {
 	return (
 		<div>
 			<Layout>

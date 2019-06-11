@@ -1,16 +1,23 @@
 import React from 'react';
 import Ingredient from './Ingredient/Ingredient';
 import styles from './Burger.module.css';
+import PropTypes from 'prop-types';
 
 const Burger = props => {
+	// props:
+	const { ingredients } = props;
+
+	// CSS Modules styles:
+	const { Burger } = styles;
+
 	let transformedIngredientsArr = [];
-	transformedIngredientsArr = props.ingredients.map(element => {
+	transformedIngredientsArr = ingredients.map(ingredient => {
 		let changedArr = [];
-		for (let i = 0; i < element.quantity; i++) {
+		for (let i = 0; i < ingredient.quantity; i++) {
 			changedArr.push(
 				<Ingredient
-					key={`${element.ingredient + Math.random() * 20}`}
-					type={element.ingredient}
+					key={`${ingredient.ingredient + Math.random() * 20}`}
+					type={ingredient.ingredient}
 				/>
 			);
 		}
@@ -22,7 +29,7 @@ const Burger = props => {
 	);
 
 	return (
-		<div className={styles.Burger}>
+		<div className={Burger}>
 			<Ingredient type="bread-top" />
 			{areNoIngredients ? (
 				<p>Please start adding ingredients!</p>
@@ -32,6 +39,10 @@ const Burger = props => {
 			<Ingredient type="bread-bottom" />
 		</div>
 	);
+};
+
+Burger.propTypes = {
+	ingredients: PropTypes.array,
 };
 
 export default Burger;

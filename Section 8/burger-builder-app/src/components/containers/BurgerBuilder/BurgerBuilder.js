@@ -20,6 +20,7 @@ class BurgerBuilder extends Component {
 		],
 		totalPrice: 3,
 		isPurchasable: false,
+		isInOrderSummary: false,
 	};
 
 	checkIfPurchasable = () => {
@@ -32,6 +33,12 @@ class BurgerBuilder extends Component {
 			return {
 				isPurchasable: check,
 			};
+		});
+	};
+
+	handleOrderButtonClick = () => {
+		return this.setState({
+			isInOrderSummary: true,
 		});
 	};
 
@@ -66,9 +73,6 @@ class BurgerBuilder extends Component {
 			el => el.ingredient === type
 		);
 
-		// If quantity is 0 or less then don't execute
-		if ([...this.state.ingredients][ingredientIndex].quantity <= 0) return;
-
 		const decrementQuantity =
 			[...this.state.ingredients][ingredientIndex].quantity - 1;
 
@@ -91,23 +95,30 @@ class BurgerBuilder extends Component {
 	};
 
 	render() {
-		const { ingredients } = this.state;
-		const isQuantityZero = [...this.state.ingredients].map(
-			el => el.quantity <= 0
-		);
+		// state destructuring
+		const {
+			ingredients,
+			totalPrice,
+			isPurchasable,
+			isInOrderSummary,
+		} = this.state;
+
+		// Check if an ingredient quantity is currently 0
+		const isQuantityZero = [...ingredients].map(el => el.quantity <= 0);
 
 		return (
 			<>
-				<Modal>
-					<OrderSummary ingredients={this.state.ingredients} />
+				<Modal show={isInOrderSummary}>
+					<OrderSummary ingredients={ingredients} />
 				</Modal>
 				<Burger ingredients={ingredients} />
 				<BuildControls
 					addIngredient={this.handleAddIngredientClick}
 					removeIngredient={this.handleRemoveIngredientClick}
 					disableRemove={isQuantityZero}
-					price={this.state.totalPrice}
-					purchasable={this.state.isPurchasable}
+					price={totalPrice}
+					purchasable={isPurchasable}
+					setPurchaseMode={this.handleOrderButtonClick}
 				/>
 			</>
 		);

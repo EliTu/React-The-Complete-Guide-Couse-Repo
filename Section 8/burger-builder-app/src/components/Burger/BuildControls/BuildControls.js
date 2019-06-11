@@ -18,6 +18,7 @@ const BuildControls = props => {
 		removeIngredient,
 		disableRemove,
 		purchasable,
+		setPurchaseMode,
 	} = props;
 
 	// CSS Modules styles:
@@ -38,7 +39,11 @@ const BuildControls = props => {
 					DisableRemoveButton={disableRemove[control.position]}
 				/>
 			))}
-			<button className={OrderButton} disabled={!purchasable}>
+			<button
+				className={OrderButton}
+				disabled={!purchasable}
+				onClick={setPurchaseMode}
+			>
 				Order now
 			</button>
 		</div>
@@ -51,6 +56,7 @@ BuildControls.propTypes = {
 	removeIngredient: PropTypes.func,
 	disableRemove: PropTypes.array,
 	purchasable: PropTypes.bool,
+	setPurchaseMode: PropTypes.func,
 };
 
 export default BuildControls;

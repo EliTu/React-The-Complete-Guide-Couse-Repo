@@ -23,6 +23,8 @@ const OrderSummary = props => {
 			<p>A Burger with the following ingredients:</p>
 			<ul className={UnorderedStyle}>{ingredientSummary}</ul>
 			<p>Ready to checkout ?</p>
+			<button>Checkout</button>
+			<button>Cancel</button>
 		</>
 	);
 };

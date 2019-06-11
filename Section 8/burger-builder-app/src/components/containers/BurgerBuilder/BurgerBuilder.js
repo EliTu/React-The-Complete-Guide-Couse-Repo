@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Burger from '../../Burger/Burger';
 import BuildControls from '../../Burger/BuildControls/BuildControls';
-// import PropTypes from 'prop-types';
 
 const INGREDIENT_PRICES = {
 	salad: 0.5,
@@ -18,6 +17,20 @@ class BurgerBuilder extends Component {
 			{ ingredient: 'bacon', quantity: 0 },
 		],
 		totalPrice: 3,
+		isPurchasable: false,
+	};
+
+	checkIfPurchasable = () => {
+		const ingredientsCopy = [...this.state.ingredients];
+		const check = ingredientsCopy.some(
+			ingredient => ingredient.quantity > 0
+		);
+
+		this.setState(() => {
+			return {
+				isPurchasable: check,
+			};
+		});
 	};
 
 	handleAddIngredientClick = type => {
@@ -42,6 +55,8 @@ class BurgerBuilder extends Component {
 				totalPrice: prevState.totalPrice + priceAddition,
 			};
 		});
+
+		this.checkIfPurchasable();
 	};
 
 	handleRemoveIngredientClick = type => {
@@ -69,6 +84,8 @@ class BurgerBuilder extends Component {
 				totalPrice: prevState.totalPrice - priceDeduction,
 			};
 		});
+
+		this.checkIfPurchasable();
 	};
 
 	render() {
@@ -85,11 +102,11 @@ class BurgerBuilder extends Component {
 					removeIngredient={this.handleRemoveIngredientClick}
 					disableRemove={isQuantityZero}
 					price={this.state.totalPrice}
+					purchasable={this.state.isPurchasable}
 				/>
 			</>
 		);
 	}
-	static propTypes = {};
 }
 
 export default BurgerBuilder;

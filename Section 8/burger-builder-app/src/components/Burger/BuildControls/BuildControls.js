@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './BuildControls.module.css';
 import Controller from './Controller/Controller';
+import PropTypes from 'prop-types';
 
 const controls = [
 	{ label: 'Meat', type: 'meat', position: 0 },
@@ -13,7 +14,8 @@ const BuildControls = props => {
 	return (
 		<div className={styles.BuildControls}>
 			<p className={styles.Price}>
-				Current Price: ${props.price.toFixed(2)}
+				Total Price:
+				<span className={styles.Sum}>${props.price.toFixed(2)}</span>
 			</p>
 			{controls.map(control => (
 				<Controller
@@ -24,8 +26,22 @@ const BuildControls = props => {
 					DisableRemoveButton={props.disableRemove[control.position]}
 				/>
 			))}
+			<button
+				className={styles.OrderButton}
+				disabled={!props.purchasable}
+			>
+				Order now
+			</button>
 		</div>
 	);
+};
+
+BuildControls.propTypes = {
+	price: PropTypes.number,
+	addIngredient: PropTypes.func,
+	removeIngredient: PropTypes.func,
+	disableRemove: PropTypes.array,
+	purchasable: PropTypes.bool,
 };
 
 export default BuildControls;

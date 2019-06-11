@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Controller.module.css';
+import PropTypes from 'prop-types';
 
 const Controller = props => {
 	return (
@@ -17,6 +18,13 @@ const Controller = props => {
 			</button>
 		</div>
 	);
+};
+
+Controller.prototypes = {
+	label: PropTypes.string,
+	clickRemove: PropTypes.func,
+	DisableRemoveButton: PropTypes.bool,
+	clickAdd: PropTypes.func,
 };
 
 export default Controller;

@@ -3,7 +3,11 @@
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    margin: 5px 0;
+    margin: 12px 0;
+    padding: 3px 0;
+    border-bottom: 2px solid rgb(26, 24, 24);
+    border-radius: 7px;
+    user-select: none;
 }
 
 .Controller button {
@@ -15,6 +19,7 @@
     border: 1px solid #aa6817;
     cursor: pointer;
     outline: none;
+    border-radius: 15px;
 }
 
 .Controller button:disabled {

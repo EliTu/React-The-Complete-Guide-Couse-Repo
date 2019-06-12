@@ -1,4 +1,5 @@
 import React from 'react';
+import Toolbar from '../Navigation/Toolbar/Toolbar';
 import styles from './Layout.module.css';
 import PropTypes from 'prop-types';
 
@@ -11,7 +12,7 @@ const Layout = props => {
 
 	return (
 		<>
-			<div>Toolbar SideDrawer BackDrop</div>
+			<Toolbar />
 			<main className={layoutStyle}>{children}</main>
 		</>
 	);

@@ -48,6 +48,10 @@ class BurgerBuilder extends Component {
 		});
 	};
 
+	handleCheckoutButtonClick = () => {
+		alert('Order confirmed!');
+	};
+
 	handleAddIngredientClick = type => {
 		const ingredientIndex = this.state.ingredients.findIndex(
 			el => el.ingredient === type
@@ -119,6 +123,8 @@ class BurgerBuilder extends Component {
 					closeModalHandler={this.handleModalOuterBorderClick}
 				>
 					<OrderSummary
+						checkoutHandler={this.handleCheckoutButtonClick}
+						closeModalHandler={this.handleModalOuterBorderClick}
 						ingredients={ingredients}
 						price={totalPrice}
 					/>

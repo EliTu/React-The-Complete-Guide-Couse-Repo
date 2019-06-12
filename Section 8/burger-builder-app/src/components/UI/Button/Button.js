@@ -10,7 +10,10 @@ const Button = props => {
 	const { Button } = styles;
 
 	return (
-		<button onClick={handleClick} className={[Button, Button[type]]}>
+		<button
+			onClick={handleClick}
+			className={[Button, styles[type]].join(' ')}
+		>
 			{children}
 		</button>
 	);
@@ -21,6 +24,8 @@ Button.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]),
+	handleClick: PropTypes.func,
+	type: PropTypes.string,
 };
 
 export default Button;

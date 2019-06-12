@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './Modal.module.css';
+import Backdrop from '../Backdrop/Backdrop';
 import PropTypes from 'prop-types';
 
 const Modal = props => {
 	// props:
-	const { children, show } = props;
+	const { children, show, closeModalHandler } = props;
 
 	// CSS Modules styles:
 	const { Modal } = styles;
@@ -14,15 +15,18 @@ const Modal = props => {
 	const adjustOpacity = show ? '1' : '0';
 
 	return (
-		<div
-			className={Modal}
-			style={{
-				transform: translateModal,
-				opacity: adjustOpacity,
-			}}
-		>
-			{children}
-		</div>
+		<>
+			<Backdrop show={show} removeBackdrop={closeModalHandler} />
+			<div
+				className={Modal}
+				style={{
+					transform: translateModal,
+					opacity: adjustOpacity,
+				}}
+			>
+				{children}
+			</div>
+		</>
 	);
 };
 
@@ -32,6 +36,7 @@ Modal.propTypes = {
 		PropTypes.node,
 	]),
 	show: PropTypes.bool,
+	closeModalHandler: PropTypes.func,
 };
 
 export default Modal;

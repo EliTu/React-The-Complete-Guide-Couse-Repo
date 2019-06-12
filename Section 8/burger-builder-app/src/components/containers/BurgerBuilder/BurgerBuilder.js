@@ -42,6 +42,12 @@ class BurgerBuilder extends Component {
 		});
 	};
 
+	handleModalOuterBorderClick = () => {
+		return this.setState({
+			isInOrderSummary: false,
+		});
+	};
+
 	handleAddIngredientClick = type => {
 		const ingredientIndex = this.state.ingredients.findIndex(
 			el => el.ingredient === type
@@ -108,7 +114,10 @@ class BurgerBuilder extends Component {
 
 		return (
 			<>
-				<Modal show={isInOrderSummary}>
+				<Modal
+					show={isInOrderSummary}
+					closeModalHandler={this.handleModalOuterBorderClick}
+				>
 					<OrderSummary ingredients={ingredients} />
 				</Modal>
 				<Burger ingredients={ingredients} />

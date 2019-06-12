@@ -33,6 +33,7 @@
     background-color: #AC9980;
     color: #ccc;
     cursor: not-allowed;
+    border-radius: 15px;
 }
 
 .Label {
@@ -55,10 +56,12 @@
 .Controller .Less:active {
     background-color: #DAA972;
     color: white;
+    border-radius: 15px;
 }
 
 .Controller .More:hover,
 .Controller .More:active {
     background-color: #99703F;
     color: white;
+    border-radius: 15px;
 }

@@ -1,13 +1,14 @@
 import React from 'react';
+import Button from '../../UI/Button/Button';
 import styles from './OrderSummary.module.css';
 import PropTypes from 'prop-types';
 
 const OrderSummary = props => {
 	// props:
-	const { ingredients } = props;
+	const { ingredients, price } = props;
 
 	// CSS Modules styles:
-	const { OrderSummary, IngredientStyle, UnorderedStyle } = styles;
+	const { OrderSummary, IngredientStyle, UnorderedStyle, Price } = styles;
 
 	const ingredientSummary = ingredients.map((el, i) => (
 		<li className={OrderSummary} key={i}>
@@ -20,16 +21,21 @@ const OrderSummary = props => {
 	return (
 		<>
 			<h3>Your Order:</h3>
-			<p>A Burger with the following ingredients:</p>
+			<p>A burger with the following ingredients:</p>
 			<ul className={UnorderedStyle}>{ingredientSummary}</ul>
+			<p>
+				Your total price is:
+				<span className={Price}>${price.toFixed(2)}</span>
+			</p>
 			<p>Ready to checkout ?</p>
-			<button>Checkout</button>
-			<button>Cancel</button>
+			<Button>Checkout</Button>
+			<Button>Cancel</Button>
 		</>
 	);
 };
 
 OrderSummary.prototypes = {
 	ingredients: PropTypes.array,
+	price: PropTypes.Number,
 };
 export default OrderSummary;

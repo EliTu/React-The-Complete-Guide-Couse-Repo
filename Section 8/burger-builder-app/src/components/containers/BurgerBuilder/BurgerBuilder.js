@@ -118,7 +118,10 @@ class BurgerBuilder extends Component {
 					show={isInOrderSummary}
 					closeModalHandler={this.handleModalOuterBorderClick}
 				>
-					<OrderSummary ingredients={ingredients} />
+					<OrderSummary
+						ingredients={ingredients}
+						price={totalPrice}
+					/>
 				</Modal>
 				<Burger ingredients={ingredients} />
 				<BuildControls

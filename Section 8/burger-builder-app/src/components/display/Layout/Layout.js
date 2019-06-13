@@ -1,24 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from '../Navigation/SIdeDrawer/SideDrawer';
 import styles from './Layout.module.css';
 import PropTypes from 'prop-types';
 
-const Layout = props => {
-	// props:
-	const { children } = props;
+class Layout extends Component {
+	state = {
+		isSideDrawerVisible: false,
+		isSideDrawerOpen: false,
+	};
 
-	// CSS Modules styles:
-	const { layoutStyle } = styles;
+	render() {
+		// props:
+		const { children } = this.props;
 
-	return (
-		<>
-			<Toolbar />
-			<SideDrawer />
-			<main className={layoutStyle}>{children}</main>
-		</>
-	);
-};
+		// state:
+		const { isSideDrawerVisible } = this.state;
+
+		// CSS Modules styles:
+		const { layoutStyle } = styles;
+
+		const handleSideDrawerCloseClick = () => {
+			this.setState({
+				isSideDrawerVisible: false,
+			});
+		};
+
+		const handleDrawerButtonClick = () => {
+			this.setState({
+				isSideDrawerVisible: true,
+				isSideDrawerOpen: true,
+			});
+		};
+
+		return (
+			<>
+				<Toolbar clicked={handleDrawerButtonClick} />
+				<SideDrawer
+					isVisible={isSideDrawerVisible}
+					handleVisibility={handleSideDrawerCloseClick}
+				/>
+				<main className={layoutStyle}>{children}</main>
+			</>
+		);
+	}
+}
 
 Layout.propTypes = {
 	children: PropTypes.oneOfType([

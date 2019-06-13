@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Button = props => {
 	// props:
-	const { children, handleClick, type } = props;
+	const { children, handleClick, type, toolBarButton } = props;
 
 	// CSS Modules styles:
 	const { Button } = styles;
@@ -12,7 +12,7 @@ const Button = props => {
 	return (
 		<button
 			onClick={handleClick}
-			className={[Button, styles[type]].join(' ')}
+			className={[Button, styles[type], styles[toolBarButton]].join(' ')}
 		>
 			{children}
 		</button>
@@ -26,6 +26,7 @@ Button.propTypes = {
 	]),
 	handleClick: PropTypes.func,
 	type: PropTypes.string,
+	toolBarButton: PropTypes.string,
 };
 
 export default Button;

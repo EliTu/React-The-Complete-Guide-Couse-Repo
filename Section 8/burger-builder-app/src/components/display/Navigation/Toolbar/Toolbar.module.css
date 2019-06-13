@@ -25,9 +25,30 @@
     border-radius: 50%;
 }
 
+/* Desktop - Remove sideDrawer Toggle button */
+@media (min-width: 500px) {
+    .Toolbar button {
+        display: none;
+    }
+}
+
 /* Mobile */
 @media (max-width:499px) {
     .DesktopOnly {
         display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .Toolbar {
+        justify-content: space-between;
+        justify-items: end;
+        align-content: flex-end;
+    }
+
+    .LogoHeight {
+        height: 90%;
+        background-color: rgba(8, 131, 8, 0.575);
+        border-radius: 50%;
     }
 }

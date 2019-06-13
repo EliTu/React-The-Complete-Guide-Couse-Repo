@@ -9,7 +9,7 @@
     background-color: rgba(233, 233, 233, 0.877);
     padding: 2rem 1rem;
     box-sizing: border-box;
-    transition: all 0.3 ease-out;
+    transition: all 0.3s ease-out;
 }
 
 @media (min-width: 500px) {

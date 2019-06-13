@@ -39,4 +39,4 @@ Modal.propTypes = {
 	closeModalHandler: PropTypes.func.isRequired,
 };
 
-export default Modal;
+export default React.memo(Modal);

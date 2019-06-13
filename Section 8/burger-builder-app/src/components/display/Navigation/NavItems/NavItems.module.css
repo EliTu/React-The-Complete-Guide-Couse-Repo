@@ -3,6 +3,15 @@
     padding: 0;
     list-style: none;
     display: flex;
+    flex-direction: column;
     align-items: center;
     height: 100%;
+}
+
+/* Desktop */
+@media (min-width: 500px) {
+    .NavItems {
+        flex-flow: row;
+        width: 100%;
+    }
 }

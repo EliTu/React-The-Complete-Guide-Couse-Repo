@@ -5,12 +5,14 @@ import styles from './Toolbar.module.css';
 
 const Toolbar = props => {
 	// CSS Modules classes:
-	const { Toolbar } = styles;
+	const { Toolbar, LogoHeight, DesktopOnly } = styles;
 
 	return (
 		<header className={Toolbar}>
-			<Logo img="../../assets/Image/burger-logo.png" />
-			<nav>
+			<div className={[LogoHeight, DesktopOnly].join(' ')}>
+				<Logo />
+			</div>
+			<nav className={DesktopOnly}>
 				<NavItems />
 			</nav>
 		</header>

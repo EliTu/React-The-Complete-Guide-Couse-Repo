@@ -37,7 +37,7 @@ const Ingredient = props => {
 };
 
 Ingredient.propTypes = {
-	type: PropTypes.string,
+	type: PropTypes.string.isRequired,
 };
 
 export default Ingredient;

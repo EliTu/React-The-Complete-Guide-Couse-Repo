@@ -19,8 +19,8 @@ const Item = props => {
 };
 
 Item.propTypes = {
-	link: PropTypes.string,
-	children: PropTypes.node,
+	link: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
 	active: PropTypes.bool,
 };
 

@@ -51,12 +51,12 @@ const BuildControls = props => {
 };
 
 BuildControls.propTypes = {
-	price: PropTypes.number,
-	addIngredient: PropTypes.func,
-	removeIngredient: PropTypes.func,
-	disableRemove: PropTypes.array,
-	purchasable: PropTypes.bool,
-	setPurchaseMode: PropTypes.func,
+	price: PropTypes.number.isRequired,
+	addIngredient: PropTypes.func.isRequired,
+	removeIngredient: PropTypes.func.isRequired,
+	disableRemove: PropTypes.array.isRequired,
+	purchasable: PropTypes.bool.isRequired,
+	setPurchaseMode: PropTypes.func.isRequired,
 };
 
 export default BuildControls;

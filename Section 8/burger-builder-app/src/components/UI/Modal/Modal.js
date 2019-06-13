@@ -34,9 +34,9 @@ Modal.propTypes = {
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
-	]),
-	show: PropTypes.bool,
-	closeModalHandler: PropTypes.func,
+	]).isRequired,
+	show: PropTypes.bool.isRequired,
+	closeModalHandler: PropTypes.func.isRequired,
 };
 
 export default Modal;

@@ -27,10 +27,10 @@ const Controller = props => {
 };
 
 Controller.prototypes = {
-	label: PropTypes.string,
-	clickRemove: PropTypes.func,
-	DisableRemoveButton: PropTypes.bool,
-	clickAdd: PropTypes.func,
+	label: PropTypes.string.isRequired,
+	clickRemove: PropTypes.func.isRequired,
+	DisableRemoveButton: PropTypes.bool.isRequired,
+	clickAdd: PropTypes.func.isRequired,
 };
 
 export default Controller;

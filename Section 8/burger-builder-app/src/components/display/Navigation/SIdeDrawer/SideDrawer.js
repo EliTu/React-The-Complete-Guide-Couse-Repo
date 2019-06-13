@@ -30,8 +30,8 @@ const SideDrawer = props => {
 };
 
 SideDrawer.propTypes = {
-	handleVisibility: PropTypes.func,
-	isVisible: PropTypes.bool,
+	handleVisibility: PropTypes.func.isRequired,
+	isVisible: PropTypes.bool.isRequired,
 };
 
 export default SideDrawer;

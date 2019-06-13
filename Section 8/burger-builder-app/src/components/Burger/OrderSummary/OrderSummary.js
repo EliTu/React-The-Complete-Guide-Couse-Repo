@@ -39,9 +39,9 @@ const OrderSummary = props => {
 };
 
 OrderSummary.prototypes = {
-	ingredients: PropTypes.array,
-	price: PropTypes.Number,
-	closeModalHandler: PropTypes.func,
-	checkoutHandler: PropTypes.func,
+	ingredients: PropTypes.array.isRequired,
+	price: PropTypes.number.isRequired,
+	closeModalHandler: PropTypes.func.isRequired,
+	checkoutHandler: PropTypes.func.isRequired,
 };
 export default OrderSummary;

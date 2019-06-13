@@ -23,8 +23,8 @@ Button.propTypes = {
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
-	]),
-	handleClick: PropTypes.func,
+	]).isRequired,
+	handleClick: PropTypes.func.isRequired,
 	type: PropTypes.string,
 	toolBarButton: PropTypes.string,
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import Logo from '../../../Logo/Logo';
 import NavItems from '../NavItems/NavItems';
-// import ToggleButton from './ToggleButton/ToggleButton';
 import Button from '../../../UI/Button/Button';
 import styles from './Toolbar.module.css';
+import PropTypes from 'prop-types';
 
 const Toolbar = props => {
 	// props:
@@ -24,6 +24,10 @@ const Toolbar = props => {
 			</Button>
 		</header>
 	);
+};
+
+Toolbar.propTypes = {
+	clicked: PropTypes.func,
 };
 
 export default Toolbar;

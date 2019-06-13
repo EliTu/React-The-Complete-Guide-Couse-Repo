@@ -6,12 +6,12 @@
     left: 0;
     background-image: linear-gradient(75deg, rgb(238, 148, 44), rgb(230, 162, 86));
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 0 1.1rem;
     box-sizing: border-box;
     z-index: 90;
-    /* user-select: none; */
+    user-select: none;
 }
 
 .Toolbar nav {

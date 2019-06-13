@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../../../Logo/Logo';
+import NavItems from '../NavItems/NavItems';
 import styles from './Toolbar.module.css';
 
 const Toolbar = props => {
@@ -8,10 +9,9 @@ const Toolbar = props => {
 
 	return (
 		<header className={Toolbar}>
-			<Logo />
-			<div>Menu</div>
+			<Logo img="../../assets/Image/burger-logo.png" />
 			<nav>
-				<ul>...</ul>
+				<NavItems />
 			</nav>
 		</header>
 	);

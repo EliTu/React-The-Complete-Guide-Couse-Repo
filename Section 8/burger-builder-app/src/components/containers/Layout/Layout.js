@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import SideDrawer from '../Navigation/SIdeDrawer/SideDrawer';
+import Toolbar from '../../display/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../display/Navigation/SIdeDrawer/SideDrawer';
 import styles from './Layout.module.css';
 import PropTypes from 'prop-types';
 

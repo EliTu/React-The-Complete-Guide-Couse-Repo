@@ -11,9 +11,37 @@ class Blog extends Component {
 	};
 
 	componentDidMount() {
-		axios.get('https://jsonplaceholder.typicode.com/posts').then(response =>
+		const postRequest = async () => {
+			const posts = await axios.get(
+				'https://jsonplaceholder.typicode.com/posts'
+			);
+			const users = await axios.get(
+				'https://jsonplaceholder.typicode.com/users'
+			);
+			const postsData = posts.data;
+			const usersData = users.data;
+
+			let tempPostData;
+			const newPostData = [];
+
+			postsData.forEach(post => {
+				usersData.forEach(user => {
+					if (post.id === user.id) {
+						tempPostData = post;
+						tempPostData.author = user.name;
+						newPostData.push(tempPostData);
+					}
+				});
+			});
+
+			console.log(newPostData);
+
+			return newPostData;
+		};
+
+		postRequest().then(data =>
 			this.setState({
-				posts: response.data,
+				posts: data,
 			})
 		);
 	}

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import './Post.css';
 
 const post = props => {
-	const { title, author } = props;
+	const { title, author, click } = props;
 
 	return (
-		<article className="Post">
-			<h5>{title}</h5>
+		<article className="Post" onClick={click}>
+			<h3>{title}</h3>
 			<div className="Info">
 				<div className="Author">{author}</div>
 			</div>
@@ -19,6 +19,7 @@ const post = props => {
 post.Proptypes = {
 	title: PropTypes.string,
 	author: PropTypes.string,
+	click: PropTypes.func.isRequired,
 };
 
 post.defaultProps = {

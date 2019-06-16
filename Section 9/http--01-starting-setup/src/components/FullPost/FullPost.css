@@ -6,9 +6,14 @@
     text-align: center;
 }
 
-.Edit {
-
+.Select {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 1rem auto;
+    text-align: center;
 }
+
+.Edit {}
 
 .Edit label {
     display: block;

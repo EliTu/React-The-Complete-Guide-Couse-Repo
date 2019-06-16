@@ -5,6 +5,13 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import axios from 'axios';
 
+// Axios defaults baseURL global configuration:
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
+
+// Axios defaults set custom headers:
+axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+axios.defaults.headers.common['Content-type'] = 'App/JSON';
+
 // Setting axios interceptor:
 const configInterceptor = axios.interceptors.request.use(
 	config => {

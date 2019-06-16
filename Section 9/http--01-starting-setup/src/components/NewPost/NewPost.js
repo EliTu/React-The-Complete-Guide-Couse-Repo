@@ -14,13 +14,10 @@ class NewPost extends Component {
 			title: this.state.title,
 			body: this.state.content,
 			author: this.state.author,
-        };
-        
+		};
+
 		try {
-			const response = await axios.post(
-				'https://jsonplaceholder.typicode.com/posts',
-				newPost
-			);
+			const response = await axios.post('/posts', newPost);
 			console.log(response.data);
 		} catch (error) {
 			console.log(error);

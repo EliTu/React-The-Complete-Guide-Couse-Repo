@@ -3,7 +3,8 @@ import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
 import './Blog.css';
-import axios from 'axios';
+// import axios from 'axios';
+import axiosInstance from '../../axios';
 
 class Blog extends Component {
 	state = {
@@ -15,12 +16,8 @@ class Blog extends Component {
 
 	componentDidMount() {
 		const postRequest = async () => {
-			const posts = await axios.get(
-				'https://jsonplaceholder.typicode.com/posts'
-			);
-			const users = await axios.get(
-				'https://jsonplaceholder.typicode.com/users'
-			);
+			const posts = await axiosInstance.get('/posts');
+			const users = await axiosInstance.get('/users');
 			const postsData = posts.data;
 			const usersData = users.data;
 

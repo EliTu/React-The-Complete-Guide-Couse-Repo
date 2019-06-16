@@ -11,9 +11,7 @@ class FullPost extends Component {
 	handleDeletePostClick = async () => {
 		try {
 			const deletePost = await axios.delete(
-				`https://jsonplaceholder.typicode.com/posts/${
-					this.props.postId
-				}`
+				`/posts/${this.props.postId}`
 			);
 			console.log(deletePost);
 		} catch (error) {

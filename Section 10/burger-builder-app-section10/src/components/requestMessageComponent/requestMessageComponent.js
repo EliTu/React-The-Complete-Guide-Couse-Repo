@@ -7,13 +7,7 @@ const requestMessageComponent = (WrappedComponent, axiosInstance) => {
 		constructor() {
 			super();
 			// Used to catch errors upon getting data from the database on app load:
-			axiosInstance.interceptors.request.use(request => {
-				this.setState({
-					error: null,
-				});
-				return request;
-			});
-			axiosInstance.interceptors.response.use(
+			this.errorCheckInterceptor = axiosInstance.interceptors.response.use(
 				res => res,
 				error => {
 					this.setState({
@@ -29,13 +23,16 @@ const requestMessageComponent = (WrappedComponent, axiosInstance) => {
 		};
 
 		componentDidMount() {
-			axiosInstance.interceptors.request.use(request => {
-				this.setState({
-					error: null,
-				});
-				return request;
-			});
-			axiosInstance.interceptors.response.use(
+			this.requestInterceptor = axiosInstance.interceptors.request.use(
+				request => {
+					this.setState({
+						error: null,
+					});
+					return request;
+				}
+			);
+
+			this.responseInterceptor = axiosInstance.interceptors.response.use(
 				res => {
 					this.setState({
 						responseStatus: res.status === 200 ? true : false,
@@ -48,6 +45,15 @@ const requestMessageComponent = (WrappedComponent, axiosInstance) => {
 					});
 				}
 			);
+		}
+
+		componentWillUnmount() {
+			// Remove the interceptors upon unmounting the Burger component
+			axiosInstance.interceptors.response.eject(
+				this.errorCheckInterceptor,
+				this.responseInterceptor
+			);
+			axiosInstance.interceptors.request.eject(this.requestInterceptor);
 		}
 
 		handleErrorConfirmClick = () => {

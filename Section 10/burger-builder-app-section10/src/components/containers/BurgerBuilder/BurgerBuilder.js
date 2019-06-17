@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import axiosInstance from '../../../axios-orders';
 import Burger from '../../Burger/Burger';
 import BuildControls from '../../Burger/BuildControls/BuildControls';
 import Modal from '../../UI/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
+import Spinner from '../../UI/Spinner/Spinner';
 
 const INGREDIENT_PRICES = {
 	salad: 0.5,
@@ -21,17 +23,18 @@ class BurgerBuilder extends Component {
 		totalPrice: 3,
 		isPurchasable: false,
 		isInOrderSummary: false,
+		isLoadingRequest: false,
 	};
 
 	checkIfPurchasable = () => {
 		const ingredientsCopy = [...this.state.ingredients];
-		const check = ingredientsCopy.some(
+		const checkBool = ingredientsCopy.some(
 			ingredient => ingredient.quantity > 0
 		);
 
 		this.setState(() => {
 			return {
-				isPurchasable: check,
+				isPurchasable: checkBool,
 			};
 		});
 	};
@@ -48,8 +51,30 @@ class BurgerBuilder extends Component {
 		});
 	};
 
-	handleCheckoutButtonClick = () => {
-		alert('Order confirmed!');
+	handleCheckoutButtonClick = async () => {
+		this.setState({ isLoadingRequest: true });
+		const order = {
+			ingredients: this.state.ingredients,
+			price: this.state.totalPrice,
+			customer: {
+				name: 'Eliad',
+				address: {
+					street: 'Test 1',
+					zipCode: '12345',
+					city: 'Taipei',
+				},
+				eliad: 'text@testmail.com',
+			},
+			deliveryMethod: 'fastest',
+		};
+		try {
+			const postRequest = await axiosInstance.post('/orders.json', order);
+			console.log(postRequest);
+			this.setState({ isLoadingRequest: false, isInOrderSummary: false });
+		} catch (error) {
+			this.setState({ isLoadingRequest: false, isInOrderSummary: false });
+			console.log(error);
+		}
 	};
 
 	handleAddIngredientClick = type => {
@@ -111,6 +136,7 @@ class BurgerBuilder extends Component {
 			totalPrice,
 			isPurchasable,
 			isInOrderSummary,
+			isLoadingRequest,
 		} = this.state;
 
 		// Check if an ingredient quantity is currently 0
@@ -122,12 +148,16 @@ class BurgerBuilder extends Component {
 					show={isInOrderSummary}
 					closeModalHandler={this.handleModalOuterBorderClick}
 				>
-					<OrderSummary
-						checkoutHandler={this.handleCheckoutButtonClick}
-						closeModalHandler={this.handleModalOuterBorderClick}
-						ingredients={ingredients}
-						price={totalPrice}
-					/>
+					{isLoadingRequest ? (
+						<Spinner />
+					) : (
+						<OrderSummary
+							checkoutHandler={this.handleCheckoutButtonClick}
+							closeModalHandler={this.handleModalOuterBorderClick}
+							ingredients={ingredients}
+							price={totalPrice}
+						/>
+					)}
 				</Modal>
 				<Burger ingredients={ingredients} />
 				<BuildControls

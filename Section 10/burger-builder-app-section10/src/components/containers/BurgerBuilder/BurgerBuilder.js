@@ -5,7 +5,7 @@ import BuildControls from '../../Burger/BuildControls/BuildControls';
 import Modal from '../../UI/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
 import Spinner from '../../UI/Spinner/Spinner';
-import withErrorHandler from '../../withErrorHandler/withErrorHandler';
+import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 
 const INGREDIENT_PRICES = {
 	salad: 0.5,
@@ -15,17 +15,29 @@ const INGREDIENT_PRICES = {
 };
 class BurgerBuilder extends Component {
 	state = {
-		ingredients: [
-			{ ingredient: 'meat', quantity: 0 },
-			{ ingredient: 'salad', quantity: 0 },
-			{ ingredient: 'cheese', quantity: 0 },
-			{ ingredient: 'bacon', quantity: 0 },
-		],
+		ingredients: null,
 		totalPrice: 3,
 		isPurchasable: false,
 		isInOrderSummary: false,
 		isLoadingRequest: false,
+		isErrorOnMount: false,
 	};
+
+	// Get the Ingredient list and quantity from the database:
+	async componentDidMount() {
+		try {
+			const getIngredientsData = await axiosInstance.get(
+				'/ingredients.json'
+			);
+			this.setState({
+				ingredients: getIngredientsData.data,
+			});
+		} catch (error) {
+			this.setState({
+				isErrorOnMount: true,
+			});
+		}
+	}
 
 	checkIfPurchasable = () => {
 		const ingredientsCopy = [...this.state.ingredients];
@@ -137,10 +149,21 @@ class BurgerBuilder extends Component {
 			isPurchasable,
 			isInOrderSummary,
 			isLoadingRequest,
+			isErrorOnMount,
 		} = this.state;
 
 		// Check if an ingredient quantity is currently 0
-		const isQuantityZero = [...ingredients].map(el => el.quantity <= 0);
+		let isQuantityZero;
+		if (ingredients) {
+			isQuantityZero = [...ingredients].map(el => el.quantity <= 0);
+		}
+
+		// If getting database request error, display message:
+		const errorMessage = (
+			<p>
+				Oh no! We've encountered an error, ingredients can't be loaded
+			</p>
+		);
 
 		return (
 			<>
@@ -159,18 +182,25 @@ class BurgerBuilder extends Component {
 						/>
 					)}
 				</Modal>
-				<Burger ingredients={ingredients} />
-				<BuildControls
-					addIngredient={this.handleAddIngredientClick}
-					removeIngredient={this.handleRemoveIngredientClick}
-					disableRemove={isQuantityZero}
-					price={totalPrice}
-					purchasable={isPurchasable}
-					setPurchaseMode={this.handleOrderButtonClick}
-				/>
+				{isErrorOnMount ? errorMessage : null}
+				{!ingredients ? (
+					<Spinner />
+				) : (
+					<>
+						<Burger ingredients={ingredients} />
+						<BuildControls
+							addIngredient={this.handleAddIngredientClick}
+							removeIngredient={this.handleRemoveIngredientClick}
+							disableRemove={isQuantityZero}
+							price={totalPrice}
+							purchasable={isPurchasable}
+							setPurchaseMode={this.handleOrderButtonClick}
+						/>
+					</>
+				)}
 			</>
 		);
 	}
 }
 
-export default withErrorHandler(BurgerBuilder, axiosInstance);
+export default requestMessageComponent(BurgerBuilder, axiosInstance);

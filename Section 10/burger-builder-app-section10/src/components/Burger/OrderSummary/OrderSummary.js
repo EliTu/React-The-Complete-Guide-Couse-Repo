@@ -10,13 +10,18 @@ const OrderSummary = props => {
 	// CSS Modules styles:
 	const { OrderSummary, IngredientStyle, UnorderedStyle, Price } = styles;
 
-	const ingredientSummary = ingredients.map((el, i) => (
-		<li className={OrderSummary} key={i}>
-			<span className={IngredientStyle}>
-				{el.quantity > 0 ? `${el.ingredient} x ${el.quantity}` : null}
-			</span>
-		</li>
-	));
+	let ingredientSummary;
+	if (ingredients) {
+		ingredientSummary = ingredients.map((el, i) => (
+			<li className={OrderSummary} key={i}>
+				<span className={IngredientStyle}>
+					{el.quantity > 0
+						? `${el.ingredient} x ${el.quantity}`
+						: null}
+				</span>
+			</li>
+		));
+	}
 
 	return (
 		<>

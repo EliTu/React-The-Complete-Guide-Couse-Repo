@@ -1,0 +1,12 @@
+.ErrorText {
+    color: rgba(218, 26, 26, 0.856);
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.ErrorText span {
+    display: block;
+    font-weight: 100;
+    font-size: 0.9rem;
+    margin: 1rem 0;
+}

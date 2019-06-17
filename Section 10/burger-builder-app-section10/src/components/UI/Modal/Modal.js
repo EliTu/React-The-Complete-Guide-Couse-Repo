@@ -34,9 +34,9 @@ Modal.propTypes = {
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
-	]).isRequired,
-	show: PropTypes.bool.isRequired,
-	closeModalHandler: PropTypes.func.isRequired,
+	]),
+	show: PropTypes.bool,
+	closeModalHandler: PropTypes.func,
 };
 
 export default React.memo(Modal);

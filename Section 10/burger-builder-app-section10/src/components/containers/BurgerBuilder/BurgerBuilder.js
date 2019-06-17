@@ -5,6 +5,7 @@ import BuildControls from '../../Burger/BuildControls/BuildControls';
 import Modal from '../../UI/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
 import Spinner from '../../UI/Spinner/Spinner';
+import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 
 const INGREDIENT_PRICES = {
 	salad: 0.5,
@@ -73,7 +74,6 @@ class BurgerBuilder extends Component {
 			this.setState({ isLoadingRequest: false, isInOrderSummary: false });
 		} catch (error) {
 			this.setState({ isLoadingRequest: false, isInOrderSummary: false });
-			console.log(error);
 		}
 	};
 
@@ -173,4 +173,4 @@ class BurgerBuilder extends Component {
 	}
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axiosInstance);

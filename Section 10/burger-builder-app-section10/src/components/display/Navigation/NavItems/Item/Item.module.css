@@ -8,7 +8,7 @@
 .Item a {
     font-size: 1.2rem;
     align-self: auto;
-    color: #8F5C2C;
+    color: rgb(209, 207, 205);
     text-decoration: none;
     width: 100%;
     text-align: center;
@@ -20,7 +20,7 @@
 .Item a:hover,
 .Item a:active,
 .Item a.activeStyle {
-    background-color: rgb(81, 169, 194);
+    background-color: rgba(105, 241, 105, 0.521);
 }
 
 /* Desktop */
@@ -51,8 +51,8 @@
     .Item a:hover,
     .Item a:active,
     .Item a.activeStyle {
-        background-color: #8F5C2C;
-        border-bottom: 4px solid #40A4C8;
-        color: rgb(180, 173, 173);
+        background-color: rgba(122, 122, 122, 0.733);
+        border-bottom: 4px solid rgba(105, 241, 105, 0.521);
+        color: rgb(247, 239, 239);
     }
 }

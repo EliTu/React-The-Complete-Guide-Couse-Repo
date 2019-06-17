@@ -29,7 +29,7 @@
 /* Mobile - SideDrawer toggle */
 @media (max-width: 500px) {
     .MenuToggle {
-        color: rgb(26, 24, 24);
+        color: rgb(211, 211, 211);
         font-weight: 800;
         font-size: 1.5rem;
         height: 100%;

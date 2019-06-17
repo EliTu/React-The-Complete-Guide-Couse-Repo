@@ -20,7 +20,7 @@ const OrderSummary = props => {
 
 	return (
 		<>
-			<h3>Your Order:</h3>
+			<h3>Your Order is ready:</h3>
 			<p>A burger with the following ingredients:</p>
 			<ul className={UnorderedStyle}>{ingredientSummary}</ul>
 			<p>

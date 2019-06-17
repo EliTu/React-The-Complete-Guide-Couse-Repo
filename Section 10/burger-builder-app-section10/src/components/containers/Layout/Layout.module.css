@@ -2,3 +2,13 @@
     width: 100%;
     margin-top: 72px;
 }
+
+/* Mobile */
+@media (max-width: 500px)  {
+    .layoutStyle {
+        overflow: none;
+        width: 100%;
+        margin-top: 90px;
+        padding: 0;
+    }
+}

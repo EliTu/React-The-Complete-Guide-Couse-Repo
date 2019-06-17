@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-image: linear-gradient(75deg, rgb(238, 148, 44), rgb(230, 162, 86));
+    background-image: linear-gradient(180deg, rgba(32, 32, 32, 0.829), rgba(20, 20, 20, 0.815) 70%);
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -20,8 +20,8 @@
 }
 
 .LogoHeight {
-    height: 90%;
-    background-color: rgba(8, 131, 8, 0.678);
+    height: 80%;
+    background-color: rgba(105, 241, 105, 0.521);
     border-radius: 50%;
 }
 
@@ -41,14 +41,15 @@
 
 @media (max-width: 500px) {
     .Toolbar {
+        height: 70px;
         justify-content: space-between;
         justify-items: end;
         align-content: flex-end;
     }
 
     .LogoHeight {
-        height: 90%;
-        background-color: rgba(8, 131, 8, 0.575);
+        height: 80%;
+        background-color: rgba(105, 241, 105, 0.521);
         border-radius: 50%;
     }
 }

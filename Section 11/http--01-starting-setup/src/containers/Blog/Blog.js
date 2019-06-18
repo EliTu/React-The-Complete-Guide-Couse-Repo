@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Post from '../../components/Post/Post';
+import Posts from '../Posts/Posts';
 import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
+import NewPost from '../NewPost/NewPost';
 import './Blog.css';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 // import axios from 'axios';
 import axiosInstance from '../../axios';
 
@@ -66,8 +66,16 @@ class Blog extends Component {
 		return (
 			<div style={{ margin: 0, padding: 0, height: 100 + '%' }}>
 				<Navbar />
-				<section className="Posts">
-					{posts.map((post, i) => {
+				<section className="Posts" />
+			</div>
+		);
+	}
+}
+
+export default Blog;
+
+/*
+{posts.map((post, i) => {
 						return i <= 10 ? (
 							<Post
 								click={() =>
@@ -93,10 +101,4 @@ class Blog extends Component {
 				</section>
 				<section>
 					<NewPost />
-				</section>
-			</div>
-		);
-	}
-}
-
-export default Blog;
+*/

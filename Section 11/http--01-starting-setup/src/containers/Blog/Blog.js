@@ -3,6 +3,7 @@ import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
 import './Blog.css';
+import Navbar from '../../components/Navbar/Navbar';
 // import axios from 'axios';
 import axiosInstance from '../../axios';
 
@@ -63,7 +64,8 @@ class Blog extends Component {
 		} = this.state;
 
 		return (
-			<div>
+			<div style={{ margin: 0, padding: 0, height: 100 + '%' }}>
+				<Navbar />
 				<section className="Posts">
 					{posts.map((post, i) => {
 						return i <= 10 ? (

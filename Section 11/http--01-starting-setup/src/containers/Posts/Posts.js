@@ -12,6 +12,7 @@ export class Posts extends Component {
 	};
 
 	componentDidMount() {
+		console.log(this.props);
 		const postRequest = async () => {
 			const posts = await axiosInstance.get('/posts');
 			const users = await axiosInstance.get('/users');
@@ -30,8 +31,6 @@ export class Posts extends Component {
 					}
 				});
 			});
-
-			console.log(newPostData);
 
 			return newPostData;
 		};

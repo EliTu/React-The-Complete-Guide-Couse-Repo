@@ -4,6 +4,7 @@ import FullPost from '../FullPost/FullPost';
 import NewPost from '../NewPost/NewPost';
 import './Blog.css';
 import Navbar from '../Navbar/Navbar';
+import { Route } from 'react-router-dom';
 // import axios from 'axios';
 
 class Blog extends Component {
@@ -17,7 +18,7 @@ class Blog extends Component {
 		return (
 			<div>
 				<Navbar />
-				<Posts />
+				<Route path="/" exact render={() => <Posts />} />
 			</div>
 		);
 	}

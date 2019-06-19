@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Post from '../../components/Post/Post';
 import axiosInstance from '../../axios';
 import './Posts.css';
@@ -12,7 +13,6 @@ export class Posts extends Component {
 	};
 
 	componentDidMount() {
-		console.log(this.props);
 		const postRequest = async () => {
 			const posts = await axiosInstance.get('/posts');
 			const users = await axiosInstance.get('/users');
@@ -32,6 +32,7 @@ export class Posts extends Component {
 				});
 			});
 
+			console.log(newPostData);
 			return newPostData;
 		};
 
@@ -57,18 +58,19 @@ export class Posts extends Component {
 			<section className="Posts">
 				{posts.map((post, i) => {
 					return i <= 10 ? (
-						<Post
-							click={() =>
-								this.handlePostClick(
-									post.id,
-									post.title,
-									post.body
-								)
-							}
-							key={post.id}
-							title={post.title}
-							author={post.author}
-						/>
+						<Link to={`/${post.id}`} key={post.id}>
+							<Post
+								click={() =>
+									this.handlePostClick(
+										post.id,
+										post.title,
+										post.body
+									)
+								}
+								title={post.title}
+								author={post.author}
+							/>
+						</Link>
 					) : null;
 				})}
 			</section>

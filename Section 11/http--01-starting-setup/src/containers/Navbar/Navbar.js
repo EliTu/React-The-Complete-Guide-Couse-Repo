@@ -1,28 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = props => {
 	return (
 		<header className="Navbar">
 			<nav>
 				<ul>
 					<li>
-						<Link to="/">Home</Link>
+						<NavLink to="/" exact>
+							Home
+						</NavLink>
 					</li>
 					<li>
-						<Link
+						<NavLink
 							to={{
-								pathname: '/new-post',
+								pathname: `/new-post`,
 								hash: '#submit',
 								search: '?quick-submit=true',
 							}}
+							exact
 						>
 							New Post
-						</Link>
+						</NavLink>
 					</li>
 					<li>
-						<Link to="/about">About</Link>
+						<NavLink to="/about" exact>
+							About
+						</NavLink>
 					</li>
 				</ul>
 			</nav>
@@ -30,4 +35,4 @@ const Navbar = () => {
 	);
 };
 
-export default Navbar;
+export default withRouter(Navbar);

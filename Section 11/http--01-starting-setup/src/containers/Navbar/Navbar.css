@@ -1,30 +1,28 @@
 .Navbar {
     box-sizing: border-box;
-    width: 100%;
     height: 3rem;
-    margin: 0 auto;
+    margin: 0;
     padding: 0.5rem 0;
 }
 
 .Navbar nav {
     height: 100%;
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
+    border-bottom: 2px solid rgba(22, 21, 21, 0.493);
 }
 
 .Navbar ul {
-    width: 100%;
+    width: auto;
     height: 100%;
     padding: 0 0;
     margin: 0 auto;
     list-style: none;
     display: flex;
-    text-align: center;
-    justify-content: space-evenly;
-    align-content: flex-start;
-    flex-flow: row;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.767);
+    align-content: center;
+    justify-content: center;
+    justify-items: normal;
 }
 
 .Navbar li {
@@ -32,7 +30,6 @@
     width: 20%;
     font-size: 1.2rem;
     padding: 0 auto;
-    display: inline-block;
 }
 
 .Navbar a {
@@ -40,9 +37,53 @@
     text-align: center;
     text-decoration: none;
     color: #1a1717c4;
+    transition: all 0.3s;
+    padding: 0 2rem;
+    border-left: 1px solid #1a1717c4;
+    border-right: 1px solid #1a1717c4;
 }
 
 .Navbar a:hover,
-.Navbar a:active {
-    color: rgba(5, 5, 70, 0.699);
+.Navbar a:active,
+.Navbar a.active {
+    color: rgba(149, 21, 223, 0.849);
+    font-size: 1.3rem;
+    letter-spacing: 1.5px;
+}
+
+.Navbar a.active {
+    padding: 0 3rem;
+    border-radius: 7px;
+}
+
+@media (max-width: 500px) {
+    .Navbar {
+        height: 3rem;
+    }
+
+    .Navbar ul {
+        width: 100%;
+    }
+
+    .Navbar li {
+        width: 100%;
+        padding: 0 2rem;
+    }
+
+    .Navbar a {
+        font-size: 1rem;
+    }
+
+    .Navbar a:hover,
+    .Navbar a:active,
+    .Navbar a.active {
+        color: rgba(149, 21, 223, 0.849);
+        font-size: 1.15rem;
+        letter-spacing: 1.2px;
+    }
+
+    .Navbar a.active {
+        padding: 0 1.5rem;
+        border-radius: 7px;
+    }
 }

@@ -5,13 +5,29 @@ import './FullPost.css';
 
 class FullPost extends Component {
 	state = {
-		error: null,
+		loadedPost: null,
 	};
+
+	componentDidMount() {
+		if (this.props.match.params.id) {
+			if (
+				!this.state.loadedPost ||
+				(this.state.loadedPost &&
+					this.state.loadedPost.id !== this.props.id)
+			) {
+				axios
+					.get('/posts/' + this.props.match.params.id)
+					.then(response => {
+						this.setState({ loadedPost: response.data });
+					});
+			}
+		}
+	}
 
 	handleDeletePostClick = async () => {
 		try {
 			const deletePost = await axios.delete(
-				`/posts/${this.props.postId}`
+				`/posts/${this.props.match.params.id}`
 			);
 			console.log(deletePost);
 		} catch (error) {
@@ -21,30 +37,24 @@ class FullPost extends Component {
 	};
 
 	render() {
-		const { postId, title, content } = this.props;
-		let post = <p className="Select">Please select a Post!</p>;
-
-		return !postId
-			? post
-			: (post = (
-					<div className="FullPost">
-						<h1>{title}</h1>
-						<p>{content}</p>
-						<div className="Edit">
-							<button
-								className="Delete"
-								onClick={this.handleDeletePostClick}
-							>
-								Delete
-							</button>
-							{this.state.error ? (
-								<p style={{ color: 'red', fontSize: '20px' }}>
-									{this.state.error}
-								</p>
-							) : null}
-						</div>
+		let post = <p style={{ textAlign: 'center' }}>Loading</p>;
+		if (this.state.loadedPost) {
+			post = (
+				<div className="FullPost">
+					<h1>{this.state.loadedPost.title}</h1>
+					<p>{this.state.loadedPost.body}</p>
+					<div className="Edit">
+						<button
+							onClick={this.handleDeletePostClick}
+							className="Delete"
+						>
+							Delete
+						</button>
 					</div>
-			  ));
+				</div>
+			);
+		}
+		return post;
 	}
 }
 

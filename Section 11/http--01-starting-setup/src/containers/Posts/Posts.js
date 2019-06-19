@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Post from '../../components/Post/Post';
 import axiosInstance from '../../axios';
 import './Posts.css';
@@ -78,4 +78,4 @@ export class Posts extends Component {
 	}
 }
 
-export default Posts;
+export default withRouter(Posts);

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import AsyncComponent from '../HOC/AsyncComponent';
+import Navbar from '../Navbar/Navbar';
 import Posts from '../Posts/Posts';
 // import NewPost from '../NewPost/NewPost';
 // import About from '../../components/About/About';
 import './Blog.css';
-import Navbar from '../Navbar/Navbar';
 import { Route, Switch, Redirect } from 'react-router-dom';
 // import axios from 'axios';
 

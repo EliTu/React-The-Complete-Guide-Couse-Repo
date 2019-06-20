@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './NewPost.css';
 
@@ -7,6 +8,7 @@ class NewPost extends Component {
 		title: '',
 		content: '',
 		author: 'Max',
+		isRedirecting: false,
 	};
 
 	handlePostDataClick = async () => {
@@ -19,6 +21,9 @@ class NewPost extends Component {
 		try {
 			const response = await axios.post('/posts', newPost);
 			console.log(response.data);
+			this.setState({
+				isRedirecting: true,
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -27,6 +32,7 @@ class NewPost extends Component {
 	render() {
 		return (
 			<div className="NewPost">
+				{this.state.isRedirecting ? <Redirect to="/posts" /> : null}
 				<h1>Add a Post</h1>
 				<label>Title</label>
 				<input

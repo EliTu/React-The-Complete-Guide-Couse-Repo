@@ -14,9 +14,9 @@ class Blog extends Component {
 				<Navbar />
 				<Switch>
 					<Route path="/posts" component={Posts} />
-					<Redirect from="/" to="/posts" />
 					<Route path="/new-post" exact component={NewPost} />
 					<Route path="/about" exact component={About} />
+					<Redirect from="/" to="/posts" />
 				</Switch>
 			</div>
 		);

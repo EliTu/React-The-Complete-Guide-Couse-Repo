@@ -30,8 +30,7 @@ class FullPost extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		this.getApiData();
-		return prevState !== this.state;
+		if (prevState === this.state) this.getApiData();
 	}
 
 	handleDeletePostClick = async () => {

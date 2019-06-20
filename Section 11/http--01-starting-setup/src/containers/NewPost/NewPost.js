@@ -21,6 +21,7 @@ class NewPost extends Component {
 		try {
 			const response = await axios.post('/posts', newPost);
 			console.log(response.data);
+			// Redirecting conditionally (Only after a click was made and the post submitted):
 			this.props.history.push('/posts');
 			// this.setState({
 			// 	// isRedirecting: true,
@@ -33,7 +34,7 @@ class NewPost extends Component {
 	render() {
 		return (
 			<div className="NewPost">
-				{/* {this.state.isRedirecting ? <Redirect to="/posts" /> : null} */}
+				{/* To redirect conditionally using state and the Redirect object: {this.state.isRedirecting ? <Redirect to="/posts" /> : null} */}
 				<h1>Add a Post</h1>
 				<label>Title</label>
 				<input

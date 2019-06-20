@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner/Spinner';
 export class Posts extends Component {
 	state = {
 		posts: [],
-		selectedId: null,
+		selectedId: true,
 	};
 
 	componentDidMount() {

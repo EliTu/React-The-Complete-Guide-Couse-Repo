@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Route } from 'react-router-dom';
 import Post from '../../components/Post/Post';
+import FullPost from '../FullPost/FullPost';
 import axiosInstance from '../../axios';
 import './Posts.css';
+import Spinner from '../../components/Spinner/Spinner';
 
 export class Posts extends Component {
 	state = {
 		posts: [],
 		selectedId: null,
-		selectedTitle: '',
-		selectedContent: '',
 	};
 
 	componentDidMount() {
@@ -46,34 +46,38 @@ export class Posts extends Component {
 	handlePostClick = (postId, postTitle, postContent) => {
 		this.setState({
 			selectedId: postId,
-			selectedTitle: postTitle,
-			selectedContent: postContent,
 		});
 	};
 
 	render() {
-		const { posts } = this.state;
+		const { posts, selectedId } = this.state;
+		const { match } = this.props;
 
-		return (
-			<section className="Posts">
-				{posts.map((post, i) => {
-					return i <= 10 ? (
-						<Link to={`/${post.id}`} key={post.id}>
-							<Post
-								click={() =>
-									this.handlePostClick(
-										post.id,
-										post.title,
-										post.body
-									)
-								}
-								title={post.title}
-								author={post.author}
-							/>
-						</Link>
-					) : null;
-				})}
-			</section>
+		return posts.length === 0 && !selectedId ? (
+			<Spinner />
+		) : (
+			<div>
+				<section className="Posts">
+					{posts.map((post, i) => {
+						return i <= 10 ? (
+							<Link to={`${match.url}/${post.id}`} key={post.id}>
+								<Post
+									click={() =>
+										this.handlePostClick(
+											post.id,
+											post.title,
+											post.body
+										)
+									}
+									title={post.title}
+									author={post.author}
+								/>
+							</Link>
+						) : null;
+					})}
+				</section>
+				<Route path={match.url + '/:id'} component={FullPost} />
+			</div>
 		);
 	}
 }

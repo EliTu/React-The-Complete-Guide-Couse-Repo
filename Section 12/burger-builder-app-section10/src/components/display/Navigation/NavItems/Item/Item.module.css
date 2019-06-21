@@ -1,0 +1,58 @@
+.Item {
+    margin: 0.8rem 0;
+    box-sizing: border-box;
+    width: 100%;
+    display: block;
+}
+
+.Item a {
+    font-size: 1.2rem;
+    align-self: auto;
+    color: rgb(209, 207, 205);
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+    border-radius: 8px;
+}
+
+.Item a:hover,
+.Item a:active,
+.Item a.activeStyle {
+    background-color: rgba(105, 241, 105, 0.521);
+}
+
+/* Desktop */
+@media (min-width: 500px) {
+    .Item {
+        font-size: initial;
+        margin: 0;
+        height: 100%;
+        width: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .Item a {
+        align-self: flex-end;
+        font-size: 0.95rem;
+        align-self: auto;
+        color: white;
+        height: 100%;
+        width: auto;
+        text-align: center;
+        padding: 0.9rem 1rem;
+        border-bottom: 4px solid transparent;
+        display: block;
+        border-radius: 0;
+    }
+
+    .Item a:hover,
+    .Item a:active,
+    .Item a.activeStyle {
+        background-color: rgba(122, 122, 122, 0.733);
+        border-bottom: 4px solid rgba(105, 241, 105, 0.521);
+        color: rgb(247, 239, 239);
+    }
+}

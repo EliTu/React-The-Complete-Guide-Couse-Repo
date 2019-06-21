@@ -1,0 +1,67 @@
+.Controller {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    padding: 3px 0;
+    border-bottom: 2px solid rgb(26, 24, 24);
+    border-radius: 7px;
+    user-select: none;
+}
+
+.Controller button {
+    display: block;
+    font: inherit;
+    padding: 5px;
+    margin: 0 5px;
+    width: 80px;
+    border: 1px solid #0e0d0d81;
+    cursor: pointer;
+    outline: none;
+    border-radius: 15px;
+}
+
+.Controller button:disabled {
+    background-color: rgba(152, 158, 150, 0.938);
+    border: 1px solid rgba(17, 17, 16, 0.664);
+    color: #ccc;
+    cursor: default;
+}
+
+.Controller button:hover:disabled {
+    background-color: rgb(131, 161, 127);
+    color: #ccc;
+    cursor: not-allowed;
+    border-radius: 15px;
+}
+
+.Label {
+    padding: 10px;
+    font-weight: bold;
+    width: 80px;
+}
+
+.Controller .Less {
+    background-color: rgba(114, 199, 114, 0.26);
+    color: white;
+}
+
+.Controller .More {
+    background-color: rgba(105, 241, 105, 0.596);
+    color: white;
+}
+
+.Controller .Less:hover,
+.Controller .Less:active {
+    background-color: rgba(114, 199, 114, 0.644);
+    color: white;
+    border-radius: 15px;
+}
+
+.Controller .More:hover,
+.Controller .More:active {
+    background-color: rgba(93, 243, 93, 0.952);
+    color: white;
+    border-radius: 15px;
+}

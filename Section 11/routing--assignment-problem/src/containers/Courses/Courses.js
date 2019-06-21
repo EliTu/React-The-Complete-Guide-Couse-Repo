@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Course from '../Course/Course';
 // import Course from '../Course/Course';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './Courses.css';
 
@@ -14,6 +16,8 @@ class Courses extends Component {
 	};
 
 	render() {
+		const { match } = this.props;
+
 		return (
 			<div>
 				<h1>Amazing Udemy Courses</h1>
@@ -22,8 +26,8 @@ class Courses extends Component {
 						return (
 							<Link
 								to={{
-									pathname: '/courses/' + course.id,
-									search: course.title,
+									pathname: `${match.url}/${course.id}`,
+									search: `?title=${course.title}`,
 								}}
 								key={course.id}
 							>
@@ -34,9 +38,14 @@ class Courses extends Component {
 						);
 					})}
 				</section>
+				<Route path={`${match.url}/:id`} component={Course} />
 			</div>
 		);
 	}
 }
+
+Courses.propTypes = {
+	match: PropTypes.object,
+};
 
 export default Courses;

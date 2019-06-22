@@ -27,3 +27,8 @@ h3 {
     font-size: 1.3rem;
     font-weight: bold;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

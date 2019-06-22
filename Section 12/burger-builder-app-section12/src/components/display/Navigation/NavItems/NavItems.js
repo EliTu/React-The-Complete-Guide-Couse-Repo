@@ -8,7 +8,7 @@ const NavItems = props => {
 
 	return (
 		<ul className={NavItems}>
-			<Item link="/burger-builder">Burger Builder</Item>
+			<Item link="/">Burger Builder</Item>
 			<Item link="/orders">Orders</Item>
 			<Item link="/about">About</Item>
 		</ul>

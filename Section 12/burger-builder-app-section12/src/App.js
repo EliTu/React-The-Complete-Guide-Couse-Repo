@@ -11,12 +11,9 @@ function App() {
 			<Router>
 				<Layout>
 					<Switch>
-						<Route
-							path="/burger-builder"
-							component={BurgerBuilder}
-						/>
 						<Route path="/orders" component={Orders} />
 						<Route path="/about" component={About} />
+						<Route path="/" component={BurgerBuilder} />
 					</Switch>
 				</Layout>
 			</Router>

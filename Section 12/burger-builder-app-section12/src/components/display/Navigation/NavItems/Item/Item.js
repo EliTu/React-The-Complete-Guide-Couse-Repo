@@ -12,7 +12,9 @@ const Item = props => {
 
 	return (
 		<li className={Item}>
-			<NavLink to={link}>{children}</NavLink>
+			<NavLink activeClassName="active" to={link}>
+				{children}
+			</NavLink>
 		</li>
 	);
 };

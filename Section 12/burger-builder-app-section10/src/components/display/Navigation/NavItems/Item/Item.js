@@ -1,19 +1,18 @@
 import React from 'react';
 import styles from './Item.module.css';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 const Item = props => {
 	// props:
-	const { link, children, active } = props;
+	const { link, children } = props;
 
 	// CSS Modules styles:
-	const { Item, activeStyle } = styles;
+	const { Item } = styles;
 
 	return (
 		<li className={Item}>
-			<a href={link} className={active ? activeStyle : null}>
-				{children}
-			</a>
+			<NavLink to={link}>{children}</NavLink>
 		</li>
 	);
 };
@@ -21,7 +20,6 @@ const Item = props => {
 Item.propTypes = {
 	link: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
-	active: PropTypes.bool,
 };
 
 export default Item;

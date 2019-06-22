@@ -19,7 +19,7 @@
 
 .Item a:hover,
 .Item a:active,
-.Item a.activeStyle {
+.Item a.active {
     background-color: rgba(105, 241, 105, 0.521);
 }
 
@@ -50,7 +50,7 @@
 
     .Item a:hover,
     .Item a:active,
-    .Item a.activeStyle {
+    .Item a .active {
         background-color: rgba(122, 122, 122, 0.733);
         border-bottom: 4px solid rgba(105, 241, 105, 0.521);
         color: rgb(247, 239, 239);

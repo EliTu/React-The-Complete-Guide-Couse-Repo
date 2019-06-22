@@ -5,11 +5,11 @@ import styles from './CheckoutSummary.module.css';
 import PropTypes from 'prop-types';
 
 const CheckoutSummary = props => {
+	// props:
+	const { ingredients, cancelClick, checkoutClick } = props;
+
 	// CSS Modules styles
 	const { CheckoutSummary, BurgerDisplay } = styles;
-
-	// props:
-	const { ingredients } = props;
 
 	return (
 		<div className={CheckoutSummary}>
@@ -17,10 +17,10 @@ const CheckoutSummary = props => {
 			<div className={BurgerDisplay}>
 				<Burger ingredients={ingredients} />
 			</div>
-			<Button handleClick type="Confirm">
+			<Button handleClick={checkoutClick} type="Confirm">
 				Place Order
 			</Button>
-			<Button handleClick type="Danger">
+			<Button handleClick={cancelClick} type="Danger">
 				Cancel
 			</Button>
 		</div>

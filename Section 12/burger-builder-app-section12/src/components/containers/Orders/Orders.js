@@ -11,6 +11,15 @@ export class Orders extends Component {
 			{ ingredient: 'bacon', quantity: 1 },
 		],
 	};
+
+	handleCancelClick = () => {
+		this.props.history.goBack();
+	};
+
+	handleCheckoutClick = () => {
+		this.props.history.replace('/checkout/contact-data');
+	};
+
 	render() {
 		// CSS Modules styles:
 		const { Checkout } = styles;
@@ -21,7 +30,11 @@ export class Orders extends Component {
 		return (
 			<div className={Checkout}>
 				<h1>This is the orders page</h1>
-				<CheckoutSummary ingredients={ingredients} />
+				<CheckoutSummary
+					ingredients={ingredients}
+					cancelClick={this.handleCancelClick}
+					checkoutClick={this.handleCheckoutClick}
+				/>
 			</div>
 		);
 	}

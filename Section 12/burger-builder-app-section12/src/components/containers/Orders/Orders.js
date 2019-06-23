@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import CheckoutSummary from '../../CheckoutSummary/CheckoutSummary';
+import ContactData from '../../CheckoutSummary/ContactData/ContactData';
 import styles from './Orders.module.css';
 
 export class Orders extends Component {
@@ -17,7 +19,7 @@ export class Orders extends Component {
 	};
 
 	handleCheckoutClick = () => {
-		return this.props.history.replace('/checkout/contact-data');
+		return this.props.history.replace('/orders/contact-data');
 	};
 
 	render() {
@@ -34,6 +36,10 @@ export class Orders extends Component {
 					ingredients={ingredients}
 					cancelClick={this.handleCancelClick}
 					checkoutClick={this.handleCheckoutClick}
+				/>
+				<Route
+					path={`${this.props.match.path}/contact-data`}
+					component={ContactData}
 				/>
 			</div>
 		);

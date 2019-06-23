@@ -10,16 +10,23 @@ const CheckoutSummary = props => {
 	const { cancelClick, checkoutClick, location } = props;
 
 	// CSS Modules styles
-	const { CheckoutSummary, BurgerDisplay } = styles;
+	const { CheckoutSummary, BurgerDisplay, NoIngredients } = styles;
 
 	// Access the passed ingredients through the Router location prop:
-	const ingredientsArr = [...location.state];
+	const ingredientsArr = location.state ? [...location.state] : null;
 
 	return (
 		<div className={CheckoutSummary}>
 			<h1>Your burger:</h1>
 			<div className={BurgerDisplay}>
-				<Burger ingredients={ingredientsArr} />
+				{ingredientsArr ? (
+					<Burger ingredients={ingredientsArr} />
+				) : (
+					<p className={NoIngredients}>
+						It seems like no ingredients were selected! Please
+						select burger ingredients and then checkout the order.
+					</p>
+				)}
 			</div>
 			<Button handleClick={checkoutClick} type="Confirm">
 				Place Order
@@ -29,6 +36,12 @@ const CheckoutSummary = props => {
 			</Button>
 		</div>
 	);
+};
+
+CheckoutSummary.propTypes = {
+	cancelClick: PropTypes.func,
+	checkoutClick: PropTypes.func,
+	location: PropTypes.object,
 };
 
 export default withRouter(CheckoutSummary);

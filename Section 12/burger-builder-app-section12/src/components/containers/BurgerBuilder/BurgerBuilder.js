@@ -77,7 +77,7 @@ class BurgerBuilder extends Component {
 		// 			zipCode: '12345',
 		// 			city: 'Taipei',
 		// 		},
-		// 		eliad: 'text@testmail.com',
+		// 		email: 'text@testmail.com',
 		// 	},
 		// 	deliveryMethod: 'fastest',
 		// };

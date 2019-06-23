@@ -7,20 +7,17 @@ import PropTypes from 'prop-types';
 
 const CheckoutSummary = props => {
 	// props:
-	const { cancelClick, checkoutClick, location } = props;
+	const { cancelClick, checkoutClick, ingredients } = props;
 
 	// CSS Modules styles
 	const { CheckoutSummary, BurgerDisplay, NoIngredients } = styles;
-
-	// Access the passed ingredients through the Router location prop:
-	const ingredientsArr = location.state ? [...location.state] : null;
 
 	return (
 		<div className={CheckoutSummary}>
 			<h1>Your burger:</h1>
 			<div className={BurgerDisplay}>
-				{ingredientsArr ? (
-					<Burger ingredients={ingredientsArr} />
+				{ingredients ? (
+					<Burger ingredients={ingredients} />
 				) : (
 					<p className={NoIngredients}>
 						It seems like no ingredients were selected! Please
@@ -29,7 +26,7 @@ const CheckoutSummary = props => {
 				)}
 			</div>
 			<Button handleClick={checkoutClick} type="Confirm">
-				Place Order
+				Continue
 			</Button>
 			<Button handleClick={cancelClick} type="Danger">
 				Cancel

@@ -6,13 +6,18 @@ import styles from './Orders.module.css';
 
 export class Orders extends Component {
 	state = {
-		ingredients: [
-			{ ingredient: 'meat', quantity: 1 },
-			{ ingredient: 'cheese', quantity: 1 },
-			{ ingredient: 'salad', quantity: 1 },
-			{ ingredient: 'bacon', quantity: 1 },
-		],
+		ingredients: null,
 	};
+
+	componentDidMount() {
+		// Access the passed ingredients through the Router location prop:
+		const ingredientsArr = this.props.location.state
+			? this.props.location.state
+			: null;
+		this.setState({
+			ingredients: ingredientsArr,
+		});
+	}
 
 	handleCancelClick = () => {
 		return this.props.history.goBack();

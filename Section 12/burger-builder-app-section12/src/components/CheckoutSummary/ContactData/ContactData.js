@@ -42,10 +42,7 @@ export class ContactData extends Component {
 					/>
 				</form>
 				<Button type="Confirm" clickHandler>
-					Order
-				</Button>
-				<Button type="Danger" clickHandler>
-					Cancel
+					Confirm Order
 				</Button>
 			</div>
 		);

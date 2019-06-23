@@ -8,11 +8,11 @@ const Item = props => {
 	const { link, children } = props;
 
 	// CSS Modules styles:
-	const { Item } = styles;
+	const { Item, active } = styles;
 
 	return (
 		<li className={Item}>
-			<NavLink activeClassName="active" to={link}>
+			<NavLink activeClassName={active} to={link} exact>
 				{children}
 			</NavLink>
 		</li>

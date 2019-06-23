@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from './components/containers/Layout/Layout';
 import BurgerBuilder from './components/containers/BurgerBuilder/BurgerBuilder';
-import Orders from './components/containers/Orders/Orders';
+import Checkout from './components/containers/Checkout/Checkout';
 import About from './components/display/About/About';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ function App() {
 			<Router>
 				<Layout>
 					<Switch>
-						<Route path="/orders" component={Orders} />
+						<Route path="/checkout" component={Checkout} />
 						<Route path="/about" component={About} />
 						<Route path="/" component={BurgerBuilder} />
 					</Switch>

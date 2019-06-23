@@ -67,7 +67,7 @@ class BurgerBuilder extends Component {
 
 	handleCheckoutButtonClick = () => {
 		this.props.history.push({
-			pathname: '/orders',
+			pathname: '/checkout',
 			state: {
 				ingredients: this.state.ingredients,
 				price: this.state.totalPrice,

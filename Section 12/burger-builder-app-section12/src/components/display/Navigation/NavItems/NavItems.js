@@ -9,7 +9,7 @@ const NavItems = props => {
 	return (
 		<ul className={NavItems}>
 			<Item link="/">Burger Builder</Item>
-			<Item link="/orders">Orders</Item>
+			<Item link="/checkout">Checkout</Item>
 			<Item link="/about">About</Item>
 		</ul>
 	);

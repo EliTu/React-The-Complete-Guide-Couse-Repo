@@ -9,7 +9,7 @@ const CheckoutSummary = props => {
 	// props:
 	const { cancelClick, checkoutClick, ingredients } = props;
 
-	// CSS Modules styles
+	// CSS Modules styles:
 	const { CheckoutSummary, BurgerDisplay, NoIngredients } = styles;
 
 	return (

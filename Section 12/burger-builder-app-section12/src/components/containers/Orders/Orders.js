@@ -7,15 +7,23 @@ import styles from './Orders.module.css';
 export class Orders extends Component {
 	state = {
 		ingredients: null,
+		price: 0,
 	};
 
 	componentDidMount() {
+		console.log(this.props.location);
 		// Access the passed ingredients through the Router location prop:
-		const ingredientsArr = this.props.location.state
-			? this.props.location.state
+		const passedIngredients = this.props.location.state
+			? this.props.location.state.ingredients
 			: null;
+
+		const passedPrice = this.props.location.state
+			? this.props.location.state.price
+			: null;
+
 		this.setState({
-			ingredients: ingredientsArr,
+			ingredients: passedIngredients,
+			price: passedPrice,
 		});
 	}
 
@@ -32,7 +40,7 @@ export class Orders extends Component {
 		const { Checkout } = styles;
 
 		// state:
-		const { ingredients } = this.state;
+		const { ingredients, price } = this.state;
 
 		return (
 			<div className={Checkout}>
@@ -44,7 +52,13 @@ export class Orders extends Component {
 				/>
 				<Route
 					path={`${this.props.match.path}/contact-data`}
-					component={ContactData}
+					render={props => (
+						<ContactData
+							ingredients={ingredients}
+							price={price}
+							{...props}
+						/>
+					)}
 				/>
 			</div>
 		);

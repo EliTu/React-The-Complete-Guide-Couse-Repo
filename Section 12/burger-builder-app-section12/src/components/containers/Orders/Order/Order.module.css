@@ -1,7 +1,23 @@
 .Order {
-    width: 100%;
+    width: 80%;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
-    padding: 0.4rem;
+    padding: 0.7rem;
+    margin: 0.3rem auto;
     box-sizing: border-box;
+}
+
+.Order .Ingredients li {
+    display: inline-block;
+    margin: 0.8rem 0.5rem;
+    padding: 0.4rem;
+    width: 50%;
+    list-style: none;
+    text-transform: capitalize;
+}
+
+.Order .Price {
+    margin-left: 0.3rem;
+    font-size: 1.3rem;
+    font-weight: bold;
 }

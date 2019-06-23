@@ -2,13 +2,29 @@ import React from 'react';
 import styles from './Order.module.css';
 
 const Order = props => {
-	// CSS Modules styles:
-	const { Order } = styles;
+	// props:
+	const { ingredients, price, orderId } = props;
 
+	// CSS Modules styles:
+	const { Order, Price, Ingredients } = styles;
+
+	console.log(ingredients);
 	return (
 		<div className={Order}>
-			<p>Ingredients:</p>
-			<p>Price:$</p>
+			Order id: {orderId}
+			<ul className={Ingredients}>
+				Ingredients:
+				<li>
+					{ingredients.map(el =>
+						el.quantity > 0
+							? `${el.ingredient} x ${el.quantity} | `
+							: null
+					)}
+				</li>
+			</ul>
+			<p>
+				Price:<span className={Price}>${price}</span>
+			</p>
 		</div>
 	);
 };

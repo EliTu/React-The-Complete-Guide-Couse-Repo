@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Button from '../../UI/Button/Button';
 import styles from './OrderSummary.module.css';
 import PropTypes from 'prop-types';
@@ -34,8 +33,8 @@ const OrderSummary = props => {
 				<span className={Price}>${price.toFixed(2)}</span>
 			</p>
 			<p>Ready to checkout ?</p>
-			<Button type="Confirm">
-				<Link to="/orders">Checkout</Link>
+			<Button type="Confirm" handleClick={checkoutHandler}>
+				Checkout
 			</Button>
 			<Button type="Danger" handleClick={closeModalHandler}>
 				Cancel

@@ -13,11 +13,11 @@ export class Orders extends Component {
 	};
 
 	handleCancelClick = () => {
-		this.props.history.goBack();
+		return this.props.history.goBack();
 	};
 
 	handleCheckoutClick = () => {
-		this.props.history.replace('/checkout/contact-data');
+		return this.props.history.replace('/checkout/contact-data');
 	};
 
 	render() {

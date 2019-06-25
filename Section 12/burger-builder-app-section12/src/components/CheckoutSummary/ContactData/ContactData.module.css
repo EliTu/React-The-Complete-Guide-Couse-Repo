@@ -1,17 +1,40 @@
 .ContactData {
-    background-image: linear-gradient(180deg, rgba(68, 67, 67, 0.548), rgba(20, 20, 20, 0.363) 70%);
+    background-color: rgba(241, 238, 238, 0.993);
+    color: rgba(27, 24, 24, 0.795);
     margin: 20px auto;
     width: 80%;
     text-align: center;
     border: 1px solid #ccc;
+    border-radius: 7px;
     box-shadow: 0px 1px 3px black;
     padding: 0.8rem;
     box-sizing: border-box;
 }
 
+.ContactData h4 {
+    font-size: 1.5rem;
+}
+
+.ContactData label {
+    display: inline-block;
+    width: 50%;
+}
+
 .ContactData input {
-    margin: 0.2rem auto;
+    background-color: rgba(241, 238, 238, 0.993);
+    width: 40%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(105, 241, 105, 0.808);
+    margin: 1.6rem auto;
     display: block;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+.ContactData input:active {
+    border: rgba(1, 61, 1, 0.384);
+    color: #d8d8d8;
 }
 
 @media (min-width: 600px) {

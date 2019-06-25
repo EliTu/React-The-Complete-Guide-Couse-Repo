@@ -59,21 +59,25 @@ export class ContactData extends Component {
 					<Spinner />
 				) : (
 					<form action="post">
+						<label htmlFor="name">Name:</label>
 						<input
 							type="text"
 							name="name"
 							placeholder="Enter your name"
 						/>
+						<label htmlFor="email">Email:</label>
 						<input
 							type="email"
 							name="email"
 							placeholder="Enter your email"
 						/>
+						<label htmlFor="address">Address:</label>
 						<input
-							type="street"
-							name="street"
-							placeholder="Enter your street name"
+							type="address"
+							name="address"
+							placeholder="Enter your address"
 						/>
+						<label htmlFor="postal">Postal number:</label>
 						<input
 							type="postal"
 							name="postal"

@@ -8,7 +8,6 @@ const Order = props => {
 	// CSS Modules styles:
 	const { Order, Price, Ingredients } = styles;
 
-	console.log(ingredients);
 	return (
 		<div className={Order}>
 			Order id: {orderId}

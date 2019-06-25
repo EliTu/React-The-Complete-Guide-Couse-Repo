@@ -15,6 +15,8 @@ const INGREDIENT_PRICES = {
 };
 
 class BurgerBuilder extends Component {
+	_isMounted = false;
+
 	state = {
 		ingredients: null,
 		totalPrice: 3,
@@ -26,18 +28,27 @@ class BurgerBuilder extends Component {
 
 	// Get the Ingredient list and quantity from the database:
 	async componentDidMount() {
+		this._isMounted = true;
 		try {
 			const getIngredientsData = await axiosInstance.get(
 				'/ingredients.json'
 			);
-			this.setState({
-				ingredients: getIngredientsData.data,
-			});
+			if (this._isMounted) {
+				this.setState({
+					ingredients: getIngredientsData.data,
+				});
+			}
 		} catch (error) {
-			this.setState({
-				isErrorOnMount: true,
-			});
+			if (this._isMounted) {
+				this.setState({
+					isErrorOnMount: true,
+				});
+			}
 		}
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	checkIfPurchasable = () => {

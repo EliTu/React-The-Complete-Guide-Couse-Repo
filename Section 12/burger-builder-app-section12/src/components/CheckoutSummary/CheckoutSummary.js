@@ -21,21 +21,27 @@ const CheckoutSummary = props => {
 				) : (
 					<p className={NoIngredients}>
 						It seems like no ingredients were selected! Please
-						select burger ingredients and then checkout the order.
+						select burger ingredients in order to checkout.
 					</p>
 				)}
 			</div>
-			<Button handleClick={checkoutClick} type="Confirm">
-				Continue
-			</Button>
-			<Button handleClick={cancelClick} type="Danger">
-				Cancel
-			</Button>
+
+			{ingredients && (
+				<>
+					<Button handleClick={checkoutClick} type="Confirm">
+						Continue
+					</Button>
+					<Button handleClick={cancelClick} type="Danger">
+						Cancel
+					</Button>
+				</>
+			)}
 		</div>
 	);
 };
 
 CheckoutSummary.propTypes = {
+	ingredients: PropTypes.array,
 	cancelClick: PropTypes.func,
 	checkoutClick: PropTypes.func,
 	location: PropTypes.object,

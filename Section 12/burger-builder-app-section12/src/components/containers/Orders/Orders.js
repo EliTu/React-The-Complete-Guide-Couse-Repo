@@ -20,7 +20,6 @@ export class Orders extends Component {
 			for (let key in orders.data) {
 				fetchedOrders.push({ ...orders.data[key], id: key });
 			}
-
 			this.setState({
 				orders: fetchedOrders,
 				loading: false,
@@ -36,7 +35,6 @@ export class Orders extends Component {
 	render() {
 		// state:
 		const { orders } = this.state;
-		console.log(orders);
 
 		// CSS Modules styles:
 		const { Orders } = styles;
@@ -46,15 +44,16 @@ export class Orders extends Component {
 				<h1>Your orders:</h1>
 				{orders
 					? orders.map(order => {
-							console.log(order);
-							return (
+							return order.id &&
+								order.ingredients &&
+								order.price ? (
 								<Order
 									key={order.id}
 									orderId={order.id}
 									ingredients={order.ingredients}
 									price={order.price.toFixed(2)}
 								/>
-							);
+							) : null;
 					  })
 					: null}
 			</div>

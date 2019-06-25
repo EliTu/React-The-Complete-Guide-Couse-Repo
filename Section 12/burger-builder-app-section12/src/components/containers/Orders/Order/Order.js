@@ -6,23 +6,23 @@ const Order = props => {
 	const { ingredients, price, orderId } = props;
 
 	// CSS Modules styles:
-	const { Order, Price, Ingredients } = styles;
+	const { Order, Price, Ingredients, OrderId } = styles;
 
 	return (
 		<div className={Order}>
-			Order id: {orderId}
-			<ul className={Ingredients}>
+			<p className={OrderId}>Order id: {orderId}</p>
+			<div className={Ingredients}>
 				Ingredients:
-				<li>
+				<p>
 					{ingredients.map(el =>
 						el.quantity > 0
 							? `${el.ingredient} x ${el.quantity} | `
 							: null
 					)}
-				</li>
-			</ul>
+				</p>
+			</div>
 			<p>
-				Price:<span className={Price}>${price}</span>
+				Total price:<span className={Price}>${price}</span>
 			</p>
 		</div>
 	);

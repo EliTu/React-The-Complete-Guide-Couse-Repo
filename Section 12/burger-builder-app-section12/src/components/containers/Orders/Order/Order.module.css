@@ -1,13 +1,21 @@
 .Order {
     width: 80%;
     border: 1px solid #eee;
+    background-color: rgba(241, 238, 238, 0.993);
     box-shadow: 0 2px 3px #ccc;
     padding: 0.7rem;
-    margin: 0.3rem auto;
+    margin: 0.5rem auto;
     box-sizing: border-box;
+    color: rgba(27, 24, 24, 0.911);
 }
 
-.Order .Ingredients li {
+.OrderId {
+    color: black;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.Order .Ingredients p {
     display: inline-block;
     margin: 0.8rem 0.5rem;
     padding: 0.4rem;
@@ -17,7 +25,20 @@
 }
 
 .Order .Price {
+    color: rgba(47, 233, 47, 0.884);
     margin-left: 0.3rem;
     font-size: 1.3rem;
     font-weight: bold;
+}
+
+@media (max-width: 500px) {
+    .Ingredients {
+        display: flex;
+        flex-flow: column;
+        flex-wrap: nowrap;
+    }
+
+    .Order .Ingredients p {
+        width: 100%;
+    }
 }

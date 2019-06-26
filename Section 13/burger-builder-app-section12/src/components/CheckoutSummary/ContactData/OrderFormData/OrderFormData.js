@@ -1,5 +1,6 @@
-const OrderFormData = {
-	name: {
+const OrderFormData = [
+	{
+		data: 'name',
 		elementType: 'input',
 		elementConfig: {
 			type: 'text',
@@ -9,7 +10,8 @@ const OrderFormData = {
 		value: '',
 	},
 
-	phone: {
+	{
+		data: 'phone',
 		elementType: 'input',
 		elementConfig: {
 			type: 'number',
@@ -19,7 +21,8 @@ const OrderFormData = {
 		value: '',
 	},
 
-	email: {
+	{
+		data: 'email',
 		elementType: 'input',
 		elementConfig: {
 			type: 'email',
@@ -29,7 +32,8 @@ const OrderFormData = {
 		value: '',
 	},
 
-	address: {
+	{
+		data: 'address',
 		elementType: 'input',
 		elementConfig: {
 			type: 'text',
@@ -39,27 +43,29 @@ const OrderFormData = {
 		value: '',
 	},
 
-	postal: {
+	{
+		data: 'postal',
 		elementType: 'input',
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Enter your postal code',
-			label: 'Postal',
+			label: 'Postal:',
 		},
 		value: '',
 	},
 
-	deliveryMethod: {
+	{
+		data: 'deliveryMethod',
 		elementType: 'select',
 		elementConfig: {
 			options: [
 				{ value: 'fastest', displayValue: 'Fastest' },
 				{ value: 'cheapest', displayValue: 'Cheapest' },
 			],
-			label: 'Delivery Method',
+			label: 'Delivery Method:',
 		},
 		value: '',
 	},
-};
+];
 
 export default OrderFormData;

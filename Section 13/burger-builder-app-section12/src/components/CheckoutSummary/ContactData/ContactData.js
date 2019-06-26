@@ -58,32 +58,14 @@ export class ContactData extends Component {
 					<Spinner />
 				) : (
 					<form action="post">
-						<Input
-							elementType={ContactData.elementType}
-							elementConfig
-							value
-						/>
-						<Input
-							label="Email:"
-							inputtype="email"
-							type="email"
-							name="email"
-							placeholder="Enter your email"
-						/>
-						<Input
-							label="Address:"
-							inputtype="text"
-							type="text"
-							name="address"
-							placeholder="Enter your address"
-						/>
-						<Input
-							label="Postal Code:"
-							inputtype="text"
-							type="text"
-							name="postal"
-							placeholder="Enter your postal code"
-						/>
+						{orderForm.map(el => (
+							<Input
+								key={el.data}
+								elementType={el.elementType}
+								elementConfig={el.elementConfig}
+								value={el.value}
+							/>
+						))}
 					</form>
 				)}
 				<Button

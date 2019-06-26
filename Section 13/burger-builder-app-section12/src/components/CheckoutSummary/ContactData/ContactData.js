@@ -43,6 +43,18 @@ export class ContactData extends Component {
 		}
 	};
 
+	handleFormChange = (event, data) => {
+		let updatedForm = [...this.state.orderForm];
+		let updatedValue = updatedForm.forEach(el =>
+			el.data === data ? (el.value = event.target.value) : el
+		);
+		updatedForm.value = updatedValue;
+
+		this.setState({
+			orderForm: updatedForm,
+		});
+	};
+
 	render() {
 		// state:
 		const { isLoadingRequest, orderForm } = this.state;
@@ -58,12 +70,15 @@ export class ContactData extends Component {
 					<Spinner />
 				) : (
 					<form action="post">
-						{orderForm.map(el => (
+						{orderForm.map(form => (
 							<Input
-								key={el.data}
-								elementType={el.elementType}
-								elementConfig={el.elementConfig}
-								value={el.value}
+								key={form.data}
+								elementType={form.elementType}
+								elementConfig={form.elementConfig}
+								value={form.value}
+								handleChange={event =>
+									this.handleFormChange(event, form.data)
+								}
 							/>
 						))}
 					</form>

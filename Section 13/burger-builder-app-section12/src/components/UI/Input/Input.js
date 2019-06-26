@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Input = props => {
 	// props:
-	const { elementType, elementConfig, value } = props;
+	const { elementType, elementConfig, value, handleChange } = props;
 	// CSS Modules styles:
 	const { Input } = styles;
 
@@ -12,16 +12,28 @@ const Input = props => {
 
 	switch (elementType) {
 		case 'input':
-			inputElement = <input {...elementConfig} value={value} />;
+			inputElement = (
+				<input
+					{...elementConfig}
+					value={value}
+					onChange={handleChange}
+				/>
+			);
 			break;
 
 		case 'textarea':
-			inputElement = <textarea {...elementConfig} value={value} />;
+			inputElement = (
+				<textarea
+					{...elementConfig}
+					value={value}
+					onChange={handleChange}
+				/>
+			);
 			break;
 
 		case 'select':
 			inputElement = (
-				<select>
+				<select value={value} onChange={handleChange}>
 					{elementConfig.options.map(option => (
 						<option value={option.value} key={option.value}>
 							{option.displayValue}

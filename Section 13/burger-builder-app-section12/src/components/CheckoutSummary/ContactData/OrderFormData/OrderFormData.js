@@ -49,7 +49,7 @@ const OrderFormData = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Enter your postal code',
-			label: 'Postal:',
+			label: 'Postal code:',
 		},
 		value: '',
 	},

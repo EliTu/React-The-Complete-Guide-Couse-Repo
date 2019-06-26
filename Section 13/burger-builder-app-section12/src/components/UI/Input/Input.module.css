@@ -1,0 +1,33 @@
+.Input {
+    width: 100%;
+    padding: 0.4rem;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.Input input,
+.Input textarea {
+    background-color: rgba(241, 238, 238, 0.993);
+    color: #181616e0;
+    font-size: 1rem;
+    width: 30%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(105, 241, 105, 0.808);
+    margin: 1.3rem auto;
+    margin-bottom: 2rem;
+    display: block;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+.Input label {
+    font-weight: 700;
+    display: block;
+}
+
+.Input input:focus {
+    width: 55%;
+    border-radius: 7px;
+    border-bottom: 2px solid rgba(3, 136, 3, 0.781);
+}

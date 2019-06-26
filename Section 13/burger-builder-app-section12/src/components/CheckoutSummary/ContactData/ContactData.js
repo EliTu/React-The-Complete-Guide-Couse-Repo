@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../../UI/Button/Button';
 import Spinner from '../../UI/Spinner/Spinner';
+import Input from '../../UI/Input/Input';
 import axiosInstance from '../../../axios-orders';
 import styles from './ContactData.module.css';
 
@@ -59,27 +60,31 @@ export class ContactData extends Component {
 					<Spinner />
 				) : (
 					<form action="post">
-						<label htmlFor="name">Name:</label>
-						<input
+						<Input
+							label="Name:"
+							inputtype="text"
 							type="text"
 							name="name"
 							placeholder="Enter your name"
 						/>
-						<label htmlFor="email">Email:</label>
-						<input
+						<Input
+							label="Email:"
+							inputtype="email"
 							type="email"
 							name="email"
 							placeholder="Enter your email"
 						/>
-						<label htmlFor="address">Address:</label>
-						<input
-							type="address"
+						<Input
+							label="Address:"
+							inputtype="text"
+							type="text"
 							name="address"
 							placeholder="Enter your address"
 						/>
-						<label htmlFor="postal">Postal number:</label>
-						<input
-							type="postal"
+						<Input
+							label="Postal Code:"
+							inputtype="text"
+							type="text"
 							name="postal"
 							placeholder="Enter your postal code number"
 						/>

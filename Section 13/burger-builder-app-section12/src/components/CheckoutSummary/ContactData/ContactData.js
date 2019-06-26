@@ -2,17 +2,13 @@ import React, { Component } from 'react';
 import Button from '../../UI/Button/Button';
 import Spinner from '../../UI/Spinner/Spinner';
 import Input from '../../UI/Input/Input';
+import OrderFormData from './OrderFormData/OrderFormData';
 import axiosInstance from '../../../axios-orders';
 import styles from './ContactData.module.css';
 
 export class ContactData extends Component {
 	state = {
-		name: '',
-		email: '',
-		address: {
-			street: '',
-			postalCode: '',
-		},
+		orderForm: OrderFormData,
 		isLoadingRequest: false,
 		ingredients: this.props.ingredients,
 		totalPrice: this.props.price,
@@ -49,9 +45,11 @@ export class ContactData extends Component {
 
 	render() {
 		// state:
-		const { isLoadingRequest } = this.state;
+		const { isLoadingRequest, orderForm } = this.state;
 		// CSS Modules styles:
 		const { ContactData } = styles;
+
+		console.log(orderForm);
 
 		return (
 			<div className={ContactData}>
@@ -61,11 +59,9 @@ export class ContactData extends Component {
 				) : (
 					<form action="post">
 						<Input
-							label="Name:"
-							inputtype="text"
-							type="text"
-							name="name"
-							placeholder="Enter your name"
+							elementType={ContactData.elementType}
+							elementConfig
+							value
 						/>
 						<Input
 							label="Email:"
@@ -86,7 +82,7 @@ export class ContactData extends Component {
 							inputtype="text"
 							type="text"
 							name="postal"
-							placeholder="Enter your postal code number"
+							placeholder="Enter your postal code"
 						/>
 					</form>
 				)}

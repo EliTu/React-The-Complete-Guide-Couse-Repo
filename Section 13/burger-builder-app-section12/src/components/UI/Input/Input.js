@@ -4,36 +4,33 @@ import PropTypes from 'prop-types';
 
 const Input = props => {
 	// props:
-	const { label, inputtype } = props;
+	const { elementType, elementConfig, value } = props;
 	// CSS Modules styles:
 	const { Input } = styles;
 
 	let inputElement = null;
 
-	switch (inputtype) {
+	switch (elementType) {
 		case 'input':
-			inputElement = <input {...props} />;
+			inputElement = <input {...elementConfig} value={value} />;
 			break;
 		case 'textarea':
-			inputElement = <textarea {...props} />;
+			inputElement = <textarea {...elementConfig} value={value} />;
 			break;
 		default:
-			inputElement = <input {...props} />;
+			inputElement = <input {...elementConfig} value={value} />;
 	}
 	return (
 		<div className={Input}>
-			<label>{label}</label>
+			<label>{}</label>
 			{inputElement}
 		</div>
 	);
 };
 
 Input.propTypes = {
-	label: PropTypes.string,
-	inputType: PropTypes.string,
-	name: PropTypes.string,
-	type: PropTypes.string,
-	placeholder: PropTypes.string,
+	elementType: PropTypes.string,
+	elementConfig: PropTypes.object,
 };
 
 export default Input;

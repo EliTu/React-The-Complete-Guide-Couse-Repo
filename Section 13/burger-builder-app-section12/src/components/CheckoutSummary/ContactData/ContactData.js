@@ -40,7 +40,7 @@ export class ContactData extends Component {
 			const postRequest = await axiosInstance.post('/orders.json', order);
 			console.log(postRequest);
 			this.setState({ isLoadingRequest: false });
-			this.props.history.push('/');
+			this.props.history.push('/orders');
 		} catch (error) {
 			this.setState({ isLoadingRequest: false });
 		}

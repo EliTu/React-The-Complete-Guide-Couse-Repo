@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Order.module.css';
+import PropTypes from 'prop-types';
 
 const Order = props => {
 	// props:
@@ -26,6 +27,18 @@ const Order = props => {
 			</p>
 		</div>
 	);
+};
+
+Order.propTypes = {
+	ingredients: PropTypes.array,
+	price: PropTypes.string,
+	orderId: PropTypes.string,
+};
+
+Order.defaultProps = {
+	ingredients: [{ ingredient: 'N/A', quantity: 'N/A' }],
+	price: 'N/A',
+	orderId: 'N/A',
 };
 
 export default Order;

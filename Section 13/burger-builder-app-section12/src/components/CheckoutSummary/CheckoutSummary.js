@@ -25,17 +25,12 @@ const CheckoutSummary = props => {
 					</p>
 				)}
 			</div>
-
-			{ingredients && (
-				<>
-					<Button handleClick={checkoutClick} type="Confirm">
-						Continue
-					</Button>
-					<Button handleClick={cancelClick} type="Danger">
-						Cancel
-					</Button>
-				</>
-			)}
+			<Button handleClick={checkoutClick} type="Confirm">
+				Continue
+			</Button>
+			<Button handleClick={cancelClick} type="Danger">
+				Cancel
+			</Button>
 		</div>
 	);
 };
@@ -48,3 +43,16 @@ CheckoutSummary.propTypes = {
 };
 
 export default withRouter(CheckoutSummary);
+
+// {
+// 	ingredients && (
+// 		<>
+// 			<Button handleClick={checkoutClick} type="Confirm">
+// 				Continue
+// 					</Button>
+// 			<Button handleClick={cancelClick} type="Danger">
+// 				Cancel
+// 					</Button>
+// 		</>
+// 	)
+// }

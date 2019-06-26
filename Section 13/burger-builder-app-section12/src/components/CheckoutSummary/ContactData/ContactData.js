@@ -14,25 +14,24 @@ export class ContactData extends Component {
 		totalPrice: this.props.price,
 	};
 
-	handleOrderConfirmClick = async event => {
+	handleOrderSubmitClick = async event => {
 		event.preventDefault();
-		console.log(this.props.ingredients);
 
 		this.setState({ isLoadingRequest: true });
+		const orderData = [...this.state.orderForm];
 		const order = {
 			ingredients: this.state.ingredients,
 			price: this.state.totalPrice,
 			customer: {
-				name: 'Eliad',
-				address: {
-					street: 'Test 1',
-					zipCode: '12345',
-					city: 'Taipei',
-				},
-				email: 'text@testmail.com',
+				name: orderData[0].value,
+				phone: orderData[1].value,
+				email: orderData[2].value,
+				address: orderData[3].value,
+				postal: orderData[4].value,
 			},
-			deliveryMethod: 'fastest',
+			deliveryMethod: orderData[5].value,
 		};
+		console.log(order);
 		try {
 			const postRequest = await axiosInstance.post('/orders.json', order);
 			console.log(postRequest);
@@ -69,7 +68,7 @@ export class ContactData extends Component {
 				{isLoadingRequest ? (
 					<Spinner />
 				) : (
-					<form action="post">
+					<form action="post" onSubmit={this.handleOrderSubmitClick}>
 						{orderForm.map(form => (
 							<Input
 								key={form.data}
@@ -85,7 +84,7 @@ export class ContactData extends Component {
 				)}
 				<Button
 					type="Confirm"
-					handleClick={this.handleOrderConfirmClick}
+					handleClick={this.handleOrderSubmitClick}
 				>
 					Confirm Order
 				</Button>

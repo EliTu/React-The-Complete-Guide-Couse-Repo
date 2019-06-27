@@ -110,7 +110,7 @@ export class ContactData extends Component {
 
 		const formInvalidMessage = (
 			<p className={formInvalidStyle}>
-				Please fill out all the required of the form fields first!
+				Please fill out all the required form fields first!
 			</p>
 		);
 		console.log(orderForm);

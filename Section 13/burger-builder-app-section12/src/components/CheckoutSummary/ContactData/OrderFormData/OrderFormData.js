@@ -15,6 +15,7 @@ const OrderFormData = [
 		elementType: 'input',
 		elementConfig: {
 			type: 'number',
+			min: 0,
 			placeholder: 'Enter your phone number',
 			label: 'Phone number:',
 		},
@@ -55,16 +56,31 @@ const OrderFormData = [
 	},
 
 	{
+		data: 'requests',
+		elementType: 'textarea',
+		elementConfig: {
+			type: 'textarea',
+			placeholder:
+				'Please specify any additional requests or comments you might have',
+			label: 'Additional requests:',
+		},
+		value: '',
+	},
+
+	{
 		data: 'deliveryMethod',
 		elementType: 'select',
 		elementConfig: {
 			options: [
-				{ value: 'fastest', displayValue: 'Fastest' },
+				{
+					value: 'fastest',
+					displayValue: 'Fastest',
+				},
 				{ value: 'cheapest', displayValue: 'Cheapest' },
 			],
 			label: 'Delivery Method:',
 		},
-		value: '',
+		value: 'fastest',
 	},
 ];
 

@@ -28,8 +28,9 @@ export class ContactData extends Component {
 				email: orderData[2].value,
 				address: orderData[3].value,
 				postal: orderData[4].value,
+				requests: orderData[5].value,
 			},
-			deliveryMethod: orderData[5].value,
+			deliveryMethod: orderData[6].value,
 		};
 		console.log(order);
 		try {

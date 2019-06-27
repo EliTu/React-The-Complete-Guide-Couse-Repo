@@ -15,16 +15,25 @@
     outline: none;
     border: none;
     border-bottom: 2px solid rgba(105, 241, 105, 0.808);
-    margin: 1rem auto;
-    margin-bottom: 2rem;
+    margin: 0.5rem auto;
     display: block;
     text-align: center;
     transition: all 0.5s;
 }
 
+.Input textarea {
+    border: 2px solid rgba(105, 241, 105, 0.808);
+    overflow: auto;
+    resize: none;
+    text-align: start;
+    height: 50%;
+    width: 75%;
+}
+
 .Input label {
     font-weight: 700;
     display: block;
+    margin-bottom: 0.5rem;
 }
 
 .Input select option {
@@ -39,6 +48,11 @@
     border-bottom: 2px solid rgba(3, 136, 3, 0.781);
 }
 
-.Input select:focus {
+.Input select:focus,
+.Input textarea:focus {
     border-bottom: 2px solid rgba(3, 136, 3, 0.781);
+}
+
+.Input textarea:focus {
+    border: 2px solid rgba(3, 136, 3, 0.781);
 }

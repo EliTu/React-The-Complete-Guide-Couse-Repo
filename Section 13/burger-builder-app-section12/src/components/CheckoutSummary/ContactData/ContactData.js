@@ -43,12 +43,34 @@ export class ContactData extends Component {
 		}
 	};
 
+	checkFormValidation = (value, validation, type) => {
+		let isValid = false;
+		if (validation.required) isValid = value.trim() !== '';
+
+		return isValid;
+	};
+
 	handleFormChange = (event, data) => {
 		let updatedForm = [...this.state.orderForm];
 		let updatedValue = updatedForm.forEach(el =>
 			el.data === data ? (el.value = event.target.value) : el
 		);
 		updatedForm.value = updatedValue;
+
+		// Check the validation of the form:
+		// let updateValidation
+		updatedForm.forEach(el =>
+			el.data === data
+				? (el.validation.valid = this.checkFormValidation(
+						el.value,
+						el.validation,
+						el.data
+				  ))
+				: el
+		);
+		// console.log(updateValidation);
+		// console.log(updatedForm);
+		// updatedForm.validation.valid = updateValidation;
 
 		this.setState({
 			orderForm: updatedForm,

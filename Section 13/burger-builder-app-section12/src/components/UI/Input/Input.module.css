@@ -21,6 +21,13 @@
     transition: all 0.5s;
 }
 
+/* To disable up and down number spinners on number input field */
+.Input input[type=number]::-webkit-inner-spin-button,
+.Input input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .Input textarea {
     border: 2px solid rgba(105, 241, 105, 0.808);
     overflow: auto;

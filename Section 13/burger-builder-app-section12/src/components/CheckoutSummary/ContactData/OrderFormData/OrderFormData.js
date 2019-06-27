@@ -8,6 +8,10 @@ const OrderFormData = [
 			label: 'Name:',
 		},
 		value: '',
+		validation: {
+			required: true,
+			valid: false,
+		},
 	},
 
 	{
@@ -20,6 +24,10 @@ const OrderFormData = [
 			label: 'Phone number:',
 		},
 		value: '',
+		validation: {
+			required: true,
+			valid: false,
+		},
 	},
 
 	{
@@ -31,6 +39,13 @@ const OrderFormData = [
 			label: 'Email:',
 		},
 		value: '',
+		validation: {
+			required: true,
+			emailValidation: {
+				regex: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+			},
+			valid: false,
+		},
 	},
 
 	{
@@ -42,6 +57,10 @@ const OrderFormData = [
 			label: 'Address:',
 		},
 		value: '',
+		validation: {
+			required: true,
+			valid: false,
+		},
 	},
 
 	{
@@ -53,18 +72,10 @@ const OrderFormData = [
 			label: 'Postal code:',
 		},
 		value: '',
-	},
-
-	{
-		data: 'requests',
-		elementType: 'textarea',
-		elementConfig: {
-			type: 'textarea',
-			placeholder:
-				'Please specify any additional requests or comments you might have',
-			label: 'Additional requests:',
+		validation: {
+			required: true,
+			valid: false,
 		},
-		value: '',
 	},
 
 	{
@@ -81,6 +92,26 @@ const OrderFormData = [
 			label: 'Delivery Method:',
 		},
 		value: 'fastest',
+		validation: {
+			required: true,
+			valid: false,
+		},
+	},
+
+	{
+		data: 'requests',
+		elementType: 'textarea',
+		elementConfig: {
+			type: 'textarea',
+			placeholder:
+				'Please specify any additional requests or comments you might have',
+			label: 'Additional requests:',
+		},
+		value: '',
+		validation: {
+			required: false,
+			valid: true,
+		},
 	},
 ];
 

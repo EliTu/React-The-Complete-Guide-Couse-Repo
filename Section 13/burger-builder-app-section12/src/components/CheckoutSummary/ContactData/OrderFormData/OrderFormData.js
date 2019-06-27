@@ -41,9 +41,7 @@ const OrderFormData = [
 		value: '',
 		validation: {
 			required: true,
-			emailValidation: {
-				regex: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-			},
+			emailValidationRegExp: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 			valid: false,
 		},
 	},
@@ -94,7 +92,7 @@ const OrderFormData = [
 		value: 'fastest',
 		validation: {
 			required: true,
-			valid: false,
+			valid: true,
 		},
 	},
 

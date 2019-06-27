@@ -15,29 +15,6 @@
     font-size: 1.5rem;
 }
 
-.ContactData label {
-    display: inline-block;
-    width: 50%;
-}
-
-.ContactData input {
-    background-color: rgba(241, 238, 238, 0.993);
-    width: 40%;
-    outline: none;
-    border: none;
-    border-bottom: 2px solid rgba(105, 241, 105, 0.808);
-    margin: 1.3rem auto;
-    margin-bottom: 2rem;
-    display: block;
-    text-align: center;
-    transition: all 0.5s;
-}
-
-.ContactData input:active {
-    border: rgba(1, 61, 1, 0.384);
-    color: #d8d8d8;
-}
-
 @media (min-width: 600px) {
     .ContactData {
         width: 500px;

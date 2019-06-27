@@ -11,11 +11,11 @@
     background-color: rgba(241, 238, 238, 0.993);
     color: #181616e0;
     font-size: 1rem;
-    width: 30%;
+    width: 40%;
     outline: none;
     border: none;
     border-bottom: 2px solid rgba(105, 241, 105, 0.808);
-    margin: 0.5rem auto;
+    margin: 1rem auto;
     display: block;
     text-align: center;
     transition: all 0.5s;
@@ -33,6 +33,7 @@
     overflow: auto;
     resize: none;
     text-align: start;
+    margin: 1rem auto;
     height: 50%;
     width: 75%;
 }
@@ -40,7 +41,7 @@
 .Input label {
     font-weight: 700;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .Input select option {
@@ -62,4 +63,8 @@
 
 .Input textarea:focus {
     border: 2px solid rgba(3, 136, 3, 0.781);
+}
+
+.Input .InvalidStyle {
+    border-bottom: 2px solid rgba(190, 16, 16, 0.781);
 }

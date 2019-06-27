@@ -44,8 +44,12 @@ export class ContactData extends Component {
 	};
 
 	checkFormValidation = (value, validation, type) => {
-		let isValid = false;
-		if (validation.required) isValid = value.trim() !== '';
+		let isValid = true;
+		if (validation.required) isValid = value.trim() !== '' && isValid;
+
+		// Check the email field specifically:
+		if (validation.required && type === 'email')
+			isValid = validation.emailValidationRegExp.test(value);
 
 		return isValid;
 	};
@@ -97,6 +101,7 @@ export class ContactData extends Component {
 								key={form.data}
 								elementType={form.elementType}
 								elementConfig={form.elementConfig}
+								isInvalid={!form.validation.valid}
 								value={form.value}
 								handleChange={event =>
 									this.handleFormChange(event, form.data)

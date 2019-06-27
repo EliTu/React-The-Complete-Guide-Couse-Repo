@@ -4,9 +4,16 @@ import PropTypes from 'prop-types';
 
 const Input = props => {
 	// props:
-	const { elementType, elementConfig, value, handleChange } = props;
+	const {
+		elementType,
+		elementConfig,
+		value,
+		handleChange,
+		isInvalid,
+	} = props;
+
 	// CSS Modules styles:
-	const { Input } = styles;
+	const { Input, InvalidStyle } = styles;
 
 	let inputElement = null;
 
@@ -14,6 +21,7 @@ const Input = props => {
 		case 'input':
 			inputElement = (
 				<input
+					className={isInvalid ? InvalidStyle : null}
 					{...elementConfig}
 					value={value}
 					onChange={handleChange}
@@ -33,7 +41,11 @@ const Input = props => {
 
 		case 'select':
 			inputElement = (
-				<select value={value} onChange={handleChange}>
+				<select
+					value={value}
+					onChange={handleChange}
+					className={isInvalid ? InvalidStyle : null}
+				>
 					{elementConfig.options.map(option => (
 						<option value={option.value} key={option.value}>
 							{option.displayValue}
@@ -44,7 +56,13 @@ const Input = props => {
 			break;
 
 		default:
-			inputElement = <input {...elementConfig} value={value} />;
+			inputElement = (
+				<input
+					{...elementConfig}
+					value={value}
+					className={isInvalid ? InvalidStyle : null}
+				/>
+			);
 	}
 	return (
 		<div className={Input}>
@@ -55,8 +73,10 @@ const Input = props => {
 };
 
 Input.propTypes = {
+	isInvalid: PropTypes.bool,
 	elementType: PropTypes.string,
 	elementConfig: PropTypes.object,
+	handleChange: PropTypes.func,
 };
 
 export default Input;

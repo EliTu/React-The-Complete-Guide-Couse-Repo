@@ -12,7 +12,7 @@ export class ContactData extends Component {
 		totalPrice: this.props.price,
 		orderForm: OrderFormData,
 		isFormValid: false,
-		showFormInvalidError: false,
+		showFormInvalidMessage: false,
 		isLoadingRequest: false,
 	};
 
@@ -21,7 +21,7 @@ export class ContactData extends Component {
 
 		if (!this.state.isFormValid) {
 			this.setState({
-				showFormInvalidError: true,
+				showFormInvalidMessage: true,
 			});
 			return;
 		}
@@ -102,7 +102,7 @@ export class ContactData extends Component {
 			isLoadingRequest,
 			orderForm,
 			isFormValid,
-			showFormInvalidError,
+			showFormInvalidMessage,
 		} = this.state;
 
 		// CSS Modules styles:
@@ -139,12 +139,12 @@ export class ContactData extends Component {
 					</form>
 				)}
 				<Button
-					type={showFormInvalidError ? 'Danger' : 'Confirm'}
+					type={showFormInvalidMessage ? 'Danger' : 'Confirm'}
 					handleClick={this.handleOrderSubmitClick}
 				>
 					Confirm Order
 				</Button>
-				{showFormInvalidError ? formInvalidMessage : null}
+				{showFormInvalidMessage ? formInvalidMessage : null}
 			</div>
 		);
 	}

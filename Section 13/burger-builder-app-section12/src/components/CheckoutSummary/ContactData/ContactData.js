@@ -56,25 +56,18 @@ export class ContactData extends Component {
 
 	handleFormChange = (event, data) => {
 		let updatedForm = [...this.state.orderForm];
-		let updatedValue = updatedForm.forEach(el =>
-			el.data === data ? (el.value = event.target.value) : el
-		);
-		updatedForm.value = updatedValue;
-
-		// Check the validation of the form:
-		// let updateValidation
-		updatedForm.forEach(el =>
+		let updatedFormData = updatedForm.forEach(el =>
 			el.data === data
-				? (el.validation.valid = this.checkFormValidation(
+				? ((el.value = event.target.value),
+				  (el.validation.valid = this.checkFormValidation(
 						el.value,
 						el.validation,
 						el.data
-				  ))
+				  )),
+				  (el.validation.hasUserInput = true))
 				: el
 		);
-		// console.log(updateValidation);
-		// console.log(updatedForm);
-		// updatedForm.validation.valid = updateValidation;
+		updatedForm.value = updatedFormData;
 
 		this.setState({
 			orderForm: updatedForm,
@@ -91,7 +84,7 @@ export class ContactData extends Component {
 
 		return (
 			<div className={ContactData}>
-				<h4>Enter your contact data:</h4>
+				<h4>Enter your contact information:</h4>
 				{isLoadingRequest ? (
 					<Spinner />
 				) : (
@@ -102,6 +95,8 @@ export class ContactData extends Component {
 								elementType={form.elementType}
 								elementConfig={form.elementConfig}
 								isInvalid={!form.validation.valid}
+								hasUserInput={form.validation.hasUserInput}
+								errorMessage={form.validation.errorMessage}
 								value={form.value}
 								handleChange={event =>
 									this.handleFormChange(event, form.data)

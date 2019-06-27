@@ -10,7 +10,9 @@ const OrderFormData = [
 		value: '',
 		validation: {
 			required: true,
+			hasUserInput: false,
 			valid: false,
+			errorMessage: 'Please enter a name',
 		},
 	},
 
@@ -26,7 +28,9 @@ const OrderFormData = [
 		value: '',
 		validation: {
 			required: true,
+			hasUserInput: false,
 			valid: false,
+			errorMessage: 'Please enter a valid phone number',
 		},
 	},
 
@@ -42,7 +46,9 @@ const OrderFormData = [
 		validation: {
 			required: true,
 			emailValidationRegExp: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+			hasUserInput: false,
 			valid: false,
+			errorMessage: 'Please enter a valid email address',
 		},
 	},
 
@@ -57,7 +63,9 @@ const OrderFormData = [
 		value: '',
 		validation: {
 			required: true,
+			hasUserInput: false,
 			valid: false,
+			errorMessage: 'Please enter a valid address',
 		},
 	},
 
@@ -72,7 +80,9 @@ const OrderFormData = [
 		value: '',
 		validation: {
 			required: true,
+			hasUserInput: false,
 			valid: false,
+			errorMessage: 'Please enter a valid postal code',
 		},
 	},
 

@@ -8,16 +8,26 @@ import styles from './ContactData.module.css';
 
 export class ContactData extends Component {
 	state = {
-		orderForm: OrderFormData,
-		isLoadingRequest: false,
 		ingredients: this.props.ingredients,
 		totalPrice: this.props.price,
+		orderForm: OrderFormData,
+		isFormValid: false,
+		showFormInvalidError: false,
+		isLoadingRequest: false,
 	};
 
 	handleOrderSubmitClick = async event => {
 		event.preventDefault();
 
+		if (!this.state.isFormValid) {
+			this.setState({
+				showFormInvalidError: true,
+			});
+			return;
+		}
+
 		this.setState({ isLoadingRequest: true });
+
 		const orderData = [...this.state.orderForm];
 		const order = {
 			ingredients: this.state.ingredients,
@@ -33,9 +43,11 @@ export class ContactData extends Component {
 			deliveryMethod: orderData[6].value,
 		};
 		console.log(order);
+
 		try {
 			const postRequest = await axiosInstance.post('/orders.json', order);
 			console.log(postRequest);
+
 			this.setState({ isLoadingRequest: false });
 			this.props.history.push('/orders');
 		} catch (error) {
@@ -43,23 +55,12 @@ export class ContactData extends Component {
 		}
 	};
 
-	checkFormValidation = (value, validation, type) => {
-		let isValid = true;
-		if (validation.required) isValid = value.trim() !== '' && isValid;
-
-		// Check the email field specifically:
-		if (validation.required && type === 'email')
-			isValid = validation.emailValidationRegExp.test(value);
-
-		return isValid;
-	};
-
 	handleFormChange = (event, data) => {
 		let updatedForm = [...this.state.orderForm];
 		let updatedFormData = updatedForm.forEach(el =>
 			el.data === data
 				? ((el.value = event.target.value),
-				  (el.validation.valid = this.checkFormValidation(
+				  (el.validation.valid = this.checkInputValidation(
 						el.value,
 						el.validation,
 						el.data
@@ -74,18 +75,50 @@ export class ContactData extends Component {
 		});
 	};
 
+	checkFormValidation = () => {
+		const formCopy = [...this.state.orderForm];
+		const checkValid = formCopy.every(el => el.validation.valid);
+
+		this.setState({
+			isFormValid: checkValid,
+		});
+	};
+
+	checkInputValidation = (value, validation, type) => {
+		let isValid = true;
+		if (validation.required) isValid = value.trim() !== '' && isValid;
+
+		// Check the email field specifically:
+		if (validation.required && type === 'email')
+			isValid = validation.emailValidationRegExp.test(value);
+
+		this.checkFormValidation();
+		return isValid;
+	};
+
 	render() {
 		// state:
-		const { isLoadingRequest, orderForm } = this.state;
-		// CSS Modules styles:
-		const { ContactData } = styles;
+		const {
+			isLoadingRequest,
+			orderForm,
+			isFormValid,
+			showFormInvalidError,
+		} = this.state;
 
+		// CSS Modules styles:
+		const { ContactData, formInvalidStyle } = styles;
+
+		const formInvalidMessage = (
+			<p className={formInvalidStyle}>
+				Please fill out all the required of the form fields first!
+			</p>
+		);
 		console.log(orderForm);
 
 		return (
 			<div className={ContactData}>
 				<h4>Enter your contact information:</h4>
-				{isLoadingRequest ? (
+				{isLoadingRequest && isFormValid ? (
 					<Spinner />
 				) : (
 					<form action="post" onSubmit={this.handleOrderSubmitClick}>
@@ -106,11 +139,12 @@ export class ContactData extends Component {
 					</form>
 				)}
 				<Button
-					type="Confirm"
+					type={showFormInvalidError ? 'Danger' : 'Confirm'}
 					handleClick={this.handleOrderSubmitClick}
 				>
 					Confirm Order
 				</Button>
+				{showFormInvalidError ? formInvalidMessage : null}
 			</div>
 		);
 	}

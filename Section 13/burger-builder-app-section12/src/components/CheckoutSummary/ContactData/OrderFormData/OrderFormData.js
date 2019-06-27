@@ -5,7 +5,7 @@ const OrderFormData = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Enter your name',
-			label: 'Name:',
+			label: '*Name:',
 		},
 		value: '',
 		validation: {
@@ -23,7 +23,7 @@ const OrderFormData = [
 			type: 'number',
 			min: 0,
 			placeholder: 'Enter your phone number',
-			label: 'Phone number:',
+			label: '*Phone number:',
 		},
 		value: '',
 		validation: {
@@ -40,7 +40,7 @@ const OrderFormData = [
 		elementConfig: {
 			type: 'email',
 			placeholder: 'Enter your email',
-			label: 'Email:',
+			label: '*Email:',
 		},
 		value: '',
 		validation: {
@@ -58,7 +58,7 @@ const OrderFormData = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Enter your address',
-			label: 'Address:',
+			label: '*Address:',
 		},
 		value: '',
 		validation: {
@@ -75,7 +75,7 @@ const OrderFormData = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Enter your postal code',
-			label: 'Postal code:',
+			label: '*Postal code:',
 		},
 		value: '',
 		validation: {

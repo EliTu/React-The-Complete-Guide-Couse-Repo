@@ -41,10 +41,12 @@ const reducer = (state = initialState, action) => {
 			};
 
 		case 'DEL_RESULT':
-			let index = state.results.indexOf(action.id);
+			const updatedArr = state.results.filter(
+				result => result.id !== action.id
+			);
 			return {
 				...state,
-				results: state.results.slice(index, 1),
+				results: updatedArr,
 			};
 
 		default:

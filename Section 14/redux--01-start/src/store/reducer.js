@@ -7,37 +7,32 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case 'INCREMENT':
-			state = {
+			return {
 				...state,
 				counter: state.counter + 1,
 			};
-			break;
 
 		case 'DECREMENT':
-			state = {
+			return {
 				...state,
 				counter: state.counter - 1,
 			};
-			break;
 
 		case 'ADD':
-			state = {
+			return {
 				...state,
 				counter: state.counter + action.value,
 			};
-			break;
 
 		case 'SUBTRACT':
-			state = {
+			return {
 				...state,
 				counter: state.counter - action.value,
 			};
-			break;
 
 		default:
 			return state;
 	}
-	return state;
 };
 
 export default reducer;

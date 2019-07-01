@@ -39,13 +39,13 @@ const mapDispatchToProps = dispatch => {
 	const { ADD_PERSON, DEL_PERSON } = actions;
 
 	return {
-		handleAddUserClick: () =>
+		handleAddUserClick: (name, age) =>
 			dispatch({
 				type: ADD_PERSON,
 				data: {
 					id: Math.random(),
-					name: 'Max',
-					age: Math.floor(Math.random() * 40),
+					name: name,
+					age: age,
 				},
 			}),
 		handleRemoveUserClick: id => dispatch({ type: DEL_PERSON, id: id }),

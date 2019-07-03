@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Button from '../../UI/Button/Button';
 import Spinner from '../../UI/Spinner/Spinner';
 import Input from '../../UI/Input/Input';
@@ -9,7 +10,7 @@ import styles from './ContactData.module.css';
 export class ContactData extends Component {
 	state = {
 		ingredients: this.props.ingredients,
-		totalPrice: this.props.price,
+		totalPrice: this.props.totalPrice,
 		orderForm: OrderFormData,
 		isFormValid: false,
 		showFormInvalidMessage: false,
@@ -150,4 +151,12 @@ export class ContactData extends Component {
 	}
 }
 
-export default ContactData;
+// Redux setup:
+const mapStateToProps = state => {
+	return {
+		ingredients: state.ingredients,
+		totalPrice: state.totalPrice,
+	};
+};
+
+export default connect(mapStateToProps)(ContactData);

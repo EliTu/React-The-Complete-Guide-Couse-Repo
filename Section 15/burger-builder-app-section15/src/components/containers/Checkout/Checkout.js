@@ -1,32 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import CheckoutSummary from '../../CheckoutSummary/CheckoutSummary';
 import ContactData from '../../CheckoutSummary/ContactData/ContactData';
 import styles from './Checkout.module.css';
 
 export class Checkout extends Component {
-	state = {
-		ingredients: null,
-		price: 0,
-	};
-
-	componentDidMount() {
-		console.log(this.props.location);
-		// Access the passed ingredients through the Router location prop:
-		const passedIngredients = this.props.location.state
-			? this.props.location.state.ingredients
-			: null;
-
-		const passedPrice = this.props.location.state
-			? this.props.location.state.price
-			: null;
-
-		this.setState({
-			ingredients: passedIngredients,
-			price: passedPrice,
-		});
-	}
-
 	handleCancelClick = () => {
 		return this.props.history.goBack();
 	};
@@ -40,7 +19,7 @@ export class Checkout extends Component {
 		const { Checkout } = styles;
 
 		// state:
-		const { ingredients, price } = this.state;
+		const { ingredients } = this.props;
 
 		return (
 			<div className={Checkout}>
@@ -52,17 +31,18 @@ export class Checkout extends Component {
 				/>
 				<Route
 					path={`${this.props.match.path}/contact-data`}
-					render={props => (
-						<ContactData
-							ingredients={ingredients}
-							price={price}
-							{...props}
-						/>
-					)}
+					component={ContactData}
 				/>
 			</div>
 		);
 	}
 }
 
-export default Checkout;
+// Redux setup:
+const mapStateToProps = state => {
+	return {
+		ingredients: state.ingredients,
+	};
+};
+
+export default connect(mapStateToProps)(Checkout);

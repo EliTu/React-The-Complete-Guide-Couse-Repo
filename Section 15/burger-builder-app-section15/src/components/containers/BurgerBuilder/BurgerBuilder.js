@@ -9,18 +9,10 @@ import Spinner from '../../UI/Spinner/Spinner';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 import { BurgerBuilderActions } from '../../../store/actions';
 
-const INGREDIENT_PRICES = {
-	salad: 0.5,
-	cheese: 0.4,
-	meat: 1.3,
-	bacon: 0.7,
-};
-
 class BurgerBuilder extends Component {
 	_isMounted = false;
 
 	state = {
-		totalPrice: 3,
 		isPurchasable: false,
 		isInOrderSummary: false,
 		isLoadingRequest: false,
@@ -93,58 +85,9 @@ class BurgerBuilder extends Component {
 		});
 	};
 
-	handleAddIngredientClick = type => {
-		const ingredientIndex = this.props.ingredients.findIndex(
-			el => el.ingredient === type
-		);
-
-		const incrementQuantity =
-			[...this.props.ingredients][ingredientIndex].quantity + 1;
-
-		const newIngredients = [...this.props.ingredients];
-		newIngredients[ingredientIndex].quantity = incrementQuantity;
-
-		const priceAddition =
-			INGREDIENT_PRICES[
-				[...this.props.ingredients][ingredientIndex].ingredient
-			];
-
-		this.setState(prevState => {
-			return {
-				ingredients: newIngredients,
-				totalPrice: prevState.totalPrice + priceAddition,
-			};
-		});
-	};
-
-	handleRemoveIngredientClick = type => {
-		const ingredientIndex = this.props.ingredients.findIndex(
-			el => el.ingredient === type
-		);
-
-		const decrementQuantity =
-			[...this.props.ingredients][ingredientIndex].quantity - 1;
-
-		const newIngredients = [...this.props.ingredients];
-		newIngredients[ingredientIndex].quantity = decrementQuantity;
-
-		const priceDeduction =
-			INGREDIENT_PRICES[
-				[...this.props.ingredients][ingredientIndex].ingredient
-			];
-
-		this.setState(prevState => {
-			return {
-				ingredients: newIngredients,
-				totalPrice: prevState.totalPrice - priceDeduction,
-			};
-		});
-	};
-
 	render() {
 		// state:
 		const {
-			totalPrice,
 			isPurchasable,
 			isInOrderSummary,
 			isLoadingRequest,
@@ -154,6 +97,7 @@ class BurgerBuilder extends Component {
 		// props (mapped from redux):
 		const {
 			ingredients,
+			totalPrice,
 			handleAddIngredientClick,
 			handleRemoveIngredientClick,
 		} = this.props;
@@ -218,6 +162,7 @@ const mapStateToProps = state => {
 };
 
 const { ADD_INGREDIENT, REMOVE_INGREDIENT } = BurgerBuilderActions;
+
 const mapDispatchToProps = dispatch => {
 	return {
 		handleAddIngredientClick: ingName =>

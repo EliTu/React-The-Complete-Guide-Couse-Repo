@@ -10,6 +10,13 @@ const INITIAL_STATE = {
 	totalPrice: 3,
 };
 
+const INGREDIENT_PRICES = {
+	salad: 0.5,
+	cheese: 0.4,
+	meat: 1.3,
+	bacon: 0.7,
+};
+
 // BurgerBuilderActions:
 const { ADD_INGREDIENT, REMOVE_INGREDIENT } = BurgerBuilderActions;
 
@@ -25,10 +32,13 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 			const addedIngredients = [...state.ingredients];
 			addedIngredients[addedIngredientIndex].quantity = incrementQuantity;
-            
+
+			const priceAddition = INGREDIENT_PRICES[action.ingredientName];
+
 			return {
 				...state,
 				ingredients: addedIngredients,
+				totalPrice: state.totalPrice + priceAddition,
 			};
 
 		case REMOVE_INGREDIENT:
@@ -44,9 +54,12 @@ const reducer = (state = INITIAL_STATE, action) => {
 				removedIngredientIndex
 			].quantity = decrementQuantity;
 
+			const priceDeduction = INGREDIENT_PRICES[action.ingredientName];
+
 			return {
 				...state,
 				ingredients: removedIngredients,
+				totalPrice: state.totalPrice - priceDeduction,
 			};
 
 		default:

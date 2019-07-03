@@ -29,22 +29,22 @@ class BurgerBuilder extends Component {
 	// Get the Ingredient list and quantity from the database:
 	async componentDidMount() {
 		this._isMounted = true;
-		try {
-			const getIngredientsData = await axiosInstance.get(
-				'/ingredients.json'
-			);
-			if (this._isMounted) {
-				this.setState({
-					ingredients: getIngredientsData.data,
-				});
-			}
-		} catch (error) {
-			if (this._isMounted) {
-				this.setState({
-					isErrorOnMount: true,
-				});
-			}
-		}
+		// 	try {
+		// 		const getIngredientsData = await axiosInstance.get(
+		// 			'/ingredients.json'
+		// 		);
+		// 		if (this._isMounted) {
+		// 			this.setState({
+		// 				ingredients: getIngredientsData.data,
+		// 			});
+		// 		}
+		// 	} catch (error) {
+		// 		if (this._isMounted) {
+		// 			this.setState({
+		// 				isErrorOnMount: true,
+		// 			});
+		// 		}
+		// 	}
 	}
 
 	componentWillUnmount() {

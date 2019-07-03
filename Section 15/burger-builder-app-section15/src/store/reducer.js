@@ -16,22 +16,34 @@ const { ADD_INGREDIENT, REMOVE_INGREDIENT } = BurgerBuilderActions;
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case ADD_INGREDIENT:
-			let addedIngredients = [...state.ingredients].map(ing =>
-				ing.ingredeint === action.ingredientName
-					? ing.quantity + 1
-					: ing
+			const addedIngredientIndex = state.ingredients.findIndex(
+				el => el.ingredient === action.ingredientName
 			);
+
+			const incrementQuantity =
+				[...state.ingredients][addedIngredientIndex].quantity + 1;
+
+			const addedIngredients = [...state.ingredients];
+			addedIngredients[addedIngredientIndex].quantity = incrementQuantity;
+            
 			return {
 				...state,
 				ingredients: addedIngredients,
 			};
 
 		case REMOVE_INGREDIENT:
-			let removedIngredients = [...state.ingredients].map(ing =>
-				ing.ingredeint === action.ingredientName
-					? ing.quantity - 1
-					: ing
+			const removedIngredientIndex = state.ingredients.findIndex(
+				el => el.ingredient === action.ingredientName
 			);
+
+			const decrementQuantity =
+				[...state.ingredients][removedIngredientIndex].quantity - 1;
+
+			const removedIngredients = [...state.ingredients];
+			removedIngredients[
+				removedIngredientIndex
+			].quantity = decrementQuantity;
+
 			return {
 				...state,
 				ingredients: removedIngredients,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axiosInstance from '../../../axios-orders';
 import Burger from '../../Burger/Burger';
 import BuildControls from '../../Burger/BuildControls/BuildControls';
@@ -6,6 +7,7 @@ import Modal from '../../UI/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
 import Spinner from '../../UI/Spinner/Spinner';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
+import { BurgerBuilderActions } from '../../../store/actions';
 
 const INGREDIENT_PRICES = {
 	salad: 0.5,
@@ -18,7 +20,6 @@ class BurgerBuilder extends Component {
 	_isMounted = false;
 
 	state = {
-		ingredients: null,
 		totalPrice: 3,
 		isPurchasable: false,
 		isInOrderSummary: false,
@@ -47,12 +48,18 @@ class BurgerBuilder extends Component {
 		// 	}
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.ingredients !== this.props.ingredients) {
+			this.checkIfPurchasable();
+		}
+	}
+
 	componentWillUnmount() {
 		this._isMounted = false;
 	}
 
 	checkIfPurchasable = () => {
-		const ingredientsCopy = [...this.state.ingredients];
+		const ingredientsCopy = [...this.props.ingredients];
 		const checkBool = ingredientsCopy.some(
 			ingredient => ingredient.quantity > 0
 		);
@@ -80,26 +87,26 @@ class BurgerBuilder extends Component {
 		this.props.history.push({
 			pathname: '/checkout',
 			state: {
-				ingredients: this.state.ingredients,
+				ingredients: this.props.ingredients,
 				price: this.state.totalPrice,
 			},
 		});
 	};
 
 	handleAddIngredientClick = type => {
-		const ingredientIndex = this.state.ingredients.findIndex(
+		const ingredientIndex = this.props.ingredients.findIndex(
 			el => el.ingredient === type
 		);
 
 		const incrementQuantity =
-			[...this.state.ingredients][ingredientIndex].quantity + 1;
+			[...this.props.ingredients][ingredientIndex].quantity + 1;
 
-		const newIngredients = [...this.state.ingredients];
+		const newIngredients = [...this.props.ingredients];
 		newIngredients[ingredientIndex].quantity = incrementQuantity;
 
 		const priceAddition =
 			INGREDIENT_PRICES[
-				[...this.state.ingredients][ingredientIndex].ingredient
+				[...this.props.ingredients][ingredientIndex].ingredient
 			];
 
 		this.setState(prevState => {
@@ -108,24 +115,22 @@ class BurgerBuilder extends Component {
 				totalPrice: prevState.totalPrice + priceAddition,
 			};
 		});
-
-		this.checkIfPurchasable();
 	};
 
 	handleRemoveIngredientClick = type => {
-		const ingredientIndex = this.state.ingredients.findIndex(
+		const ingredientIndex = this.props.ingredients.findIndex(
 			el => el.ingredient === type
 		);
 
 		const decrementQuantity =
-			[...this.state.ingredients][ingredientIndex].quantity - 1;
+			[...this.props.ingredients][ingredientIndex].quantity - 1;
 
-		const newIngredients = [...this.state.ingredients];
+		const newIngredients = [...this.props.ingredients];
 		newIngredients[ingredientIndex].quantity = decrementQuantity;
 
 		const priceDeduction =
 			INGREDIENT_PRICES[
-				[...this.state.ingredients][ingredientIndex].ingredient
+				[...this.props.ingredients][ingredientIndex].ingredient
 			];
 
 		this.setState(prevState => {
@@ -134,20 +139,24 @@ class BurgerBuilder extends Component {
 				totalPrice: prevState.totalPrice - priceDeduction,
 			};
 		});
-
-		this.checkIfPurchasable();
 	};
 
 	render() {
-		// state destructuring
+		// state:
 		const {
-			ingredients,
 			totalPrice,
 			isPurchasable,
 			isInOrderSummary,
 			isLoadingRequest,
 			isErrorOnMount,
 		} = this.state;
+
+		// props (mapped from redux):
+		const {
+			ingredients,
+			handleAddIngredientClick,
+			handleRemoveIngredientClick,
+		} = this.props;
 
 		// Check if an ingredient quantity is currently 0
 		let isQuantityZero;
@@ -186,8 +195,8 @@ class BurgerBuilder extends Component {
 					<>
 						<Burger ingredients={ingredients} />
 						<BuildControls
-							addIngredient={this.handleAddIngredientClick}
-							removeIngredient={this.handleRemoveIngredientClick}
+							addIngredient={handleAddIngredientClick}
+							removeIngredient={handleRemoveIngredientClick}
 							disableRemove={isQuantityZero}
 							price={totalPrice}
 							purchasable={isPurchasable}
@@ -200,4 +209,25 @@ class BurgerBuilder extends Component {
 	}
 }
 
-export default requestMessageComponent(BurgerBuilder, axiosInstance);
+// Redux setup:
+const mapStateToProps = state => {
+	return {
+		ingredients: state.ingredients,
+		totalPrice: state.totalPrice,
+	};
+};
+
+const { ADD_INGREDIENT, REMOVE_INGREDIENT } = BurgerBuilderActions;
+const mapDispatchToProps = dispatch => {
+	return {
+		handleAddIngredientClick: ingName =>
+			dispatch({ type: ADD_INGREDIENT, ingredientName: ingName }),
+		handleRemoveIngredientClick: ingName =>
+			dispatch({ type: REMOVE_INGREDIENT, ingredientName: ingName }),
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(requestMessageComponent(BurgerBuilder, axiosInstance));

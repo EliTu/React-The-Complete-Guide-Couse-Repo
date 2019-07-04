@@ -1,4 +1,4 @@
-import * as actions from '../actions';
+import * as actions from '../actions/actions';
 
 // The initial state set in the Redux store:
 const initialState = {

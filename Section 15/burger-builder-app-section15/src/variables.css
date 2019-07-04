@@ -1,4 +1,5 @@
 :root {
+    /* colors */
     --primary-background-dark: linear-gradient(180deg, rgba(32, 32, 32, 0.829), rgba(20, 20, 20, 0.815) 70%);
     --primary-green: rgba(105, 241, 105, 0.521);
     --font-dark: rgb(26, 24, 24);

@@ -5,9 +5,8 @@ import {
 	decrement,
 	add,
 	subtract,
-	storeResult,
-	delResult,
-} from '../../store/actions/actions';
+} from '../../store/actions/counterActions.js';
+import { storeResult, delResult } from '../../store/actions/resultActions';
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 

@@ -1,11 +1,11 @@
-import * as actions from '../actions/actions';
+import { resultActions } from '../actions/actionTypes';
 
 const initialState = {
 	results: [],
 };
 
 const resultReducer = (state = initialState, action) => {
-	const { STORE_RESULT, DEL_RESULT } = actions;
+	const { STORE_RESULT, DEL_RESULT } = resultActions;
 
 	switch (action.type) {
 		case STORE_RESULT:

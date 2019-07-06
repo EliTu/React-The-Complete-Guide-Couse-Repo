@@ -1,4 +1,4 @@
-import * as actions from '../actions/actions';
+import { counterActions } from '../actions/actionTypes';
 
 // The initial state set in the Redux store:
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
 
 // The main reducer function:
 const counterReducer = (state = initialState, action) => {
-	const { INCREMENT, DECREMENT, ADD, SUBTRACT } = actions;
+	const { INCREMENT, DECREMENT, ADD, SUBTRACT } = counterActions;
 
 	switch (action.type) {
 		case INCREMENT:

@@ -19,7 +19,9 @@ export const delResult = id => {
 
 // Async dispatch with redux-thunk:
 export const storeResult = res => {
-	return dispatch => {
+	return (dispatch, getState) => {
+		const oldCounter = getState().counterReducer.counter;
+		console.log(oldCounter);
 		setTimeout(() => {
 			dispatch(saveResult(res));
 		}, 2000);

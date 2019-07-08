@@ -15,29 +15,12 @@ class BurgerBuilder extends Component {
 	state = {
 		isPurchasable: false,
 		isInOrderSummary: false,
-		isLoadingRequest: false,
-		isErrorOnMount: false,
 	};
 
 	// Get the Ingredient list and quantity from the database:
 	async componentDidMount() {
+		this.props.initIngredients();
 		this._isMounted = true;
-		// 	try {
-		// 		const getIngredientsData = await axiosInstance.get(
-		// 			'/ingredients.json'
-		// 		);
-		// 		if (this._isMounted) {
-		// 			this.setState({
-		// 				ingredients: getIngredientsData.data,
-		// 			});
-		// 		}
-		// 	} catch (error) {
-		// 		if (this._isMounted) {
-		// 			this.setState({
-		// 				isErrorOnMount: true,
-		// 			});
-		// 		}
-		// 	}
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -82,20 +65,17 @@ class BurgerBuilder extends Component {
 	};
 
 	render() {
-		// state:
-		const {
-			isPurchasable,
-			isInOrderSummary,
-			isLoadingRequest,
-			isErrorOnMount,
-		} = this.state;
+		// local state:
+		const { isPurchasable, isInOrderSummary } = this.state;
 
-		// props (mapped from redux):
+		// props (state mapped from redux):
 		const {
 			ingredients,
 			totalPrice,
 			handleAddIngredientClick,
 			handleRemoveIngredientClick,
+			isLoadingRequest,
+			isErrorOnMount,
 		} = this.props;
 
 		// Check if an ingredient quantity is currently 0
@@ -154,16 +134,19 @@ const mapStateToProps = state => {
 	return {
 		ingredients: state.ingredients,
 		totalPrice: state.totalPrice,
+		isLoadingRequest: state.isLoadingRequest,
+		isErrorOnMount: state.isErrorOnMount,
 	};
 };
 
-const { addIngredient, removeIngredient } = actions;
+const { addIngredient, removeIngredient, fetchIngredients } = actions;
 
 const mapDispatchToProps = dispatch => {
 	return {
 		handleAddIngredientClick: ingName => dispatch(addIngredient(ingName)),
 		handleRemoveIngredientClick: ingName =>
 			dispatch(removeIngredient(ingName)),
+		initIngredients: () => dispatch(fetchIngredients()),
 	};
 };
 

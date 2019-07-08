@@ -1,13 +1,15 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from './constants';
+import {
+	ADD_INGREDIENT,
+	REMOVE_INGREDIENT,
+	SET_INGREDIENTS,
+	FETCH_INGREDIENTS_FAILED,
+} from './constants';
 
 const INITIAL_STATE = {
-	ingredients: [
-		{ ingredient: 'meat', quantity: 0 },
-		{ ingredient: 'salad', quantity: 0 },
-		{ ingredient: 'cheese', quantity: 0 },
-		{ ingredient: 'bacon', quantity: 0 },
-	],
+	ingredients: null,
 	totalPrice: 3,
+	isLoadingRequest: false,
+	isErrorOnMount: false,
 };
 
 const INGREDIENT_PRICES = {
@@ -17,8 +19,21 @@ const INGREDIENT_PRICES = {
 	bacon: 0.7,
 };
 
-const burgerBuilderREducer = (state = INITIAL_STATE, action) => {
+const burgerBuilderReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case SET_INGREDIENTS:
+			return {
+				...state,
+				ingredients: action.ingredients,
+				isErrorOnMount: false,
+			};
+
+		case FETCH_INGREDIENTS_FAILED:
+			return {
+				...state,
+				isErrorOnMount: true,
+			};
+
 		case ADD_INGREDIENT:
 			const addedIngredientIndex = state.ingredients.findIndex(
 				el => el.ingredient === action.ingredientName
@@ -64,4 +79,4 @@ const burgerBuilderREducer = (state = INITIAL_STATE, action) => {
 	}
 };
 
-export default burgerBuilderREducer;
+export default burgerBuilderReducer;

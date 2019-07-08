@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import reducer from './store/reducer';
+import reducer from './components/containers/BurgerBuilder/store/reducer';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';

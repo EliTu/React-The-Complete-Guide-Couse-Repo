@@ -1,4 +1,4 @@
-import { BurgerBuilderActions } from './actions';
+import * as actionTypes from './constants';
 
 const INITIAL_STATE = {
 	ingredients: [
@@ -17,8 +17,8 @@ const INGREDIENT_PRICES = {
 	bacon: 0.7,
 };
 
-// BurgerBuilderActions:
-const { ADD_INGREDIENT, REMOVE_INGREDIENT } = BurgerBuilderActions;
+// action types:
+const { ADD_INGREDIENT, REMOVE_INGREDIENT } = actionTypes;
 
 const reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {

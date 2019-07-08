@@ -7,7 +7,7 @@ import Modal from '../../UI/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
 import Spinner from '../../UI/Spinner/Spinner';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
-import * as actionTypes from './store/constants';
+import * as actions from './store/actions';
 
 class BurgerBuilder extends Component {
 	_isMounted = false;
@@ -157,14 +157,13 @@ const mapStateToProps = state => {
 	};
 };
 
-const { ADD_INGREDIENT, REMOVE_INGREDIENT } = actionTypes;
+const { addIngredient, removeIngredient } = actions;
 
 const mapDispatchToProps = dispatch => {
 	return {
-		handleAddIngredientClick: ingName =>
-			dispatch({ type: ADD_INGREDIENT, ingredientName: ingName }),
+		handleAddIngredientClick: ingName => dispatch(addIngredient(ingName)),
 		handleRemoveIngredientClick: ingName =>
-			dispatch({ type: REMOVE_INGREDIENT, ingredientName: ingName }),
+			dispatch(removeIngredient(ingName)),
 	};
 };
 

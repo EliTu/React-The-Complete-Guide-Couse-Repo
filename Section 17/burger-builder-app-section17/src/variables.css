@@ -1,0 +1,9 @@
+:root {
+    /* colors */
+    --primary-background-dark: linear-gradient(180deg, rgba(32, 32, 32, 0.829), rgba(20, 20, 20, 0.815) 70%);
+    --primary-green: rgba(105, 241, 105, 0.521);
+    --font-dark: rgb(26, 24, 24);
+    --font-light: rgb(218, 214, 214);
+    --confirmation-green: rgba(16, 151, 4, 0.781);
+    --danger-red: rgb(226, 17, 17);
+}

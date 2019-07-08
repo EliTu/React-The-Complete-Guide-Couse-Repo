@@ -1,0 +1,65 @@
+.Input {
+    width: 100%;
+    padding: 0.4rem;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.Input input,
+.Input textarea,
+.Input select {
+    background-color: rgba(241, 238, 238, 0.993);
+    color: #181616e0;
+    font-size: 0.9rem;
+    width: 40%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(105, 241, 105, 0.808);
+    margin: 1rem auto;
+    display: block;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+/* To disable up and down number spinners on number input field */
+.Input input[type=number]::-webkit-inner-spin-button,
+.Input input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.Input textarea {
+    border: 1px solid rgba(105, 241, 105, 0.808);
+    overflow: auto;
+    resize: none;
+    text-align: start;
+    margin: 1rem auto;
+    height: 50%;
+    width: 75%;
+}
+
+.Input label {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.Input select option {
+    text-align: center;
+    background-color: rgba(241, 238, 238, 0.993);
+    color: #181616e0;
+}
+
+.Input input:focus {
+    width: 55%;
+    border-radius: 7px;
+}
+
+.Input .InvalidStyle {
+    border-bottom: 2px solid rgba(190, 16, 16, 0.63);
+}
+
+.errorMessageStyle {
+    font-size: 0.8rem;
+    color: rgba(190, 16, 16, 0.788);
+}

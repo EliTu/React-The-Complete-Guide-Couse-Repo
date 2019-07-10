@@ -19,8 +19,8 @@ class BurgerBuilder extends Component {
 
 	// Get the Ingredient list and quantity from the database:
 	async componentDidMount() {
-		this.props.initIngredients();
 		this._isMounted = true;
+		this.props.initIngredients();
 	}
 
 	componentDidUpdate(prevProps, prevState) {

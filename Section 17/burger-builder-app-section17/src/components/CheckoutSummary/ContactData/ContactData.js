@@ -16,7 +16,6 @@ export class ContactData extends Component {
 		orderForm: OrderFormData,
 		isFormValid: false,
 		showFormInvalidMessage: false,
-		isLoadingRequest: false,
 	};
 
 	handleOrderSubmitClick = async event => {
@@ -92,13 +91,11 @@ export class ContactData extends Component {
 	};
 
 	render() {
-		// state:
-		const {
-			isLoadingRequest,
-			orderForm,
-			isFormValid,
-			showFormInvalidMessage,
-		} = this.state;
+		// local state:
+		const { orderForm, isFormValid, showFormInvalidMessage } = this.state;
+
+		// props (from redux):
+		const { isLoadingRequest } = this.props;
 
 		// CSS Modules styles:
 		const { ContactData, formInvalidStyle } = styles;
@@ -150,6 +147,7 @@ const mapStateToProps = state => {
 	return {
 		ingredients: state.ingredients,
 		totalPrice: state.totalPrice,
+		isLoadingRequest: state.isLoading,
 	};
 };
 

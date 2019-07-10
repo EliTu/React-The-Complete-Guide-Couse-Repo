@@ -1,4 +1,8 @@
-import { PURCHASE_BURGER_SUCCESS, PURCHASE_BURGER_FAIL } from './constants';
+import {
+	PURCHASE_BURGER_SUCCESS,
+	PURCHASE_BURGER_FAIL,
+	PURCHASE_BURGER_INIT,
+} from './constants';
 import axiosInstance from '../../../../axios-orders';
 
 export const purchaseBurgerSuccess = (id, order) => {
@@ -16,8 +20,15 @@ export const purchaseBurgerFail = error => {
 	};
 };
 
+export const purchaseBurgerInit = () => {
+	return {
+		type: PURCHASE_BURGER_INIT,
+	};
+};
+
 export const postPurchasedBurger = order => {
 	return async dispatch => {
+		dispatch(purchaseBurgerInit());
 		try {
 			const postRequest = await axiosInstance.post('/orders.json', order);
 			console.log(postRequest);

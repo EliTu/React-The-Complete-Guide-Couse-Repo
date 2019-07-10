@@ -1,4 +1,8 @@
-import { PURCHASE_BURGER_SUCCESS, PURCHASE_BURGER_FAIL } from './constants';
+import {
+	PURCHASE_BURGER_SUCCESS,
+	PURCHASE_BURGER_FAIL,
+	PURCHASE_BURGER_INIT,
+} from './constants';
 
 const INITIAL_STATE = {
 	orders: [],
@@ -7,6 +11,11 @@ const INITIAL_STATE = {
 
 const orderFormReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case PURCHASE_BURGER_INIT:
+			return {
+				...state,
+				isLoading: true,
+			};
 		case PURCHASE_BURGER_SUCCESS:
 			const newOrder = {
 				...action.order,

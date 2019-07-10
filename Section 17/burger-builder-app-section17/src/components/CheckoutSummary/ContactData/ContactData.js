@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { postPurchasedBurger } from './store/actions';
 import Button from '../../UI/Button/Button';
 import Spinner from '../../UI/Spinner/Spinner';
 import Input from '../../UI/Input/Input';
 import OrderFormData from './OrderFormData/OrderFormData';
 import axiosInstance from '../../../axios-orders';
+import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 import styles from './ContactData.module.css';
 
 export class ContactData extends Component {
@@ -45,15 +47,7 @@ export class ContactData extends Component {
 		};
 		console.log(order);
 
-		try {
-			const postRequest = await axiosInstance.post('/orders.json', order);
-			console.log(postRequest);
-
-			this.setState({ isLoadingRequest: false });
-			this.props.history.push('/orders');
-		} catch (error) {
-			this.setState({ isLoadingRequest: false });
-		}
+		this.props.onOrderClick(order);
 	};
 
 	handleFormChange = (event, data) => {
@@ -159,4 +153,13 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+	return {
+		onOrderClick: order => dispatch(postPurchasedBurger(order)),
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(requestMessageComponent(ContactData, axiosInstance));

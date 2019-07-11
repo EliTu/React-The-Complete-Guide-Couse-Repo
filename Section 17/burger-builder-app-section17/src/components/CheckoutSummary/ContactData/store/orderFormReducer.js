@@ -18,8 +18,7 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 			};
 		case PURCHASE_BURGER_SUCCESS:
 			const newOrder = {
-				...action.order,
-				id: action.id,
+				...action.orderData,
 			};
 			return {
 				...state,
@@ -30,7 +29,7 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 		case PURCHASE_BURGER_FAIL:
 			return {
 				...state,
-				loading: false,
+				isLoading: false,
 			};
 
 		default:

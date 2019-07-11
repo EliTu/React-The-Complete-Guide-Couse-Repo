@@ -4,3 +4,13 @@
     margin: 1rem auto;
     text-align: center;
 }
+
+.noOrders {
+    font-size: 1.2rem;
+    width: 40%;
+    margin: 3rem auto;
+    padding: 3rem;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 7px;
+}

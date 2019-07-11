@@ -40,9 +40,9 @@ export class ContactData extends Component {
 				email: orderData[2].value,
 				address: orderData[3].value,
 				postal: orderData[4].value,
-				requests: orderData[5].value,
+				requests: orderData[6].value,
 			},
-			deliveryMethod: orderData[6].value,
+			deliveryMethod: orderData[5].value,
 		};
 		console.log(order);
 
@@ -145,9 +145,9 @@ export class ContactData extends Component {
 // Redux setup:
 const mapStateToProps = state => {
 	return {
-		ingredients: state.ingredients,
-		totalPrice: state.totalPrice,
-		isLoadingRequest: state.isLoading,
+		ingredients: state.burgerBuilder.ingredients,
+		totalPrice: state.burgerBuilder.totalPrice,
+		isLoadingRequest: state.orderForm.isLoading,
 	};
 };
 

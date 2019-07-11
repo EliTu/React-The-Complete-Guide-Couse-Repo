@@ -132,10 +132,10 @@ class BurgerBuilder extends Component {
 // Redux setup:
 const mapStateToProps = state => {
 	return {
-		ingredients: state.ingredients,
-		totalPrice: state.totalPrice,
-		isLoadingRequest: state.isLoadingRequest,
-		isErrorOnMount: state.isErrorOnMount,
+		ingredients: state.burgerBuilder.ingredients,
+		totalPrice: state.burgerBuilder.totalPrice,
+		isLoadingRequest: state.burgerBuilder.isLoadingRequest,
+		isErrorOnMount: state.burgerBuilder.isErrorOnMount,
 	};
 };
 

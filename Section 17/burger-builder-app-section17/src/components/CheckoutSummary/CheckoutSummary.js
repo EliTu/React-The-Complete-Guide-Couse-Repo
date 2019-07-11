@@ -12,20 +12,29 @@ const CheckoutSummary = props => {
 	// CSS Modules styles:
 	const { CheckoutSummary, BurgerDisplay, NoIngredients } = styles;
 
+	const areIngredientsSelected = ingredients
+		? ingredients.some(ingredient => ingredient.quantity > 0)
+		: null;
+
 	return (
 		<div className={CheckoutSummary}>
 			<h1>Your burger:</h1>
 			<div className={BurgerDisplay}>
-				{ingredients ? (
+				{areIngredientsSelected ? (
 					<Burger ingredients={ingredients} />
 				) : (
-					<p className={NoIngredients}>
-						It seems like no ingredients were selected! Please
-						select burger ingredients in order to checkout.
-					</p>
+					<>
+						<p className={NoIngredients}>
+							It seems like no ingredients were selected! Please
+							select burger ingredients in order to checkout.
+						</p>
+						<Button handleClick={cancelClick} type="Danger">
+							Go back
+						</Button>
+					</>
 				)}
 			</div>
-			{ingredients && (
+			{areIngredientsSelected && (
 				<>
 					<Button handleClick={checkoutClick} type="Confirm">
 						Continue

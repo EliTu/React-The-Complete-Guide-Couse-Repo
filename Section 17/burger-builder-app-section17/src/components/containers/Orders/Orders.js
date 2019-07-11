@@ -34,28 +34,30 @@ export class Orders extends Component {
 
 	render() {
 		// state:
-		const { orders } = this.state;
+		const { orders, loading } = this.state;
 
 		// CSS Modules styles:
-		const { Orders } = styles;
+		const { Orders, noOrders } = styles;
+
+		const areOrdersAvailable = !loading && orders.length > 0;
 
 		return (
 			<div className={Orders}>
 				<h1>Your orders:</h1>
-				{orders
-					? orders.map(order => {
-							return order.id &&
-								order.ingredients &&
-								order.price ? (
-								<Order
-									key={order.id}
-									orderId={order.id}
-									ingredients={order.ingredients}
-									price={order.price.toFixed(2)}
-								/>
-							) : null;
-					  })
-					: null}
+				{areOrdersAvailable ? (
+					orders.map(order => {
+						return order.id && order.ingredients && order.price ? (
+							<Order
+								key={order.id}
+								orderId={order.id}
+								ingredients={order.ingredients}
+								price={order.price.toFixed(2)}
+							/>
+						) : null;
+					})
+				) : (
+					<p className={noOrders}>No orders found!</p>
+				)}
 			</div>
 		);
 	}

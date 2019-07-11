@@ -23,7 +23,6 @@ export class Checkout extends Component {
 
 		return (
 			<div className={Checkout}>
-				<h1>This is the orders page</h1>
 				<CheckoutSummary
 					ingredients={ingredients}
 					cancelClick={this.handleCancelClick}
@@ -41,7 +40,7 @@ export class Checkout extends Component {
 // Redux setup:
 const mapStateToProps = state => {
 	return {
-		ingredients: state.ingredients,
+		ingredients: state.burgerBuilder.ingredients,
 	};
 };
 

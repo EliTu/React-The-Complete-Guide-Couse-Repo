@@ -30,9 +30,10 @@ export const postPurchasedBurger = order => {
 	return async dispatch => {
 		dispatch(purchaseBurgerInit());
 		try {
+			console.log(order);
 			const postRequest = await axiosInstance.post('/orders.json', order);
 			console.log(postRequest);
-			dispatch(purchaseBurgerSuccess(postRequest, order));
+			dispatch(purchaseBurgerSuccess(postRequest.id, order));
 		} catch (error) {
 			dispatch(purchaseBurgerFail(error));
 		}

@@ -41,8 +41,6 @@ export class Orders extends Component {
 
 		const areOrdersAvailable = !loading && orders.length > 0;
 
-		console.log(orders);
-
 		return (
 			<div className={Orders}>
 				<h1>Your orders:</h1>

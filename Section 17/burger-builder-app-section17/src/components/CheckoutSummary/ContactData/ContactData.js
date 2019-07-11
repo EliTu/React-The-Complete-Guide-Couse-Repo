@@ -46,7 +46,7 @@ export class ContactData extends Component {
 		};
 		console.log(order);
 
-		this.props.onOrderClick(order);
+		this.props.onOrderClick(order, this.props.history.goBack);
 	};
 
 	handleFormChange = (event, data) => {
@@ -106,6 +106,7 @@ export class ContactData extends Component {
 			</p>
 		);
 
+		console.log(this.props);
 		return (
 			<div className={ContactData}>
 				<h4>Enter your contact information:</h4>
@@ -152,7 +153,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onOrderClick: order => dispatch(postPurchasedBurger(order)),
+		onOrderClick: (order, redirectBack) =>
+			dispatch(postPurchasedBurger(order, redirectBack)),
 	};
 };
 

@@ -105,7 +105,6 @@ export class ContactData extends Component {
 				Please fill out all the required form fields first!
 			</p>
 		);
-		console.log(orderForm);
 
 		return (
 			<div className={ContactData}>

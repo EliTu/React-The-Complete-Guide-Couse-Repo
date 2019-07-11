@@ -15,13 +15,24 @@
     text-decoration: underline;
 }
 
-.Order .Ingredients p {
+.DataHeader {
     display: inline-block;
-    margin: 0.8rem 0.5rem;
+    margin: 0.3rem 0.5rem;
     padding: 0.4rem;
     width: 50%;
     list-style: none;
+}
+
+.DataHeader li {
+    list-style: none;
+    margin: 0.4rem;
+}
+
+.Category {
     text-transform: capitalize;
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 900;
 }
 
 .Order .Price {
@@ -31,14 +42,31 @@
     font-weight: bold;
 }
 
+/* Mobile */
 @media (max-width: 500px) {
-    .Ingredients {
+    .DataHeader {
         display: flex;
         flex-flow: column;
         flex-wrap: nowrap;
     }
 
-    .Order .Ingredients p {
+    .OrderId {
+        font-size: 0.95rem;
+    }
+
+    .DataHeader ul {
+        margin: 0;
+    }
+
+    .DataHeader li {
+        width: 100%;
+    }
+
+    .Category {
+        font-size: 1rem;
+    }
+
+    .Order p {
         width: 100%;
     }
 }

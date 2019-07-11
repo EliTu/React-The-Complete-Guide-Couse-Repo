@@ -41,6 +41,8 @@ export class Orders extends Component {
 
 		const areOrdersAvailable = !loading && orders.length > 0;
 
+		console.log(orders);
+
 		return (
 			<div className={Orders}>
 				<h1>Your orders:</h1>
@@ -51,6 +53,8 @@ export class Orders extends Component {
 								key={order.id}
 								orderId={order.id}
 								ingredients={order.ingredients}
+								contact={order.customer}
+								delivery={order.deliveryMethod}
 								price={order.price.toFixed(2)}
 							/>
 						) : null;

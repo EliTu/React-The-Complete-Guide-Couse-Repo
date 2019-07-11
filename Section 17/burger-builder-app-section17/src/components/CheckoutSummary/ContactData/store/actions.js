@@ -5,18 +5,19 @@ import {
 } from './constants';
 import axiosInstance from '../../../../axios-orders';
 
-export const purchaseBurgerSuccess = (id, order) => {
+export const purchaseBurgerSuccess = order => {
+	console.log(order);
 	return {
 		type: PURCHASE_BURGER_SUCCESS,
-		orderId: id,
+		// orderId: id,
 		orderData: order,
 	};
 };
 
 export const purchaseBurgerFail = error => {
+	console.log(error);
 	return {
 		type: PURCHASE_BURGER_FAIL,
-		error: error,
 	};
 };
 
@@ -33,7 +34,7 @@ export const postPurchasedBurger = order => {
 			console.log(order);
 			const postRequest = await axiosInstance.post('/orders.json', order);
 			console.log(postRequest);
-			dispatch(purchaseBurgerSuccess(postRequest.id, order));
+			dispatch(purchaseBurgerSuccess(order));
 		} catch (error) {
 			dispatch(purchaseBurgerFail(error));
 		}

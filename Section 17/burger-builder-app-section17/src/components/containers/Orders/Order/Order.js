@@ -4,25 +4,58 @@ import PropTypes from 'prop-types';
 
 const Order = props => {
 	// props:
-	const { ingredients, price, orderId } = props;
+	const { ingredients, price, orderId, contact, delivery } = props;
 
 	// CSS Modules styles:
-	const { Order, Price, Ingredients, OrderId } = styles;
+	const { Order, Price, DataHeader, Category, OrderId } = styles;
+
+	let mappedContactInfo = [];
+	for (let key in contact) {
+		mappedContactInfo.push({ [key]: contact[key] });
+	}
 
 	return (
 		<div className={Order}>
 			<p className={OrderId}>Order id: {orderId}</p>
-			<div className={Ingredients}>
+			<div className={DataHeader}>
 				Ingredients:
-				<p>
+				<ul>
 					{ingredients.map(el =>
-						el.quantity > 0
-							? `${el.ingredient} x ${el.quantity} | `
-							: null
+						el.quantity > 0 ? (
+							<li key={el.ingredient}>
+								<span className={Category}>
+									{el.ingredient}
+								</span>
+								x {el.quantity}
+							</li>
+						) : null
 					)}
-				</p>
+				</ul>
 			</div>
-			<p>
+
+			<div className={DataHeader}>
+				Contact information:
+				<ul>
+					{mappedContactInfo.map(el => {
+						const entries = Object.entries(el);
+						const key = entries[0][0];
+						const value = entries[0][1];
+						return (
+							<li key={key}>
+								<span className={Category}>{key}:</span>
+								{value !== '' ? value : 'n/a'}
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+
+			<p className={DataHeader}>
+				<span className={Category}>Delivery method: </span>
+				{delivery}
+			</p>
+
+			<p className={DataHeader}>
 				Total price:<span className={Price}>${price}</span>
 			</p>
 		</div>
@@ -33,6 +66,8 @@ Order.propTypes = {
 	ingredients: PropTypes.array,
 	price: PropTypes.string,
 	orderId: PropTypes.string,
+	contact: PropTypes.object,
+	delivery: PropTypes.string,
 };
 
 Order.defaultProps = {

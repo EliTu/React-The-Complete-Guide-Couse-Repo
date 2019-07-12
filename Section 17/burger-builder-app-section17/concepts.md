@@ -4,7 +4,11 @@
 
 - Add dates to the each Order component in the Orders component.
 
+- Accordion UI for each Order component.
+
 - Sort Orders by placing the most recent order on the top of the Orders stack.
+
+- Can delete an Order component.
 
 - More functionality and options for the builder:
   - How would you like it made? Well done, Medium well, Medium, Medium rare, rare.

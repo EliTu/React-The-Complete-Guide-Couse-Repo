@@ -33,7 +33,7 @@ export const postPurchasedBurger = (order, redirectOnSuccess) => {
 			console.log(order);
 			await axiosInstance.post('/orders.json', order);
 			dispatch(purchaseBurgerSuccess(order));
-			redirectOnSuccess();
+			redirectOnSuccess('/orders');
 		} catch (error) {
 			dispatch(purchaseBurgerFail(error));
 		}

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Order from './Order/Order';
+import Spinner from '../../UI/Spinner/Spinner';
 import axiosInstance from '../../../axios-orders';
 import { fetchOrdersFromDatabase } from './store/actions';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 import styles from './Orders.module.css';
+import PropTypes from 'prop-types';
 
 export class Orders extends Component {
 	componentDidMount() {
@@ -17,12 +19,12 @@ export class Orders extends Component {
 		// CSS Modules styles:
 		const { Orders, noOrders } = styles;
 
-		const areOrdersAvailable = !isLoadingRequest && orders.length > 0;
-
 		return (
 			<div className={Orders}>
 				<h1>Your orders:</h1>
-				{areOrdersAvailable ? (
+				{isLoadingRequest ? (
+					<Spinner />
+				) : !isLoadingRequest && orders.length > 0 ? (
 					orders.map(order => {
 						return order.id && order.ingredients && order.price ? (
 							<Order
@@ -43,6 +45,13 @@ export class Orders extends Component {
 	}
 }
 
+Orders.propTypes = {
+	orders: PropTypes.array,
+	isLoadingRequest: PropTypes.bool,
+	onFetchOrders: PropTypes.func,
+};
+
+// Redux setup:
 const mapStateToProps = state => {
 	return {
 		orders: state.orderForm.orders,

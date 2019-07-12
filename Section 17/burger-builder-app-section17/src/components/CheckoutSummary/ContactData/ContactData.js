@@ -8,6 +8,7 @@ import OrderFormData from './OrderFormData/OrderFormData';
 import axiosInstance from '../../../axios-orders';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 import styles from './ContactData.module.css';
+import PropTypes from 'prop-types';
 
 export class ContactData extends Component {
 	state = {
@@ -44,9 +45,8 @@ export class ContactData extends Component {
 			},
 			deliveryMethod: orderData[5].value,
 		};
-		console.log(order);
 
-		this.props.onOrderClick(order, this.props.history.goBack);
+		this.props.onOrderClick(order, this.props.history.replace);
 	};
 
 	handleFormChange = (event, data) => {
@@ -141,6 +141,13 @@ export class ContactData extends Component {
 		);
 	}
 }
+
+ContactData.propTypes = {
+	ingredients: PropTypes.array,
+	totalPrice: PropTypes.number,
+	isLoadingRequest: PropTypes.bool,
+	onOrderClick: PropTypes.func,
+};
 
 // Redux setup:
 const mapStateToProps = state => {

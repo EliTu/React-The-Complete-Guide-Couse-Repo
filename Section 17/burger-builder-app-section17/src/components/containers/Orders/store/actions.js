@@ -24,19 +24,18 @@ export const fetchOrderFail = () => {
 	};
 };
 
-export const fetchOrdersFromDatabase = dispatch => {
+export const fetchOrdersFromDatabase = () => {
 	return async dispatch => {
-		fetchOrderInit();
+		dispatch(fetchOrderInit());
 		try {
 			const orders = await axiosInstance.get('/orders.json');
 			const fetchedOrders = [];
 			for (let key in orders.data) {
 				fetchedOrders.push({ ...orders.data[key], id: key });
 			}
-			console.log(fetchedOrders);
-			fetchOrdersSuccess(fetchedOrders);
+			dispatch(fetchOrdersSuccess(fetchedOrders));
 		} catch (error) {
-			fetchOrderFail();
+			dispatch(fetchOrderFail());
 		}
 	};
 };

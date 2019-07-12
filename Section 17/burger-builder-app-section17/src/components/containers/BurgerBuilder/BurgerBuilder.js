@@ -8,6 +8,7 @@ import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
 import Spinner from '../../UI/Spinner/Spinner';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 import * as actions from './store/actions';
+import PropTypes from 'prop-types';
 
 class BurgerBuilder extends Component {
 	_isMounted = false;
@@ -128,6 +129,16 @@ class BurgerBuilder extends Component {
 		);
 	}
 }
+
+BurgerBuilder.propTypes = {
+	ingredients: PropTypes.array,
+	totalPrice: PropTypes.number,
+	isLoadingRequest: PropTypes.bool,
+	isErrorOnMount: PropTypes.bool,
+	handleAddIngredientClick: PropTypes.func,
+	handleRemoveIngredientClick: PropTypes.func,
+	initIngredients: PropTypes.func,
+};
 
 // Redux setup:
 const mapStateToProps = state => {

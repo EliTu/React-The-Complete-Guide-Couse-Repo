@@ -1,7 +1,7 @@
 import {
 	ADD_INGREDIENT,
 	REMOVE_INGREDIENT,
-	SET_INGREDIENTS,
+	SET_DEFAULT_BURGER_STATE,
 	FETCH_INGREDIENTS_FAILED,
 } from './constants';
 
@@ -21,11 +21,12 @@ const INGREDIENT_PRICES = {
 
 const burgerBuilderReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case SET_INGREDIENTS:
+		case SET_DEFAULT_BURGER_STATE:
 			return {
 				...state,
 				ingredients: action.ingredients,
 				isErrorOnMount: false,
+				totalPrice: 3,
 			};
 
 		case FETCH_INGREDIENTS_FAILED:

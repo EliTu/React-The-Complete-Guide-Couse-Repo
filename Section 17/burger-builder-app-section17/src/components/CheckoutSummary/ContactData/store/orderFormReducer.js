@@ -3,6 +3,11 @@ import {
 	PURCHASE_BURGER_FAIL,
 	PURCHASE_BURGER_INIT,
 } from './constants';
+import {
+	FETCH_ORDERS_INIT,
+	FETCH_ORDERS_SUCCESS,
+	FETCH_ORDERS_FAIL,
+} from '../../../containers/Orders/store/constants.js';
 
 const INITIAL_STATE = {
 	orders: [],
@@ -28,6 +33,25 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 			};
 
 		case PURCHASE_BURGER_FAIL:
+			return {
+				...state,
+				isLoading: false,
+			};
+
+		case FETCH_ORDERS_INIT:
+			return {
+				...state,
+				isLoading: true,
+			};
+
+		case FETCH_ORDERS_SUCCESS:
+			return {
+				...state,
+				orders: action.orders,
+				isLoading: false,
+			};
+
+		case FETCH_ORDERS_FAIL:
 			return {
 				...state,
 				isLoading: false,

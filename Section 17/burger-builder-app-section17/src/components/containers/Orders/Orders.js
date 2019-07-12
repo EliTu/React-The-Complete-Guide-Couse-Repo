@@ -1,45 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Order from './Order/Order';
 import axiosInstance from '../../../axios-orders';
+import { fetchOrdersFromDatabase } from './store/actions';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 import styles from './Orders.module.css';
 
 export class Orders extends Component {
-	state = {
-		orders: null,
-		loading: true,
-	};
-
-	async componentDidMount() {
-		try {
-			// Get the orders from the database:
-			const orders = await axiosInstance.get('/orders.json');
-
-			// Create an array from the object received:
-			const fetchedOrders = [];
-			for (let key in orders.data) {
-				fetchedOrders.push({ ...orders.data[key], id: key });
-			}
-			this.setState({
-				orders: fetchedOrders,
-				loading: false,
-			});
-		} catch (error) {
-			console.log(error);
-			this.setState({
-				loading: false,
-			});
-		}
+	componentDidMount() {
+		this.props.onFetchOrders();
 	}
 
 	render() {
-		// state:
-		const { orders, loading } = this.state;
-
+		// state (mapped from redux):
+		const { orders, isLoadingRequest } = this.props;
 		// CSS Modules styles:
 		const { Orders, noOrders } = styles;
 
-		const areOrdersAvailable = !loading && orders.length > 0;
+		const areOrdersAvailable = !isLoadingRequest && orders.length > 0;
 
 		return (
 			<div className={Orders}>
@@ -58,11 +36,27 @@ export class Orders extends Component {
 						) : null;
 					})
 				) : (
-					<p className={noOrders}>No orders found!</p>
+					<p className={noOrders}>No previous orders found!</p>
 				)}
 			</div>
 		);
 	}
 }
 
-export default requestMessageComponent(Orders, axiosInstance);
+const mapStateToProps = state => {
+	return {
+		orders: state.orderForm.orders,
+		isLoadingRequest: state.orderForm.isLoading,
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		onFetchOrders: () => dispatch(fetchOrdersFromDatabase()),
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(requestMessageComponent(Orders, axiosInstance));

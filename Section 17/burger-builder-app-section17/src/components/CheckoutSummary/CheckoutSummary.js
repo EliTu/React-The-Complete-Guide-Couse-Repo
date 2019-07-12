@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Burger from '../Burger/Burger';
 import Button from '../UI/Button/Button';
@@ -7,10 +8,10 @@ import PropTypes from 'prop-types';
 
 const CheckoutSummary = props => {
 	// props:
-	const { cancelClick, checkoutClick, ingredients } = props;
+	const { cancelClick, checkoutClick, ingredients, totalPrice } = props;
 
 	// CSS Modules styles:
-	const { CheckoutSummary, BurgerDisplay, NoIngredients } = styles;
+	const { CheckoutSummary, BurgerDisplay, NoIngredients, Price } = styles;
 
 	const areIngredientsSelected = ingredients
 		? ingredients.some(ingredient => ingredient.quantity > 0)
@@ -21,7 +22,15 @@ const CheckoutSummary = props => {
 			<h1>Your burger:</h1>
 			<div className={BurgerDisplay}>
 				{areIngredientsSelected ? (
-					<Burger ingredients={ingredients} />
+					<>
+						<p>
+							Total price:
+							<span className={Price}>
+								${totalPrice.toFixed(2)}
+							</span>
+						</p>
+						<Burger ingredients={ingredients} />
+					</>
 				) : (
 					<>
 						<p className={NoIngredients}>
@@ -48,6 +57,12 @@ const CheckoutSummary = props => {
 	);
 };
 
+const mapStateToProps = state => {
+	return {
+		totalPrice: state.burgerBuilder.totalPrice,
+	};
+};
+
 CheckoutSummary.propTypes = {
 	ingredients: PropTypes.array,
 	cancelClick: PropTypes.func,
@@ -55,4 +70,4 @@ CheckoutSummary.propTypes = {
 	location: PropTypes.object,
 };
 
-export default withRouter(CheckoutSummary);
+export default connect(mapStateToProps)(withRouter(CheckoutSummary));

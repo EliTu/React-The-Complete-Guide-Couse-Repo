@@ -1,14 +1,14 @@
 import {
 	ADD_INGREDIENT,
 	REMOVE_INGREDIENT,
-	SET_INGREDIENTS,
+	SET_DEFAULT_BURGER_STATE,
 	FETCH_INGREDIENTS_FAILED,
 } from './constants';
 import axiosInstance from '../../../../axios-orders';
 
-export const setIngredients = ingredients => {
+export const setDefaultBurgerState = ingredients => {
 	return {
-		type: SET_INGREDIENTS,
+		type: SET_DEFAULT_BURGER_STATE,
 		ingredients: ingredients,
 	};
 };
@@ -26,7 +26,7 @@ export const fetchIngredients = () => {
 			const getIngredientsData = await axiosInstance.get(
 				'/ingredients.json'
 			);
-			dispatch(setIngredients(getIngredientsData.data));
+			dispatch(setDefaultBurgerState(getIngredientsData.data));
 		} catch (error) {
 			dispatch(fetchIngredientsFailed());
 		}

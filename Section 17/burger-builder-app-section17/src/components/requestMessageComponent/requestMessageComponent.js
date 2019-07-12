@@ -4,20 +4,6 @@ import styles from './requestMessageComponent.module.css';
 
 const requestMessageComponent = (WrappedComponent, axiosInstance) => {
 	return class extends Component {
-		// 	constructor() {
-		// 		super();
-		// 		// Used to catch errors upon getting data from the database on app load:
-		// 		this.errorCheckInterceptor = axiosInstance.interceptors.response.use(
-		// 			res => res,
-		// 			error => {
-		// 				this.setState({
-		// 					error: error,
-		// 				});
-		// 			}
-		// 		);
-		// 		console.log(this.errorCheckInterceptor);
-		// 	}
-
 		state = {
 			error: null,
 			responseStatus: false,
@@ -46,16 +32,11 @@ const requestMessageComponent = (WrappedComponent, axiosInstance) => {
 					});
 				}
 			);
-			// console.log(this.responseInterceptor);
-			// console.log(this.requestInterceptor);
 		}
 
 		componentWillUnmount() {
-			// Remove the interceptors upon unmounting the Burger component
+			// Remove the interceptors upon unmounting the component
 			axiosInstance.interceptors.response.eject(this.responseInterceptor);
-			axiosInstance.interceptors.response.eject(
-				this.errorCheckInterceptor
-			);
 			axiosInstance.interceptors.request.eject(this.requestInterceptor);
 		}
 

@@ -26,14 +26,14 @@ export const purchaseBurgerInit = () => {
 	};
 };
 
-export const postPurchasedBurger = (order, redirectBack) => {
+export const postPurchasedBurger = (order, redirectOnSuccess) => {
 	return async dispatch => {
 		dispatch(purchaseBurgerInit());
 		try {
 			console.log(order);
 			await axiosInstance.post('/orders.json', order);
 			dispatch(purchaseBurgerSuccess(order));
-			// redirectBack();
+			redirectOnSuccess();
 		} catch (error) {
 			dispatch(purchaseBurgerFail(error));
 		}

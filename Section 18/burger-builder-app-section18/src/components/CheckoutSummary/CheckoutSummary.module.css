@@ -1,0 +1,43 @@
+.CheckoutSummary {
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+.CheckoutSummary h1 {
+    margin: 1rem auto;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.BurgerDisplay {
+    width: 100%;
+    height: 40%;
+    margin: auto;
+    padding: 0.3rem 0;
+}
+
+.CheckoutSummary button {
+    display: inline;
+    text-align: center;
+    margin: 0.8rem 0.6rem;
+}
+
+.NoIngredients {
+    color: rgb(230, 14, 32);
+    font-size: 2rem;
+}
+
+.Price {
+    margin-left: 0.3rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: rgba(84, 243, 84, 0.925);
+}
+
+@media(min-width: 600px) {
+    .CheckoutSummary {
+        width: 500px;
+    }
+}

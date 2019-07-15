@@ -5,7 +5,7 @@ const authForm = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Enter username',
-			label: '*Username:',
+			label: 'Username:',
 		},
 		value: '',
 		validation: {
@@ -22,7 +22,7 @@ const authForm = [
 		elementConfig: {
 			type: 'password',
 			placeholder: 'Enter password',
-			label: '*Password',
+			label: 'Password:',
 		},
 		value: '',
 		validation: {
@@ -41,7 +41,7 @@ const authForm = [
 		elementConfig: {
 			type: 'email',
 			placeholder: 'Enter your email',
-			label: '*Email:',
+			label: 'Email:',
 		},
 		value: '',
 		validation: {

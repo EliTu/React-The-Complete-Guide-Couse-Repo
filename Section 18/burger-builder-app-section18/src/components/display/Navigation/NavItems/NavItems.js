@@ -4,7 +4,7 @@ import styles from './NavItems.module.css';
 
 const NavItems = props => {
 	// CSS Module styles:
-	const { NavItems, AuthItem } = styles;
+	const { NavItems } = styles;
 
 	return (
 		<ul className={NavItems}>
@@ -12,9 +12,7 @@ const NavItems = props => {
 			<Item link="/checkout">Checkout</Item>
 			<Item link="/orders">Orders</Item>
 			<Item link="/about">About</Item>
-			<span className={AuthItem}>
-				<Item link="/signup">Sign up</Item>
-			</span>
+			<Item link="/signup">Sign up</Item>
 		</ul>
 	);
 };

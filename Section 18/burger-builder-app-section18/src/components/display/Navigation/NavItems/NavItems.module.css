@@ -9,10 +9,6 @@
     height: 100%;
 }
 
-.AuthItem {
-    justify-content: flex-end;
-}
-
 /* Desktop */
 @media (min-width: 500px) {
     .NavItems {

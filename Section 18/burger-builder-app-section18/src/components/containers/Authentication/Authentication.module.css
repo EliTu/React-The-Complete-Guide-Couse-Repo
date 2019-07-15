@@ -1,8 +1,14 @@
+.MainHeader {
+    margin: 3rem auto;
+    text-align: center;
+    color: rgba(27, 24, 24, 0.795);
+}
+
 .Authentication {
     background-color: rgba(241, 238, 238, 0.993);
     color: rgba(27, 24, 24, 0.795);
-    margin: 20px auto;
-    width: 80%;
+    margin: 3rem auto;
+    width: 50%;
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 7px;

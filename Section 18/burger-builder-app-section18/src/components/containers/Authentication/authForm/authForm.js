@@ -4,7 +4,7 @@ const authForm = [
 		elementType: 'input',
 		elementConfig: {
 			type: 'text',
-			placeholder: 'Enter username',
+			placeholder: 'Enter a username',
 			label: 'Username:',
 		},
 		value: '',
@@ -12,7 +12,10 @@ const authForm = [
 			required: true,
 			hasUserInput: false,
 			valid: false,
-			errorMessage: 'Please a valid username',
+			minLength: 6,
+			maxLength: 12,
+			errorMessage:
+				'Please a valid username (must be 6 to 12 characters)',
 		},
 	},
 
@@ -21,7 +24,7 @@ const authForm = [
 		elementType: 'input',
 		elementConfig: {
 			type: 'password',
-			placeholder: 'Enter password',
+			placeholder: 'Enter a password',
 			label: 'Password:',
 		},
 		value: '',
@@ -31,7 +34,8 @@ const authForm = [
 			valid: false,
 			minLength: 6,
 			maxLength: 12,
-			errorMessage: 'Please enter a valid password',
+			errorMessage:
+				'Please enter a valid password (must be 6 to 12 characters)',
 		},
 	},
 
@@ -40,7 +44,7 @@ const authForm = [
 		elementType: 'input',
 		elementConfig: {
 			type: 'email',
-			placeholder: 'Enter your email',
+			placeholder: 'Enter an email',
 			label: 'Email:',
 		},
 		value: '',
@@ -49,7 +53,8 @@ const authForm = [
 			emailValidationRegExp: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 			hasUserInput: false,
 			valid: false,
-			errorMessage: 'Please enter a valid email address',
+			errorMessage:
+				'Please enter a valid email address (e.g: myemail@mail.com)',
 		},
 	},
 ];

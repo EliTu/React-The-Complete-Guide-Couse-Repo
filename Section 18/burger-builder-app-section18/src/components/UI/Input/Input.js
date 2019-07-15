@@ -9,9 +9,7 @@ const Input = props => {
 		elementConfig,
 		value,
 		handleChange,
-		isInvalid,
-		errorMessage,
-		hasUserInput,
+		validation,
 	} = props;
 
 	// CSS Modules styles:
@@ -19,14 +17,18 @@ const Input = props => {
 
 	let inputElement = null;
 	let errorMessageElement = (
-		<p className={errorMessageStyle}>{errorMessage}</p>
+		<p className={errorMessageStyle}>{validation.errorMessage}</p>
 	);
 
 	switch (elementType) {
 		case 'input':
 			inputElement = (
 				<input
-					className={isInvalid && hasUserInput ? InvalidStyle : null}
+					className={
+						!validation.valid && validation.hasUserInput
+							? InvalidStyle
+							: null
+					}
 					{...elementConfig}
 					value={value}
 					onChange={handleChange}
@@ -61,7 +63,7 @@ const Input = props => {
 				<input
 					{...elementConfig}
 					value={value}
-					className={isInvalid ? InvalidStyle : null}
+					className={!validation.valid ? InvalidStyle : null}
 				/>
 			);
 	}
@@ -69,7 +71,9 @@ const Input = props => {
 		<div className={Input}>
 			<label>{elementConfig.label}</label>
 			{inputElement}
-			{isInvalid && hasUserInput ? errorMessageElement : null}
+			{!validation.valid && validation.hasUserInput
+				? errorMessageElement
+				: null}
 		</div>
 	);
 };
@@ -77,9 +81,7 @@ const Input = props => {
 Input.propTypes = {
 	elementType: PropTypes.string,
 	elementConfig: PropTypes.object,
-	isInvalid: PropTypes.bool,
-	errorMessage: PropTypes.string,
-	hasUserInput: PropTypes.bool,
+	validation: PropTypes.object,
 	handleChange: PropTypes.func,
 };
 

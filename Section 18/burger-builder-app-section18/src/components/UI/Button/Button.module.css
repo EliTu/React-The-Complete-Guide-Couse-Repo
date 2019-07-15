@@ -1,29 +1,33 @@
 .Button {
-    font-size: 1.3rem;
+    width: 60%;
+    font-size: 1.15rem;
     align-self: baseline;
     margin: 0.5rem 1.5rem;
-    border: none;
-    border-bottom: 2px solid rgb(26, 24, 24);
+    padding: 0.5rem;
+    border: 1px solid rgba(26, 24, 24, 0.452);
+    border-radius: 5px;
     background-color: initial;
     cursor: pointer;
     outline: none;
     transition: 0.1s all;
 }
 
-.Button:hover {
-    border-radius: 8px;
-    font-weight: 800;
-    transform: scale(1.1);
-}
-
 .Confirm {
     color: rgb(26, 104, 7);
-    border-bottom: 2px solid rgba(16, 151, 4, 0.781);
+    border: 2px solid rgba(16, 151, 4, 0.781);
+}
+
+.Confirm:hover {
+    background-color: rgba(166, 240, 159, 0.747);
 }
 
 .Danger {
     color: rgb(226, 17, 17);
-    border-bottom: 2px solid rgba(226, 42, 42, 0.719);
+    border: 2px solid rgba(226, 42, 42, 0.719);
+}
+
+.Danger:hover {
+    background-color: rgba(231, 159, 159, 0.74);
 }
 
 /* Mobile - SideDrawer toggle */

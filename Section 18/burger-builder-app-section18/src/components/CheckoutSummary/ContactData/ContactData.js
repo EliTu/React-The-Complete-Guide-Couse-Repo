@@ -106,7 +106,6 @@ export class ContactData extends Component {
 			</p>
 		);
 
-		console.log(this.props);
 		return (
 			<div className={ContactData}>
 				<h4>Enter your contact information:</h4>
@@ -119,9 +118,7 @@ export class ContactData extends Component {
 								key={form.data}
 								elementType={form.elementType}
 								elementConfig={form.elementConfig}
-								isInvalid={!form.validation.valid}
-								hasUserInput={form.validation.hasUserInput}
-								errorMessage={form.validation.errorMessage}
+								validation={{ ...form.validation }}
 								value={form.value}
 								handleChange={event =>
 									this.handleFormChange(event, form.data)

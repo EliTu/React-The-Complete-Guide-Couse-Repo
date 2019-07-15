@@ -52,7 +52,6 @@
 
 .Input input:focus {
     width: 55%;
-    border-radius: 7px;
 }
 
 .Input .InvalidStyle {
@@ -62,4 +61,8 @@
 .errorMessageStyle {
     font-size: 0.8rem;
     color: rgba(190, 16, 16, 0.788);
+}
+
+::placeholder {
+    color: rgba(58, 50, 50, 0.438);
 }

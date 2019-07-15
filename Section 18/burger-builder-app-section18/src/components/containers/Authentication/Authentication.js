@@ -61,6 +61,10 @@ export class Authentication extends Component {
 		return isValid;
 	};
 
+	handleCancelClick = () => {
+		return this.props.history.replace('/');
+	};
+
 	render() {
 		// state:
 		const { fields } = this.state;
@@ -88,7 +92,9 @@ export class Authentication extends Component {
 						))}
 					</form>
 					<Button type="Confirm">Sign up</Button>
-					<Button type="Danger">Go back</Button>
+					<Button type="Danger" handleClick={this.handleCancelClick}>
+						Go back
+					</Button>
 				</div>
 			</>
 		);

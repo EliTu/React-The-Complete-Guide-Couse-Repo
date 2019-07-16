@@ -1,6 +1,6 @@
 const authForm = [
 	{
-		data: 'userName',
+		data: 'username',
 		elementType: 'input',
 		elementConfig: {
 			type: 'text',

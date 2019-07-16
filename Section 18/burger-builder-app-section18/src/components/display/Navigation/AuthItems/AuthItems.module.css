@@ -1,0 +1,20 @@
+.AuthItems {
+    margin: 0 1rem;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+    height: 100%;
+}
+
+.AuthItems a {
+    color: rgba(105, 241, 105, 0.76);
+    font-size: 1.1rem;
+}
+
+/* Desktop */
+@media (min-width: 500px) {
+    .AuthItems {
+        flex-flow: row;
+        width: 100%;
+    }
+}

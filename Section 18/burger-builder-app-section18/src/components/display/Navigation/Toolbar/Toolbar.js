@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../../../Logo/Logo';
 import NavItems from '../NavItems/NavItems';
+import AuthItems from '../AuthItems/AuthItems';
 import Button from '../../../UI/Button/Button';
 import styles from './Toolbar.module.css';
 import PropTypes from 'prop-types';
@@ -9,19 +10,32 @@ const Toolbar = props => {
 	// props:
 	const { clicked } = props;
 	// CSS Modules classes:
-	const { Toolbar, LogoHeight, DesktopOnly } = styles;
+	const {
+		Toolbar,
+		ItemsWrapper,
+		logoWrapper,
+		LogoHeight,
+		DesktopOnly,
+	} = styles;
 
 	return (
 		<header className={Toolbar}>
-			<div className={[LogoHeight].join(' ')}>
-				<Logo />
+			<div className={ItemsWrapper}>
+				<div className={logoWrapper}>
+					<div className={LogoHeight}>
+						<Logo />
+					</div>
+					<nav className={DesktopOnly}>
+						<NavItems />
+					</nav>
+				</div>
+				<nav className={DesktopOnly}>
+					<AuthItems />
+				</nav>
+				<Button toolBarButton="MenuToggle" handleClick={clicked}>
+					三
+				</Button>
 			</div>
-			<nav className={DesktopOnly}>
-				<NavItems />
-			</nav>
-			<Button toolBarButton="MenuToggle" handleClick={clicked}>
-				三
-			</Button>
 		</header>
 	);
 };

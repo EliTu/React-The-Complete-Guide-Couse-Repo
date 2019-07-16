@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../../../Logo/Logo';
 import NavItems from '../NavItems/NavItems';
+import AuthItems from '../AuthItems/AuthItems';
 import Backdrop from '../../../UI/Backdrop/Backdrop';
 import PropTypes from 'prop-types';
 import styles from './SIdeDrawer.module.css';
@@ -9,7 +10,7 @@ const SideDrawer = props => {
 	// props:
 	const { handleVisibility, isVisible } = props;
 	// CSS Modules styles:
-	const { SideDrawer, LogoHeight, Close, Open } = styles;
+	const { SideDrawer, LogoHeight, Close, Open, StyledHorizontal } = styles;
 
 	let attachedClasses = [SideDrawer, Close];
 	if (isVisible) attachedClasses = [SideDrawer, Open];
@@ -22,6 +23,8 @@ const SideDrawer = props => {
 					<Logo />
 				</div>
 				<nav>
+					<AuthItems />
+					<div className={StyledHorizontal} />
 					<NavItems />
 				</nav>
 			</div>

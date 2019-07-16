@@ -11,11 +11,11 @@ const Item = props => {
 	const { Item, active } = styles;
 
 	return (
-		<li className={Item}>
-			<NavLink activeClassName={active} to={link} exact>
+		<div className={Item}>
+			<NavLink className={Item} activeClassName={active} to={link} exact>
 				{children}
 			</NavLink>
-		</li>
+		</div>
 	);
 };
 

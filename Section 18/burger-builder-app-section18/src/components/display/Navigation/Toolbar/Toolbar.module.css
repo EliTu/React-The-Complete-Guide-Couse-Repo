@@ -5,13 +5,28 @@
     top: 0;
     left: 0;
     background-image: linear-gradient(180deg, rgba(32, 32, 32, 0.829), rgba(20, 20, 20, 0.815) 70%);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
     padding: 0 1.1rem;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
     z-index: 90;
     user-select: none;
+}
+
+.ItemsWrapper {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.1rem;
+    margin: auto 0;
+    height: 56px;
+}
+
+.logoWrapper {
+    display: flex;
+    align-items: center;
+    height: 56px;
 }
 
 .Toolbar nav {
@@ -44,6 +59,10 @@
         justify-content: space-between;
         justify-items: end;
         align-content: flex-end;
+    }
+
+    .Toolbar button {
+        border: none;
     }
 
     .LogoHeight {

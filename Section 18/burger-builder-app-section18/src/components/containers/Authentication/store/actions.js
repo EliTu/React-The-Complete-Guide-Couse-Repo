@@ -22,6 +22,7 @@ export const authFail = error => {
 
 export const confirmAuth = (username, email, password) => {
 	return async dispatch => {
+		console.log('Fired!');
 		dispatch(authInit());
 	};
 };

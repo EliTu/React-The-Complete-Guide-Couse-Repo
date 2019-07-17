@@ -4,7 +4,7 @@ import styles from './NavItems.module.css';
 
 const NavItems = props => {
 	// CSS Module styles:
-	const { NavItems, AuthItem } = styles;
+	const { NavItems } = styles;
 
 	return (
 		<div className={NavItems}>

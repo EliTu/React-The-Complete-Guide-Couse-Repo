@@ -7,6 +7,7 @@ import Input from '../../UI/Input/Input';
 import OrderFormData from './OrderFormData/OrderFormData';
 import axiosInstance from '../../../axios-orders';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
+import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
 import styles from './ContactData.module.css';
 import PropTypes from 'prop-types';
 
@@ -29,7 +30,7 @@ export class ContactData extends Component {
 			return;
 		}
 
-		this.setState({ isLoadingRequest: true });
+		// this.setState({ isLoadingRequest: true });
 
 		const orderData = [...this.state.orderForm];
 		const order = {
@@ -98,13 +99,7 @@ export class ContactData extends Component {
 		const { isLoadingRequest } = this.props;
 
 		// CSS Modules styles:
-		const { ContactData, formInvalidStyle } = styles;
-
-		const formInvalidMessage = (
-			<p className={formInvalidStyle}>
-				Please fill out all the required form fields first!
-			</p>
-		);
+		const { ContactData } = styles;
 
 		return (
 			<div className={ContactData}>
@@ -133,7 +128,9 @@ export class ContactData extends Component {
 				>
 					Confirm Order
 				</Button>
-				{showFormInvalidMessage ? formInvalidMessage : null}
+				{showFormInvalidMessage ? (
+					<FormErrorMessage errorType="emptyFields" />
+				) : null}
 			</div>
 		);
 	}

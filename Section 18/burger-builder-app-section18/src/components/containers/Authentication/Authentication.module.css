@@ -17,8 +17,14 @@
     box-sizing: border-box;
 }
 
+@media only screen and (max-width: 960px) {
+    .Authentication {
+        width: 70%;
+    }
+}
+
 /* Mobile */
-@media (max-width: 500px) {
+@media only screen and (max-width: 500px) {
     .Authentication {
         width: 90%;
     }

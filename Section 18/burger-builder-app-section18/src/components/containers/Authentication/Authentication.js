@@ -14,8 +14,14 @@ export class Authentication extends Component {
 		isFormValid: false,
 		showFormInvalidMessage: false,
 		formErrorType: 'emptyFields',
-		isMinMaxValid: false,
+		checkMinMax: false,
 	};
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.checkMinMax !== this.state.checkMinMax) {
+			this.checkFormValidation();
+		}
+	}
 
 	handleFormChange = (event, data) => {
 		let updatedForm = [...this.state.fields];
@@ -40,13 +46,9 @@ export class Authentication extends Component {
 	checkFormValidation = () => {
 		const formCopy = [...this.state.fields];
 		const checkValid = formCopy.every(el => {
-			console.log(el.validation.valid);
 			return el.validation.valid;
 		});
-		console.log('Email', formCopy[0].validation.valid);
-		console.log('pass1', formCopy[1].validation.valid);
-		console.log('pass2', formCopy[2].validation.valid);
-		console.log('CHECKVALID', checkValid);
+
 		this.setState({
 			isFormValid: checkValid,
 		});
@@ -63,39 +65,17 @@ export class Authentication extends Component {
 			isValid = validation.emailValidationRegExp.test(value);
 
 		// Check min-max characters requirement:
-		if (validation.minLength && validation.maxLength) {
-			if (
+		if (validation.minLength && validation.maxLength)
+			isValid =
 				value.length + 1 >= validation.minLength &&
-				value.length + 1 <= validation.maxLength
-			) {
-				isValid = true;
-				this.setState({
-					isMinMaxValid: true,
-				});
-			}
-			console.log(isValid);
-			console.log(value.length);
-			console.log(validation.minLength);
-			console.log(validation.maxLength);
-		}
+				value.length + 1 <= validation.maxLength;
 
-		// console.log(isValid);
-		this.checkFormValidation();
+		this.setState({
+			checkMinMax: isValid,
+		});
+
 		return isValid;
 	};
-
-	// checkPasswordsMatch = () => {
-	// 	if (this.state.fields[1].value !== this.state.fields[2].value) {
-	// 		let resetValueCopy = [...this.state.fields];
-	// 		resetValueCopy[2].value = '';
-	// 		this.setState({
-	// 			fields: resetValueCopy,
-	// 			isFormValid: false,
-	// 			showFormInvalidMessage: true,
-	// 			formErrorType: 'noMatch',
-	// 		});
-	// 	}
-	// };
 
 	handleSubmitFormClick = event => {
 		event.preventDefault();
@@ -103,6 +83,22 @@ export class Authentication extends Component {
 		if (!this.state.isFormValid) {
 			this.setState({
 				showFormInvalidMessage: true,
+				formErrorType: 'emptyFields',
+			});
+			return;
+		}
+
+		// Check if both passwords are not matching
+		if (this.state.fields[1].value !== this.state.fields[2].value) {
+			// Nullify 2nd password field
+			let resetValueCopy = [...this.state.fields];
+			resetValueCopy[2].value = '';
+
+			this.setState({
+				fields: resetValueCopy,
+				isFormValid: false,
+				showFormInvalidMessage: true,
+				formErrorType: 'noMatch',
 			});
 			return;
 		}

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import authForm from './authForm/authForm';
-import Input from '../../UI/Input/Input';
-import Button from '../../UI/Button/Button';
-import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
-import styles from './Authentication.module.css';
-import { confirmAuth } from './store/actions';
-// import * as helpers from './helpers';
+import signUpForm from './signUpForm/signUpForm';
+import Input from '../../../UI/Input/Input';
+import Button from '../../../UI/Button/Button';
+import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
+import styles from '../SignUp/SignUp.module.css';
+import { confirmAuth } from '../store/actions';
 
-export class Authentication extends Component {
+export class SignUp extends Component {
 	state = {
-		fields: authForm,
+		fields: signUpForm,
 		isFormValid: false,
 		showFormInvalidMessage: false,
 		formErrorType: 'emptyFields',
@@ -129,12 +128,12 @@ export class Authentication extends Component {
 		const { fields, showFormInvalidMessage, formErrorType } = this.state;
 
 		// Styles:
-		const { Authentication, MainHeader } = styles;
+		const { SignUp, MainHeader } = styles;
 
 		return (
 			<>
 				<h1 className={MainHeader}>Registration</h1>
-				<div className={Authentication}>
+				<div className={SignUp}>
 					<h2>Become a new member!</h2>
 					<form action="post" onSubmit={this.handleSubmitFormClick}>
 						{fields.map(field => (
@@ -179,4 +178,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	null,
 	mapDispatchToProps
-)(Authentication);
+)(SignUp);

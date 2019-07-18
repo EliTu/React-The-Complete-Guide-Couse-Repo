@@ -4,7 +4,7 @@
     color: rgba(27, 24, 24, 0.795);
 }
 
-.Authentication {
+.SignUp {
     background-color: rgba(241, 238, 238, 0.993);
     color: rgba(27, 24, 24, 0.795);
     margin: 3rem auto;
@@ -18,14 +18,14 @@
 }
 
 @media only screen and (max-width: 960px) {
-    .Authentication {
+    .SignUp {
         width: 70%;
     }
 }
 
 /* Mobile */
 @media only screen and (max-width: 500px) {
-    .Authentication {
+    .SignUp {
         width: 90%;
     }
 }

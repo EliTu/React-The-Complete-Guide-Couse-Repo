@@ -1,10 +1,10 @@
-const authForm = [
+const signInForm = [
 	{
 		data: 'email',
 		elementType: 'input',
 		elementConfig: {
 			type: 'email',
-			placeholder: 'Enter an email',
+			placeholder: 'Enter your email',
 			label: 'Email:',
 		},
 		value: '',
@@ -23,7 +23,7 @@ const authForm = [
 		elementType: 'input',
 		elementConfig: {
 			type: 'password',
-			placeholder: 'Enter a password',
+			placeholder: 'Enter your password',
 			label: 'Password:',
 		},
 		value: '',
@@ -33,29 +33,9 @@ const authForm = [
 			valid: false,
 			minLength: 7,
 			maxLength: 12,
-			errorMessage:
-				'Please enter a valid password (must be 6 to 12 characters)',
-		},
-	},
-
-	{
-		data: 'confirmPassword',
-		elementType: 'input',
-		elementConfig: {
-			type: 'password',
-			placeholder: 'Re-enter password',
-			label: 'Confirm Password:',
-		},
-		value: '',
-		validation: {
-			required: true,
-			hasUserInput: false,
-			valid: false,
-			minLength: 7,
-			maxLength: 12,
-			errorMessage: 'Please re-enter the password',
+			errorMessage: 'The password must be 6-12 characters',
 		},
 	},
 ];
 
-export default authForm;
+export default signInForm;

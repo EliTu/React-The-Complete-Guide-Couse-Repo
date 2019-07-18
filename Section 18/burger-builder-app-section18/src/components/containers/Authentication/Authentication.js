@@ -14,6 +14,7 @@ export class Authentication extends Component {
 		isFormValid: false,
 		showFormInvalidMessage: false,
 		formErrorType: 'emptyFields',
+		isMinMaxValid: false,
 	};
 
 	handleFormChange = (event, data) => {
@@ -63,10 +64,15 @@ export class Authentication extends Component {
 
 		// Check min-max characters requirement:
 		if (validation.minLength && validation.maxLength) {
-			isValid =
+			if (
 				value.length + 1 >= validation.minLength &&
-				value.length + 1 <= validation.maxLength &&
-				isValid;
+				value.length + 1 <= validation.maxLength
+			) {
+				isValid = true;
+				this.setState({
+					isMinMaxValid: true,
+				});
+			}
 			console.log(isValid);
 			console.log(value.length);
 			console.log(validation.minLength);

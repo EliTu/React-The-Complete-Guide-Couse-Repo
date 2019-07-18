@@ -4,7 +4,7 @@ import {
 	SET_DEFAULT_BURGER_STATE,
 	FETCH_INGREDIENTS_FAILED,
 } from './constants';
-import axiosInstance from '../../../../axios-orders';
+import axiosInstance from '../../../../axios/axios-orders';
 
 export const setDefaultBurgerState = ingredients => {
 	return {

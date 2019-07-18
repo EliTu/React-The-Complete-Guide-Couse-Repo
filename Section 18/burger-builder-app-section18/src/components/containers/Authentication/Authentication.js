@@ -90,7 +90,7 @@ export class Authentication extends Component {
 
 		// Check if both passwords are not matching
 		if (this.state.fields[1].value !== this.state.fields[2].value) {
-			// Nullify 2nd password field
+			// Nullify 2nd password field value
 			let resetValueCopy = [...this.state.fields];
 			resetValueCopy[2].value = '';
 
@@ -103,12 +103,18 @@ export class Authentication extends Component {
 			return;
 		}
 
+		// If all fields are valid
 		if (this.state.isFormValid) {
 			this.props.sentAuthForm(
 				this.state.fields[0].value,
 				this.state.fields[1].value
 			);
+
+			let resetValueCopy = [...this.state.fields];
+			resetValueCopy.forEach(field => (field.value = ''));
+
 			this.setState({
+				fields: resetValueCopy,
 				showFormInvalidMessage: false,
 			});
 		}

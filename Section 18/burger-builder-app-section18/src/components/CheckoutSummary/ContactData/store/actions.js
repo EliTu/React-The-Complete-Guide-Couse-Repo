@@ -1,4 +1,4 @@
-import axiosInstance from '../../../../axios-orders';
+import axiosInstance from '../../../../axios/axios-orders';
 import {
 	PURCHASE_BURGER_SUCCESS,
 	PURCHASE_BURGER_FAIL,

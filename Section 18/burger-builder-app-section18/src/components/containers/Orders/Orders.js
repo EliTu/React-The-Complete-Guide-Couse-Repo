@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Order from './Order/Order';
 import Spinner from '../../UI/Spinner/Spinner';
-import axiosInstance from '../../../axios-orders';
+import axiosInstance from '../../../axios/axios-orders';
 import { fetchOrdersFromDatabase } from './store/actions';
 import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 import styles from './Orders.module.css';

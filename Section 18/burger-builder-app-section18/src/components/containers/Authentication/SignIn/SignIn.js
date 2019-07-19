@@ -5,6 +5,7 @@ import signInForm from './signInForm/signInForm';
 import styles from './SignIn.module.css';
 
 const SignIn = () => {
+	const { SignIn, MainHeader } = styles;
 	const [fields, setFields] = useState(signInForm);
 
 	const handleFormChange = (event, data) => {
@@ -26,8 +27,8 @@ const SignIn = () => {
 	};
 
 	return (
-		<div>
-			<h2>Login</h2>
+		<div className={SignIn}>
+			<h2>Members Login</h2>
 			<form action="post">
 				{fields.map(field => (
 					<Input
@@ -42,6 +43,9 @@ const SignIn = () => {
 					/>
 				))}
 			</form>
+			<Button type="Confirm" handleClick>
+				Login
+			</Button>
 		</div>
 	);
 };

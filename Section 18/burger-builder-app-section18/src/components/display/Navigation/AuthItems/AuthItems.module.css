@@ -1,4 +1,6 @@
 .AuthItems {
+    display: flex;
+    justify-items: center;
     margin: 0 1rem;
     padding: 0;
     list-style: none;

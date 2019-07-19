@@ -40,25 +40,35 @@
 }
 
 /* Desktop - Remove sideDrawer Toggle button */
-@media (min-width: 500px) {
+@media screen and (min-width: 500px) {
     .Toolbar button {
         display: none;
     }
 }
 
+@media screen and (max-width: 960px) {
+    .ItemsWrapper {
+        width: 100%;
+    }
+}
+
 /* Mobile */
-@media (max-width:499px) {
+@media screen and (max-width:499px) {
     .DesktopOnly {
         display: none;
     }
 }
 
-@media (max-width: 500px) {
+@media screen and (max-width: 500px) {
     .Toolbar {
         height: 70px;
         justify-content: space-between;
         justify-items: end;
         align-content: flex-end;
+    }
+
+    .ItemsWrapper {
+        width: inherit;
     }
 
     .Toolbar button {

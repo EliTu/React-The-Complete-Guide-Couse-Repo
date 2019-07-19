@@ -5,6 +5,7 @@ import Checkout from './components/containers/Checkout/Checkout';
 import Orders from './components/containers/Orders/Orders';
 import About from './components/display/About/About';
 import SignUp from './components/containers/Authentication/SignUp/SignUp';
+import SignIn from './components/containers/Authentication/SignIn/SignIn';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 		<div>
 			<Router>
 				<Layout>
+					<SignIn />
 					<Switch>
 						<Route path="/checkout" component={Checkout} />
 						<Route path="/orders" component={Orders} />

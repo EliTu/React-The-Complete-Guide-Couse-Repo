@@ -23,8 +23,10 @@
 	background-color: rgba(105, 241, 105, 0.521);
 }
 
-/* Desktop */
-@media (min-width: 500px) {
+
+
+/* Large screen */
+@media screen and (min-width: 500px) {
 	.Item {
 		font-size: initial;
 		margin: 0;
@@ -57,6 +59,17 @@
 	.Item a.active {
 		background-color: rgba(0, 0, 0, 0);
 		border-bottom: 10px solid rgba(71, 219, 71, 0.89);
+		color: rgba(247, 232, 232, 0.986);
+	}
+}
+
+/* Medium screen */
+@media screen and (max-width: 710px) {
+
+	.Item a:active,
+	.Item a.active {
+		background-color: rgba(0, 0, 0, 0);
+		border-bottom: 5px solid rgba(71, 219, 71, 0.89);
 		color: rgba(247, 232, 232, 0.986);
 	}
 }

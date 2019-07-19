@@ -66,3 +66,9 @@
 ::placeholder {
     color: rgba(58, 50, 50, 0.438);
 }
+
+@media screen and (max-width: 800px) {
+    .Input input {
+        width: 70%;
+    }
+}

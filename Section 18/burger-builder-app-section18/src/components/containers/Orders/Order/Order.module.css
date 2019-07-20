@@ -1,5 +1,5 @@
 .Order {
-    width: 80%;
+    width: 60%;
     border: 1px solid #eee;
     background-color: rgba(241, 238, 238, 0.993);
     box-shadow: 0 2px 3px #ccc;
@@ -44,6 +44,10 @@
 
 /* Mobile */
 @media (max-width: 500px) {
+    .Order {
+        width: 85%
+    }
+
     .DataHeader {
         display: flex;
         flex-flow: column;

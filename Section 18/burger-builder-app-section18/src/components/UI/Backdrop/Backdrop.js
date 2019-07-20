@@ -14,7 +14,7 @@ const Backdrop = props => {
 
 Backdrop.propTypes = {
 	show: PropTypes.bool,
-	removeBackdrop: PropTypes.func.isRequired,
+	removeBackdrop: PropTypes.func,
 };
 
 export default Backdrop;

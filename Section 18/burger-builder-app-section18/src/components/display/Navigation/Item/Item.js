@@ -24,7 +24,6 @@ const Item = props => {
 	const authType = signInItem ? (
 		<a
 			className={[Item, AuthSignin, signInActive].join(' ')}
-			activeClassName={active}
 			href={link}
 			onClick={event => handleSignInToggleClick(event)}
 		>

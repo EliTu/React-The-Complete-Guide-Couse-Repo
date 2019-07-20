@@ -8,17 +8,31 @@ import styles from './SignIn.module.css';
 
 const SignIn = props => {
 	const { SignIn, Open, Closed } = styles;
+
+	// State hooks:
 	const [fields, setFields] = useState(signInForm);
+	const [isFormValid, setIsFormValid] = useState(false);
+	const [showFormInvalidMessage, setShowFormInvalidMessage] = useState(false);
+	const [checkMinMax, setCheckMinMax] = useState(false);
 
 	// Toggle component display upon clicking the navbar link
 	const setDisplayStyle = props.isSignInDisplayed ? Open : Closed;
 
+	const checkFormValidation = () => {
+		const formCopy = [...fields];
+		const checkValid = formCopy.every(el => {
+			return el.validation.valid;
+		});
+
+		setIsFormValid(checkValid);
+	};
+
 	const handleFormChange = (event, data) => {
-		let updatedForm = [...this.state.fields];
+		let updatedForm = [...fields];
 		let updatedFormData = updatedForm.forEach(el =>
 			el.data === data
 				? ((el.value = event.target.value),
-				  (el.validation.valid = this.checkInputValidation(
+				  (el.validation.valid = checkInputValidation(
 						el.value,
 						el.validation,
 						el.data
@@ -27,8 +41,27 @@ const SignIn = props => {
 				: el
 		);
 		updatedForm.value = updatedFormData;
+		setFields([...updatedForm]);
+	};
 
-		setFields(updatedFormData);
+	const checkInputValidation = (value, validation, type) => {
+		let isValid = true;
+
+		// General validation & empty field:
+		if (validation.required) isValid = value.trim() !== '' && isValid;
+
+		// Check the email regexp:
+		if (validation.required && type === 'email')
+			isValid = validation.emailValidationRegExp.test(value);
+
+		// Check min-max characters requirement:
+		if (validation.minLength && validation.maxLength)
+			isValid =
+				value.length + 1 >= validation.minLength &&
+				value.length + 1 <= validation.maxLength;
+
+		setCheckMinMax(isValid);
+		return isValid;
 	};
 
 	// Handle clicks on outside of the component to close it

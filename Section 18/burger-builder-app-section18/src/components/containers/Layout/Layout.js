@@ -36,7 +36,7 @@ class Layout extends Component {
 		};
 
 		const handleSigninCloseClick = () => {
-			closeSignIn();
+			// closeSignIn();
 		};
 
 		return (

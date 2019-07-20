@@ -27,11 +27,20 @@ const SignIn = props => {
 		);
 		updatedForm.value = updatedFormData;
 
-		setFields();
+		setFields(updatedFormData);
+	};
+
+	const handleOutsideClick = event => {
+		if (!event.currentTarget.contains(event.relatedTarget)) {
+			console.log('hi');
+		}
 	};
 
 	return (
-		<div className={[SignIn, setDisplayStyle].join(' ')}>
+		<div
+			className={[SignIn, setDisplayStyle].join(' ')}
+			onBlur={event => handleOutsideClick(event)}
+		>
 			<h2>Members Login</h2>
 			<form action="post">
 				{fields.map(field => (

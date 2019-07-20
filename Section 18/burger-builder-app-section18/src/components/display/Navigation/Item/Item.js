@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { signInToggleClick } from '../AuthItems/store/actions';
 import styles from './Item.module.css';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 
 const Item = props => {
 	// props:
-	const { link, children, signInItem } = props;
+	const { link, children, signInItem, toggleSignIn } = props;
 
 	// CSS Modules styles:
-	const { Item, active } = styles;
+	const { Item, active, AuthSignin } = styles;
 
-	const [isSignInOpen, setIsSignInOpen] = useState(false);
-	console.log(isSignInOpen);
-
-	const handleSignInClick = event => {
+	const handleSignInToggleClick = event => {
 		event.preventDefault();
-		setIsSignInOpen(!isSignInOpen);
-		// TODO Set Redux instead of local state to toggle the login box
+		toggleSignIn();
 	};
 
 	const authType = signInItem ? (
 		<a
-			className={[Item].join(' ')}
+			className={[Item, AuthSignin].join(' ')}
 			activeClassName={active}
 			href={link}
-			onClick={event => handleSignInClick(event)}
+			onClick={event => handleSignInToggleClick(event)}
 		>
 			Sign in
 		</a>
@@ -43,4 +41,14 @@ Item.propTypes = {
 	signInItem: PropTypes.bool,
 };
 
-export default Item;
+// Redux setup:
+const mapDispatchToProps = dispatch => {
+	return {
+		toggleSignIn: () => dispatch(signInToggleClick()),
+	};
+};
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(Item);

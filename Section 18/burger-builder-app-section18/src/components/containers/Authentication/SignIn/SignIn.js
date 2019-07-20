@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import Button from '../../../UI/Button/Button';
 import Input from '../../../UI/Input/Input';
 import signInForm from './signInForm/signInForm';
 import styles from './SignIn.module.css';
 
-const SignIn = () => {
-	const { SignIn, MainHeader } = styles;
+const SignIn = props => {
+	const { SignIn, Open, Closed } = styles;
 	const [fields, setFields] = useState(signInForm);
+
+	// Toggle component display upon clicking the navbar link
+	const setDisplayStyle = props.isSignInDisplayed ? Open : Closed;
 
 	const handleFormChange = (event, data) => {
 		let updatedForm = [...this.state.fields];
@@ -27,7 +31,7 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className={SignIn}>
+		<div className={[SignIn, setDisplayStyle].join(' ')}>
 			<h2>Members Login</h2>
 			<form action="post">
 				{fields.map(field => (
@@ -50,4 +54,11 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+// Redux setup:
+const mapStateToProps = state => {
+	return {
+		isSignInDisplayed: state.signIn.isSignInDisplayed,
+	};
+};
+
+export default connect(mapStateToProps)(SignIn);

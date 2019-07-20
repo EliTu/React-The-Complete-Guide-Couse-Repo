@@ -8,7 +8,7 @@ const AuthItems = props => {
 	return (
 		<div className={AuthItems}>
 			<Item signInItem link="">
-				Sign up
+				Sign in
 			</Item>
 			<Item link="/signup">Sign up</Item>
 		</div>

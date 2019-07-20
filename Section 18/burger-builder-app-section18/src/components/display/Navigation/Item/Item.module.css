@@ -18,6 +18,11 @@
 	border-radius: 8px;
 }
 
+.Item .AuthSignin {
+	color: rgba(105, 241, 105, 0.76);
+	font-size: 1.1rem;
+}
+
 .Item a:hover .Item a:active,
 .Item a.active {
 	background-color: rgba(105, 241, 105, 0.521);

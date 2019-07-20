@@ -8,11 +8,6 @@
     height: 100%;
 }
 
-.AuthItems a {
-    color: rgba(105, 241, 105, 0.76);
-    font-size: 1.1rem;
-}
-
 /* Desktop */
 @media (min-width: 500px) {
     .AuthItems {

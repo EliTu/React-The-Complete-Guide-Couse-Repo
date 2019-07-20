@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Toolbar from '../../display/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../display/Navigation/SIdeDrawer/SideDrawer';
+import { signInOutsideCloseClick } from '../../display/Navigation/AuthItems/store/actions';
 import styles from './Layout.module.css';
 import PropTypes from 'prop-types';
 
@@ -12,7 +14,7 @@ class Layout extends Component {
 
 	render() {
 		// props:
-		const { children } = this.props;
+		const { children, closeSignIn } = this.props;
 
 		// state:
 		const { isSideDrawerVisible } = this.state;
@@ -33,6 +35,10 @@ class Layout extends Component {
 			});
 		};
 
+		const handleSigninCloseClick = () => {
+			closeSignIn();
+		};
+
 		return (
 			<>
 				<Toolbar clicked={handleDrawerButtonClick} />
@@ -40,11 +46,20 @@ class Layout extends Component {
 					isVisible={isSideDrawerVisible}
 					handleVisibility={handleSideDrawerCloseClick}
 				/>
-				<main className={layoutStyle}>{children}</main>
+				<main className={layoutStyle} onClick={handleSigninCloseClick}>
+					{children}
+				</main>
 			</>
 		);
 	}
 }
+
+// Redux setup
+const mapDispatchToProps = dispatch => {
+	return {
+		closeSignIn: () => dispatch(signInOutsideCloseClick()),
+	};
+};
 
 Layout.propTypes = {
 	children: PropTypes.oneOfType([
@@ -53,4 +68,7 @@ Layout.propTypes = {
 	]).isRequired,
 };
 
-export default Layout;
+export default connect(
+	null,
+	mapDispatchToProps
+)(Layout);

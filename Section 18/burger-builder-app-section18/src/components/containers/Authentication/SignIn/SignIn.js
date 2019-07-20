@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { connect } from 'react-redux';
 import Button from '../../../UI/Button/Button';
 import Input from '../../../UI/Input/Input';
 import signInForm from './signInForm/signInForm';
+import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/store/actions';
 import styles from './SignIn.module.css';
 
 const SignIn = props => {
@@ -30,16 +31,29 @@ const SignIn = props => {
 		setFields(updatedFormData);
 	};
 
-	const handleOutsideClick = event => {
-		if (!event.currentTarget.contains(event.relatedTarget)) {
-			console.log('hi');
-		}
-	};
+	// Handle clicks on outside of the component to close it
+	const myRef = useRef();
+	const handleOutsideClick = useCallback(
+		event => {
+			if (
+				props.isSignInDisplayed &&
+				!myRef.current.contains(event.target)
+			) {
+				props.closeSignIn();
+			}
+		},
+		[props]
+	);
+	useEffect(() => {
+		document.addEventListener('click', handleOutsideClick);
+		return () => document.removeEventListener('click', handleOutsideClick);
+	}, [handleOutsideClick]);
 
 	return (
 		<div
 			className={[SignIn, setDisplayStyle].join(' ')}
-			onBlur={event => handleOutsideClick(event)}
+			ref={myRef}
+			onClick={event => handleOutsideClick(event)}
 		>
 			<h2>Members Login</h2>
 			<form action="post">
@@ -70,4 +84,13 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps)(SignIn);
+const mapDispatchToProps = dispatch => {
+	return {
+		closeSignIn: () => dispatch(signInOutsideCloseClick()),
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(SignIn);

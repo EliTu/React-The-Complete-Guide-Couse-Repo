@@ -20,6 +20,7 @@
     margin: 0.5rem auto;
 }
 
+/* Disable on desktop */
 @media (min-width: 500px) {
     .SideDrawer {
         display: none;

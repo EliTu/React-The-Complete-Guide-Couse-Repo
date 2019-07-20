@@ -59,7 +59,11 @@
 /* Small screen */
 @media screen and (max-width: 499px) {
     .SignIn {
-        width: 60%;
+        width: 80%;
+        top: 20%;
+        right: 10%;
+        z-index: 110;
+        border: none;
     }
 
     .SignIn input {

@@ -10,16 +10,20 @@ const Item = props => {
 	const { link, children, signInItem, toggleSignIn } = props;
 
 	// CSS Modules styles:
-	const { Item, active, AuthSignin } = styles;
+	const { Item, active, AuthSignin, SigninActive } = styles;
 
+	// Handle toggling the display property of the LogIn component
 	const handleSignInToggleClick = event => {
 		event.preventDefault();
-		toggleSignIn();
+		if (!props.isSignInDisplayed) toggleSignIn();
 	};
+
+	// Set style when the LogIn component is displayed
+	const signInActive = props.isSignInDisplayed ? SigninActive : null;
 
 	const authType = signInItem ? (
 		<a
-			className={[Item, AuthSignin].join(' ')}
+			className={[Item, AuthSignin, signInActive].join(' ')}
 			activeClassName={active}
 			href={link}
 			onClick={event => handleSignInToggleClick(event)}
@@ -42,6 +46,11 @@ Item.propTypes = {
 };
 
 // Redux setup:
+const mapStateToProps = state => {
+	return {
+		isSignInDisplayed: state.signIn.isSignInDisplayed,
+	};
+};
 const mapDispatchToProps = dispatch => {
 	return {
 		toggleSignIn: () => dispatch(signInToggleClick()),
@@ -49,6 +58,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
 )(Item);

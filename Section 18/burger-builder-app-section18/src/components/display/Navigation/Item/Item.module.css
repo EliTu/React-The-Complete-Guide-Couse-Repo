@@ -19,8 +19,12 @@
 }
 
 .Item .AuthSignin {
-	color: rgba(105, 241, 105, 0.76);
-	font-size: 1.1rem;
+	color: rgba(105, 241, 105, 0.781);
+}
+
+.Item .SigninActive {
+	color: rgb(99, 248, 99);
+	border-bottom: 5px solid rgba(71, 219, 71, 0.89);
 }
 
 .Item a:hover .Item a:active,
@@ -54,6 +58,11 @@
 		border-bottom: 4px solid transparent;
 		display: block;
 		border-radius: 0;
+	}
+
+	.Item .SigninActive {
+		color: rgb(99, 248, 99);
+		border-bottom: 10px solid rgba(71, 219, 71, 0.89);
 	}
 
 	.Item a:hover {

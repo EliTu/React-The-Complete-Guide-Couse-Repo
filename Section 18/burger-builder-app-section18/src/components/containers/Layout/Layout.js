@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Toolbar from '../../display/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../display/Navigation/SIdeDrawer/SideDrawer';
-import { signInOutsideCloseClick } from '../../display/Navigation/AuthItems/store/actions';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 import styles from './Layout.module.css';
 import PropTypes from 'prop-types';
 
@@ -12,9 +12,18 @@ class Layout extends Component {
 		isSideDrawerOpen: false,
 	};
 
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.isSignInDisplayed !== this.props.isSignInDisplayed) {
+			this.setState({
+				isSideDrawerVisible: false,
+				isSideDrawerOpen: false,
+			});
+		}
+	}
+
 	render() {
 		// props:
-		const { children, closeSignIn } = this.props;
+		const { children, isSignInDisplayed } = this.props;
 
 		// state:
 		const { isSideDrawerVisible } = this.state;
@@ -35,29 +44,24 @@ class Layout extends Component {
 			});
 		};
 
-		const handleSigninCloseClick = () => {
-			// closeSignIn();
-		};
-
 		return (
 			<>
+				<Backdrop show={isSignInDisplayed} />
 				<Toolbar clicked={handleDrawerButtonClick} />
 				<SideDrawer
 					isVisible={isSideDrawerVisible}
 					handleVisibility={handleSideDrawerCloseClick}
 				/>
-				<main className={layoutStyle} onClick={handleSigninCloseClick}>
-					{children}
-				</main>
+				<main className={layoutStyle}>{children}</main>
 			</>
 		);
 	}
 }
 
-// Redux setup
-const mapDispatchToProps = dispatch => {
+// Redux setup:
+const mapStateToProps = state => {
 	return {
-		closeSignIn: () => dispatch(signInOutsideCloseClick()),
+		isSignInDisplayed: state.signIn.isSignInDisplayed,
 	};
 };
 
@@ -66,9 +70,7 @@ Layout.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]).isRequired,
+	isSignInDisplayed: PropTypes.bool,
 };
 
-export default connect(
-	null,
-	mapDispatchToProps
-)(Layout);
+export default connect(mapStateToProps)(Layout);

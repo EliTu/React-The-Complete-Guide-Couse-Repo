@@ -47,6 +47,8 @@ const requestMessageComponent = (WrappedComponent, axiosInstance) => {
 			});
 		};
 
+		handleButton;
+
 		render() {
 			// State:
 			const { error, responseStatus } = this.state;
@@ -62,9 +64,7 @@ const requestMessageComponent = (WrappedComponent, axiosInstance) => {
 			) : null;
 
 			const confirmationMessage = responseStatus ? (
-				<p className={confirmationText}>
-					Your order has been received!
-				</p>
+				<p className={confirmationText}>Received</p>
 			) : null;
 
 			return (

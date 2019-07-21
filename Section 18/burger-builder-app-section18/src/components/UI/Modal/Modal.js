@@ -23,9 +23,7 @@ const Modal = props => {
 					transform: translateModal,
 					opacity: adjustOpacity,
 				}}
-			>
-				{children}
-			</div>
+			/>
 		</>
 	);
 };

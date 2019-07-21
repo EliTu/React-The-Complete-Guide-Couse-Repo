@@ -19,7 +19,7 @@
     display: inline-block;
     margin: 0.3rem 0.5rem;
     padding: 0.4rem;
-    width: 50%;
+    width: 90%;
     list-style: none;
 }
 
@@ -42,8 +42,15 @@
     font-weight: bold;
 }
 
-/* Mobile */
-@media (max-width: 500px) {
+/* Medium screens */
+@media screen and (max-width: 900px) {
+    .Order {
+        width: 80%
+    }
+}
+
+/* Small screens */
+@media screen and (max-width: 500px) {
     .Order {
         width: 85%
     }

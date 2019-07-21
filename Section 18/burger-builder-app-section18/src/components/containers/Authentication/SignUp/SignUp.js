@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import signUpForm from './signUpForm/signUpForm';
 import Input from '../../../UI/Input/Input';
 import Button from '../../../UI/Button/Button';
+import Spinner from '../../../UI/Spinner/Spinner';
 import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
 import styles from '../SignUp/SignUp.module.css';
 import { confirmAuth } from '../store/actions';

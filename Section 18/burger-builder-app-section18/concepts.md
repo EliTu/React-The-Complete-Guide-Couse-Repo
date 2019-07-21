@@ -6,7 +6,7 @@
 
 - Accordion UI for each Order component.
 
-- Sort Orders by placing the most recent order on the top of the Orders stack.
+<!-- - Sort Orders by placing the most recent order on the top of the Orders stack. -->
 
 - Can delete an Order component.
 

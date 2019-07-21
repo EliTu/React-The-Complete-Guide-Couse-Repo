@@ -25,18 +25,22 @@ export class Orders extends Component {
 				{isLoadingRequest ? (
 					<Spinner />
 				) : !isLoadingRequest && orders.length > 0 ? (
-					orders.map(order => {
-						return order.id && order.ingredients && order.price ? (
-							<Order
-								key={order.id}
-								orderId={order.id}
-								ingredients={order.ingredients}
-								contact={order.customer}
-								delivery={order.deliveryMethod}
-								price={order.price.toFixed(2)}
-							/>
-						) : null;
-					})
+					orders
+						.map(order => {
+							return order.id &&
+								order.ingredients &&
+								order.price ? (
+								<Order
+									key={order.id}
+									orderId={order.id}
+									ingredients={order.ingredients}
+									contact={order.customer}
+									delivery={order.deliveryMethod}
+									price={order.price.toFixed(2)}
+								/>
+							) : null;
+						})
+						.reverse() // TO show the latest order first
 				) : (
 					<p className={noOrders}>No previous orders found!</p>
 				)}

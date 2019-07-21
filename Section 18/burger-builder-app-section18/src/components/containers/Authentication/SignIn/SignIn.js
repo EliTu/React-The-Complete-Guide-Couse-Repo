@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { connect } from 'react-redux';
 import Button from '../../../UI/Button/Button';
 import Input from '../../../UI/Input/Input';
+import Spinner from '../../../UI/Spinner/Spinner';
 import signInForm from './signInForm/signInForm';
 import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/store/actions';
 import styles from './SignIn.module.css';
@@ -64,7 +65,7 @@ const SignIn = props => {
 		return isValid;
 	};
 
-	// Handle clicks on outside of the component to close it
+	// Handle clicks on elements outside of the component to close it
 	const myRef = useRef();
 	const handleOutsideClick = useCallback(
 		event => {

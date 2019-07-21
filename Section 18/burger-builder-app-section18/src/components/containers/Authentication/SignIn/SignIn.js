@@ -108,7 +108,7 @@ const SignIn = props => {
 			// 	showFormInvalidMessage: false,
 			// });
 
-			props.closeSignIn();
+			// props.closeSignIn();
 		}
 	};
 
@@ -137,26 +137,32 @@ const SignIn = props => {
 			ref={myRef}
 			onClick={event => handleOutsideClick(event)}
 		>
-			<h2>Members Login</h2>
-			<form action="post" onSubmit={handleSubmitFormClick}>
-				{fields.map((field, i) => (
-					<Input
-						key={field.data}
-						focused={i === 0 && props.isSignInDisplayed}
-						elementType={field.elementType}
-						elementConfig={field.elementConfig}
-						validation={{ ...field.validation }}
-						value={field.value}
-						handleChange={event =>
-							handleFormChange(event, field.data)
-						}
-						handleEnterPress={handleSubmitFormClick}
-					/>
-				))}
-			</form>
-			<Button type="Confirm" handleClick={handleSubmitFormClick}>
-				Login
-			</Button>
+			{props.isLoading ? (
+				<Spinner />
+			) : (
+				<>
+					<h2>Members Login</h2>
+					<form action="post" onSubmit={handleSubmitFormClick}>
+						{fields.map((field, i) => (
+							<Input
+								key={field.data}
+								focused={i === 0 && props.isSignInDisplayed}
+								elementType={field.elementType}
+								elementConfig={field.elementConfig}
+								validation={{ ...field.validation }}
+								value={field.value}
+								handleChange={event =>
+									handleFormChange(event, field.data)
+								}
+								handleEnterPress={handleSubmitFormClick}
+							/>
+						))}
+					</form>
+					<Button type="Confirm" handleClick={handleSubmitFormClick}>
+						Login
+					</Button>
+				</>
+			)}
 		</div>
 	);
 };
@@ -165,6 +171,7 @@ const SignIn = props => {
 const mapStateToProps = state => {
 	return {
 		isSignInDisplayed: state.signIn.isSignInDisplayed,
+		isLoading: state.auth.isLoading,
 	};
 };
 

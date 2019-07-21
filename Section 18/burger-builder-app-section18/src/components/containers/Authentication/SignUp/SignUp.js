@@ -128,6 +128,9 @@ export class SignUp extends Component {
 		// state:
 		const { fields, showFormInvalidMessage, formErrorType } = this.state;
 
+		// props:
+		const { isLoading } = this.props;
+
 		// Styles:
 		const { SignUp, MainHeader } = styles;
 
@@ -135,35 +138,52 @@ export class SignUp extends Component {
 			<>
 				<h1 className={MainHeader}>Registration</h1>
 				<div className={SignUp}>
-					<h2>Become a new member!</h2>
-					<form action="post" onSubmit={this.handleSubmitFormClick}>
-						{fields.map((field, i) => (
-							<Input
-								key={field.data}
-								focused={i === 0}
-								elementType={field.elementType}
-								elementConfig={field.elementConfig}
-								validation={{ ...field.validation }}
-								value={field.value}
-								handleChange={event =>
-									this.handleFormChange(event, field.data)
-								}
-								handleEnterPress={this.handleSubmitFormClick}
-							/>
-						))}
-					</form>
-					{showFormInvalidMessage ? (
-						<FormErrorMessage errorType={formErrorType} />
-					) : null}
-					<Button
-						type="Confirm"
-						handleClick={this.handleSubmitFormClick}
-					>
-						Sign up
-					</Button>
-					<Button type="Danger" handleClick={this.handleCancelClick}>
-						Go back
-					</Button>
+					{isLoading ? (
+						<Spinner />
+					) : (
+						<>
+							<h2>Become a new member!</h2>
+							<form
+								action="post"
+								onSubmit={this.handleSubmitFormClick}
+							>
+								{fields.map((field, i) => (
+									<Input
+										key={field.data}
+										focused={i === 0}
+										elementType={field.elementType}
+										elementConfig={field.elementConfig}
+										validation={{ ...field.validation }}
+										value={field.value}
+										handleChange={event =>
+											this.handleFormChange(
+												event,
+												field.data
+											)
+										}
+										handleEnterPress={
+											this.handleSubmitFormClick
+										}
+									/>
+								))}
+							</form>
+							{showFormInvalidMessage ? (
+								<FormErrorMessage errorType={formErrorType} />
+							) : null}
+							<Button
+								type="Confirm"
+								handleClick={this.handleSubmitFormClick}
+							>
+								Sign up
+							</Button>
+							<Button
+								type="Danger"
+								handleClick={this.handleCancelClick}
+							>
+								Go back
+							</Button>
+						</>
+					)}
 				</div>
 			</>
 		);
@@ -171,6 +191,12 @@ export class SignUp extends Component {
 }
 
 // Redux setup:
+const mapStateToProps = state => {
+	return {
+		isLoading: state.auth.isLoading,
+	};
+};
+
 const mapDispatchToProps = dispatch => {
 	return {
 		sentAuthForm: (email, password) =>
@@ -179,6 +205,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
 )(SignUp);

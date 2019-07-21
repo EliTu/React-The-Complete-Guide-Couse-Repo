@@ -5,9 +5,11 @@ import Input from '../../../UI/Input/Input';
 import Spinner from '../../../UI/Spinner/Spinner';
 import signInForm from './signInForm/signInForm';
 import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/store/actions';
+import { confirmAuth } from '../store/actions';
 import styles from './SignIn.module.css';
 
 const SignIn = props => {
+	// CSS Modules styles:
 	const { SignIn, Open, Closed } = styles;
 
 	// State hooks:
@@ -18,15 +20,6 @@ const SignIn = props => {
 
 	// Toggle component display upon clicking the navbar link
 	const setDisplayStyle = props.isSignInDisplayed ? Open : Closed;
-
-	const checkFormValidation = () => {
-		const formCopy = [...fields];
-		const checkValid = formCopy.every(el => {
-			return el.validation.valid;
-		});
-
-		setIsFormValid(checkValid);
-	};
 
 	const handleFormChange = (event, data) => {
 		let updatedForm = [...fields];
@@ -45,6 +38,20 @@ const SignIn = props => {
 		setFields([...updatedForm]);
 	};
 
+	// Check form validation upon changes to fields and minMax requirements
+	useEffect(() => {
+		const checkFormValidation = () => {
+			const formCopy = [...fields];
+			const checkValid = formCopy.every(el => {
+				return el.validation.valid;
+			});
+
+			setIsFormValid(checkValid);
+		};
+		checkFormValidation();
+	}, [checkMinMax, fields]);
+
+	// Check requirements for the input fields for validations
 	const checkInputValidation = (value, validation, type) => {
 		let isValid = true;
 
@@ -65,6 +72,46 @@ const SignIn = props => {
 		return isValid;
 	};
 
+	const handleSubmitFormClick = event => {
+		event.preventDefault();
+
+		if (!isFormValid) {
+			setShowFormInvalidMessage(true);
+			return;
+		}
+
+		// Check if both passwords are not matching
+		// if (this.state.fields[1].value !== this.state.fields[2].value) {
+		// 	// Nullify 2nd password field value
+		// 	let resetValueCopy = [...this.state.fields];
+		// 	resetValueCopy[2].value = '';
+
+		// 	this.setState({
+		// 		fields: resetValueCopy,
+		// 		isFormValid: false,
+		// 		showFormInvalidMessage: true,
+		// 		formErrorType: 'noMatch',
+		// 	});
+		// 	return;
+		// }
+
+		// If all fields are valid
+		const isSignIn = true;
+		if (isFormValid) {
+			props.sentAuthForm(fields[0].value, fields[1].value, isSignIn);
+
+			// let resetValueCopy = [...this.state.fields];
+			// resetValueCopy.forEach(field => (field.value = ''));
+
+			// this.setState({
+			// 	fields: resetValueCopy,
+			// 	showFormInvalidMessage: false,
+			// });
+
+			props.closeSignIn();
+		}
+	};
+
 	// Handle clicks on elements outside of the component to close it
 	const myRef = useRef();
 	const handleOutsideClick = useCallback(
@@ -78,6 +125,7 @@ const SignIn = props => {
 		},
 		[props]
 	);
+
 	useEffect(() => {
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
@@ -90,7 +138,7 @@ const SignIn = props => {
 			onClick={event => handleOutsideClick(event)}
 		>
 			<h2>Members Login</h2>
-			<form action="post">
+			<form action="post" onSubmit={handleSubmitFormClick}>
 				{fields.map(field => (
 					<Input
 						key={field.data}
@@ -104,7 +152,7 @@ const SignIn = props => {
 					/>
 				))}
 			</form>
-			<Button type="Confirm" handleClick>
+			<Button type="Confirm" handleClick={handleSubmitFormClick}>
 				Login
 			</Button>
 		</div>
@@ -121,6 +169,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		closeSignIn: () => dispatch(signInOutsideCloseClick()),
+		sentAuthForm: (email, password, isSignIn) =>
+			dispatch(confirmAuth(email, password, isSignIn)),
 	};
 };
 

@@ -21,10 +21,14 @@ export const authFail = error => {
 	};
 };
 
-export const confirmAuth = (email, password) => {
+export const confirmAuth = (email, password, isSignIn) => {
 	return async dispatch => {
 		console.log('Fired!');
 		dispatch(authInit());
+
+		let targetUrl = isSignIn
+			? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M'
+			: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M';
 
 		const authData = {
 			email: email,
@@ -33,15 +37,12 @@ export const confirmAuth = (email, password) => {
 		};
 
 		try {
-			const postAuthData = await axiosAuth.post(
-				'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M',
-				authData
-			);
+			const postAuthData = await axiosAuth.post(targetUrl, authData);
 			console.log(postAuthData);
-			dispatch(authSuccess());
+			dispatch(authSuccess(postAuthData));
 		} catch (error) {
 			console.log(error);
-			dispatch(authFail());
+			dispatch(authFail(error));
 		}
 	};
 };

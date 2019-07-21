@@ -118,6 +118,7 @@ export class ContactData extends Component {
 								handleChange={event =>
 									this.handleFormChange(event, form.data)
 								}
+								handleEnterPress={this.handleOrderSubmitClick}
 							/>
 						))}
 					</form>

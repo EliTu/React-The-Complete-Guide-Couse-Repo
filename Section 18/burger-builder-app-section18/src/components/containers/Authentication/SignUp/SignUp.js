@@ -147,6 +147,7 @@ export class SignUp extends Component {
 								handleChange={event =>
 									this.handleFormChange(event, field.data)
 								}
+								handleEnterPress={this.handleSubmitFormClick}
 							/>
 						))}
 					</form>

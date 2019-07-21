@@ -139,8 +139,9 @@ const SignIn = props => {
 		>
 			<h2>Members Login</h2>
 			<form action="post" onSubmit={handleSubmitFormClick}>
-				{fields.map(field => (
+				{fields.map((field, i) => (
 					<Input
+						focused={i === 0 && props.isSignInDisplayed}
 						key={field.data}
 						elementType={field.elementType}
 						elementConfig={field.elementConfig}
@@ -149,6 +150,7 @@ const SignIn = props => {
 						handleChange={event =>
 							handleFormChange(event, field.data)
 						}
+						handleEnterPress={handleSubmitFormClick}
 					/>
 				))}
 			</form>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './Input.module.css';
 import PropTypes from 'prop-types';
 
@@ -8,8 +8,10 @@ const Input = props => {
 		elementType,
 		elementConfig,
 		value,
-		handleChange,
 		validation,
+		focused,
+		handleChange,
+		handleEnterPress,
 	} = props;
 
 	// CSS Modules styles:
@@ -20,10 +22,22 @@ const Input = props => {
 		<p className={errorMessageStyle}>{validation.errorMessage}</p>
 	);
 
+	// Listen to keyboard enter click to submit form:
+	const enterPressCallback = (event, func) => {
+		if (event.key === 'Enter') func(event);
+	};
+
+	// For LogIn component - focus the first input field:
+	const focusRef = useRef();
+	useEffect(() => {
+		if (focused) focusRef.current.focus();
+	}, [focused]);
+
 	switch (elementType) {
 		case 'input':
 			inputElement = (
 				<input
+					ref={focusRef}
 					className={
 						!validation.valid && validation.hasUserInput
 							? InvalidStyle
@@ -32,6 +46,9 @@ const Input = props => {
 					{...elementConfig}
 					value={value}
 					onChange={handleChange}
+					onKeyPress={event =>
+						enterPressCallback(event, handleEnterPress)
+					}
 				/>
 			);
 			break;
@@ -42,6 +59,9 @@ const Input = props => {
 					{...elementConfig}
 					value={value}
 					onChange={handleChange}
+					onKeyPress={event =>
+						enterPressCallback(event, handleEnterPress)
+					}
 				/>
 			);
 			break;
@@ -64,6 +84,9 @@ const Input = props => {
 					{...elementConfig}
 					value={value}
 					className={!validation.valid ? InvalidStyle : null}
+					onKeyPress={event =>
+						enterPressCallback(event, handleEnterPress)
+					}
 				/>
 			);
 	}
@@ -82,7 +105,9 @@ Input.propTypes = {
 	elementType: PropTypes.string,
 	elementConfig: PropTypes.object,
 	validation: PropTypes.object,
+	focused: PropTypes.bool,
 	handleChange: PropTypes.func,
+	handleEnterPress: PropTypes.func,
 };
 
 export default Input;

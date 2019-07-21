@@ -1,6 +1,5 @@
 import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL } from './constants';
 import axiosAuth from '../../../../axios/axios-auth';
-// import axios from 'axios';
 
 export const authInit = () => {
 	return {
@@ -8,10 +7,11 @@ export const authInit = () => {
 	};
 };
 
-export const authSuccess = authData => {
+export const authSuccess = (idToken, userId) => {
 	return {
 		type: AUTH_SUCCESS,
-		authData: authData,
+		idToken: idToken,
+		userId: userId,
 	};
 };
 export const authFail = error => {
@@ -38,8 +38,13 @@ export const confirmAuth = (email, password, isSignIn) => {
 
 		try {
 			const postAuthData = await axiosAuth.post(targetUrl, authData);
-			console.log(postAuthData);
-			dispatch(authSuccess(postAuthData));
+			console.log(postAuthData.data);
+			dispatch(
+				authSuccess(
+					postAuthData.data.idToken,
+					postAuthData.data.localId
+				)
+			);
 		} catch (error) {
 			console.log(error);
 			dispatch(authFail(error));

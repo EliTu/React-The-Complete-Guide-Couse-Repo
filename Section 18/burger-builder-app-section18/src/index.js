@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import burgerBuilderReducer from './components/containers/BurgerBuilder/store/burgerBuilderReducer';
 import orderFormReducer from './components/CheckoutSummary/ContactData/store/orderFormReducer';
 import signInReducer from './components/display/Navigation/AuthItems/store/signInReducer';
+import authReducer from './components/containers/Authentication/store/authReducer';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
 	burgerBuilder: burgerBuilderReducer,
 	orderForm: orderFormReducer,
 	signIn: signInReducer,
+	auth: authReducer,
 });
 
 // Init redux store + middleware:

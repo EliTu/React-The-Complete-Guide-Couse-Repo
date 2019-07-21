@@ -8,6 +8,8 @@
 
 <!-- - Sort Orders by placing the most recent order on the top of the Orders stack. -->
 
+- Add 'Order number' field for orders to better track them.
+
 - Can delete an Order component.
 
 - More functionality and options for the builder:

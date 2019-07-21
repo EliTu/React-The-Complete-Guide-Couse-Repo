@@ -31,6 +31,7 @@
 .SignIn input {
     background-color: rgba(204, 204, 204, 0);
     width: 45%;
+    color: rgb(236, 235, 235);
 }
 
 .SignIn input::placeholder {

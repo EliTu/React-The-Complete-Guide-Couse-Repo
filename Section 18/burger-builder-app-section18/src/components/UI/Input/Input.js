@@ -27,7 +27,7 @@ const Input = props => {
 		if (event.key === 'Enter') func(event);
 	};
 
-	// For LogIn component - focus the first input field:
+	// Focus the first input field upon component mount
 	const focusRef = useRef();
 	useEffect(() => {
 		if (focused) focusRef.current.focus();

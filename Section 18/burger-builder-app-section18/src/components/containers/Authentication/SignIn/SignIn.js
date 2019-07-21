@@ -141,8 +141,8 @@ const SignIn = props => {
 			<form action="post" onSubmit={handleSubmitFormClick}>
 				{fields.map((field, i) => (
 					<Input
-						focused={i === 0 && props.isSignInDisplayed}
 						key={field.data}
+						focused={i === 0 && props.isSignInDisplayed}
 						elementType={field.elementType}
 						elementConfig={field.elementConfig}
 						validation={{ ...field.validation }}

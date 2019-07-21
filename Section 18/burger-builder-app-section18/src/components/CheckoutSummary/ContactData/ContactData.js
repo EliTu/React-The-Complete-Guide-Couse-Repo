@@ -108,9 +108,10 @@ export class ContactData extends Component {
 					<Spinner />
 				) : (
 					<form action="post" onSubmit={this.handleOrderSubmitClick}>
-						{orderForm.map(form => (
+						{orderForm.map((form, i) => (
 							<Input
 								key={form.data}
+								focused={i === 0}
 								elementType={form.elementType}
 								elementConfig={form.elementConfig}
 								validation={{ ...form.validation }}

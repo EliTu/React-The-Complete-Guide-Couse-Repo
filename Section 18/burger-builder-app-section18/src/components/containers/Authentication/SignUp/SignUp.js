@@ -137,9 +137,10 @@ export class SignUp extends Component {
 				<div className={SignUp}>
 					<h2>Become a new member!</h2>
 					<form action="post" onSubmit={this.handleSubmitFormClick}>
-						{fields.map(field => (
+						{fields.map((field, i) => (
 							<Input
 								key={field.data}
+								focused={i === 0}
 								elementType={field.elementType}
 								elementConfig={field.elementConfig}
 								validation={{ ...field.validation }}

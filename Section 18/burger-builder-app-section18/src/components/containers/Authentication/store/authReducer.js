@@ -1,4 +1,4 @@
-import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL } from './constants';
+import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL, AUTH_SIGNOUT } from './constants';
 
 const INITIAL_STATE = {
 	authType: '',
@@ -13,7 +13,6 @@ const INITIAL_STATE = {
 const authReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case AUTH_INIT:
-			console.log(action.isSignInLoading);
 			return {
 				...state,
 				isLoading: true,
@@ -25,7 +24,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				idToken: action.idToken,
-				userId: action.localId,
+				userId: action.userId,
 				isLoggedIn: true,
 				isLoading: false,
 				isSignInLoading: false,
@@ -40,6 +39,16 @@ const authReducer = (state = INITIAL_STATE, action) => {
 				error: action.error,
 			};
 
+		case AUTH_SIGNOUT:
+			return {
+				...state,
+				idToken: '',
+				userId: '',
+				isLoggedIn: false,
+				isLoading: false,
+				isSignInLoading: false,
+				error: null,
+			};
 		default:
 			return state;
 	}

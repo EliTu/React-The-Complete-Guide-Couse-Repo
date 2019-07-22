@@ -93,6 +93,7 @@ const SignIn = ({
 		// If all fields are valid
 		if (isFormValid) {
 			sentAuthForm(fields[0].value, fields[1].value, 'signin');
+			setShowFormInvalidMessage(false);
 		}
 	};
 

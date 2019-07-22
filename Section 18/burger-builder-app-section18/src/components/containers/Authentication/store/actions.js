@@ -1,4 +1,4 @@
-import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL } from './constants';
+import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL, AUTH_SIGNOUT } from './constants';
 import axiosAuth from '../../../../axios/axios-auth';
 
 export const authInit = authType => {
@@ -23,9 +23,14 @@ export const authFail = error => {
 	};
 };
 
+export const authSignout = () => {
+	return {
+		type: AUTH_SIGNOUT,
+	};
+};
+
 export const confirmAuth = (email, password, authType) => {
 	return async dispatch => {
-		console.log('Fired!');
 		dispatch(authInit(authType));
 
 		let targetUrl =
@@ -48,8 +53,17 @@ export const confirmAuth = (email, password, authType) => {
 					postAuthData.data.localId
 				)
 			);
+			dispatch(logOutWhenTokenExpires(postAuthData.data.expiresIn));
 		} catch (error) {
 			dispatch(authFail(error));
 		}
+	};
+};
+
+export const logOutWhenTokenExpires = expireTime => {
+	return async dispatch => {
+		setTimeout(() => {
+			dispatch(authSignout());
+		}, expireTime * 1000);
 	};
 };

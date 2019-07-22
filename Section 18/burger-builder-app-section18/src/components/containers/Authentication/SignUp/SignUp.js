@@ -5,8 +5,10 @@ import Input from '../../../UI/Input/Input';
 import Button from '../../../UI/Button/Button';
 import Spinner from '../../../UI/Spinner/Spinner';
 import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
+import AuthErrorMessage from '../../../UI/AuthErrorMessage/AuthErrorMessage';
 import styles from '../SignUp/SignUp.module.css';
 import { confirmAuth } from '../store/actions';
+import PropTypes from 'prop-types';
 
 export class SignUp extends Component {
 	state = {
@@ -129,7 +131,7 @@ export class SignUp extends Component {
 		const { fields, showFormInvalidMessage, formErrorType } = this.state;
 
 		// props:
-		const { isLoading, isSignInLoading } = this.props;
+		const { isLoading, isSignInLoading, error } = this.props;
 
 		// Styles:
 		const { SignUp, MainHeader } = styles;
@@ -170,6 +172,13 @@ export class SignUp extends Component {
 							{showFormInvalidMessage ? (
 								<FormErrorMessage errorType={formErrorType} />
 							) : null}
+							{error ? (
+								<AuthErrorMessage
+									errorMessage={
+										error.response.data.error.message
+									}
+								/>
+							) : null}
 							<Button
 								type="Confirm"
 								handleClick={this.handleSubmitFormClick}
@@ -195,6 +204,7 @@ const mapStateToProps = state => {
 	return {
 		isLoading: state.auth.isLoading,
 		isSignInLoading: state.auth.isSignInLoading,
+		error: state.auth.error,
 	};
 };
 
@@ -203,6 +213,13 @@ const mapDispatchToProps = dispatch => {
 		sentAuthForm: (email, password) =>
 			dispatch(confirmAuth(email, password)),
 	};
+};
+
+SignUp.propTypes = {
+	isLoading: PropTypes.bool,
+	isSignInLoading: PropTypes.bool,
+	error: PropTypes.object,
+	sentAuthForm: PropTypes.func,
 };
 
 export default connect(

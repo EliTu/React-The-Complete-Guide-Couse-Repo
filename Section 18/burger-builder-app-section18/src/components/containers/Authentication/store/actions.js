@@ -47,7 +47,6 @@ export const confirmAuth = (email, password, isSignIn) => {
 				)
 			);
 		} catch (error) {
-			console.log(error);
 			dispatch(authFail(error));
 		}
 	};

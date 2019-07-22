@@ -11,7 +11,7 @@
     background-color: rgba(241, 238, 238, 0.993);
     color: #181616e0;
     font-size: 0.9rem;
-    width: 40%;
+    width: 55%;
     outline: none;
     border: none;
     border-bottom: 2px solid rgba(105, 241, 105, 0.808);
@@ -51,7 +51,7 @@
 }
 
 .Input input:focus {
-    width: 55%;
+    width: 70%;
 }
 
 .Input .InvalidStyle {

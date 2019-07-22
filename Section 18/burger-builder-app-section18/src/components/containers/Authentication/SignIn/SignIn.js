@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { connect } from 'react-redux';
+import signInForm from './signInForm/signInForm';
 import Button from '../../../UI/Button/Button';
 import Input from '../../../UI/Input/Input';
 import Spinner from '../../../UI/Spinner/Spinner';
-import signInForm from './signInForm/signInForm';
+import AuthErrorMessage from '../../../UI/AuthErrorMessage/AuthErrorMessage';
 import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/store/actions';
 import { confirmAuth } from '../store/actions';
 import styles from './SignIn.module.css';
+import PropTypes from 'prop-types';
 
-const SignIn = props => {
+const SignIn = ({
+	isSignInDisplayed,
+	isLoading,
+	error,
+	sentAuthForm,
+	closeSignIn,
+}) => {
 	// CSS Modules styles:
 	const { SignIn, Open, Closed } = styles;
 
@@ -19,7 +27,7 @@ const SignIn = props => {
 	const [checkMinMax, setCheckMinMax] = useState(false);
 
 	// Toggle component display upon clicking the navbar link
-	const setDisplayStyle = props.isSignInDisplayed ? Open : Closed;
+	const setDisplayStyle = isSignInDisplayed ? Open : Closed;
 
 	const handleFormChange = (event, data) => {
 		let updatedForm = [...fields];
@@ -80,35 +88,10 @@ const SignIn = props => {
 			return;
 		}
 
-		// Check if both passwords are not matching
-		// if (this.state.fields[1].value !== this.state.fields[2].value) {
-		// 	// Nullify 2nd password field value
-		// 	let resetValueCopy = [...this.state.fields];
-		// 	resetValueCopy[2].value = '';
-
-		// 	this.setState({
-		// 		fields: resetValueCopy,
-		// 		isFormValid: false,
-		// 		showFormInvalidMessage: true,
-		// 		formErrorType: 'noMatch',
-		// 	});
-		// 	return;
-		// }
-
 		// If all fields are valid
 		const isSignIn = true;
 		if (isFormValid) {
-			props.sentAuthForm(fields[0].value, fields[1].value, isSignIn);
-
-			// let resetValueCopy = [...this.state.fields];
-			// resetValueCopy.forEach(field => (field.value = ''));
-
-			// this.setState({
-			// 	fields: resetValueCopy,
-			// 	showFormInvalidMessage: false,
-			// });
-
-			// props.closeSignIn();
+			sentAuthForm(fields[0].value, fields[1].value, isSignIn);
 		}
 	};
 
@@ -116,14 +99,11 @@ const SignIn = props => {
 	const myRef = useRef();
 	const handleOutsideClick = useCallback(
 		event => {
-			if (
-				props.isSignInDisplayed &&
-				!myRef.current.contains(event.target)
-			) {
-				props.closeSignIn();
+			if (isSignInDisplayed && !myRef.current.contains(event.target)) {
+				closeSignIn();
 			}
 		},
-		[props]
+		[closeSignIn, isSignInDisplayed]
 	);
 
 	useEffect(() => {
@@ -132,12 +112,8 @@ const SignIn = props => {
 	}, [handleOutsideClick]);
 
 	return (
-		<div
-			className={[SignIn, setDisplayStyle].join(' ')}
-			ref={myRef}
-			onClick={event => handleOutsideClick(event)}
-		>
-			{props.isLoading ? (
+		<div className={[SignIn, setDisplayStyle].join(' ')} ref={myRef}>
+			{isLoading ? (
 				<Spinner />
 			) : (
 				<>
@@ -146,7 +122,7 @@ const SignIn = props => {
 						{fields.map((field, i) => (
 							<Input
 								key={field.data}
-								focused={i === 0 && props.isSignInDisplayed}
+								focused={i === 0 && isSignInDisplayed}
 								elementType={field.elementType}
 								elementConfig={field.elementConfig}
 								validation={{ ...field.validation }}
@@ -158,6 +134,11 @@ const SignIn = props => {
 							/>
 						))}
 					</form>
+					{error ? (
+						<AuthErrorMessage
+							errorMessage={error.response.data.error.message}
+						/>
+					) : null}
 					<Button type="Confirm" handleClick={handleSubmitFormClick}>
 						Login
 					</Button>
@@ -172,6 +153,7 @@ const mapStateToProps = state => {
 	return {
 		isSignInDisplayed: state.signIn.isSignInDisplayed,
 		isLoading: state.auth.isLoading,
+		error: state.auth.error,
 	};
 };
 
@@ -181,6 +163,14 @@ const mapDispatchToProps = dispatch => {
 		sentAuthForm: (email, password, isSignIn) =>
 			dispatch(confirmAuth(email, password, isSignIn)),
 	};
+};
+
+SignIn.propTypes = {
+	isSignInDisplayed: PropTypes.bool,
+	isLoading: PropTypes.bool,
+	error: PropTypes.object,
+	closeSignIn: PropTypes.func,
+	sentAuthForm: PropTypes.func,
 };
 
 export default connect(

@@ -5,15 +5,18 @@ const INITIAL_STATE = {
 	idToken: '',
 	userId: '',
 	isLoading: false,
+	isSignInLoading: false,
 	error: null,
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case AUTH_INIT:
+			console.log(action.isSignInLoading);
 			return {
 				...state,
 				isLoading: true,
+				isSignInLoading: action.isSignInLoading,
 			};
 
 		case AUTH_SUCCESS:
@@ -23,6 +26,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 				userId: action.localId,
 				isLoggedIn: true,
 				isLoading: false,
+				isSignInLoading: false,
 				error: null,
 			};
 
@@ -30,6 +34,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				isLoading: false,
+				isSignInLoading: false,
 				error: action.error,
 			};
 

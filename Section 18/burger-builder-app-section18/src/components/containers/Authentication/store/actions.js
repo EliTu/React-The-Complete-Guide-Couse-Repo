@@ -1,9 +1,10 @@
 import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL } from './constants';
 import axiosAuth from '../../../../axios/axios-auth';
 
-export const authInit = () => {
+export const authInit = isSignIn => {
 	return {
 		type: AUTH_INIT,
+		isSignInLoading: isSignIn,
 	};
 };
 
@@ -24,7 +25,7 @@ export const authFail = error => {
 export const confirmAuth = (email, password, isSignIn) => {
 	return async dispatch => {
 		console.log('Fired!');
-		dispatch(authInit());
+		dispatch(authInit(isSignIn));
 
 		let targetUrl = isSignIn
 			? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M'

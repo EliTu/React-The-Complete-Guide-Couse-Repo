@@ -129,7 +129,7 @@ export class SignUp extends Component {
 		const { fields, showFormInvalidMessage, formErrorType } = this.state;
 
 		// props:
-		const { isLoading } = this.props;
+		const { isLoading, isSignInLoading } = this.props;
 
 		// Styles:
 		const { SignUp, MainHeader } = styles;
@@ -138,7 +138,7 @@ export class SignUp extends Component {
 			<>
 				<h1 className={MainHeader}>Registration</h1>
 				<div className={SignUp}>
-					{isLoading ? (
+					{isLoading && !isSignInLoading ? (
 						<Spinner />
 					) : (
 						<>
@@ -194,6 +194,7 @@ export class SignUp extends Component {
 const mapStateToProps = state => {
 	return {
 		isLoading: state.auth.isLoading,
+		isSignInLoading: state.auth.isSignInLoading,
 	};
 };
 

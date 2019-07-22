@@ -4,6 +4,7 @@ import signInForm from './signInForm/signInForm';
 import Button from '../../../UI/Button/Button';
 import Input from '../../../UI/Input/Input';
 import Spinner from '../../../UI/Spinner/Spinner';
+import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
 import AuthErrorMessage from '../../../UI/AuthErrorMessage/AuthErrorMessage';
 import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/store/actions';
 import { confirmAuth } from '../store/actions';
@@ -14,6 +15,7 @@ const SignIn = ({
 	isSignInDisplayed,
 	isLoading,
 	error,
+	authType,
 	sentAuthForm,
 	closeSignIn,
 }) => {
@@ -89,9 +91,8 @@ const SignIn = ({
 		}
 
 		// If all fields are valid
-		const isSignIn = true;
 		if (isFormValid) {
-			sentAuthForm(fields[0].value, fields[1].value, isSignIn);
+			sentAuthForm(fields[0].value, fields[1].value, 'signin');
 		}
 	};
 
@@ -134,7 +135,10 @@ const SignIn = ({
 							/>
 						))}
 					</form>
-					{error ? (
+					{showFormInvalidMessage ? (
+						<FormErrorMessage errorType="emptyFields" />
+					) : null}
+					{error && authType === 'signin' ? (
 						<AuthErrorMessage
 							errorMessage={error.response.data.error.message}
 						/>
@@ -153,6 +157,7 @@ const mapStateToProps = state => {
 	return {
 		isSignInDisplayed: state.signIn.isSignInDisplayed,
 		isLoading: state.auth.isLoading,
+		authType: state.auth.authType,
 		error: state.auth.error,
 	};
 };
@@ -160,8 +165,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		closeSignIn: () => dispatch(signInOutsideCloseClick()),
-		sentAuthForm: (email, password, isSignIn) =>
-			dispatch(confirmAuth(email, password, isSignIn)),
+		sentAuthForm: (email, password, authType) =>
+			dispatch(confirmAuth(email, password, authType)),
 	};
 };
 
@@ -171,6 +176,7 @@ SignIn.propTypes = {
 	error: PropTypes.object,
 	closeSignIn: PropTypes.func,
 	sentAuthForm: PropTypes.func,
+	authType: PropTypes.string,
 };
 
 export default connect(

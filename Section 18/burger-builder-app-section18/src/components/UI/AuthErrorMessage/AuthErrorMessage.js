@@ -24,7 +24,7 @@ const AuthErrorMessage = ({ errorMessage }) => {
 				return `The user account you're trying to sign in to has been disabled`;
 
 			default:
-				return 'an Unexpected error occurred!';
+				return 'Oops! an Unexpected error has occurred!';
 		}
 	};
 
@@ -37,6 +37,7 @@ const AuthErrorMessage = ({ errorMessage }) => {
 
 AuthErrorMessage.propTypes = {
 	errorMessage: PropTypes.string,
+	authType: PropTypes.string,
 };
 
 export default AuthErrorMessage;

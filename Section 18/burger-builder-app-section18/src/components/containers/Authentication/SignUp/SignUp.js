@@ -109,7 +109,8 @@ export class SignUp extends Component {
 		if (this.state.isFormValid) {
 			this.props.sentAuthForm(
 				this.state.fields[0].value,
-				this.state.fields[1].value
+				this.state.fields[1].value,
+				'signup'
 			);
 
 			let resetValueCopy = [...this.state.fields];
@@ -131,7 +132,7 @@ export class SignUp extends Component {
 		const { fields, showFormInvalidMessage, formErrorType } = this.state;
 
 		// props:
-		const { isLoading, isSignInLoading, error } = this.props;
+		const { isLoading, isSignInLoading, error, authType } = this.props;
 
 		// Styles:
 		const { SignUp, MainHeader } = styles;
@@ -172,7 +173,7 @@ export class SignUp extends Component {
 							{showFormInvalidMessage ? (
 								<FormErrorMessage errorType={formErrorType} />
 							) : null}
-							{error ? (
+							{error && authType === 'signup' ? (
 								<AuthErrorMessage
 									errorMessage={
 										error.response.data.error.message
@@ -205,19 +206,21 @@ const mapStateToProps = state => {
 		isLoading: state.auth.isLoading,
 		isSignInLoading: state.auth.isSignInLoading,
 		error: state.auth.error,
+		authType: state.auth.authType,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		sentAuthForm: (email, password) =>
-			dispatch(confirmAuth(email, password)),
+		sentAuthForm: (email, password, authType) =>
+			dispatch(confirmAuth(email, password, authType)),
 	};
 };
 
 SignUp.propTypes = {
 	isLoading: PropTypes.bool,
 	isSignInLoading: PropTypes.bool,
+	authType: PropTypes.string,
 	error: PropTypes.object,
 	sentAuthForm: PropTypes.func,
 };

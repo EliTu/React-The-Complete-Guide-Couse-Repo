@@ -1,10 +1,11 @@
 import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL } from './constants';
 import axiosAuth from '../../../../axios/axios-auth';
 
-export const authInit = isSignIn => {
+export const authInit = authType => {
 	return {
 		type: AUTH_INIT,
-		isSignInLoading: isSignIn,
+		authType: authType,
+		isSignInLoading: authType === 'signin',
 	};
 };
 
@@ -22,14 +23,15 @@ export const authFail = error => {
 	};
 };
 
-export const confirmAuth = (email, password, isSignIn) => {
+export const confirmAuth = (email, password, authType) => {
 	return async dispatch => {
 		console.log('Fired!');
-		dispatch(authInit(isSignIn));
+		dispatch(authInit(authType));
 
-		let targetUrl = isSignIn
-			? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M'
-			: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M';
+		let targetUrl =
+			authType === 'signin'
+				? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M'
+				: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M';
 
 		const authData = {
 			email: email,

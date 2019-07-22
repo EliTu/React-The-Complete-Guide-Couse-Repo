@@ -1,9 +1,10 @@
 import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL } from './constants';
 
 const INITIAL_STATE = {
-	isLoggedIn: false,
+	authType: '',
 	idToken: '',
 	userId: '',
+	isLoggedIn: false,
 	isLoading: false,
 	isSignInLoading: false,
 	error: null,
@@ -17,6 +18,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				isLoading: true,
 				isSignInLoading: action.isSignInLoading,
+				authType: action.authType,
 			};
 
 		case AUTH_SUCCESS:

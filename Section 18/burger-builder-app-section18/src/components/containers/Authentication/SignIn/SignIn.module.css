@@ -9,7 +9,7 @@
     flex-flow: column;
     align-content: center;
     z-index: 5;
-    padding: 0.2rem 0.5rem;
+    padding: 0.6rem 0.5rem;
     margin: 0.3rem auto;
     border: 1px solid rgb(182, 177, 177);
     border-top: none;
@@ -18,6 +18,8 @@
     border-radius: 7px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    outline: 2px solid rgba(212, 208, 208, 0.904);
+    outline-offset: -0.5rem;
 }
 
 .SignIn h2 {

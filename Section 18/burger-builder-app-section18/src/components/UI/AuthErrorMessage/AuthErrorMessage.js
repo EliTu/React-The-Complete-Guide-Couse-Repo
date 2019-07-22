@@ -15,13 +15,13 @@ const AuthErrorMessage = ({ errorMessage }) => {
 				return 'Too many attempts. Please try again later';
 
 			case 'EMAIL_NOT_FOUND':
-				return `The email you've provided does not exist. Please try signing in with a different address or register a new user with the unused email`;
+				return `The email you've provided does not exist. Please try signing in with a different email or register a new user with the unused email`;
 
 			case 'INVALID_PASSWORD':
 				return 'Wrong password. Please try again';
 
 			case 'USER_DISABLED':
-				return `The user account you're trying to sign in to has been disabled`;
+				return `The account you're trying to sign in to has been disabled`;
 
 			default:
 				return 'Oops! an Unexpected error has occurred!';

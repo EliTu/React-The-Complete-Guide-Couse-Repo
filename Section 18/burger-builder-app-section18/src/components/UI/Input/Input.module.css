@@ -8,7 +8,7 @@
 .Input input,
 .Input textarea,
 .Input select {
-    background-color: rgba(241, 238, 238, 0.993);
+    background-color: rgba(241, 238, 238, 0);
     color: #181616e0;
     font-size: 0.9rem;
     width: 55%;
@@ -55,20 +55,20 @@
 }
 
 .Input .InvalidStyle {
-    border-bottom: 2px solid rgba(190, 16, 16, 0.63);
+    border-bottom: 2px solid rgba(238, 87, 87, 0.89);
 }
 
 .errorMessageStyle {
     font-size: 0.8rem;
-    color: rgb(245, 82, 82);
+    color: rgb(247, 109, 109);
 }
 
 ::placeholder {
-    color: rgba(58, 50, 50, 0.438);
+    color: rgba(173, 165, 165, 0.685);
 }
 
 @media screen and (max-width: 800px) {
     .Input input {
-        width: 40%;
+        width: 60%;
     }
 }

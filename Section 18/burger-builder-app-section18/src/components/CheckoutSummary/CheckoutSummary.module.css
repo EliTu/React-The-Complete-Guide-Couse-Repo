@@ -2,13 +2,14 @@
     width: 80%;
     text-align: center;
     margin: auto;
+    border: 1px solid black;
 }
 
-.CheckoutSummary h1 {
-    margin: 1rem auto;
+.CheckoutSummaryHeader {
+    margin: 3rem auto;
     text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
+    color: rgba(27, 24, 24, 0.904);
+    margin: 0 auto;
 }
 
 .BurgerDisplay {

@@ -13,20 +13,22 @@
 }
 
 .Confirm {
-    color: rgb(26, 104, 7);
-    border: 2px solid rgba(16, 151, 4, 0.781);
+    color: rgba(105, 241, 105, 0.911);
+    border: 2px solid rgba(105, 241, 105, 0.76);
 }
 
 .Confirm:hover {
-    background-color: rgba(166, 240, 159, 0.747);
+    color: rgba(158, 238, 158, 0.925);
+    background-color: rgba(37, 168, 28, 0.781);
 }
 
 .Danger {
-    color: rgb(226, 17, 17);
-    border: 2px solid rgba(226, 42, 42, 0.719);
+    color: rgb(228, 104, 104);
+    border: 2px solid rgba(241, 81, 81, 0.897);
 }
 
 .Danger:hover {
+    color: rgb(228, 25, 25);
     background-color: rgba(231, 159, 159, 0.74);
 }
 

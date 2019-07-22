@@ -145,7 +145,7 @@ export class SignUp extends Component {
 						<Spinner />
 					) : (
 						<>
-							<h2>Become a new member!</h2>
+							<h2>Become a new member</h2>
 							<form
 								action="post"
 								onSubmit={this.handleSubmitFormClick}

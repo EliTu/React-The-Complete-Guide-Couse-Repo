@@ -20,35 +20,35 @@
     border-top-right-radius: 0;
     outline: 2px solid rgba(212, 208, 208, 0.904);
     outline-offset: -0.5rem;
+    transition: all 0.2s ease-in-out;
 }
 
 .SignIn h2 {
     color: rgb(236, 235, 235);
     margin: 0.8rem auto;
+    padding: 0.7rem 0;
     text-align: center;
+    border-bottom: 2px solid rgb(209, 207, 205);
+    width: 90%;
 }
 
 .SignIn button {
     margin: 0.7rem auto;
-    color: rgba(105, 241, 105, 0.76);
 }
 
 .SignIn input {
-    background-color: rgba(204, 204, 204, 0);
     width: 60%;
     color: rgb(236, 235, 235);
 }
 
-.SignIn input::placeholder {
-    color: rgba(173, 172, 170, 0.548);
-}
-
 .Closed {
-    display: none;
+    opacity: 0;
+    transform: translateY(-150%);
 }
 
 .Open {
-    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Medium screen */
@@ -76,5 +76,15 @@
 
     .SignIn input {
         width: 55%;
+    }
+
+    .Closed {
+        opacity: 0;
+        transform: translateX(-150%);
+    }
+
+    .Open {
+        opacity: 1;
+        transform: translateX(0);
     }
 }

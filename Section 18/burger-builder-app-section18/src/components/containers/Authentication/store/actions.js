@@ -9,11 +9,12 @@ export const authInit = authType => {
 	};
 };
 
-export const authSuccess = (idToken, userId) => {
+export const authSuccess = (idToken, userId, email) => {
 	return {
 		type: AUTH_SUCCESS,
 		idToken: idToken,
 		userId: userId,
+		email: email,
 	};
 };
 export const authFail = error => {
@@ -50,7 +51,8 @@ export const confirmAuth = (email, password, authType) => {
 			dispatch(
 				authSuccess(
 					postAuthData.data.idToken,
-					postAuthData.data.localId
+					postAuthData.data.localId,
+					postAuthData.data.email
 				)
 			);
 			dispatch(logOutWhenTokenExpires(postAuthData.data.expiresIn));

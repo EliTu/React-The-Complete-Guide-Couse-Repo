@@ -24,11 +24,13 @@ export const fetchOrderFail = () => {
 	};
 };
 
-export const fetchOrdersFromDatabase = () => {
+export const fetchOrdersFromDatabase = idToken => {
 	return async dispatch => {
 		dispatch(fetchOrderInit());
 		try {
-			const orders = await axiosInstance.get('/orders.json');
+			const orders = await axiosInstance.get(
+				`/orders.json?auth=${idToken}`
+			);
 			const fetchedOrders = [];
 			for (let key in orders.data) {
 				fetchedOrders.push({ ...orders.data[key], id: key });

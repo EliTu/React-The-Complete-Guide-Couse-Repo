@@ -20,6 +20,18 @@ export class ContactData extends Component {
 		showFormInvalidMessage: false,
 	};
 
+	componentDidMount() {
+		// If a user is logged in, set the email value to the user email by default
+		if (this.props.isLoggedIn && this.props.email) {
+			const orderFormCopy = [...this.state.orderForm];
+			orderFormCopy[2].value = this.props.email;
+
+			this.setState({
+				orderForm: orderFormCopy,
+			});
+		}
+	}
+
 	handleOrderSubmitClick = async event => {
 		event.preventDefault();
 
@@ -29,8 +41,6 @@ export class ContactData extends Component {
 			});
 			return;
 		}
-
-		// this.setState({ isLoadingRequest: true });
 
 		const orderData = [...this.state.orderForm];
 		const order = {
@@ -47,7 +57,11 @@ export class ContactData extends Component {
 			deliveryMethod: orderData[5].value,
 		};
 
-		this.props.onOrderClick(order, this.props.history.replace);
+		this.props.onOrderClick(
+			order,
+			this.props.history.replace,
+			this.props.idToken
+		);
 	};
 
 	handleFormChange = (event, data) => {
@@ -143,6 +157,9 @@ ContactData.propTypes = {
 	totalPrice: PropTypes.number,
 	isLoadingRequest: PropTypes.bool,
 	onOrderClick: PropTypes.func,
+	idToken: PropTypes.string,
+	isLoggedIn: PropTypes.bool,
+	email: PropTypes.string,
 };
 
 // Redux setup:
@@ -151,13 +168,16 @@ const mapStateToProps = state => {
 		ingredients: state.burgerBuilder.ingredients,
 		totalPrice: state.burgerBuilder.totalPrice,
 		isLoadingRequest: state.orderForm.isLoading,
+		idToken: state.auth.idToken,
+		isLoggedIn: state.auth.isLoggedIn,
+		email: state.auth.email,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onOrderClick: (order, redirectBack) =>
-			dispatch(postPurchasedBurger(order, redirectBack)),
+		onOrderClick: (order, redirectBack, idToken) =>
+			dispatch(postPurchasedBurger(order, redirectBack, idToken)),
 	};
 };
 

@@ -2,22 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Order from './Order/Order';
 import Spinner from '../../UI/Spinner/Spinner';
-import axiosInstance from '../../../axios/axios-orders';
 import { fetchOrdersFromDatabase } from './store/actions';
-import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
 import styles from './Orders.module.css';
 import PropTypes from 'prop-types';
 
 export class Orders extends Component {
 	componentDidMount() {
-		this.props.onFetchOrders();
+		this.props.onFetchOrders(this.props.idToken);
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.isLoggedIn !== this.props.isLoggedIn)
+			this.props.onFetchOrders(this.props.idToken);
 	}
 
 	render() {
 		// state (mapped from redux):
-		const { orders, isLoadingRequest } = this.props;
+		const { orders, isLoadingRequest, isLoggedIn } = this.props;
 		// CSS Modules styles:
 		const { Orders, noOrders } = styles;
+
+		const noShowMessage =
+			!isLoggedIn && !isLoadingRequest
+				? `The Orders area is for members only! in order to review previous orders, please log in first`
+				: `No previous orders found!`;
 
 		return (
 			<div className={Orders}>
@@ -40,9 +48,9 @@ export class Orders extends Component {
 								/>
 							) : null;
 						})
-						.reverse() // TO show the latest order first
+						.reverse() // To show the latest order first
 				) : (
-					<p className={noOrders}>No previous orders found!</p>
+					<p className={noOrders}>{noShowMessage}</p>
 				)}
 			</div>
 		);
@@ -53,6 +61,8 @@ Orders.propTypes = {
 	orders: PropTypes.array,
 	isLoadingRequest: PropTypes.bool,
 	onFetchOrders: PropTypes.func,
+	isLoggedIn: PropTypes.bool,
+	idToken: PropTypes.string,
 };
 
 // Redux setup:
@@ -60,16 +70,18 @@ const mapStateToProps = state => {
 	return {
 		orders: state.orderForm.orders,
 		isLoadingRequest: state.orderForm.isLoading,
+		isLoggedIn: state.auth.isLoggedIn,
+		idToken: state.auth.idToken,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onFetchOrders: () => dispatch(fetchOrdersFromDatabase()),
+		onFetchOrders: idToken => dispatch(fetchOrdersFromDatabase(idToken)),
 	};
 };
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(requestMessageComponent(Orders, axiosInstance));
+)(Orders);

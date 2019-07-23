@@ -72,6 +72,7 @@
         border: none;
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
+        box-shadow: 2px 3px 20px 10px rgb(182, 177, 177);
     }
 
     .SignIn input {

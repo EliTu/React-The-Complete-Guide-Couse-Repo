@@ -9,7 +9,7 @@
 .Input textarea,
 .Input select {
     background-color: rgba(241, 238, 238, 0);
-    color: #181616e0;
+    color: rgb(209, 207, 205);
     font-size: 0.9rem;
     width: 55%;
     outline: none;

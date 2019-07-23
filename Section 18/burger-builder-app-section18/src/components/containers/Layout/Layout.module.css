@@ -4,7 +4,7 @@
 }
 
 /* Mobile */
-@media (max-width: 500px)  {
+@media (max-width: 500px) {
     .layoutStyle {
         overflow: none;
         width: 100%;

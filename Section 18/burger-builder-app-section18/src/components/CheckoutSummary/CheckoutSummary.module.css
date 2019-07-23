@@ -1,22 +1,20 @@
 .CheckoutSummary {
+    box-sizing: border-box;
     width: 80%;
     text-align: center;
     margin: auto;
-    border: 1px solid black;
-}
-
-.CheckoutSummaryHeader {
-    margin: 3rem auto;
-    text-align: center;
-    color: rgba(27, 24, 24, 0.904);
-    margin: 0 auto;
+    padding: 1rem;
+    border-radius: 7px;
+    background-image: linear-gradient(180deg, rgba(32, 32, 32, 0.932), rgba(20, 20, 20, 0.945) 70%);
+    color: rgb(209, 207, 205);
 }
 
 .BurgerDisplay {
     width: 100%;
     height: 40%;
     margin: auto;
-    padding: 0.3rem 0;
+    padding: 0.2rem 0;
+    border: 2px solid rgba(229, 222, 207, 0.582);
 }
 
 .CheckoutSummary button {
@@ -28,6 +26,7 @@
 .NoIngredients {
     color: rgb(230, 14, 32);
     font-size: 2rem;
+    padding: 0.2rem;
 }
 
 .Price {
@@ -37,8 +36,9 @@
     color: rgba(84, 243, 84, 0.925);
 }
 
-@media(min-width: 600px) {
+/* Large screen */
+@media screen and (min-width: 600px) {
     .CheckoutSummary {
-        width: 500px;
+        width: 30%;
     }
 }

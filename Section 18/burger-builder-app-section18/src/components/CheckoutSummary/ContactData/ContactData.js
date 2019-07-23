@@ -103,7 +103,7 @@ export class ContactData extends Component {
 
 		return (
 			<div className={ContactData}>
-				<h4>Enter your contact information:</h4>
+				<h3>Enter your contact information:</h3>
 				{isLoadingRequest && isFormValid ? (
 					<Spinner />
 				) : (

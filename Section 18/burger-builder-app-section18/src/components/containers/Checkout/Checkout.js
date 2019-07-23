@@ -16,23 +16,26 @@ export class Checkout extends Component {
 
 	render() {
 		// CSS Modules styles:
-		const { Checkout } = styles;
+		const { Checkout, CheckoutHeader } = styles;
 
 		// state:
 		const { ingredients } = this.props;
 
 		return (
-			<div className={Checkout}>
-				<CheckoutSummary
-					ingredients={ingredients}
-					cancelClick={this.handleCancelClick}
-					checkoutClick={this.handleCheckoutClick}
-				/>
-				<Route
-					path={`${this.props.match.path}/contact-data`}
-					component={ContactData}
-				/>
-			</div>
+			<>
+				<h1 className={CheckoutHeader}>Your burger:</h1>
+				<div className={Checkout}>
+					<CheckoutSummary
+						ingredients={ingredients}
+						cancelClick={this.handleCancelClick}
+						checkoutClick={this.handleCheckoutClick}
+					/>
+					<Route
+						path={`${this.props.match.path}/contact-data`}
+						component={ContactData}
+					/>
+				</div>
+			</>
 		);
 	}
 }

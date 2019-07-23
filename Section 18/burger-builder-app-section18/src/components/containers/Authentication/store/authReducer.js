@@ -50,7 +50,9 @@ const authReducer = (state = INITIAL_STATE, action) => {
 				isLoading: false,
 				isSignInLoading: false,
 				error: null,
+				authType: action.authType,
 			};
+
 		default:
 			return state;
 	}

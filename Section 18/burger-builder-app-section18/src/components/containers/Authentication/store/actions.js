@@ -27,6 +27,7 @@ export const authFail = error => {
 export const authSignout = () => {
 	return {
 		type: AUTH_SIGNOUT,
+		authType: 'signOut',
 	};
 };
 

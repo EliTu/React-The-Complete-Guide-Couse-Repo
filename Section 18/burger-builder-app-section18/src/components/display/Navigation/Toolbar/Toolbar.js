@@ -6,7 +6,7 @@ import Button from '../../../UI/Button/Button';
 import styles from './Toolbar.module.css';
 import PropTypes from 'prop-types';
 
-const Toolbar = ({ clicked, isLoggedIn, email }) => {
+const Toolbar = ({ clicked }) => {
 	// CSS Modules classes:
 	const {
 		Toolbar,

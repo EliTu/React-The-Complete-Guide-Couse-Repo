@@ -32,6 +32,7 @@ const SignIn = ({
 	// Toggle component display upon clicking the navbar link
 	const setDisplayStyle = isSignInDisplayed ? Open : Closed;
 
+	// Handle changes upon typing in the input fields
 	const handleFormChange = (event, data) => {
 		let updatedForm = [...fields];
 		let updatedFormData = updatedForm.forEach(el =>
@@ -83,6 +84,7 @@ const SignIn = ({
 		return isValid;
 	};
 
+	// Handle form submittion
 	const handleSubmitFormClick = event => {
 		event.preventDefault();
 
@@ -168,6 +170,16 @@ const SignIn = ({
 	);
 };
 
+SignIn.propTypes = {
+	isSignInDisplayed: PropTypes.bool,
+	isLoading: PropTypes.bool,
+	error: PropTypes.object,
+	closeSignIn: PropTypes.func,
+	sentAuthForm: PropTypes.func,
+	authType: PropTypes.string,
+	isLoggedIn: PropTypes.bool,
+};
+
 // Redux setup:
 const mapStateToProps = state => {
 	return {
@@ -185,16 +197,6 @@ const mapDispatchToProps = dispatch => {
 		sentAuthForm: (email, password, authType) =>
 			dispatch(confirmAuth(email, password, authType)),
 	};
-};
-
-SignIn.propTypes = {
-	isSignInDisplayed: PropTypes.bool,
-	isLoading: PropTypes.bool,
-	error: PropTypes.object,
-	closeSignIn: PropTypes.func,
-	sentAuthForm: PropTypes.func,
-	authType: PropTypes.string,
-	isLoggedIn: PropTypes.bool,
 };
 
 export default connect(

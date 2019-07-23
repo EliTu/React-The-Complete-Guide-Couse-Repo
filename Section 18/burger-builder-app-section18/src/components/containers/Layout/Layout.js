@@ -58,19 +58,19 @@ class Layout extends Component {
 	}
 }
 
-// Redux setup:
-const mapStateToProps = state => {
-	return {
-		isSignInDisplayed: state.signIn.isSignInDisplayed,
-	};
-};
-
 Layout.propTypes = {
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]).isRequired,
 	isSignInDisplayed: PropTypes.bool,
+};
+
+// Redux setup:
+const mapStateToProps = state => {
+	return {
+		isSignInDisplayed: state.signIn.isSignInDisplayed,
+	};
 };
 
 export default connect(mapStateToProps)(Layout);

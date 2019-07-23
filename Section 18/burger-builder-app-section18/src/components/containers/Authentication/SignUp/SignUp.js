@@ -200,6 +200,14 @@ export class SignUp extends Component {
 	}
 }
 
+SignUp.propTypes = {
+	isLoading: PropTypes.bool,
+	isSignInLoading: PropTypes.bool,
+	authType: PropTypes.string,
+	error: PropTypes.object,
+	sentAuthForm: PropTypes.func,
+};
+
 // Redux setup:
 const mapStateToProps = state => {
 	return {
@@ -215,14 +223,6 @@ const mapDispatchToProps = dispatch => {
 		sentAuthForm: (email, password, authType) =>
 			dispatch(confirmAuth(email, password, authType)),
 	};
-};
-
-SignUp.propTypes = {
-	isLoading: PropTypes.bool,
-	isSignInLoading: PropTypes.bool,
-	authType: PropTypes.string,
-	error: PropTypes.object,
-	sentAuthForm: PropTypes.func,
 };
 
 export default connect(

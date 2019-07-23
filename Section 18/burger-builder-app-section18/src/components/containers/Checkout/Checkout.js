@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CheckoutSummary from '../../CheckoutSummary/CheckoutSummary';
 import ContactData from '../../CheckoutSummary/ContactData/ContactData';
 import styles from './Checkout.module.css';
+import PropTypes from 'prop-types';
 
 export class Checkout extends Component {
 	handleCancelClick = () => {
@@ -39,6 +40,10 @@ export class Checkout extends Component {
 		);
 	}
 }
+
+Checkout.propTypes = {
+	ingredients: PropTypes.array,
+};
 
 // Redux setup:
 const mapStateToProps = state => {

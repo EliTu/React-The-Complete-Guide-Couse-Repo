@@ -31,17 +31,17 @@ const AuthItems = ({ isLoggedIn, email }) => {
 	);
 };
 
+AuthItems.propTypes = {
+	isLoggedIn: PropTypes.bool,
+	email: PropTypes.string,
+};
+
 // Redux setup:
 const mapStateToProps = state => {
 	return {
 		isLoggedIn: state.auth.isLoggedIn,
 		email: state.auth.email,
 	};
-};
-
-AuthItems.propTypes = {
-	isLoggedIn: PropTypes.bool,
-	email: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(AuthItems);

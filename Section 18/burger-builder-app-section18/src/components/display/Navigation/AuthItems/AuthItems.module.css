@@ -1,6 +1,5 @@
 .AuthItems {
-    display: flex;
-    justify-items: center;
+    display: block;
     margin: 0 1rem;
     padding: 0;
     list-style: none;
@@ -9,10 +8,14 @@
 }
 
 .AuthItems .LoggedInMessage {
-    font-size: 1rem;
     color: rgba(235, 235, 235, 0.897);
+    display: inline-block;
+    height: 100%;
+    font-size: 1rem;
     text-align: center;
-    margin: auto;
+    margin: auto 0;
+    padding: 0.9rem 1rem;
+
 }
 
 .LoggedInMessage span {
@@ -22,7 +25,9 @@
 /* Desktop */
 @media (min-width: 500px) {
     .AuthItems {
+        display: flex;
         flex-flow: row;
+        justify-items: center;
         width: 100%;
     }
 }

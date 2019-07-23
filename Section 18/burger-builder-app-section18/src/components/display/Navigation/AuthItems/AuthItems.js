@@ -22,6 +22,9 @@ const AuthItems = ({ isLoggedIn, email }) => {
 					<p className={LoggedInMessage}>
 						Welcome, <span>{email}</span>!
 					</p>
+					<Item signOutItem link="">
+						Log out
+					</Item>
 				</>
 			)}
 		</div>

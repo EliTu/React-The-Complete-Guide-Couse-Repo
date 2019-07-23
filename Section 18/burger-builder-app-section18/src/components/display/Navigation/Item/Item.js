@@ -2,38 +2,56 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { signInToggleClick } from '../AuthItems/store/actions';
+import { authSignout } from '../../../containers/Authentication/store/actions';
 import styles from './Item.module.css';
 import PropTypes from 'prop-types';
 
-const Item = props => {
-	// props:
-	const { link, children, signInItem, toggleSignIn } = props;
-
+const Item = ({
+	link,
+	children,
+	isSignInDisplayed,
+	signInItem,
+	toggleSignIn,
+	signOutItem,
+	signOutClicked,
+	isLoggedIn,
+}) => {
 	// CSS Modules styles:
 	const { Item, active, AuthSignin, SigninActive } = styles;
 
 	// Handle toggling the display property of the LogIn component
 	const handleSignInToggleClick = event => {
 		event.preventDefault();
-		if (!props.isSignInDisplayed) toggleSignIn();
+		if (!isSignInDisplayed) toggleSignIn();
+	};
+
+	// Handle loging user out upon click on 'Log out':
+	const handleLogOutClick = event => {
+		event.preventDefault();
+		signOutClicked();
 	};
 
 	// Set style when the LogIn component is displayed
-	const signInActive = props.isSignInDisplayed ? SigninActive : null;
+	const signInStyles = !isLoggedIn ? [AuthSignin, SigninActive] : [];
 
-	const authType = signInItem ? (
-		<a
-			className={[Item, AuthSignin, signInActive].join(' ')}
-			href={link}
-			onClick={event => handleSignInToggleClick(event)}
-		>
-			Sign in
-		</a>
-	) : (
-		<NavLink className={Item} activeClassName={active} to={link} exact>
-			{children}
-		</NavLink>
-	);
+	const authType =
+		signInItem || signOutItem ? (
+			<a
+				className={[Item, ...signInStyles].join(' ')}
+				href={link}
+				onClick={event =>
+					signInItem
+						? handleSignInToggleClick(event)
+						: handleLogOutClick(event)
+				}
+			>
+				{signInItem ? 'Sign in' : 'Log out'}
+			</a>
+		) : (
+			<NavLink className={Item} activeClassName={active} to={link} exact>
+				{children}
+			</NavLink>
+		);
 
 	return <div className={Item}>{authType}</div>;
 };
@@ -42,17 +60,23 @@ Item.propTypes = {
 	link: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
 	signInItem: PropTypes.bool,
+	isSignInDisplayed: PropTypes.bool,
+	toggleSignIn: PropTypes.func,
+	signOutClicked: PropTypes.func,
+	isLoggedIn: PropTypes.bool,
 };
 
 // Redux setup:
 const mapStateToProps = state => {
 	return {
 		isSignInDisplayed: state.signIn.isSignInDisplayed,
+		isLoggedIn: state.auth.isLoggedIn,
 	};
 };
 const mapDispatchToProps = dispatch => {
 	return {
 		toggleSignIn: () => dispatch(signInToggleClick()),
+		signOutClicked: () => dispatch(authSignout()),
 	};
 };
 

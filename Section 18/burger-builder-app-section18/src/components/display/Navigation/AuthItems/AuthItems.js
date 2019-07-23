@@ -1,18 +1,44 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Item from '../Item/Item';
 import styles from './AuthItems.module.css';
+import PropTypes from 'prop-types';
 
-const AuthItems = props => {
+const AuthItems = ({ isLoggedIn, email }) => {
 	// CSS Modules style:
-	const { AuthItems } = styles;
+	const { AuthItems, LoggedInMessage } = styles;
+
 	return (
 		<div className={AuthItems}>
-			<Item signInItem link="">
-				Sign in
-			</Item>
-			<Item link="/signup">Sign up</Item>
+			{!isLoggedIn ? (
+				<>
+					<Item signInItem link="">
+						Sign in
+					</Item>
+					<Item link="/signup">Sign up</Item>
+				</>
+			) : (
+				<>
+					<p className={LoggedInMessage}>
+						Welcome, <span>{email}</span>!
+					</p>
+				</>
+			)}
 		</div>
 	);
 };
 
-export default AuthItems;
+// Redux setup:
+const mapStateToProps = state => {
+	return {
+		isLoggedIn: state.auth.isLoggedIn,
+		email: state.auth.email,
+	};
+};
+
+AuthItems.propTypes = {
+	isLoggedIn: PropTypes.bool,
+	email: PropTypes.string,
+};
+
+export default connect(mapStateToProps)(AuthItems);

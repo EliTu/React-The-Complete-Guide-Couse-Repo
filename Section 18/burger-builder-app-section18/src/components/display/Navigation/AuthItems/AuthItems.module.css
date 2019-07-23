@@ -8,6 +8,17 @@
     height: 100%;
 }
 
+.AuthItems .LoggedInMessage {
+    font-size: 1rem;
+    color: rgba(235, 235, 235, 0.897);
+    text-align: center;
+    margin: auto;
+}
+
+.LoggedInMessage span {
+    color: rgba(105, 241, 105, 0.808);
+}
+
 /* Desktop */
 @media (min-width: 500px) {
     .AuthItems {

@@ -18,9 +18,10 @@ const SignIn = ({
 	authType,
 	sentAuthForm,
 	closeSignIn,
+	isLoggedIn,
 }) => {
 	// CSS Modules styles:
-	const { SignIn, Open, Closed } = styles;
+	const { SignIn, Open, Closed, SuccessMessage } = styles;
 
 	// State hooks:
 	const [fields, setFields] = useState(signInForm);
@@ -115,40 +116,54 @@ const SignIn = ({
 
 	return (
 		<div className={[SignIn, setDisplayStyle].join(' ')} ref={myRef}>
-			{isLoading ? (
-				<Spinner />
-			) : (
-				<>
-					<h2>Members Login</h2>
-					<form action="post" onSubmit={handleSubmitFormClick}>
-						{fields.map((field, i) => (
-							<Input
-								key={field.data}
-								focused={i === 0 && isSignInDisplayed}
-								elementType={field.elementType}
-								elementConfig={field.elementConfig}
-								validation={{ ...field.validation }}
-								value={field.value}
-								handleChange={event =>
-									handleFormChange(event, field.data)
-								}
-								handleEnterPress={handleSubmitFormClick}
-							/>
-						))}
-					</form>
-					{showFormInvalidMessage ? (
-						<FormErrorMessage errorType="emptyFields" />
-					) : null}
-					{error && authType === 'signin' ? (
-						<AuthErrorMessage
-							errorMessage={error.response.data.error.message}
-						/>
-					) : null}
-					<Button type="Confirm" handleClick={handleSubmitFormClick}>
-						Login
-					</Button>
-				</>
-			)}
+			<>
+				{!isLoggedIn ? (
+					isLoading ? (
+						<Spinner />
+					) : (
+						<>
+							<h2>Members Login</h2>
+							<form
+								action="post"
+								onSubmit={handleSubmitFormClick}
+							>
+								{fields.map((field, i) => (
+									<Input
+										key={field.data}
+										focused={i === 0 && isSignInDisplayed}
+										elementType={field.elementType}
+										elementConfig={field.elementConfig}
+										validation={{ ...field.validation }}
+										value={field.value}
+										handleChange={event =>
+											handleFormChange(event, field.data)
+										}
+										handleEnterPress={handleSubmitFormClick}
+									/>
+								))}
+							</form>
+							{showFormInvalidMessage ? (
+								<FormErrorMessage errorType="emptyFields" />
+							) : null}
+							{error && authType === 'signin' ? (
+								<AuthErrorMessage
+									errorMessage={
+										error.response.data.error.message
+									}
+								/>
+							) : null}
+							<Button
+								type="Confirm"
+								handleClick={handleSubmitFormClick}
+							>
+								Login
+							</Button>
+						</>
+					)
+				) : (
+					<p className={SuccessMessage}>Sign in success!</p>
+				)}
+			</>
 		</div>
 	);
 };
@@ -160,6 +175,7 @@ const mapStateToProps = state => {
 		isLoading: state.auth.isLoading,
 		authType: state.auth.authType,
 		error: state.auth.error,
+		isLoggedIn: state.auth.isLoggedIn,
 	};
 };
 
@@ -178,6 +194,7 @@ SignIn.propTypes = {
 	closeSignIn: PropTypes.func,
 	sentAuthForm: PropTypes.func,
 	authType: PropTypes.string,
+	isLoggedIn: PropTypes.bool,
 };
 
 export default connect(

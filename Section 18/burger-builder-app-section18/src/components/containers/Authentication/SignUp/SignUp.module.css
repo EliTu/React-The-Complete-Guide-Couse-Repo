@@ -30,6 +30,11 @@
     margin: 0.5rem;
 }
 
+.SuccessMessage {
+    color: rgba(105, 241, 105, 0.808);
+    font-size: 1.2rem;
+}
+
 @media only screen and (max-width: 960px) {
     .SignUp {
         width: 70%;

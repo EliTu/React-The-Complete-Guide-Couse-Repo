@@ -23,6 +23,8 @@ export class SignUp extends Component {
 		if (prevState.checkMinMax !== this.state.checkMinMax) {
 			this.checkFormValidation();
 		}
+		if (prevProps.isLoggedIn !== this.props.isLoggedIn)
+			this.props.history.push('/');
 	}
 
 	handleFormChange = (event, data) => {
@@ -215,6 +217,7 @@ const mapStateToProps = state => {
 		isSignInLoading: state.auth.isSignInLoading,
 		error: state.auth.error,
 		authType: state.auth.authType,
+		isLoggedIn: state.auth.isLoggedIn,
 	};
 };
 

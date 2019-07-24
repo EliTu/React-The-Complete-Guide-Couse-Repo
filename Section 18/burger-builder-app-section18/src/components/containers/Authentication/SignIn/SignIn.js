@@ -174,10 +174,10 @@ SignIn.propTypes = {
 	isSignInDisplayed: PropTypes.bool,
 	isLoading: PropTypes.bool,
 	error: PropTypes.object,
-	closeSignIn: PropTypes.func,
-	sentAuthForm: PropTypes.func,
 	authType: PropTypes.string,
 	isLoggedIn: PropTypes.bool,
+	closeSignIn: PropTypes.func,
+	sentAuthForm: PropTypes.func,
 };
 
 // Redux setup:

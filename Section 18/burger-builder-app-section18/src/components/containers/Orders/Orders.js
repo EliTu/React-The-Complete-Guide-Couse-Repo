@@ -22,9 +22,9 @@ export class Orders extends Component {
 		// CSS Modules styles:
 		const { Orders, noOrders } = styles;
 
-		const noShowMessage =
+		const noOrdersMessage =
 			!isLoggedIn && !isLoadingRequest
-				? `The Orders area is for members only! in order to review previous orders, please log in first`
+				? `The Orders area is for members only! in order to review your previous orders, please sign in as a member first`
 				: `No previous orders found!`;
 
 		return (
@@ -32,7 +32,7 @@ export class Orders extends Component {
 				<h1>Your orders:</h1>
 				{isLoadingRequest ? (
 					<Spinner />
-				) : !isLoadingRequest && orders.length > 0 ? (
+				) : !isLoadingRequest && orders.length > 0 && isLoggedIn ? (
 					orders
 						.map(order => {
 							return order.id &&
@@ -48,9 +48,9 @@ export class Orders extends Component {
 								/>
 							) : null;
 						})
-						.reverse() // To show the latest order first
+						.reverse() // To render the latest order first
 				) : (
-					<p className={noOrders}>{noShowMessage}</p>
+					<p className={noOrders}>{noOrdersMessage}</p>
 				)}
 			</div>
 		);

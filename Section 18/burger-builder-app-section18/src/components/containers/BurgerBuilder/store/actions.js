@@ -13,6 +13,20 @@ export const setDefaultBurgerState = ingredients => {
 	};
 };
 
+export const addIngredient = ingName => {
+	return {
+		type: ADD_INGREDIENT,
+		ingredientName: ingName,
+	};
+};
+
+export const removeIngredient = ingName => {
+	return {
+		type: REMOVE_INGREDIENT,
+		ingredientName: ingName,
+	};
+};
+
 export const fetchIngredientsFailed = () => {
 	return {
 		type: FETCH_INGREDIENTS_FAILED,
@@ -30,19 +44,5 @@ export const fetchIngredients = () => {
 		} catch (error) {
 			dispatch(fetchIngredientsFailed());
 		}
-	};
-};
-
-export const addIngredient = ingName => {
-	return {
-		type: ADD_INGREDIENT,
-		ingredientName: ingName,
-	};
-};
-
-export const removeIngredient = ingName => {
-	return {
-		type: REMOVE_INGREDIENT,
-		ingredientName: ingName,
 	};
 };

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Button from '../../UI/Button/Button';
 import { signInToggleClick } from '../../display/Navigation/AuthItems/store/actions';
+import { redirectedToAuthPage } from '../../containers/Authentication/store/actions';
 import styles from './OrderSummary.module.css';
 import PropTypes from 'prop-types';
 
@@ -13,6 +14,7 @@ const OrderSummary = ({
 	checkoutHandler,
 	isLoggedIn,
 	openSignIn,
+	setAuthRedirectMode,
 	...props
 }) => {
 	// CSS Modules styles:
@@ -20,12 +22,14 @@ const OrderSummary = ({
 
 	// If a user is not signed in, prompt the sign in menu open
 	const handleSignInButtonClick = () => {
+		setAuthRedirectMode();
 		openSignIn();
 		closeModalHandler();
 	};
 
 	// If a user is not signed in, prompt redirection to sign up page
 	const handleSignUpButtonClick = () => {
+		setAuthRedirectMode();
 		props.history.push('/signup');
 	};
 
@@ -92,6 +96,7 @@ OrderSummary.prototypes = {
 	checkoutHandler: PropTypes.func.isRequired,
 	isLoggedIn: PropTypes.bool,
 	openSignIn: PropTypes.func,
+	setAuthRedirectMode: PropTypes.func,
 };
 
 // Redux setup:
@@ -104,6 +109,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		openSignIn: () => dispatch(signInToggleClick()),
+		setAuthRedirectMode: () => dispatch(redirectedToAuthPage()),
 	};
 };
 

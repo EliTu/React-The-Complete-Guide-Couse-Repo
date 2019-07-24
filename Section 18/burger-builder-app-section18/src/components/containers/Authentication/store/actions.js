@@ -1,4 +1,10 @@
-import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL, AUTH_SIGNOUT } from './constants';
+import {
+	AUTH_INIT,
+	AUTH_SUCCESS,
+	AUTH_FAIL,
+	AUTH_SIGNOUT,
+	REDIRECTED_TO_AUTH_PAGE,
+} from './constants';
 import axiosAuth from '../../../../axios/axios-auth';
 
 export const authInit = authType => {
@@ -28,6 +34,12 @@ export const authSignout = () => {
 	return {
 		type: AUTH_SIGNOUT,
 		authType: 'signOut',
+	};
+};
+
+export const redirectedToAuthPage = () => {
+	return {
+		type: REDIRECTED_TO_AUTH_PAGE,
 	};
 };
 

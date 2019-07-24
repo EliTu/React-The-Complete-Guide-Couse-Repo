@@ -23,8 +23,11 @@ export class SignUp extends Component {
 		if (prevState.checkMinMax !== this.state.checkMinMax) {
 			this.checkFormValidation();
 		}
-		if (prevProps.isLoggedIn !== this.props.isLoggedIn)
-			this.props.history.push('/');
+		if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
+			this.props.isBuilding && this.props.isRedirectedToAuth
+				? this.props.history.push('/checkout')
+				: this.props.history.push('/');
+		}
 	}
 
 	handleFormChange = (event, data) => {
@@ -208,6 +211,8 @@ SignUp.propTypes = {
 	authType: PropTypes.string,
 	error: PropTypes.object,
 	sentAuthForm: PropTypes.func,
+	isRedirectedToAuth: PropTypes.bool,
+	isBuilding: PropTypes.bool,
 };
 
 // Redux setup:
@@ -218,6 +223,8 @@ const mapStateToProps = state => {
 		error: state.auth.error,
 		authType: state.auth.authType,
 		isLoggedIn: state.auth.isLoggedIn,
+		isRedirectedToAuth: state.auth.isRedirectedToAuth,
+		isBuilding: state.burgerBuilder.isBuilding,
 	};
 };
 

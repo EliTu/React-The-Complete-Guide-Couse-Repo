@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 	totalPrice: 3,
 	isLoadingRequest: false,
 	isErrorOnMount: false,
+	isBuilding: false,
 };
 
 const INGREDIENT_PRICES = {
@@ -52,6 +53,8 @@ const burgerBuilderReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				ingredients: addedIngredients,
 				totalPrice: state.totalPrice + priceAddition,
+				isBuilding:
+					true && state.ingredients.some(el => el.quantity > 0),
 			};
 
 		case REMOVE_INGREDIENT:
@@ -73,6 +76,8 @@ const burgerBuilderReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				ingredients: removedIngredients,
 				totalPrice: state.totalPrice - priceDeduction,
+				isBuilding:
+					true && state.ingredients.some(el => el.quantity > 0),
 			};
 
 		default:

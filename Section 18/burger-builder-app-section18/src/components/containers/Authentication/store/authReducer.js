@@ -1,4 +1,10 @@
-import { AUTH_INIT, AUTH_SUCCESS, AUTH_FAIL, AUTH_SIGNOUT } from './constants';
+import {
+	AUTH_INIT,
+	AUTH_SUCCESS,
+	AUTH_FAIL,
+	AUTH_SIGNOUT,
+	REDIRECTED_TO_AUTH_PAGE,
+} from './constants';
 
 const INITIAL_STATE = {
 	authType: '',
@@ -8,6 +14,7 @@ const INITIAL_STATE = {
 	isLoggedIn: false,
 	isLoading: false,
 	isSignInLoading: false,
+	isRedirectedToAuth: false,
 	error: null,
 };
 
@@ -50,7 +57,14 @@ const authReducer = (state = INITIAL_STATE, action) => {
 				isLoading: false,
 				isSignInLoading: false,
 				error: null,
+				isRedirectedToAuth: false,
 				authType: action.authType,
+			};
+
+		case REDIRECTED_TO_AUTH_PAGE:
+			return {
+				...state,
+				isRedirectedToAuth: true,
 			};
 
 		default:

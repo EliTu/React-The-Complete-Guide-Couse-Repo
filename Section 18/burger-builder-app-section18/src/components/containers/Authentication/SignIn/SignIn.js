@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import signInForm from './signInForm/signInForm';
 import Button from '../../../UI/Button/Button';
 import Input from '../../../UI/Input/Input';
@@ -19,6 +20,9 @@ const SignIn = ({
 	sentAuthForm,
 	closeSignIn,
 	isLoggedIn,
+	isBuilding,
+	isRedirectedToAuth,
+	...props
 }) => {
 	// CSS Modules styles:
 	const { SignIn, Open, Closed, SuccessMessage } = styles;
@@ -116,6 +120,16 @@ const SignIn = ({
 		return () => document.removeEventListener('click', handleOutsideClick);
 	}, [handleOutsideClick]);
 
+	// Check if should be redirecting to checkout:
+	const redirectToCheckout = useCallback(() => {
+		if (isLoggedIn && isBuilding && isRedirectedToAuth)
+			props.history.push('/checkout');
+	}, [isBuilding, isLoggedIn, isRedirectedToAuth, props.history]);
+
+	useEffect(() => {
+		redirectToCheckout();
+	}, [redirectToCheckout]);
+
 	return (
 		<div className={[SignIn, setDisplayStyle].join(' ')} ref={myRef}>
 			<>
@@ -178,6 +192,8 @@ SignIn.propTypes = {
 	isLoggedIn: PropTypes.bool,
 	closeSignIn: PropTypes.func,
 	sentAuthForm: PropTypes.func,
+	isRedirectedToAuth: PropTypes.bool,
+	isBuilding: PropTypes.bool,
 };
 
 // Redux setup:
@@ -188,6 +204,8 @@ const mapStateToProps = state => {
 		authType: state.auth.authType,
 		error: state.auth.error,
 		isLoggedIn: state.auth.isLoggedIn,
+		isRedirectedToAuth: state.auth.isRedirectedToAuth,
+		isBuilding: state.burgerBuilder.isBuilding,
 	};
 };
 
@@ -202,4 +220,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(SignIn);
+)(withRouter(SignIn));

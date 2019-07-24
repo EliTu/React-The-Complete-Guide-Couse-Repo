@@ -11,8 +11,6 @@ import * as actions from './store/actions';
 import PropTypes from 'prop-types';
 
 class BurgerBuilder extends Component {
-	_isMounted = false;
-
 	state = {
 		isPurchasable: false,
 		isInOrderSummary: false,
@@ -20,7 +18,6 @@ class BurgerBuilder extends Component {
 
 	// Get the Ingredient list and quantity from the database:
 	async componentDidMount() {
-		this._isMounted = true;
 		this.props.initIngredients();
 	}
 
@@ -28,10 +25,6 @@ class BurgerBuilder extends Component {
 		if (prevProps.ingredients !== this.props.ingredients) {
 			this.checkIfPurchasable();
 		}
-	}
-
-	componentWillUnmount() {
-		this._isMounted = false;
 	}
 
 	checkIfPurchasable = () => {
@@ -60,9 +53,7 @@ class BurgerBuilder extends Component {
 	};
 
 	handleCheckoutButtonClick = () => {
-		this.props.history.push({
-			pathname: '/checkout',
-		});
+		this.props.history.push('/checkout');
 	};
 
 	render() {

@@ -31,13 +31,16 @@ const Item = ({
 		signOutClicked();
 	};
 
-	// Set style when the LogIn component is displayed
-	const signInStyles = !isLoggedIn ? [AuthSignin, SigninActive] : [];
+	// Set Sign in tab custom styles:
+	const signInDefaultStyle = !isLoggedIn ? AuthSignin : null;
+	const signInActiveStyle = isSignInDisplayed ? SigninActive : null;
 
 	const authType =
 		signInItem || signOutItem ? (
 			<a
-				className={[Item, ...signInStyles].join(' ')}
+				className={[Item, signInDefaultStyle, signInActiveStyle].join(
+					' '
+				)}
 				href={link}
 				onClick={event =>
 					signInItem

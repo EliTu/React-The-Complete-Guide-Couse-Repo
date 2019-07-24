@@ -8,7 +8,7 @@
     margin: 2rem auto;
     padding: 10px 0;
     color: rgb(218, 214, 214);
-    outline: 2px solid rgb(26, 24, 24);
+    outline: 2px solid rgba(212, 208, 208, 0.904);
     outline-offset: -0.9rem;
     border-radius: 7px;
 }

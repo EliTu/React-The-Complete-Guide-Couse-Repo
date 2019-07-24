@@ -120,7 +120,7 @@ const SignIn = ({
 		return () => document.removeEventListener('click', handleOutsideClick);
 	}, [handleOutsideClick]);
 
-	// Check if should be redirecting to checkout:
+	// Check if should be redirecting to checkout upon a sign in:
 	const redirectToCheckout = useCallback(() => {
 		if (isLoggedIn && isBuilding && isRedirectedToAuth)
 			props.history.push('/checkout');

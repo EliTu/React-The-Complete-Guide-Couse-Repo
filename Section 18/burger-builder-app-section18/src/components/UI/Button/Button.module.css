@@ -32,6 +32,16 @@
     background-color: rgba(231, 159, 159, 0.74);
 }
 
+.Neutral {
+    color: rgb(211, 211, 211);
+    border: 2px solid rgb(90, 88, 88);
+}
+
+.Neutral:hover {
+    color: rgb(228, 222, 222);
+    background-color: rgba(175, 174, 174, 0.74)
+}
+
 /* Mobile - SideDrawer toggle */
 @media (max-width: 500px) {
     .MenuToggle {

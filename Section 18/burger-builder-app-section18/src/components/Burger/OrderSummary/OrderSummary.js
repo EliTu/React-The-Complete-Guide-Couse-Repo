@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router';
+import { withRouter } from 'react-router';
 import Button from '../../UI/Button/Button';
 import { signInToggleClick } from '../../display/Navigation/AuthItems/store/actions';
 import styles from './OrderSummary.module.css';
@@ -29,24 +29,23 @@ const OrderSummary = ({
 		props.history.push('/signup');
 	};
 
-	let ingredientSummary;
-	if (ingredients) {
-		ingredientSummary = ingredients.map((el, i) => (
-			<li className={OrderSummary} key={i}>
-				<span className={IngredientStyle}>
-					{el.quantity > 0
-						? `${el.ingredient} x ${el.quantity}`
-						: null}
-				</span>
-			</li>
-		));
-	}
-
 	return (
 		<>
 			<h3>Your Order is ready</h3>
 			<p>A burger with the following ingredients:</p>
-			<ul className={UnorderedStyle}>{ingredientSummary}</ul>
+			<ul className={UnorderedStyle}>
+				{ingredients
+					? ingredients.map((el, i) => (
+							<li className={OrderSummary} key={i}>
+								<span className={IngredientStyle}>
+									{el.quantity > 0
+										? `${el.ingredient} x ${el.quantity}`
+										: null}
+								</span>
+							</li>
+					  ))
+					: null}
+			</ul>
 			<p>
 				Your total price is:
 				<span className={Price}>${price.toFixed(2)}</span>
@@ -75,7 +74,7 @@ const OrderSummary = ({
 						Sign in
 					</Button>
 					<Button
-						type="Confirm"
+						type="Neutral"
 						handleClick={handleSignUpButtonClick}
 					>
 						Sign up a new user

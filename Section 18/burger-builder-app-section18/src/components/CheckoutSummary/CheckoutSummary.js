@@ -56,17 +56,18 @@ const CheckoutSummary = props => {
 	);
 };
 
-const mapStateToProps = state => {
-	return {
-		totalPrice: state.burgerBuilder.totalPrice,
-	};
-};
-
 CheckoutSummary.propTypes = {
 	ingredients: PropTypes.array,
 	cancelClick: PropTypes.func,
 	checkoutClick: PropTypes.func,
 	location: PropTypes.object,
+};
+
+// Redux setup:
+const mapStateToProps = state => {
+	return {
+		totalPrice: state.burgerBuilder.totalPrice,
+	};
 };
 
 export default connect(mapStateToProps)(withRouter(CheckoutSummary));

@@ -114,7 +114,7 @@ export const authCheckLoginState = () => {
 			dispatch(authSuccess(token, userId, email));
 			dispatch(
 				logOutWhenTokenExpires(
-					(expirationDate.getTime() - new Date().getSeconds()) / 1000
+					(expirationDate.getTime() - new Date().getTime()) / 1000
 				)
 			);
 		}

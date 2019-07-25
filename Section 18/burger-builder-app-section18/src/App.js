@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Layout from './components/containers/Layout/Layout';
 import BurgerBuilder from './components/containers/BurgerBuilder/BurgerBuilder';
 import Checkout from './components/containers/Checkout/Checkout';
@@ -6,9 +8,13 @@ import Orders from './components/containers/Orders/Orders';
 import About from './components/display/About/About';
 import SignUp from './components/containers/Authentication/SignUp/SignUp';
 import SignIn from './components/containers/Authentication/SignIn/SignIn';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { authCheckLoginState } from './components/containers/Authentication/store/actions';
 
-function App() {
+function App({ tryAutoSignIn }) {
+	useEffect(() => {
+		tryAutoSignIn();
+	}, [tryAutoSignIn]);
+
 	return (
 		<div>
 			<Router>
@@ -27,4 +33,14 @@ function App() {
 	);
 }
 
-export default App;
+// Redux setup:
+const mapDispatchToProps = dispatch => {
+	return {
+		tryAutoSignIn: () => dispatch(authCheckLoginState()),
+	};
+};
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(App);

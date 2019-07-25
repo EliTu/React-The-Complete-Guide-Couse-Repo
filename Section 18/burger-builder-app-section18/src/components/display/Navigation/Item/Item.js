@@ -50,7 +50,7 @@ const Item = ({
 			>
 				{signInItem ? 'Sign in' : 'Log out'}
 			</a>
-		) : (
+		) : ( 
 			<NavLink className={Item} activeClassName={active} to={link} exact>
 				{children}
 			</NavLink>

@@ -101,6 +101,7 @@ export const logOutWhenTokenExpires = expireTime => {
 
 export const authCheckLoginState = () => {
 	return dispatch => {
+		// Check if a token is available in the local storage
 		const token = localStorage.getItem('token');
 		if (!token) dispatch(authSignout());
 
@@ -108,6 +109,7 @@ export const authCheckLoginState = () => {
 		const userId = localStorage.getItem('userId');
 		const email = localStorage.getItem('email');
 
+		// If the token's expiration time is due, then log out, otherwise dispatch authSuccess to persist log in state
 		if (expirationDate <= new Date()) {
 			dispatch(authSignout());
 		} else {

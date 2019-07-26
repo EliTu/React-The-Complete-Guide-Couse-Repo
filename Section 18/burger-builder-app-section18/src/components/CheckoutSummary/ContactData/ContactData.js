@@ -25,6 +25,8 @@ export class ContactData extends Component {
 		if (this.props.isLoggedIn && this.props.email) {
 			const orderFormCopy = [...this.state.orderForm];
 			orderFormCopy[2].value = this.props.email;
+			orderFormCopy[2].validation.valid = true;
+			orderFormCopy[2].validation.hasUserInput = true;
 
 			this.setState({
 				orderForm: orderFormCopy,
@@ -44,6 +46,7 @@ export class ContactData extends Component {
 
 		const orderData = [...this.state.orderForm];
 		const order = {
+			userId: this.props.userId,
 			ingredients: this.state.ingredients,
 			price: this.state.totalPrice,
 			customer: {
@@ -62,6 +65,7 @@ export class ContactData extends Component {
 			this.props.history.replace,
 			this.props.idToken
 		);
+		console.log(order);
 	};
 
 	handleFormChange = (event, data) => {
@@ -160,6 +164,7 @@ ContactData.propTypes = {
 	idToken: PropTypes.string,
 	isLoggedIn: PropTypes.bool,
 	email: PropTypes.string,
+	userId: PropTypes.string,
 };
 
 // Redux setup:
@@ -171,6 +176,7 @@ const mapStateToProps = state => {
 		idToken: state.auth.idToken,
 		isLoggedIn: state.auth.isLoggedIn,
 		email: state.auth.email,
+		userId: state.auth.userId,
 	};
 };
 

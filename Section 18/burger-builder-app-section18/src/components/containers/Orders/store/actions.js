@@ -24,17 +24,21 @@ export const fetchOrderFail = () => {
 	};
 };
 
-export const fetchOrdersFromDatabase = idToken => {
+export const fetchOrdersFromDatabase = (idToken, userId) => {
 	return async dispatch => {
 		dispatch(fetchOrderInit());
 		try {
-			const orders = await axiosInstance.get(
-				`/orders.json?auth=${idToken}`
-			);
+			// Query params to set authentication by a token && filter fetched orders by userId
+			const params = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`;
+
+			const orders = await axiosInstance.get(`/orders.json${params}`);
+
+			// Parse json into an array and add the order id
 			const fetchedOrders = [];
 			for (let key in orders.data) {
 				fetchedOrders.push({ ...orders.data[key], id: key });
 			}
+
 			dispatch(fetchOrdersSuccess(fetchedOrders));
 		} catch (error) {
 			dispatch(fetchOrderFail());

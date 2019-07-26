@@ -8,12 +8,13 @@ import PropTypes from 'prop-types';
 
 export class Orders extends Component {
 	componentDidMount() {
-		this.props.onFetchOrders(this.props.idToken);
+		if (this.props.idToken && this.props.userId)
+			this.props.onFetchOrders(this.props.idToken, this.props.userId);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.isLoggedIn !== this.props.isLoggedIn)
-			this.props.onFetchOrders(this.props.idToken);
+			this.props.onFetchOrders(this.props.idToken, this.props.userId);
 	}
 
 	render() {
@@ -27,6 +28,7 @@ export class Orders extends Component {
 				? `The Orders area is for members only! in order to review your previous orders, please sign in as a member first`
 				: `No previous orders found!`;
 
+		console.log(orders);
 		return (
 			<div className={Orders}>
 				<h1>Your orders:</h1>
@@ -63,6 +65,7 @@ Orders.propTypes = {
 	onFetchOrders: PropTypes.func,
 	isLoggedIn: PropTypes.bool,
 	idToken: PropTypes.string,
+	userId: PropTypes.string,
 };
 
 // Redux setup:
@@ -72,12 +75,14 @@ const mapStateToProps = state => {
 		isLoadingRequest: state.orderForm.isLoading,
 		isLoggedIn: state.auth.isLoggedIn,
 		idToken: state.auth.idToken,
+		userId: state.auth.userId,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onFetchOrders: idToken => dispatch(fetchOrdersFromDatabase(idToken)),
+		onFetchOrders: (idToken, userId) =>
+			dispatch(fetchOrdersFromDatabase(idToken, userId)),
 	};
 };
 

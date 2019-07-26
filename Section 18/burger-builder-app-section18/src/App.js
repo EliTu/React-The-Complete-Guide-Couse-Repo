@@ -9,8 +9,10 @@ import About from './components/display/About/About';
 import SignUp from './components/containers/Authentication/SignUp/SignUp';
 import SignIn from './components/containers/Authentication/SignIn/SignIn';
 import { authCheckLoginState } from './components/containers/Authentication/store/actions';
+import PropTypes from 'prop-types';
 
-function App({ tryAutoSignIn }) {
+function App({ tryAutoSignIn, isLoggedIn }) {
+	// If a token is available in localStorage, try to login upon App mount
 	useEffect(() => {
 		tryAutoSignIn();
 	}, [tryAutoSignIn]);
@@ -21,7 +23,9 @@ function App({ tryAutoSignIn }) {
 				<Layout>
 					<SignIn />
 					<Switch>
-						<Route path="/checkout" component={Checkout} />
+						{isLoggedIn && (
+							<Route path="/checkout" component={Checkout} />
+						)}
 						<Route path="/orders" component={Orders} />
 						<Route path="/about" component={About} />
 						<Route path="/signup" component={SignUp} />
@@ -33,7 +37,18 @@ function App({ tryAutoSignIn }) {
 	);
 }
 
+App.propTypes = {
+	isLoggedIn: PropTypes.bool,
+	tryAutoSignIn: PropTypes.func,
+};
+
 // Redux setup:
+const mapStateToProps = state => {
+	return {
+		isLoggedIn: state.auth.isLoggedIn,
+	};
+};
+
 const mapDispatchToProps = dispatch => {
 	return {
 		tryAutoSignIn: () => dispatch(authCheckLoginState()),
@@ -41,6 +56,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
 )(App);

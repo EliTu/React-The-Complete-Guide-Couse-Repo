@@ -15,7 +15,7 @@ const CheckoutSummary = ({
 	...props
 }) => {
 	// CSS Modules styles:
-	const { CheckoutSummary, BurgerDisplay, NoIngredients, Price } = styles;
+	const { CheckoutSummary, BurgerDisplay, errorMessageStyle, Price } = styles;
 
 	// Check if ingredients were selected in the BurgerBuilder
 	const areIngredientsSelected = ingredients
@@ -41,7 +41,7 @@ const CheckoutSummary = ({
 					</>
 				) : (
 					<>
-						<p className={NoIngredients}>{errorMessage}</p>
+						<p className={errorMessageStyle}>{errorMessage}</p>
 						<Button handleClick={cancelClick} type="Danger">
 							Go back
 						</Button>

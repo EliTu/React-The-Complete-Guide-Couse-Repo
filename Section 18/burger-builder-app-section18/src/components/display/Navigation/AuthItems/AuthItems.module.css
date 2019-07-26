@@ -5,6 +5,7 @@
     list-style: none;
     align-items: center;
     height: 100%;
+    width: 90%;
 }
 
 .AuthItems .LoggedInMessage {

@@ -36,9 +36,9 @@
     color: rgba(84, 243, 84, 0.925);
 }
 
-/* Large screen */
+/* medium screen */
 @media screen and (min-width: 600px) {
     .CheckoutSummary {
-        width: 30%;
+        width: 50%;
     }
 }

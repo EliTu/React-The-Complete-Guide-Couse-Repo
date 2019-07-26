@@ -6,21 +6,30 @@ import Button from '../UI/Button/Button';
 import styles from './CheckoutSummary.module.css';
 import PropTypes from 'prop-types';
 
-const CheckoutSummary = props => {
-	// props:
-	const { cancelClick, checkoutClick, ingredients, totalPrice } = props;
-
+const CheckoutSummary = ({
+	cancelClick,
+	checkoutClick,
+	ingredients,
+	totalPrice,
+	isLoggedIn,
+	...props
+}) => {
 	// CSS Modules styles:
 	const { CheckoutSummary, BurgerDisplay, NoIngredients, Price } = styles;
 
+	// Check if ingredients were selected in the BurgerBuilder
 	const areIngredientsSelected = ingredients
 		? ingredients.some(ingredient => ingredient.quantity > 0)
 		: null;
 
+	const errorMessage = !isLoggedIn
+		? 'Please sign in to checkout an order'
+		: 'It seems like no ingredients were selected! Please select burger ingredients in order to checkout';
+
 	return (
 		<div className={CheckoutSummary}>
 			<div className={BurgerDisplay}>
-				{areIngredientsSelected ? (
+				{areIngredientsSelected && isLoggedIn ? (
 					<>
 						<p>
 							Total price:
@@ -32,17 +41,14 @@ const CheckoutSummary = props => {
 					</>
 				) : (
 					<>
-						<p className={NoIngredients}>
-							It seems like no ingredients were selected! Please
-							select burger ingredients in order to checkout.
-						</p>
+						<p className={NoIngredients}>{errorMessage}</p>
 						<Button handleClick={cancelClick} type="Danger">
 							Go back
 						</Button>
 					</>
 				)}
 			</div>
-			{areIngredientsSelected && (
+			{areIngredientsSelected && isLoggedIn && (
 				<>
 					<Button handleClick={checkoutClick} type="Confirm">
 						Continue
@@ -61,12 +67,14 @@ CheckoutSummary.propTypes = {
 	cancelClick: PropTypes.func,
 	checkoutClick: PropTypes.func,
 	location: PropTypes.object,
+	isLoggedIn: PropTypes.bool,
 };
 
 // Redux setup:
 const mapStateToProps = state => {
 	return {
 		totalPrice: state.burgerBuilder.totalPrice,
+		isLoggedIn: state.auth.isLoggedIn,
 	};
 };
 

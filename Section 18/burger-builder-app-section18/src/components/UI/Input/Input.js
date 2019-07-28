@@ -15,9 +15,10 @@ const Input = props => {
 	} = props;
 
 	// CSS Modules styles:
-	const { Input, InvalidStyle, errorMessageStyle } = styles;
+	const { Input, InvalidStyle, errorMessageStyle, ValidStyle } = styles;
 
 	let inputElement = null;
+
 	let errorMessageElement = (
 		<p className={errorMessageStyle}>{validation.errorMessage}</p>
 	);
@@ -33,16 +34,21 @@ const Input = props => {
 		if (focused) focusRef.current.focus();
 	}, [focused]);
 
+	// Set validation styles:
+	let validationStyles = [];
+	validationStyles =
+		!validation.valid && validation.hasUserInput
+			? [...validationStyles, InvalidStyle]
+			: validation.valid && validation.hasUserInput
+			? [...validationStyles, ValidStyle]
+			: [];
+
 	switch (elementType) {
 		case 'input':
 			inputElement = (
 				<input
 					ref={focusRef}
-					className={
-						!validation.valid && validation.hasUserInput
-							? InvalidStyle
-							: null
-					}
+					className={validationStyles.join(' ')}
 					{...elementConfig}
 					value={value}
 					onChange={handleChange}

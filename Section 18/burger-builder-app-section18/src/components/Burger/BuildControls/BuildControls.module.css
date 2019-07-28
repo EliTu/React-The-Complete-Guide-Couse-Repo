@@ -1,14 +1,16 @@
+@import '../../../variables.css';
+
 .BuildControls {
     width: 100%;
-    background-image: linear-gradient(180deg, rgba(32, 32, 32, 0.829), rgba(20, 20, 20, 0.815) 70%);
+    background-color: var(--primary-background-light);
     display: flex;
     flex-flow: column;
     align-items: center;
-    box-shadow: 0 2px 1px #ccc;
+    box-shadow: var(--shadow-dark);
     margin: 2rem auto;
     padding: 10px 0;
-    color: rgb(218, 214, 214);
-    outline: 2px solid rgba(212, 208, 208, 0.904);
+    color: var(--coloring-dark);
+    outline: 2px solid var(--coloring-opaque-dark);
     outline-offset: -0.9rem;
     border-radius: 7px;
 }
@@ -20,16 +22,16 @@
 }
 
 .Sum {
-    color: rgba(105, 241, 105, 0.521);
+    color: var(--glow-green-darker);
     font-size: 1.5rem;
     margin-left: 0.5rem;
 }
 
 .OrderButton {
-    background-color: rgba(105, 241, 105, 0.521);
+    background-color: var(--confirmation-green);
     outline: none;
     cursor: pointer;
-    border: 1px solid rgba(105, 241, 105, 0.521);
+    border: 1px solid var(--glow-green-darker);
     color: #d8d8d8;
     font-family: inherit;
     font-size: 1.2em;
@@ -43,16 +45,16 @@
 
 .OrderButton:hover,
 .OrderButton:active {
-    background-color: rgba(47, 233, 47, 0.384);
+    background-color: rgba(47, 233, 47, 0.877);
     color: #d8d8d8;
 }
 
 .OrderButton:disabled {
-    background-color: #C7C6C6;
+    background-color: var(--disabled-light);
     cursor: not-allowed;
-    border: 1px solid #ccc;
+    border: 1px solid var(--disabled-dark);
     box-shadow: none;
-    color: #888888;
+    color: var(--disabled-dark);
 }
 
 .OrderButton:not(:disabled) {

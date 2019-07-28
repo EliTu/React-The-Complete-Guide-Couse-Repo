@@ -1,37 +1,37 @@
+@import '../../../../variables.css';
+
 .Item {
-	font-size: 1.3rem;
-	margin: 0.8rem 0;
 	box-sizing: border-box;
-	width: 100%;
+	font-size: 1.3rem;
+	margin: 0.8rem auto;
+	width: 75%;
 	display: block;
 	transition: 0.5s all;
 }
 
 .Item a {
-	align-self: auto;
-	color: rgb(209, 207, 205);
-	text-decoration: none;
 	width: 100%;
+	align-self: auto;
+	color: var(--coloring-light);
+	text-decoration: none;
 	text-align: center;
 	display: block;
-	border-radius: 8px;
 }
 
 .Item .AuthSignin {
-	color: rgba(105, 241, 105, 0.781);
+	color: var(--glow-green-darker);
 }
 
-.Item .SigninActive {
-	color: rgb(99, 248, 99);
-	border-bottom: 5px solid rgba(71, 219, 71, 0.89);
+.Item a:hover {
+	border-bottom: 5px solid var(--glow-green-darker);
 }
 
-.Item a:hover .Item a:active,
+.Item a:active,
 .Item a.active {
-	background-color: rgba(105, 241, 105, 0.521);
+	background-color: rgba(0, 0, 0, 0);
+	border-bottom: 10px solid var(--glow-green-darker);
+	color: var(--coloring-bright-light);
 }
-
-
 
 /* Large screen */
 @media screen and (min-width: 500px) {
@@ -49,7 +49,7 @@
 		align-self: flex-end;
 		font-size: 1rem;
 		align-self: auto;
-		color: rgba(235, 231, 231, 0.726);
+		color: var(--coloring-light);
 		height: 100%;
 		width: auto;
 		text-align: center;
@@ -63,17 +63,6 @@
 		color: rgb(99, 248, 99);
 		border-bottom: 10px solid rgba(71, 219, 71, 0.89);
 	}
-
-	.Item a:hover {
-		border-bottom: 5px solid rgba(105, 241, 105, 0.521);
-	}
-
-	.Item a:active,
-	.Item a.active {
-		background-color: rgba(0, 0, 0, 0);
-		border-bottom: 10px solid rgba(71, 219, 71, 0.89);
-		color: rgba(247, 232, 232, 0.986);
-	}
 }
 
 /* Medium screen */
@@ -82,7 +71,7 @@
 	.Item a:active,
 	.Item a.active {
 		background-color: rgba(0, 0, 0, 0);
-		border-bottom: 5px solid rgba(71, 219, 71, 0.89);
-		color: rgba(247, 232, 232, 0.986);
+		border-bottom: 3px solid var(--glow-green-darker);
+		color: var(--coloring-bright-light);
 	}
 }

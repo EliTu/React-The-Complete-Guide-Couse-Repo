@@ -1,3 +1,5 @@
+@import '../../../../variables.css';
+
 .AuthItems {
     display: block;
     margin: 0 1rem;
@@ -9,7 +11,7 @@
 }
 
 .AuthItems .LoggedInMessage {
-    color: rgba(235, 235, 235, 0.897);
+    color: var(--coloring-bright-light);
     display: inline-block;
     height: 100%;
     font-size: 1rem;
@@ -20,7 +22,7 @@
 }
 
 .LoggedInMessage span {
-    color: rgba(105, 241, 105, 0.808);
+    color: var(--glow-green-darker);
 }
 
 /* Desktop */

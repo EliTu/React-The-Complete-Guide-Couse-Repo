@@ -1,3 +1,5 @@
+@import '../../../variables.css';
+
 .Input {
     width: 100%;
     padding: 0.4rem;
@@ -9,12 +11,12 @@
 .Input textarea,
 .Input select {
     background-color: rgba(241, 238, 238, 0);
-    color: rgb(209, 207, 205);
+    color: var(--coloring-dark);
     font-size: 0.9rem;
     width: 55%;
     outline: none;
     border: none;
-    border-bottom: 2px solid rgba(105, 241, 105, 0.808);
+    border-bottom: 2px solid var(--coloring-opaque-dark);
     margin: 1rem auto;
     display: block;
     text-align: center;
@@ -29,7 +31,7 @@
 }
 
 .Input textarea {
-    border: 1px solid rgba(105, 241, 105, 0.808);
+    border: 1px solid var(--coloring-opaque-dark);
     overflow: auto;
     resize: none;
     text-align: start;
@@ -47,24 +49,28 @@
 .Input select option {
     text-align: center;
     background-color: rgba(241, 238, 238, 0.993);
-    color: #181616e0;
+    color: var(--coloring-dark);
 }
 
 .Input input:focus {
     width: 70%;
 }
 
+.Input .ValidStyle {
+    border-bottom: 2px solid var(--glow-green-opaque-lighter);
+}
+
 .Input .InvalidStyle {
-    border-bottom: 2px solid rgba(238, 87, 87, 0.89);
+    border-bottom: 2px solid var(--invalid-red-dark);
 }
 
 .errorMessageStyle {
     font-size: 0.8rem;
-    color: rgb(247, 109, 109);
+    color: var(--invalid-red-light);
 }
 
 ::placeholder {
-    color: rgba(173, 165, 165, 0.685);
+    color: var(--coloring-opaque-dark);
 }
 
 @media screen and (max-width: 800px) {

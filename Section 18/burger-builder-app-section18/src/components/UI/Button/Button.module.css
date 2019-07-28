@@ -1,10 +1,12 @@
+@import '../../../variables.css';
+
 .Button {
     width: 60%;
     font-size: 1.15rem;
     align-self: baseline;
-    margin: 0.5rem 1.5rem;
+    margin: 0.5rem auto;
     padding: 0.5rem;
-    border: 1px solid rgba(26, 24, 24, 0.452);
+    border: 1px solid var(--coloring-opaque-dark);
     border-radius: 5px;
     background-color: initial;
     cursor: pointer;
@@ -13,18 +15,18 @@
 }
 
 .Confirm {
-    color: rgba(105, 241, 105, 0.911);
-    border: 2px solid rgba(105, 241, 105, 0.76);
+    color: var(--glow-green-opaque-lighter);
+    border: 2px solid var(--glow-green-opaque);
 }
 
 .Confirm:hover {
-    color: rgba(158, 238, 158, 0.925);
+    color: var(--coloring-light);
     background-color: rgba(37, 168, 28, 0.781);
 }
 
 .Danger {
-    color: rgb(228, 104, 104);
-    border: 2px solid rgba(241, 81, 81, 0.897);
+    color: var(--invalid-red-light);
+    border: 2px solid var(--invalid-red-dark);
 }
 
 .Danger:hover {
@@ -33,8 +35,8 @@
 }
 
 .Neutral {
-    color: rgb(211, 211, 211);
-    border: 2px solid rgb(90, 88, 88);
+    color: var(--coloring-light);
+    border: 2px solid var(--disabled-dark);
 }
 
 .Neutral:hover {
@@ -45,7 +47,7 @@
 /* Mobile - SideDrawer toggle */
 @media (max-width: 500px) {
     .MenuToggle {
-        color: rgb(211, 211, 211);
+        color: var(--coloring-bright-light);
         font-weight: 800;
         font-size: 1.5rem;
         height: 100%;

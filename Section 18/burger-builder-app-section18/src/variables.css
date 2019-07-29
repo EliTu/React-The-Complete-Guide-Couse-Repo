@@ -15,6 +15,14 @@
     --invalid-red-light: rgb(247, 109, 109);
     --invalid-red-dark: rgba(238, 87, 87, 0.89);
 
+    /* Blue sets */
+    --light-blue: rgba(76, 122, 207, 0.925);
+    --glow-light-blue: rgba(121, 160, 233, 0.925);
+    --dark-blue: rgba(31, 42, 61, 0.705);
+    --glow-dark-blue: rgba(87, 104, 133, 0.726);
+    --light-cyan: rgba(5, 234, 241, 0.938);
+    --dark-cyan: rgba(18, 158, 163, 0.938);
+
     /* Coloring variations (usually for fonts)  */
     --coloring-dark: rgba(27, 24, 24, 0.836);
     --coloring-opaque-dark: rgba(44, 39, 39, 0.507);

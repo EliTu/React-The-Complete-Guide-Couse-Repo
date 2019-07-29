@@ -22,21 +22,21 @@
 }
 
 .Sum {
-    color: var(--glow-green-darker);
+    color: var(--light-blue);
     font-size: 1.5rem;
     margin-left: 0.5rem;
 }
 
 .OrderButton {
-    background-color: var(--confirmation-green);
+    background-color: var(--glow-dark-blue);
     outline: none;
     cursor: pointer;
-    border: 1px solid var(--glow-green-darker);
+    border: 1px solid var(--glow-light-blue);
     color: #d8d8d8;
     font-family: inherit;
     font-size: 1.2em;
     padding: 15px 30px;
-    box-shadow: 2px 2px 2px rgba(15, 185, 15, 0.603);
+    box-shadow: var(--shadow-light);
     margin: 1.3rem auto;
     border-radius: 7px;
     font-weight: bolder;
@@ -45,8 +45,8 @@
 
 .OrderButton:hover,
 .OrderButton:active {
-    background-color: rgba(47, 233, 47, 0.877);
-    color: #d8d8d8;
+    background-color: var(--glow-light-blue);
+    color: var(--coloring-light);
 }
 
 .OrderButton:disabled {

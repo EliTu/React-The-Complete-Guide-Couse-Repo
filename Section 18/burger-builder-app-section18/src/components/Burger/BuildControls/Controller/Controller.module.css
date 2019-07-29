@@ -34,7 +34,7 @@
 
 .Controller button:hover:disabled {
     background-color: var(--coloring-light);
-    color: #ccc;
+    color: var(--coloring-opaque-dark);
     cursor: not-allowed;
     border-radius: 15px;
 }
@@ -46,25 +46,25 @@
 }
 
 .Controller .Less {
-    background-color: var(--glow-green-opaque);
-    color: var(--coloring-opaque-dark);
+    background-color: var(--dark-blue);
+    color: var(--coloring-light);
 }
 
 .Controller .More {
-    background-color: var(--glow-green-lighter);
-    color: var(--coloring-opaque-dark);
+    background-color: var(--light-blue);
+    color: var(--coloring-light);
 }
 
 .Controller .Less:hover,
 .Controller .Less:active {
-    background-color: var(--glow-green-opaque-lighter);
-    color: var(--coloring-dark);
+    background-color: var(--glow-dark-blue);
+    color: var(--coloring-light);
     border-radius: 15px;
 }
 
 .Controller .More:hover,
 .Controller .More:active {
-    background-color: var(--glow-green-darker);
-    color: var(--coloring-dark);
+    background-color: var(--glow-light-blue);
+    color: var(--coloring-light);
     border-radius: 15px;
 }

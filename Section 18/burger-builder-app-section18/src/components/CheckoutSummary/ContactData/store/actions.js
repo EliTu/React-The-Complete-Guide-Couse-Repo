@@ -6,7 +6,6 @@ import {
 } from './constants';
 
 export const purchaseBurgerSuccess = order => {
-	console.log(order);
 	return {
 		type: PURCHASE_BURGER_SUCCESS,
 		orderData: order,
@@ -14,7 +13,6 @@ export const purchaseBurgerSuccess = order => {
 };
 
 export const purchaseBurgerFail = error => {
-	console.log(error);
 	return {
 		type: PURCHASE_BURGER_FAIL,
 	};
@@ -30,7 +28,6 @@ export const postPurchasedBurger = (order, redirectOnSuccess, idToken) => {
 	return async dispatch => {
 		dispatch(purchaseBurgerInit());
 		try {
-			console.log(order);
 			await axiosInstance.post(`/orders.json?auth=${idToken}`, order);
 			dispatch(purchaseBurgerSuccess(order));
 			redirectOnSuccess('/orders');

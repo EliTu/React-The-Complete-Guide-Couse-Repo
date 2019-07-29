@@ -28,7 +28,6 @@ export class Orders extends Component {
 				? `The Orders area is for members only! in order to review your previous orders, please sign in as a member first`
 				: `No previous orders found!`;
 
-		console.log(orders);
 		return (
 			<div className={Orders}>
 				<h1>Your orders:</h1>

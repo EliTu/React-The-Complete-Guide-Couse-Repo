@@ -24,7 +24,6 @@ const requestMessageComponent = (WrappedComponent, axiosInstance) => {
 					this.setState({
 						responseStatus: res.status === 200 ? true : false,
 					});
-					console.log(this.state.responseStatus);
 				},
 				error => {
 					this.setState({

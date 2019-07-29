@@ -65,7 +65,6 @@ export const confirmAuth = (email, password, authType) => {
 
 		try {
 			const postAuthData = await axiosAuth.post(targetUrl, authData);
-			console.log(postAuthData.data);
 
 			const expirationDate = new Date(
 				new Date().getTime() + postAuthData.data.expiresIn * 1000

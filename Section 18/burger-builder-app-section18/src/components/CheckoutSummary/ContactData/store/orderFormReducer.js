@@ -22,7 +22,6 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 				isLoading: true,
 			};
 		case PURCHASE_BURGER_SUCCESS:
-			console.log(action.orderData);
 			const newOrder = {
 				...action.orderData,
 			};

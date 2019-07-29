@@ -65,7 +65,6 @@ export class ContactData extends Component {
 			this.props.history.replace,
 			this.props.idToken
 		);
-		console.log(order);
 	};
 
 	handleFormChange = (event, data) => {

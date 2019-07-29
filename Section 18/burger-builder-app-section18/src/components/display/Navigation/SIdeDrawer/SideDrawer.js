@@ -6,9 +6,7 @@ import Backdrop from '../../../UI/Backdrop/Backdrop';
 import PropTypes from 'prop-types';
 import styles from './SIdeDrawer.module.css';
 
-const SideDrawer = props => {
-	// props:
-	const { handleVisibility, isVisible } = props;
+const SideDrawer = ({ handleVisibility, isVisible }) => {
 	// CSS Modules styles:
 	const { SideDrawer, LogoHeight, Close, Open, StyledHorizontal } = styles;
 

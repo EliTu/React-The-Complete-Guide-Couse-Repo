@@ -11,8 +11,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// enable redux dev tools:
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// enable redux dev tools (only for dev mode):
+const composeEnhancers =
+	process.env.NODE_ENV === 'development'
+		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		: null || compose;
 
 // Combine reducers:
 const rootReducer = combineReducers({

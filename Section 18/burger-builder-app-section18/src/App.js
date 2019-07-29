@@ -1,18 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Layout from './components/containers/Layout/Layout';
 import BurgerBuilder from './components/containers/BurgerBuilder/BurgerBuilder';
-import Checkout from './components/containers/Checkout/Checkout';
-import Orders from './components/containers/Orders/Orders';
-import About from './components/display/About/About';
-import SignUp from './components/containers/Authentication/SignUp/SignUp';
 import SignIn from './components/containers/Authentication/SignIn/SignIn';
 import { authCheckLoginState } from './components/containers/Authentication/store/actions';
+import LazyLoader from './components/hoc/LazyLoader/LazyLoader';
 import PropTypes from 'prop-types';
 
+// Lazy loading imports:
+const Orders = lazy(() => import('./components/containers/Orders/Orders'));
+const About = lazy(() => import('./components/display/About/About'));
+const Checkout = lazy(() =>
+	import('./components/containers/Checkout/Checkout')
+);
+const SignUp = lazy(() =>
+	import('./components/containers/Authentication/SignUp/SignUp')
+);
+
 function App({ tryAutoSignIn, isLoggedIn }) {
-	// If a token is available in localStorage, try to login upon App mount
+	// If a token is available in localStorage, try to login upon App component mount
 	useEffect(() => {
 		tryAutoSignIn();
 	}, [tryAutoSignIn]);
@@ -24,11 +31,14 @@ function App({ tryAutoSignIn, isLoggedIn }) {
 					<SignIn />
 					<Switch>
 						{isLoggedIn && (
-							<Route path="/checkout" component={Checkout} />
+							<Route
+								path="/checkout"
+								component={LazyLoader(Checkout)}
+							/>
 						)}
-						<Route path="/orders" component={Orders} />
-						<Route path="/about" component={About} />
-						<Route path="/signup" component={SignUp} />
+						<Route path="/orders" component={LazyLoader(Orders)} />
+						<Route path="/about" component={LazyLoader(About)} />
+						<Route path="/signup" component={LazyLoader(SignUp)} />
 						<Route path="/" component={BurgerBuilder} />
 					</Switch>
 				</Layout>

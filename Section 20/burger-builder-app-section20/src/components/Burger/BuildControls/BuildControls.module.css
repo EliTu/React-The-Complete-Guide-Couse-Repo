@@ -54,7 +54,7 @@
     cursor: not-allowed;
     border: 1px solid var(--disabled-dark);
     box-shadow: none;
-    color: var(--disabled-dark);
+    color: var(--coloring-opaque-dark);
 }
 
 .OrderButton:not(:disabled) {

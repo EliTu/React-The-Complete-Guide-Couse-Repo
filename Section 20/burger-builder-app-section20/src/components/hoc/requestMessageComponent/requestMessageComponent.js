@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from '../UI/Modal/Modal';
+import Modal from '../../UI/Modal/Modal';
 import styles from './requestMessageComponent.module.css';
 
 const requestMessageComponent = (WrappedComponent, axiosInstance) => {

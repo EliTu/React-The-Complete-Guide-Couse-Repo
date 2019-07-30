@@ -6,7 +6,7 @@ import Spinner from '../../UI/Spinner/Spinner';
 import Input from '../../UI/Input/Input';
 import OrderFormData from './OrderFormData/OrderFormData';
 import axiosInstance from '../../../axios/axios-orders';
-import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
+import requestMessageComponent from '../../hoc/requestMessageComponent/requestMessageComponent';
 import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
 import styles from './ContactData.module.css';
 import PropTypes from 'prop-types';

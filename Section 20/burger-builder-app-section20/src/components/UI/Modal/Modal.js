@@ -3,10 +3,7 @@ import styles from './Modal.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 import PropTypes from 'prop-types';
 
-const Modal = props => {
-	// props:
-	const { children, show, closeModalHandler } = props;
-
+const Modal = ({ children, show, closeModalHandler }) => {
 	// CSS Modules styles:
 	const { Modal } = styles;
 

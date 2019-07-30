@@ -6,7 +6,7 @@ import BuildControls from '../../Burger/BuildControls/BuildControls';
 import Modal from '../../UI/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
 import Spinner from '../../UI/Spinner/Spinner';
-import requestMessageComponent from '../../requestMessageComponent/requestMessageComponent';
+import requestMessageComponent from '../../hoc/requestMessageComponent/requestMessageComponent';
 import * as actions from './store/actions';
 import PropTypes from 'prop-types';
 

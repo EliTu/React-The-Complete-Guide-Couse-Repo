@@ -1,0 +1,49 @@
+.MainHeader {
+    margin: 3rem auto;
+    text-align: center;
+    color: rgba(27, 24, 24, 0.904);
+}
+
+.SignUp {
+    background-image: linear-gradient(180deg, rgba(59, 58, 58, 0.925), rgba(56, 56, 56, 0.945) 70%);
+    color: rgb(236, 235, 235);
+    margin: 3rem auto;
+    width: 30%;
+    text-align: center;
+    border-radius: 7px;
+    box-shadow: 0px 1px 3px black;
+    padding: 1rem;
+    box-sizing: border-box;
+    outline: 2px solid rgba(212, 208, 208, 0.904);
+    outline-offset: -0.6rem;
+}
+
+.SignUp h2 {
+    color: rgb(236, 235, 235);
+    margin: 0.8rem auto;
+    padding: 1rem 0;
+    text-align: center;
+    width: 90%;
+}
+
+.SignUp button {
+    margin: 0.5rem;
+}
+
+.SuccessMessage {
+    color: rgba(105, 241, 105, 0.808);
+    font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 960px) {
+    .SignUp {
+        width: 70%;
+    }
+}
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+    .SignUp {
+        width: 90%;
+    }
+}

@@ -1,0 +1,36 @@
+@import '../../../../variables.css';
+
+.AuthItems {
+    display: block;
+    margin: 0 1rem;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+    height: 100%;
+    width: 90%;
+}
+
+.AuthItems .LoggedInMessage {
+    color: var(--coloring-bright-light);
+    display: inline-block;
+    height: 100%;
+    font-size: 1rem;
+    text-align: center;
+    margin: auto 0;
+    padding: 0.9rem 1rem;
+
+}
+
+.LoggedInMessage span {
+    color: var(--glow-green-darker);
+}
+
+/* Desktop */
+@media (min-width: 500px) {
+    .AuthItems {
+        display: flex;
+        flex-flow: row;
+        justify-items: center;
+        width: 100%;
+    }
+}

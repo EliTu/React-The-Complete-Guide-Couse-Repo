@@ -1,0 +1,82 @@
+.Order {
+    width: 60%;
+    border: 1px solid #eee;
+    background-color: rgba(241, 238, 238, 0.993);
+    box-shadow: 0 2px 3px #ccc;
+    padding: 0.7rem;
+    margin: 0.5rem auto;
+    box-sizing: border-box;
+    color: rgba(27, 24, 24, 0.911);
+}
+
+.OrderId {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.DataHeader {
+    display: inline-block;
+    margin: 0.3rem 0.5rem;
+    padding: 0.4rem;
+    width: 90%;
+    list-style: none;
+}
+
+.DataHeader li {
+    list-style: none;
+    margin: 0.4rem;
+}
+
+.Category {
+    text-transform: capitalize;
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+.Order .Price {
+    color: rgba(47, 233, 47, 0.884);
+    margin-left: 0.3rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* Medium screens */
+@media screen and (max-width: 900px) {
+    .Order {
+        width: 80%
+    }
+}
+
+/* Small screens */
+@media screen and (max-width: 500px) {
+    .Order {
+        width: 85%
+    }
+
+    .DataHeader {
+        display: flex;
+        flex-flow: column;
+        flex-wrap: nowrap;
+    }
+
+    .OrderId {
+        font-size: 0.95rem;
+    }
+
+    .DataHeader ul {
+        margin: 0;
+    }
+
+    .DataHeader li {
+        width: 100%;
+    }
+
+    .Category {
+        font-size: 1rem;
+    }
+
+    .Order p {
+        width: 100%;
+    }
+}

@@ -1,0 +1,80 @@
+@import '../../../variables.css';
+
+.Input {
+    width: 100%;
+    padding: 0.4rem;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.Input input,
+.Input textarea,
+.Input select {
+    background-color: rgba(241, 238, 238, 0);
+    color: var(--coloring-dark);
+    font-size: 0.9rem;
+    width: 55%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--coloring-opaque-dark);
+    margin: 1rem auto;
+    display: block;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+/* To disable up and down number spinners on number input field */
+.Input input[type=number]::-webkit-inner-spin-button,
+.Input input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.Input textarea {
+    border: 1px solid var(--coloring-opaque-dark);
+    overflow: auto;
+    resize: none;
+    text-align: start;
+    margin: 1rem auto;
+    height: 50%;
+    width: 75%;
+}
+
+.Input label {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.Input select option {
+    text-align: center;
+    background-color: rgba(241, 238, 238, 0.993);
+    color: var(--coloring-dark);
+}
+
+.Input input:focus {
+    width: 70%;
+}
+
+.Input .ValidStyle {
+    border-bottom: 2px solid var(--glow-green-opaque-lighter);
+}
+
+.Input .InvalidStyle {
+    border-bottom: 2px solid var(--invalid-red-dark);
+}
+
+.errorMessageStyle {
+    font-size: 0.8rem;
+    color: var(--invalid-red-light);
+}
+
+::placeholder {
+    color: var(--coloring-opaque-dark);
+}
+
+@media screen and (max-width: 800px) {
+    .Input input {
+        width: 60%;
+    }
+}

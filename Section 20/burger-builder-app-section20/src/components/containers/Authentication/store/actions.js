@@ -33,8 +33,6 @@ export const authFail = error => {
 export const authSignout = () => {
 	// When logging out, remove the saved auth data in the local storage
 	localStorage.clear();
-	// localStorage.removeItem('token');
-	// localStorage.removeItem('expirationDate');
 
 	return {
 		type: AUTH_SIGNOUT,

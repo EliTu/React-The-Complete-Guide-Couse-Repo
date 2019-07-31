@@ -53,6 +53,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				idToken: '',
 				userId: '',
+				email: '',
 				isLoggedIn: false,
 				isLoading: false,
 				isSignInLoading: false,

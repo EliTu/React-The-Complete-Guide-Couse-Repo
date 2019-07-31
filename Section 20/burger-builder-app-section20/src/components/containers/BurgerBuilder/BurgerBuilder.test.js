@@ -30,6 +30,7 @@ describe('<BurgerBuilder>', () => {
 		wrapper.setProps({
 			ingredients: [],
 		});
+
 		expect(wrapper.find(Spinner)).toBeTruthy();
 	});
 

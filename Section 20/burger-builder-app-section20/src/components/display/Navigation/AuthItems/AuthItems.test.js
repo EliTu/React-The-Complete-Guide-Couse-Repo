@@ -21,4 +21,15 @@ describe('AuthItems', () => {
 		wrapper.setProps({ isLoggedIn: true });
 		expect(wrapper.find(Item)).toHaveLength(1);
 	});
+
+	it('should contain an <Item>Log out</Item> if the user is authenticated and logged in', () => {
+		wrapper.setProps({ isLoggedIn: true });
+		expect(
+			wrapper.contains(
+				<Item signOutItem link="">
+					Log out
+				</Item>
+			)
+		).toEqual(true);
+	});
 });

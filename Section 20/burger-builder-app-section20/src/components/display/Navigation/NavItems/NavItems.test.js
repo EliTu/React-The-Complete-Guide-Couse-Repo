@@ -12,11 +12,11 @@ describe('<NavItems/>', () => {
 		wrapper = shallow(<NavItems />);
 	});
 
-	it('should by default render 3 nav <Item/> components (as long as user not authenticated)', () => {
+	it('should render 3 nav <Item/> components (as long as user not authenticated)', () => {
 		expect(wrapper.find(Item)).toHaveLength(3);
 	});
 
-	it('should by default render 4 nav <Item/> components if the user is authenticated and logged in', () => {
+	it('should render 4 nav <Item/> components if the user is authenticated and logged in', () => {
 		wrapper.setProps({ isLoggedIn: true });
 		expect(wrapper.find(Item)).toHaveLength(4);
 	});

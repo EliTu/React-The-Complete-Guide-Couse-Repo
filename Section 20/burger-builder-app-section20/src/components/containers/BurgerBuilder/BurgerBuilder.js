@@ -10,7 +10,7 @@ import requestMessageComponent from '../../hoc/requestMessageComponent/requestMe
 import * as actions from './store/actions';
 import PropTypes from 'prop-types';
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
 	state = {
 		isPurchasable: false,
 		isInOrderSummary: false,

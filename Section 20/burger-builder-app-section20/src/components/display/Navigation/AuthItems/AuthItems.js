@@ -4,7 +4,7 @@ import Item from '../Item/Item';
 import styles from './AuthItems.module.css';
 import PropTypes from 'prop-types';
 
-const AuthItems = ({ isLoggedIn, email }) => {
+export const AuthItems = ({ isLoggedIn, email }) => {
 	// CSS Modules style:
 	const { AuthItems, LoggedInMessage } = styles;
 

@@ -19,6 +19,7 @@ const Todo = () => {
 			<button type="button" onClick={handleButtonClick}>
 				Add
 			</button>
+			<button onClick={() => setTodos([])}>Clear</button>
 			<ul>
 				{todos.map((el, i) => (
 					<li key={i}>{el}</li>

@@ -13,6 +13,7 @@ const Todo = () => {
 			<input
 				type="text"
 				placeholder="Todo"
+				value={input}
 				onChange={e => handleInputChange(e)}
 			/>
 			<button type="button" onClick={handleButtonClick}>

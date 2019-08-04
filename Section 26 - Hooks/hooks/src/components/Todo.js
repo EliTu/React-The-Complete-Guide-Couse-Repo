@@ -35,6 +35,17 @@ const Todo = () => {
 		getTodoData();
 	}, [todos]);
 
+	const handleMouseMove = e => {
+		console.log(e.clientX, e.clientY);
+	};
+
+	useEffect(() => {
+		document.addEventListener('mousemove', handleMouseMove);
+		return () => {
+			document.removeEventListener('mousemove', handleMouseMove);
+		};
+	}, []);
+
 	const handleInputChange = e => setInput(e.target.value);
 
 	const handleAddButtonClick = () => handleNewTodoItem();

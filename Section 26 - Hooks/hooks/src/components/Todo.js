@@ -4,12 +4,23 @@ const Todo = () => {
 	const [todos, setTodos] = useState([]);
 	const [input, setInput] = useState('');
 
+	const handleNewTodoItem = () => {
+		setTodos([...todos, input]);
+		setTimeout(() => {
+			try {
+				console.log(`ADDED ASYNC ${input} `);
+			} catch (error) {
+				console.log(error);
+			}
+		}, 2000);
+	};
+
 	const handleInputChange = e => setInput(e.target.value);
 
-	const handleButtonClick = () => setTodos([...todos, input]);
+	const handleAddButtonClick = () => handleNewTodoItem();
 
-	const handleEnterPress = e =>
-		e.key === 'Enter' ? setTodos([...todos, input]) : null;
+	const handleInputEnterPress = e =>
+		e.key === 'Enter' ? handleNewTodoItem() : null;
 
 	return (
 		<>
@@ -18,9 +29,9 @@ const Todo = () => {
 				placeholder="Todo"
 				value={input}
 				onChange={e => handleInputChange(e)}
-				onKeyPress={e => handleEnterPress(e)}
+				onKeyPress={e => handleInputEnterPress(e)}
 			/>
-			<button type="button" onClick={handleButtonClick}>
+			<button type="button" onClick={handleAddButtonClick}>
 				Add
 			</button>
 			<button onClick={() => setTodos([])}>Clear</button>

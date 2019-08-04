@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 
 const Todo = () => {
@@ -81,16 +81,21 @@ const Todo = () => {
 				Add
 			</button>
 			<button onClick={handleClearButtonClick}>Clear</button>
-			<ul>
-				{todos.map(todo => (
-					<li
-						key={todo.id}
-						onClick={id => handleTodoItemClick(todo.id)}
-					>
-						{todo.name}
-					</li>
-				))}
-			</ul>
+			{useMemo(
+				() => (
+					<ul>
+						{todos.map(todo => (
+							<li
+								key={todo.id}
+								onClick={id => handleTodoItemClick(todo.id)}
+							>
+								{todo.name}
+							</li>
+						))}
+					</ul>
+				),
+				[todos]
+			)}
 		</>
 	);
 };

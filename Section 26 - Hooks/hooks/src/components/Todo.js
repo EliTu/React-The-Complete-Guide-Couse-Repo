@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
+import { useFormValidation } from '../hooks/useFormValidation';
 
 const Todo = () => {
 	const [todos, setTodos] = useState([]);
 	const [input, setInput] = useState('');
+	const { value, onChange, isValid } = useFormValidation();
 
 	const handleNewTodoItem = async () => {
-		if (input !== '')
+		if (value !== '')
 			try {
 				setInput('');
 				await axios.post(
 					'https://react-hooks-intro-940a4.firebaseio.com/todos.json',
-					{ todo: input }
+					{ todo: value }
 				);
 			} catch (error) {
 				console.log(error);
@@ -49,8 +51,6 @@ const Todo = () => {
 		};
 	}, []);
 
-	const handleInputChange = e => setInput(e.target.value);
-
 	const handleAddButtonClick = () => handleNewTodoItem();
 
 	const handleInputEnterPress = e =>
@@ -73,13 +73,14 @@ const Todo = () => {
 			<input
 				type="text"
 				placeholder="Todo"
-				value={input}
-				onChange={e => handleInputChange(e)}
+				value={value}
+				style={{ backgroundColor: !isValid ? 'indigo' : null }}
+				onChange={onChange}
 				onKeyPress={e => handleInputEnterPress(e)}
 			/>
 			<button type="button" onClick={handleAddButtonClick}>
 				Add
-			</button>
+			</button>git
 			<button onClick={handleClearButtonClick}>Clear</button>
 			{useMemo(
 				() => (

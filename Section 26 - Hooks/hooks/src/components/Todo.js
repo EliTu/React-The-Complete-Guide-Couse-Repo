@@ -6,14 +6,16 @@ const Todo = () => {
 	const [input, setInput] = useState('');
 
 	const handleNewTodoItem = async () => {
-		try {
-			await axios.post(
-				'https://react-hooks-intro-940a4.firebaseio.com/todos.json',
-				{ todo: input }
-			);
-		} catch (error) {
-			console.log(error);
-		}
+		if (input !== '')
+			try {
+				setInput('');
+				await axios.post(
+					'https://react-hooks-intro-940a4.firebaseio.com/todos.json',
+					{ todo: input }
+				);
+			} catch (error) {
+				console.log(error);
+			}
 	};
 
 	useEffect(() => {

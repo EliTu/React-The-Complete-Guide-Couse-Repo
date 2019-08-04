@@ -22,7 +22,7 @@ const App = () => {
 				<Nav switchRoutes={navStateSwitch} />
 				<hr />
 				{navState === 'Auth' && <Auth />}
-				{navState === 'Todo' && <Todo />}
+				{navState === 'Todo' && isLoggedIn && <Todo />}
 			</AuthContext.Provider>
 		</div>
 	);

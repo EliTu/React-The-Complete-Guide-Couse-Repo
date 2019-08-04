@@ -33,7 +33,6 @@ const Todo = () => {
 			}
 		};
 		getTodoData();
-		
 	}, [todos]);
 
 	const handleMouseMove = e => {
@@ -43,6 +42,7 @@ const Todo = () => {
 	useEffect(() => {
 		document.addEventListener('mousemove', handleMouseMove);
 		return () => {
+			console.log('Cleanup');
 			document.removeEventListener('mousemove', handleMouseMove);
 		};
 	}, []);

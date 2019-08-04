@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Todo = () => {
 	const [todos, setTodos] = useState([]);
@@ -14,6 +14,12 @@ const Todo = () => {
 			}
 		}, 2000);
 	};
+
+	useEffect(() => {
+		setTimeout(() => {
+			console.log(`FETCHED ${input} ON MOUNT`);
+		}, 2500);
+	}, [todos]);
 
 	const handleInputChange = e => setInput(e.target.value);
 

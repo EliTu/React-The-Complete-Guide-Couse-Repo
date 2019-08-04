@@ -33,6 +33,7 @@ const Todo = () => {
 			}
 		};
 		getTodoData();
+		
 	}, [todos]);
 
 	const handleMouseMove = e => {

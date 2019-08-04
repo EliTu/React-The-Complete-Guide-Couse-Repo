@@ -58,7 +58,13 @@ const Todo = () => {
 
 	const handleClearButtonClick = async () => {
 		await axios.delete(
-			'https://react-hooks-intro-940a4.firebaseio.com/todos.json'
+			`https://react-hooks-intro-940a4.firebaseio.com/todos.json`
+		);
+	};
+
+	const handleTodoItemClick = async id => {
+		await axios.delete(
+			`https://react-hooks-intro-940a4.firebaseio.com/todos/${id}.json`
 		);
 	};
 
@@ -77,7 +83,12 @@ const Todo = () => {
 			<button onClick={handleClearButtonClick}>Clear</button>
 			<ul>
 				{todos.map(todo => (
-					<li key={todo.id}>{todo.name}</li>
+					<li
+						key={todo.id}
+						onClick={id => handleTodoItemClick(todo.id)}
+					>
+						{todo.name}
+					</li>
 				))}
 			</ul>
 		</>

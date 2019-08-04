@@ -80,7 +80,8 @@ const Todo = () => {
 			/>
 			<button type="button" onClick={handleAddButtonClick}>
 				Add
-			</button>git
+			</button>
+			git
 			<button onClick={handleClearButtonClick}>Clear</button>
 			{useMemo(
 				() => (

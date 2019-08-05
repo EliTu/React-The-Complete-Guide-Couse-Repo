@@ -39,4 +39,5 @@
     --shadow-dark: 1px 1px 3px rgba(0, 0, 0, 0.904);
     --shadow-light: 1px 1px 3px #ccc;
     --shadow-bright-glow: 1px 1px 10px 5px rgb(182, 177, 177);
+    --shadow-dark-glow: 1px 1px 10px 5px rgba(46, 43, 43, 0.678);
 }

@@ -29,7 +29,6 @@
 .Item a:active,
 .Item a.active {
 	background-color: rgba(0, 0, 0, 0);
-	/* border-bottom: 10px solid var(--glow-green-darker); */
 	border-bottom: 10px solid var(--light-cyan);
 	color: var(--coloring-bright-light);
 }
@@ -62,7 +61,7 @@
 
 	.Item .SigninActive {
 		color: rgb(99, 248, 99);
-		border-bottom: 10px solid rgba(71, 219, 71, 0.89);
+		border-bottom: 10px solid var(--light-cyan);
 	}
 }
 

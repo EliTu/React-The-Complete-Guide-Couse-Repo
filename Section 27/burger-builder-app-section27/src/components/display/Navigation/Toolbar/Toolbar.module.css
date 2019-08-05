@@ -12,6 +12,7 @@
     display: flex;
     justify-content: center;
     z-index: 90;
+    box-shadow: var(--shadow-dark);
 }
 
 .ItemsWrapper {

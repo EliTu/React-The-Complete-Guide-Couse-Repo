@@ -2,7 +2,7 @@
 
 .Input {
     width: 100%;
-    padding: 0.4rem;
+    padding: 0.2rem;
     box-sizing: border-box;
     font-family: inherit;
 }
@@ -12,14 +12,13 @@
 .Input select {
     background-color: rgba(241, 238, 238, 0);
     color: var(--coloring-dark);
-    font-size: 0.9rem;
-    width: 55%;
+    font-size: 1.1rem;
+    width: 45%;
     outline: none;
     border: none;
     border-bottom: 2px solid var(--coloring-opaque-dark);
-    margin: 1rem auto;
-    display: block;
-    text-align: center;
+    margin: 0.7rem auto;
+    display: inline-block;
     transition: all 0.5s;
 }
 
@@ -31,19 +30,20 @@
 }
 
 .Input textarea {
-    border: 1px solid var(--coloring-opaque-dark);
+    border: 2px solid var(--coloring-opaque-dark);
     overflow: auto;
     resize: none;
     text-align: start;
-    margin: 1rem auto;
-    height: 50%;
+    margin: 0.5rem auto;
+    height: 3rem;
     width: 75%;
 }
 
 .Input label {
+    width: 40%;
     font-weight: 700;
-    display: block;
-    margin-bottom: 1rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
 }
 
 .Input select option {
@@ -52,8 +52,13 @@
     color: var(--coloring-dark);
 }
 
-.Input input:focus {
-    width: 70%;
+.Input input:focus,
+.Input select:focus {
+    border-bottom: 2px solid var(--glow-light-blue);
+}
+
+.Input textarea:focus {
+    border: 2px solid var(--glow-light-blue);
 }
 
 .Input .ValidStyle {
@@ -65,6 +70,8 @@
 }
 
 .errorMessageStyle {
+    margin: 0.1rem;
+
     font-size: 0.8rem;
     color: var(--invalid-red-light);
 }
@@ -73,8 +80,22 @@
     color: var(--coloring-opaque-dark);
 }
 
+/* Small screen */
 @media screen and (max-width: 800px) {
     .Input input {
         width: 60%;
+    }
+
+    .Input input,
+    .Input textarea,
+    .Input select {
+        font-size: 0.9rem;
+        width: 70%;
+        display: block;
+    }
+
+    .Input label {
+        width: 100%;
+        display: block;
     }
 }

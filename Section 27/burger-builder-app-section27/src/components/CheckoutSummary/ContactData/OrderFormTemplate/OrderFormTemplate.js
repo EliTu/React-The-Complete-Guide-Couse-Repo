@@ -1,4 +1,4 @@
-const OrderFormData = [
+const OrderFormTemplate = [
 	{
 		data: 'name',
 		elementType: 'input',
@@ -123,4 +123,4 @@ const OrderFormData = [
 	},
 ];
 
-export default OrderFormData;
+export default OrderFormTemplate;

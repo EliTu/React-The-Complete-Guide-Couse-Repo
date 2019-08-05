@@ -158,16 +158,17 @@ const SignIn = ({
 									/>
 								))}
 							</form>
-							{showFormInvalidMessage ? (
+							{showFormInvalidMessage && (
 								<FormErrorMessage errorType="emptyFields" />
-							) : null}
-							{error && authType === 'signin' ? (
+							)}
+							{error && authType === 'signin' && (
 								<AuthErrorMessage
 									errorMessage={
 										error.response.data.error.message
 									}
 								/>
-							) : null}
+							)}
+							}
 							<Button
 								type="Confirm"
 								handleClick={handleSubmitFormClick}

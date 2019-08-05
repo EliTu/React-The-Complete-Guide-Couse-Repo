@@ -1,12 +1,13 @@
+@import '../../../../variables.css';
+
 .Order {
     width: 60%;
-    border: 1px solid #eee;
-    background-color: rgba(241, 238, 238, 0.993);
-    box-shadow: 0 2px 3px #ccc;
+    background-color: var(--primary-background-light);
+    box-shadow: var(--shadow-light);
     padding: 0.7rem;
     margin: 0.5rem auto;
     box-sizing: border-box;
-    color: rgba(27, 24, 24, 0.911);
+    color: var(--coloring-dark);
 }
 
 .OrderId {
@@ -35,7 +36,7 @@
 }
 
 .Order .Price {
-    color: rgba(47, 233, 47, 0.884);
+    color: var(--glow-green-darker);
     margin-left: 0.3rem;
     font-size: 1.3rem;
     font-weight: bold;

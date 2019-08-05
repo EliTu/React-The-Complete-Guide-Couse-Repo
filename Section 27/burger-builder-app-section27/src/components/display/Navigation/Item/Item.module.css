@@ -23,13 +23,13 @@
 }
 
 .Item a:hover {
-	border-bottom: 5px solid var(--light-cyan);
+	border-bottom: 5px solid var(--coloring-bright-light);
 }
 
 .Item a:active,
 .Item a.active {
 	background-color: rgba(0, 0, 0, 0);
-	border-bottom: 10px solid var(--light-cyan);
+	border-bottom: 10px solid var(--coloring-bright-light);
 	color: var(--coloring-bright-light);
 }
 
@@ -61,7 +61,12 @@
 
 	.Item .SigninActive {
 		color: rgb(99, 248, 99);
-		border-bottom: 10px solid var(--light-cyan);
+		border-bottom: 10px solid var(--coloring-bright-light);
+	}
+
+	.Item a:active,
+	.Item a.active {
+		border-radius: 10px;
 	}
 }
 

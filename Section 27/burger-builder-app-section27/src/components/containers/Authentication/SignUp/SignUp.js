@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import signUpForm from './signUpForm/signUpForm';
+import signUpFormTemplate from './signUpFormTemplate/signUpFormTemplate';
 import Input from '../../../UI/Input/Input';
 import Button from '../../../UI/Button/Button';
 import Spinner from '../../../UI/Spinner/Spinner';
@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 
 export class SignUp extends Component {
 	state = {
-		fields: signUpForm,
+		fields: signUpFormTemplate,
 		isFormValid: false,
 		showFormInvalidMessage: false,
 		formErrorType: 'emptyFields',

@@ -168,7 +168,6 @@ const SignIn = ({
 									}
 								/>
 							)}
-							}
 							<Button
 								type="Confirm"
 								handleClick={handleSubmitFormClick}

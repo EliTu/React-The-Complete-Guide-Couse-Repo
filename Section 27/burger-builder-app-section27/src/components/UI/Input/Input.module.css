@@ -13,10 +13,11 @@
     background-color: rgba(241, 238, 238, 0);
     color: var(--coloring-dark);
     font-size: 1.1rem;
-    width: 45%;
-    outline: none;
+    width: 65%;
     border: none;
-    border-bottom: 2px solid var(--coloring-opaque-dark);
+    border-radius: 2px;
+    border: 2px solid var(--coloring-opaque-dark);
+    padding: 0.3rem 0.7rem;
     margin: 0.7rem auto;
     display: inline-block;
     transition: all 0.5s;
@@ -40,10 +41,11 @@
 }
 
 .Input label {
-    width: 40%;
+    width: 35%;
     font-weight: 700;
     display: inline-block;
     margin-bottom: 0.5rem;
+    text-align: center;
 }
 
 .Input select option {
@@ -54,7 +56,7 @@
 
 .Input input:focus,
 .Input select:focus {
-    border-bottom: 2px solid var(--glow-light-blue);
+    border: 2px solid var(--glow-light-blue);
 }
 
 .Input textarea:focus {
@@ -62,11 +64,11 @@
 }
 
 .Input .ValidStyle {
-    border-bottom: 2px solid var(--glow-green-opaque-lighter);
+    border: 2px solid var(--glow-green-opaque-lighter);
 }
 
 .Input .InvalidStyle {
-    border-bottom: 2px solid var(--invalid-red-dark);
+    border: 2px solid var(--invalid-red-dark);
 }
 
 .errorMessageStyle {

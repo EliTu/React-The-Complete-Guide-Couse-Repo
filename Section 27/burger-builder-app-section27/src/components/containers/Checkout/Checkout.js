@@ -38,6 +38,8 @@ export const Checkout = ({ ingredients, history, match }) => {
 
 Checkout.propTypes = {
 	ingredients: PropTypes.array,
+	history: PropTypes.object,
+	match: PropTypes.object,
 };
 
 // Redux setup:

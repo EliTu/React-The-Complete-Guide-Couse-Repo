@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import signInForm from './signInForm/signInForm';
@@ -9,13 +9,15 @@ import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
 import AuthErrorMessage from '../../../UI/AuthErrorMessage/AuthErrorMessage';
 import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/store/actions';
 import { confirmAuth } from '../store/actions';
+import useClickOutside from '../../../../utilities/custom-hooks/useClickOutside';
+import useRedirect from '../../../../utilities/custom-hooks/useRedirect';
 import styles from './SignIn.module.css';
 import PropTypes from 'prop-types';
-import useClickOutside from '../../../../utilities/custom-hooks/useClickOutside';
 
 const SignIn = ({
 	isSignInDisplayed,
 	isLoading,
+	history,
 	error,
 	authType,
 	sentAuthForm,
@@ -109,14 +111,13 @@ const SignIn = ({
 	const outsideClickRef = useClickOutside(isSignInDisplayed, closeSignIn);
 
 	// Check if should be redirecting to checkout upon a sign in:
-	const redirectToCheckout = useCallback(() => {
-		if (isLoggedIn && isBuilding && isRedirectedToAuth)
-			props.history.push('/checkout');
-	}, [isBuilding, isLoggedIn, isRedirectedToAuth, props.history]);
-
-	useEffect(() => {
-		redirectToCheckout();
-	}, [redirectToCheckout]);
+	useRedirect(
+		isLoggedIn,
+		isBuilding,
+		isRedirectedToAuth,
+		history.push,
+		'/checkout'
+	);
 
 	return (
 		<div

@@ -6,9 +6,10 @@ import Button from '../../../UI/Button/Button';
 import Spinner from '../../../UI/Spinner/Spinner';
 import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
 import AuthErrorMessage from '../../../UI/AuthErrorMessage/AuthErrorMessage';
-import styles from '../SignUp/SignUp.module.css';
 import { confirmAuth } from '../store/actions';
+import styles from '../SignUp/SignUp.module.css';
 import PropTypes from 'prop-types';
+import useRedirect from '../../../../utilities/custom-hooks/useRedirect';
 
 export const SignUp = ({
 	isLoading,
@@ -28,6 +29,14 @@ export const SignUp = ({
 	const [checkMinMax, setCheckMinMax] = useState(false);
 	const [formErrorType, setFormErrorType] = useState('emptyFields');
 
+	const redirect = useRedirect(
+		isLoggedIn,
+		isBuilding,
+		isRedirectedToAuth,
+		history.push,
+		'/checkout'
+	);
+
 	useEffect(() => {
 		const checkFormValidation = () => {
 			const formCopy = [...fields];
@@ -39,9 +48,7 @@ export const SignUp = ({
 		};
 		checkFormValidation();
 		if (isLoggedIn) {
-			isBuilding && isRedirectedToAuth
-				? history.push('/checkout')
-				: history.push('/');
+			isBuilding && isRedirectedToAuth ? redirect() : history.push('/');
 		}
 	}, [
 		checkMinMax,
@@ -50,6 +57,7 @@ export const SignUp = ({
 		isBuilding,
 		isLoggedIn,
 		isRedirectedToAuth,
+		redirect,
 	]);
 
 	const handleFormChange = (event, data) => {
@@ -127,6 +135,7 @@ export const SignUp = ({
 
 	const handleCancelClick = () => history.replace('/');
 
+	// CSS modules styles:
 	const { SignUp, MainHeader } = styles;
 
 	return (

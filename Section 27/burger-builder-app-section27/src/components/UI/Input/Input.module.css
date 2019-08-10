@@ -12,7 +12,7 @@
 .Input select {
     background-color: rgba(241, 238, 238, 0);
     color: var(--coloring-dark);
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     width: 65%;
     border: none;
     border-radius: 2px;

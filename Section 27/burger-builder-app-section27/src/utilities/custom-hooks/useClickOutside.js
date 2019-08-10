@@ -1,14 +1,15 @@
 import { useRef, useCallback, useEffect } from 'react';
 
-const useClickOutside = (isDisplayed, closeCallbackFn) => {
+// Hook to detect clicks ourside of a certain node, and run a function in response on that node:
+const useClickOutside = (isDisplayed, callbackFn) => {
 	const boxRef = useRef();
 	const handleOutsideClick = useCallback(
 		event => {
 			if (isDisplayed && !boxRef.current.contains(event.target)) {
-				closeCallbackFn();
+				callbackFn();
 			}
 		},
-		[closeCallbackFn, isDisplayed]
+		[callbackFn, isDisplayed]
 	);
 
 	useEffect(() => {

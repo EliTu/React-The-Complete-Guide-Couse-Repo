@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import signInForm from './signInForm/signInForm';
@@ -9,6 +9,7 @@ import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
 import AuthErrorMessage from '../../../UI/AuthErrorMessage/AuthErrorMessage';
 import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/store/actions';
 import { confirmAuth } from '../store/actions';
+import useForm from '../../../../utilities/custom-hooks/useForm';
 import useClickOutside from '../../../../utilities/custom-hooks/useClickOutside';
 import useRedirect from '../../../../utilities/custom-hooks/useRedirect';
 import styles from './SignIn.module.css';
@@ -31,68 +32,16 @@ const SignIn = ({
 	const { SignIn, Open, Closed, SuccessMessage } = styles;
 
 	// State hooks:
-	const [fields, setFields] = useState(signInForm);
-	const [isFormValid, setIsFormValid] = useState(false);
 	const [showFormInvalidMessage, setShowFormInvalidMessage] = useState(false);
-	const [checkMinMax, setCheckMinMax] = useState(false);
+
+	// Form fields & validation data from useForm custom hook:
+	const [inputs, , isFormValid, , handleFormChange] = useForm(signInForm);
 
 	// Toggle component display upon clicking the navbar link
 	const setDisplayStyle = isSignInDisplayed ? Open : Closed;
 
-	// Handle changes upon typing in the input fields
-	const handleFormChange = (event, data) => {
-		let updatedForm = [...fields];
-		let updatedFormData = updatedForm.forEach(el =>
-			el.data === data
-				? ((el.value = event.target.value),
-				  (el.validation.valid = checkInputValidation(
-						el.value,
-						el.validation,
-						el.data
-				  )),
-				  (el.validation.hasUserInput = true))
-				: el
-		);
-		updatedForm.value = updatedFormData;
-		setFields([...updatedForm]);
-	};
-
-	// Check form validation upon changes to fields and minMax requirements
-	useEffect(() => {
-		const checkFormValidation = () => {
-			const formCopy = [...fields];
-			const checkValid = formCopy.every(el => {
-				return el.validation.valid;
-			});
-
-			setIsFormValid(checkValid);
-		};
-		checkFormValidation();
-	}, [checkMinMax, fields]);
-
-	// Check requirements for the input fields for validations
-	const checkInputValidation = (value, validation, type) => {
-		let isValid = true;
-
-		// General validation & empty field:
-		if (validation.required) isValid = value.trim() !== '' && isValid;
-
-		// Check the email regexp:
-		if (validation.required && type === 'email')
-			isValid = validation.emailValidationRegExp.test(value);
-
-		// Check min-max characters requirement:
-		if (validation.minLength && validation.maxLength)
-			isValid =
-				value.length + 1 >= validation.minLength &&
-				value.length + 1 <= validation.maxLength;
-
-		setCheckMinMax(isValid);
-		return isValid;
-	};
-
 	// Handle form submittion
-	const handleSubmitFormClick = event => {
+	const handleFormSubmitEvent = event => {
 		event.preventDefault();
 
 		if (!isFormValid) {
@@ -102,7 +51,7 @@ const SignIn = ({
 
 		// If all fields are valid
 		if (isFormValid) {
-			sentAuthForm(fields[0].value, fields[1].value, 'signin');
+			sentAuthForm(inputs[0].value, inputs[1].value, 'signin');
 			setShowFormInvalidMessage(false);
 		}
 	};
@@ -133,9 +82,9 @@ const SignIn = ({
 							<h2>Members Login</h2>
 							<form
 								action="post"
-								onSubmit={handleSubmitFormClick}
+								onSubmit={handleFormSubmitEvent}
 							>
-								{fields.map((field, i) => (
+								{inputs.map((field, i) => (
 									<Input
 										key={field.data}
 										focused={i === 0 && isSignInDisplayed}
@@ -146,7 +95,7 @@ const SignIn = ({
 										handleChange={event =>
 											handleFormChange(event, field.data)
 										}
-										handleEnterPress={handleSubmitFormClick}
+										handleEnterPress={handleFormSubmitEvent}
 									/>
 								))}
 							</form>
@@ -162,7 +111,7 @@ const SignIn = ({
 							)}
 							<Button
 								type="Confirm"
-								handleClick={handleSubmitFormClick}
+								handleClick={handleFormSubmitEvent}
 							>
 								Login
 							</Button>

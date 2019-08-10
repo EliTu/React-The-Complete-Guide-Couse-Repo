@@ -7,9 +7,10 @@ import Spinner from '../../../UI/Spinner/Spinner';
 import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
 import AuthErrorMessage from '../../../UI/AuthErrorMessage/AuthErrorMessage';
 import { confirmAuth } from '../store/actions';
+import useForm from '../../../../utilities/custom-hooks/useForm';
+import useRedirect from '../../../../utilities/custom-hooks/useRedirect';
 import styles from '../SignUp/SignUp.module.css';
 import PropTypes from 'prop-types';
-import useRedirect from '../../../../utilities/custom-hooks/useRedirect';
 
 export const SignUp = ({
 	isLoading,
@@ -23,11 +24,20 @@ export const SignUp = ({
 	history,
 }) => {
 	// Local state hooks:
-	const [fields, setFields] = useState(signUpFormTemplate);
-	const [isFormValid, setIsFormValid] = useState(false);
+	// const [fields, setFields] = useState(signUpFormTemplate);
+	// const [isFormValid, setIsFormValid] = useState(false);
+	// const [checkMinMax, setCheckMinMax] = useState(false);
 	const [showFormInvalidMessage, setShowFormInvalidMessage] = useState(false);
-	const [checkMinMax, setCheckMinMax] = useState(false);
 	const [formErrorType, setFormErrorType] = useState('emptyFields');
+
+	// Form fields & validation data from useForm custom hook:
+	const [
+		inputs,
+		setInputs,
+		isFormValid,
+		setIsFormValid,
+		handleFormChange,
+	] = useForm(signUpFormTemplate);
 
 	const redirect = useRedirect(
 		isLoggedIn,
@@ -38,68 +48,12 @@ export const SignUp = ({
 	);
 
 	useEffect(() => {
-		const checkFormValidation = () => {
-			const formCopy = [...fields];
-			const checkValid = formCopy.every(el => {
-				return el.validation.valid;
-			});
-
-			setIsFormValid(checkValid);
-		};
-		checkFormValidation();
 		if (isLoggedIn) {
 			isBuilding && isRedirectedToAuth ? redirect() : history.push('/');
 		}
-	}, [
-		checkMinMax,
-		fields,
-		history,
-		isBuilding,
-		isLoggedIn,
-		isRedirectedToAuth,
-		redirect,
-	]);
+	}, [history, isBuilding, isLoggedIn, isRedirectedToAuth, redirect]);
 
-	const handleFormChange = (event, data) => {
-		let updatedForm = [...fields];
-		let updatedFormData = updatedForm.forEach(el =>
-			el.data === data
-				? ((el.value = event.target.value),
-				  (el.validation.valid = checkInputValidation(
-						el.value,
-						el.validation,
-						el.data
-				  )),
-				  (el.validation.hasUserInput = true))
-				: el
-		);
-		updatedForm.value = updatedFormData;
-
-		setFields(updatedForm);
-	};
-
-	const checkInputValidation = (value, validation, type) => {
-		let isValid = true;
-
-		// General validation & empty field:
-		if (validation.required) isValid = value.trim() !== '' && isValid;
-
-		// Check the email regexp:
-		if (validation.required && type === 'email')
-			isValid = validation.emailValidationRegExp.test(value);
-
-		// Check min-max characters requirement:
-		if (validation.minLength && validation.maxLength)
-			isValid =
-				value.length + 1 >= validation.minLength &&
-				value.length + 1 <= validation.maxLength;
-
-		setCheckMinMax(isValid);
-
-		return isValid;
-	};
-
-	const handleSubmitFormClick = event => {
+	const handleFormSubmitEvent = event => {
 		event.preventDefault();
 
 		if (!isFormValid) {
@@ -109,12 +63,12 @@ export const SignUp = ({
 		}
 
 		// Check if both passwords are not matching
-		if (fields[1].value !== fields[2].value) {
+		if (inputs[1].value !== inputs[2].value) {
 			// Nullify 2nd password field value
-			let resetValueCopy = [...fields];
+			let resetValueCopy = [...inputs];
 			resetValueCopy[2].value = '';
 
-			setFields(resetValueCopy);
+			setInputs(resetValueCopy);
 			setIsFormValid(false);
 			setShowFormInvalidMessage(true);
 			setFormErrorType('noMatch');
@@ -123,12 +77,12 @@ export const SignUp = ({
 
 		// If all fields are valid
 		if (isFormValid) {
-			sentAuthForm(fields[0].value, fields[1].value, 'signup');
+			sentAuthForm(inputs[0].value, inputs[1].value, 'signup');
 
-			let resetValueCopy = [...fields];
+			let resetValueCopy = [...inputs];
 			resetValueCopy.forEach(field => (field.value = ''));
 
-			setFields(resetValueCopy);
+			setInputs(resetValueCopy);
 			setShowFormInvalidMessage(false);
 		}
 	};
@@ -147,8 +101,8 @@ export const SignUp = ({
 				) : (
 					<>
 						<h2>Become a new member</h2>
-						<form action="post" onSubmit={handleSubmitFormClick}>
-							{fields.map((field, i) => (
+						<form action="post" onSubmit={handleFormSubmitEvent}>
+							{inputs.map((field, i) => (
 								<Input
 									key={field.data}
 									focused={i === 0}
@@ -159,7 +113,7 @@ export const SignUp = ({
 									handleChange={event =>
 										handleFormChange(event, field.data)
 									}
-									handleEnterPress={handleSubmitFormClick}
+									handleEnterPress={handleFormSubmitEvent}
 								/>
 							))}
 						</form>
@@ -173,7 +127,7 @@ export const SignUp = ({
 						) : null}
 						<Button
 							type="Confirm"
-							handleClick={handleSubmitFormClick}
+							handleClick={handleFormSubmitEvent}
 						>
 							Sign up
 						</Button>

@@ -39,7 +39,7 @@ const Input = props => {
 	validationStyles =
 		!validation.valid && validation.hasUserInput
 			? [...validationStyles, InvalidStyle]
-			: validation.valid && validation.hasUserInput
+			: validation.valid && validation.hasUserInput && value !== ''
 			? [...validationStyles, ValidStyle]
 			: [];
 

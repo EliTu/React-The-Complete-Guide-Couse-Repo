@@ -11,6 +11,7 @@ import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/s
 import { confirmAuth } from '../store/actions';
 import styles from './SignIn.module.css';
 import PropTypes from 'prop-types';
+import useClickOutside from '../../../../utilities/custom-hooks/useClickOutside';
 
 const SignIn = ({
 	isSignInDisplayed,
@@ -105,20 +106,7 @@ const SignIn = ({
 	};
 
 	// Handle clicks on elements outside of the component to close it
-	const myRef = useRef();
-	const handleOutsideClick = useCallback(
-		event => {
-			if (isSignInDisplayed && !myRef.current.contains(event.target)) {
-				closeSignIn();
-			}
-		},
-		[closeSignIn, isSignInDisplayed]
-	);
-
-	useEffect(() => {
-		document.addEventListener('click', handleOutsideClick);
-		return () => document.removeEventListener('click', handleOutsideClick);
-	}, [handleOutsideClick]);
+	const outsideClickRef = useClickOutside(isSignInDisplayed, closeSignIn);
 
 	// Check if should be redirecting to checkout upon a sign in:
 	const redirectToCheckout = useCallback(() => {
@@ -131,7 +119,10 @@ const SignIn = ({
 	}, [redirectToCheckout]);
 
 	return (
-		<div className={[SignIn, setDisplayStyle].join(' ')} ref={myRef}>
+		<div
+			className={[SignIn, setDisplayStyle].join(' ')}
+			ref={outsideClickRef}
+		>
 			<>
 				{!isLoggedIn ? (
 					isLoading ? (

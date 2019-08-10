@@ -84,6 +84,7 @@ export const BurgerBuilder = ({
 				<>
 					<Burger ingredients={ingredients} />
 					<BuildControls
+						ingredients={ingredients}
 						addIngredient={handleAddIngredientClick}
 						removeIngredient={handleRemoveIngredientClick}
 						disableRemove={isQuantityZero}
@@ -121,9 +122,10 @@ const { addIngredient, removeIngredient, fetchIngredients } = actions;
 
 const mapDispatchToProps = dispatch => {
 	return {
-		handleAddIngredientClick: ingName => dispatch(addIngredient(ingName)),
-		handleRemoveIngredientClick: ingName =>
-			dispatch(removeIngredient(ingName)),
+		handleAddIngredientClick: (ingName, ingredients) =>
+			dispatch(addIngredient(ingName, ingredients)),
+		handleRemoveIngredientClick: (ingName, ingredients) =>
+			dispatch(removeIngredient(ingName, ingredients)),
 		initIngredients: () => dispatch(fetchIngredients()),
 	};
 };

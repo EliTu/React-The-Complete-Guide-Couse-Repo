@@ -19,6 +19,7 @@ const BuildControls = props => {
 		disableRemove,
 		purchasable,
 		setPurchaseMode,
+		ingredients,
 	} = props;
 
 	// CSS Modules styles:
@@ -34,8 +35,10 @@ const BuildControls = props => {
 				<Controller
 					key={control.label}
 					label={control.label}
-					clickAdd={() => addIngredient(control.type)}
-					clickRemove={() => removeIngredient(control.type)}
+					clickAdd={() => addIngredient(control.type, ingredients)}
+					clickRemove={() =>
+						removeIngredient(control.type, ingredients)
+					}
 					DisableRemoveButton={disableRemove[control.position]}
 				/>
 			))}
@@ -57,6 +60,7 @@ BuildControls.propTypes = {
 	disableRemove: PropTypes.array,
 	purchasable: PropTypes.bool,
 	setPurchaseMode: PropTypes.func,
+	ingredients: PropTypes.array,
 };
 
 export default BuildControls;

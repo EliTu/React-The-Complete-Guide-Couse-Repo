@@ -38,6 +38,7 @@
     margin: 0.5rem auto;
     height: 3rem;
     width: 75%;
+    height: 5rem;
 }
 
 .Input label {
@@ -84,9 +85,6 @@
 
 /* Small screen */
 @media screen and (max-width: 800px) {
-    .Input input {
-        width: 60%;
-    }
 
     .Input input,
     .Input textarea,
@@ -94,6 +92,12 @@
         font-size: 0.9rem;
         width: 70%;
         display: block;
+    }
+
+    .Input textarea {
+        width: 85%;
+        height: 5rem;
+
     }
 
     .Input label {

@@ -63,11 +63,6 @@
 		color: rgb(99, 248, 99);
 		border-bottom: 10px solid var(--coloring-bright-light);
 	}
-
-	.Item a:active,
-	.Item a.active {
-		border-radius: 10px;
-	}
 }
 
 /* Medium screen */

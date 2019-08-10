@@ -35,7 +35,7 @@
 }
 
 .Neutral {
-    color: var(--coloring-light);
+    color: var(--coloring-opaque-dark);
     border: 2px solid var(--disabled-dark);
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axiosInstance from '../../../axios/axios-orders';
 import Burger from '../../Burger/Burger';
@@ -10,116 +10,92 @@ import requestMessageComponent from '../../hoc/requestMessageComponent/requestMe
 import * as actions from './store/actions';
 import PropTypes from 'prop-types';
 
-export class BurgerBuilder extends Component {
-	state = {
-		isPurchasable: false,
-		isInOrderSummary: false,
-	};
+export const BurgerBuilder = ({
+	ingredients,
+	totalPrice,
+	handleAddIngredientClick,
+	handleRemoveIngredientClick,
+	isLoadingRequest,
+	isErrorOnMount,
+	initIngredients,
+	history,
+}) => {
+	// Local state hooks:
+	const [isPurchasable, setIsPurchasable] = useState(false);
+	const [isInOrderSummary, setIsInOrderSummary] = useState(false);
 
-	// Get the Ingredient list and quantity from the database:
-	async componentDidMount() {
-		this.props.initIngredients();
-	}
+	// First get the Ingredient list and quantity from the database on mount:
+	useEffect(() => {
+		initIngredients();
+	}, [initIngredients]);
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.ingredients !== this.props.ingredients) {
-			this.checkIfPurchasable();
-		}
-	}
-
-	checkIfPurchasable = () => {
-		const ingredientsCopy = [...this.props.ingredients];
-		const checkBool = ingredientsCopy.some(
-			ingredient => ingredient.quantity > 0
-		);
-
-		this.setState(() => {
-			return {
-				isPurchasable: checkBool,
+	// Loop over the ingredients and check if the burger is purchasable:
+	useEffect(() => {
+		if (ingredients !== null) {
+			const checkIfPurchasable = () => {
+				const ingredientsCopy = [...ingredients];
+				const checkBool = ingredientsCopy.some(
+					ingredient => ingredient.quantity > 0
+				);
+				setIsPurchasable(checkBool);
 			};
-		});
-	};
-
-	handleOrderButtonClick = () => {
-		return this.setState({
-			isInOrderSummary: true,
-		});
-	};
-
-	handleModalOuterBorderClick = () => {
-		return this.setState({
-			isInOrderSummary: false,
-		});
-	};
-
-	handleCheckoutButtonClick = () => {
-		this.props.history.push('/checkout');
-	};
-
-	render() {
-		// local state:
-		const { isPurchasable, isInOrderSummary } = this.state;
-
-		// props (state mapped from redux):
-		const {
-			ingredients,
-			totalPrice,
-			handleAddIngredientClick,
-			handleRemoveIngredientClick,
-			isLoadingRequest,
-			isErrorOnMount,
-		} = this.props;
-
-		// Check if an ingredient quantity is currently 0
-		let isQuantityZero;
-		if (ingredients) {
-			isQuantityZero = [...ingredients].map(el => el.quantity <= 0);
+			checkIfPurchasable();
 		}
+	}, [ingredients]);
 
-		// If getting database request error, display message:
-		const errorMessage = (
-			<p>
-				Oh no! We've encountered an error, ingredients can't be loaded
-			</p>
-		);
+	const handleOrderButtonClick = () => setIsInOrderSummary(true);
 
-		return (
-			<>
-				<Modal
-					show={isInOrderSummary}
-					closeModalHandler={this.handleModalOuterBorderClick}
-				>
-					{isLoadingRequest ? (
-						<Spinner />
-					) : (
-						<OrderSummary
-							checkoutHandler={this.handleCheckoutButtonClick}
-							closeModalHandler={this.handleModalOuterBorderClick}
-							ingredients={ingredients}
-							price={totalPrice}
-						/>
-					)}
-				</Modal>
-				{isErrorOnMount ? errorMessage : null}
-				{!ingredients ? (
+	const handleModalOuterBorderClick = () => setIsInOrderSummary(false);
+
+	const handleCheckoutButtonClick = () => history.push('/checkout');
+
+	// Check if an ingredient quantity is currently 0
+	let isQuantityZero;
+	if (ingredients) {
+		isQuantityZero = [...ingredients].map(el => el.quantity <= 0);
+	}
+
+	// If getting database request error, display message:
+	const errorMessage = (
+		<p>Oh no! We've encountered an error, ingredients can't be loaded</p>
+	);
+
+	return (
+		<>
+			<Modal
+				show={isInOrderSummary}
+				closeModalHandler={handleModalOuterBorderClick}
+			>
+				{isLoadingRequest ? (
 					<Spinner />
 				) : (
-					<>
-						<Burger ingredients={ingredients} />
-						<BuildControls
-							addIngredient={handleAddIngredientClick}
-							removeIngredient={handleRemoveIngredientClick}
-							disableRemove={isQuantityZero}
-							price={totalPrice}
-							purchasable={isPurchasable}
-							setPurchaseMode={this.handleOrderButtonClick}
-						/>
-					</>
+					<OrderSummary
+						checkoutHandler={handleCheckoutButtonClick}
+						closeModalHandler={handleModalOuterBorderClick}
+						ingredients={ingredients}
+						price={totalPrice}
+					/>
 				)}
-			</>
-		);
-	}
-}
+			</Modal>
+			{isErrorOnMount ? errorMessage : null}
+			{!ingredients ? (
+				<Spinner />
+			) : (
+				<>
+					<Burger ingredients={ingredients} />
+					<BuildControls
+						addIngredient={handleAddIngredientClick}
+						removeIngredient={handleRemoveIngredientClick}
+						disableRemove={isQuantityZero}
+						price={totalPrice}
+						purchasable={isPurchasable}
+						setPurchaseMode={handleOrderButtonClick}
+					/>
+				</>
+			)}
+		</>
+	);
+};
 
 BurgerBuilder.propTypes = {
 	ingredients: PropTypes.array,

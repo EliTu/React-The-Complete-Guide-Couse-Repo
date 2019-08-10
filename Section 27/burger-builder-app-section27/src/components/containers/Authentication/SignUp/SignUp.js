@@ -39,6 +39,7 @@ export const SignUp = ({
 		handleFormChange,
 	] = useForm(signUpFormTemplate);
 
+	// Fire redirect custom hook:
 	const redirect = useRedirect(
 		isLoggedIn,
 		isBuilding,

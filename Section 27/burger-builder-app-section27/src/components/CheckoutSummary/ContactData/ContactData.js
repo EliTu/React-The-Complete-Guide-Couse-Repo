@@ -51,8 +51,12 @@ export const ContactData = ({
 			return;
 		}
 
+		const dateString = new Date().toDateString();
+		const hourStrig = new Date().toLocaleTimeString();
+
 		const orderorderFormCopy = [...inputs];
 		const order = {
+			date: `${dateString}, ${hourStrig}`,
 			userId: userId,
 			ingredients: ingredientsArr,
 			price: price,

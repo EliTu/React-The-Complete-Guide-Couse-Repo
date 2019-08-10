@@ -2,13 +2,13 @@
 
 - Handle the ContactData action redirect - Instead of immediately redirect to the BurgerBuilder page upon receiving a response from the server, should redirect after receiving the confirmation message in the modal.
 
-- Add dates to the each Order component in the Orders component.
+<!-- - Add dates to the each Order component in the Orders component. -->
 
 - Accordion UI for each Order component.
 
 <!-- - Sort Orders by placing the most recent order on the top of the Orders stack. -->
 
-- Add 'Order number' field for orders to better track them.
+<!-- - Add 'Order number' field for orders to better track them. *Parsed the Firebase orderId for better readability -->
 
 - Can delete an Order component.
 

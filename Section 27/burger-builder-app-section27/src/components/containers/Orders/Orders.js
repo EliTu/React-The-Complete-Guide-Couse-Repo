@@ -38,6 +38,7 @@ export const Orders = ({
 							<Order
 								key={order.id}
 								orderId={order.id}
+								date={order.date}
 								ingredients={order.ingredients}
 								contact={order.customer}
 								delivery={order.deliveryMethod}

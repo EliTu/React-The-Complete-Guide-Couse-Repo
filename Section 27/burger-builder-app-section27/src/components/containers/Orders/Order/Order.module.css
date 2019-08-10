@@ -15,6 +15,11 @@
     text-decoration: underline;
 }
 
+.dateStyle {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
 .DataHeader {
     display: inline-block;
     margin: 0.3rem 0.5rem;

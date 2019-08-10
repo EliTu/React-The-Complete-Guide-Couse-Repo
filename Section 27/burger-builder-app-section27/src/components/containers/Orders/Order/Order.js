@@ -4,19 +4,22 @@ import PropTypes from 'prop-types';
 
 const Order = props => {
 	// props:
-	const { ingredients, price, orderId, contact, delivery } = props;
+	const { ingredients, price, orderId, contact, delivery, date } = props;
 
 	// CSS Modules styles:
-	const { Order, Price, DataHeader, Category, OrderId } = styles;
+	const { Order, Price, DataHeader, Category, OrderId, dateStyle } = styles;
 
 	let mappedContactInfo = [];
 	for (let key in contact) {
 		mappedContactInfo.push({ [key]: contact[key] });
 	}
 
+	const parsedOrderId = orderId.replace(/[-!@#$ %^&* _(),.?":{}|<>]/g, '');
+
 	return (
 		<div className={Order}>
-			<p className={OrderId}>Order id: {orderId}</p>
+			<p className={OrderId}>Order id: {parsedOrderId}</p>
+			<p className={dateStyle}>{date}</p>
 			<div className={DataHeader}>
 				Ingredients:
 				<ul>
@@ -68,6 +71,7 @@ Order.propTypes = {
 	orderId: PropTypes.string,
 	contact: PropTypes.object,
 	delivery: PropTypes.string,
+	date: PropTypes.string,
 };
 
 Order.defaultProps = {

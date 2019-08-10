@@ -5,7 +5,7 @@
     background-color: var(--primary-background-light);
     box-shadow: var(--shadow-light);
     padding: 0.7rem;
-    margin: 0.5rem auto;
+    margin: 1rem auto;
     box-sizing: border-box;
     color: var(--coloring-dark);
 }

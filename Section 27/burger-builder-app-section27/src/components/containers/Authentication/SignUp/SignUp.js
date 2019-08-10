@@ -24,9 +24,6 @@ export const SignUp = ({
 	history,
 }) => {
 	// Local state hooks:
-	// const [fields, setFields] = useState(signUpFormTemplate);
-	// const [isFormValid, setIsFormValid] = useState(false);
-	// const [checkMinMax, setCheckMinMax] = useState(false);
 	const [showFormInvalidMessage, setShowFormInvalidMessage] = useState(false);
 	const [formErrorType, setFormErrorType] = useState('emptyFields');
 

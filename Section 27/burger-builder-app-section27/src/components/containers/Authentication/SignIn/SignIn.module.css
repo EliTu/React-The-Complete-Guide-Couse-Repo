@@ -52,13 +52,9 @@
 }
 
 /* Medium screen */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1250px) {
     .SignIn {
-        width: 40%;
-    }
-
-    .SignIn input {
-        width: 50%;
+        width: 35%;
     }
 }
 
@@ -73,10 +69,6 @@
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
         box-shadow: var(--shadow-light)
-    }
-
-    .SignIn input {
-        width: 55%;
     }
 
     .Closed {

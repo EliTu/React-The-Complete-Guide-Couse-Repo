@@ -10,7 +10,7 @@
     background-color: var(--primary-background-light);
     color: var(--coloring-dark);
     margin: 3rem auto;
-    width: 30%;
+    width: 40%;
     text-align: center;
     border-radius: 7px;
     box-shadow: var(--shadow-dark);
@@ -39,11 +39,18 @@
 
 @media only screen and (max-width: 960px) {
     .SignUp {
+        width: 65%;
+    }
+}
+
+/* Medium screen */
+@media only screen and (max-width: 1250px) {
+    .SignUp {
         width: 70%;
     }
 }
 
-/* Mobile */
+/* Small screen */
 @media only screen and (max-width: 500px) {
     .SignUp {
         width: 90%;

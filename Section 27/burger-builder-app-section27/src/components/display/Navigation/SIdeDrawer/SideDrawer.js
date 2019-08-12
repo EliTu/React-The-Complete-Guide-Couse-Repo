@@ -35,4 +35,4 @@ SideDrawer.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
 };
 
-export default SideDrawer;
+export default React.memo(SideDrawer);

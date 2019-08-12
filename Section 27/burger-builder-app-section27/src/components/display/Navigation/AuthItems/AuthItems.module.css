@@ -25,6 +25,14 @@
     color: var(--glow-green-darker);
 }
 
+@media only screen and (max-width: 850px) {
+    .AuthItems .LoggedInMessage {
+        width: 60%;
+        font-size: 0.9rem;
+        padding: 0.9rem 0;
+    }
+}
+
 /* Desktop */
 @media (min-width: 500px) {
     .AuthItems {

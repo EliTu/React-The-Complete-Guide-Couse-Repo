@@ -48,14 +48,16 @@
     }
 }
 
-@media screen and (max-width: 960px) {
+/* Medium screen */
+@media screen and (max-width: 1200px) {
     .ItemsWrapper {
         width: 100%;
+        padding: 0;
     }
 }
 
-/* Mobile */
-@media screen and (max-width:499px) {
+/* small screen */
+@media screen and (max-width:500px) {
     .DesktopOnly {
         display: none;
     }

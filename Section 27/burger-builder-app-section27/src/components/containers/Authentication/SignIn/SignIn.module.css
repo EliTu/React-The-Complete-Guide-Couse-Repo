@@ -15,7 +15,7 @@
     margin: 0.3rem auto;
     border: 1px solid var(--coloring-bright-light);
     color: var(--coloring-dark);
-    background-color: var(--primary-background-light);
+    background-color: rgb(245, 245, 245);
     border-top: none;
     border-right: 1px solid var(--coloring-opaque-dark);
     border-left: 1px solid var(--coloring-opaque-dark);

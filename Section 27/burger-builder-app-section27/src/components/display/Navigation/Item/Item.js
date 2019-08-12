@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { signInToggleClick } from '../AuthItems/store/actions';
 import { authSignout } from '../../../containers/Authentication/store/actions';
+import Icon from '../../../UI/Icon/Icon';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from './Item.module.css';
 import PropTypes from 'prop-types';
 
@@ -48,9 +50,10 @@ const Item = ({
 						: handleLogOutClick(event)
 				}
 			>
+				{signInItem && <Icon iconType={faSignInAlt} />}
 				{signInItem ? 'Sign in' : 'Log out'}
 			</a>
-		) : ( 
+		) : (
 			<NavLink className={Item} activeClassName={active} to={link} exact>
 				{children}
 			</NavLink>

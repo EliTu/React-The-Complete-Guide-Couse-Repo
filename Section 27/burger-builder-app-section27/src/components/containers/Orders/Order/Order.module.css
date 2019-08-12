@@ -1,7 +1,7 @@
 @import '../../../../variables.css';
 
 .Order {
-    width: 60%;
+    width: 90%;
     background-color: var(--primary-background-light);
     box-shadow: var(--shadow-light);
     padding: 0.7rem;
@@ -57,7 +57,7 @@
 /* Small screens */
 @media screen and (max-width: 500px) {
     .Order {
-        width: 85%
+        width: 80%
     }
 
     .DataHeader {

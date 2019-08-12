@@ -1,8 +1,19 @@
 @import '../../../variables.css';
 
+.Orders {
+    width: 70%;
+    margin: 0 auto;
+}
+
 .Orders h1 {
     margin: 3rem auto;
     text-align: center;
     color: var(--coloring-dark);
     margin: 0 auto;
+}
+
+@media screen and (max-width: 500px) {
+    .Orders {
+        width: 100%;
+    }
 }

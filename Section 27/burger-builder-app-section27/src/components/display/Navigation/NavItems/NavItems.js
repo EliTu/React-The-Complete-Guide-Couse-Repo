@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import Item from '../Item/Item';
 import Icon from '../../../UI/Icon/Icon';
 import styles from './NavItems.module.css';
-import PropTypes from 'prop-types';
 import {
 	faStream,
 	faList,
 	faShoppingCart,
 	faBookmark,
 } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 export const NavItems = ({ isLoggedIn }) => {
 	// CSS Module styles:

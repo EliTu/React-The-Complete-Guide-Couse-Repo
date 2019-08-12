@@ -1,10 +1,8 @@
-.Logo {
-    padding: 0.4rem;
-    height: 90%;
-    box-sizing: border-box;
-    border-radius: 50%;
-}
+@import '../../variables.css';
 
-.Logo img {
-    height: 100%;
+.Logo {
+    box-sizing: border-box;
+    margin: 0.5rem 0;
+    text-align: center;
+    color: var(--coloring-bright-light);
 }

@@ -23,15 +23,16 @@ const Order = props => {
 			<div className={DataHeader}>
 				Ingredients:
 				<ul>
-					{ingredients.map(el =>
-						el.quantity > 0 ? (
-							<li key={el.ingredient}>
-								<span className={Category}>
-									{el.ingredient}
-								</span>
-								x {el.quantity}
-							</li>
-						) : null
+					{ingredients.map(
+						el =>
+							el.quantity > 0 && (
+								<li key={el.ingredient}>
+									<span className={Category}>
+										{el.ingredient}
+									</span>
+									x {el.quantity}
+								</li>
+							)
 					)}
 				</ul>
 			</div>

@@ -8,21 +8,13 @@ import PropTypes from 'prop-types';
 
 const Toolbar = ({ clicked }) => {
 	// CSS Modules classes:
-	const {
-		Toolbar,
-		ItemsWrapper,
-		logoWrapper,
-		LogoHeight,
-		DesktopOnly,
-	} = styles;
+	const { Toolbar, ItemsWrapper, logoWrapper, DesktopOnly } = styles;
 
 	return (
 		<header className={Toolbar}>
 			<div className={ItemsWrapper}>
 				<div className={logoWrapper}>
-					<div className={LogoHeight}>
-						<Logo />
-					</div>
+					<Logo size="3x" />
 					<nav className={DesktopOnly}>
 						<NavItems />
 					</nav>

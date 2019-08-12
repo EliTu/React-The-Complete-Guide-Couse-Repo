@@ -1,14 +1,15 @@
 import React from 'react';
-import LogoImg from '../../assets/Image/burger-logo.png';
 import styles from './Logo.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHamburger } from '@fortawesome/free-solid-svg-icons';
 
-const Logo = props => {
+const Logo = ({ size }) => {
 	// CSS Modules styles:
 	const { Logo } = styles;
 
 	return (
 		<div className={Logo}>
-			<img src={LogoImg} alt="Burger Builder app logo" />
+			<FontAwesomeIcon icon={faHamburger} size={size} />
 		</div>
 	);
 };

@@ -8,7 +8,7 @@ import styles from './SIdeDrawer.module.css';
 
 const SideDrawer = ({ handleVisibility, isVisible }) => {
 	// CSS Modules styles:
-	const { SideDrawer, LogoHeight, Close, Open, StyledHorizontal } = styles;
+	const { SideDrawer, Close, Open, StyledHorizontal } = styles;
 
 	let attachedClasses = [SideDrawer, Close];
 	if (isVisible) attachedClasses = [SideDrawer, Open];
@@ -17,9 +17,7 @@ const SideDrawer = ({ handleVisibility, isVisible }) => {
 		<>
 			<Backdrop show={isVisible} removeBackdrop={handleVisibility} />
 			<div className={attachedClasses.join(' ')}>
-				<div className={LogoHeight}>
-					<Logo />
-				</div>
+				<Logo size="8x" />
 				<nav>
 					<AuthItems />
 					<div className={StyledHorizontal} />

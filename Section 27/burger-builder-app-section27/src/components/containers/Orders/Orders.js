@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Order from './Order/Order';
 import Spinner from '../../UI/Spinner/Spinner';
+import GoBackMessage from '../../UI/GoBackMessage/GoBackMessage';
 import { fetchOrdersFromDatabase } from './store/actions';
 import styles from './Orders.module.css';
 import PropTypes from 'prop-types';
@@ -19,7 +20,7 @@ export const Orders = ({
 	}, [idToken, onFetchOrders, userId, isLoggedIn]);
 
 	// CSS Modules styles:
-	const { Orders, noOrders } = styles;
+	const { Orders } = styles;
 
 	const noOrdersMessage =
 		!isLoggedIn && !isLoadingRequest
@@ -48,7 +49,7 @@ export const Orders = ({
 					})
 					.reverse() // To render the latest order first
 			) : (
-				<p className={noOrders}>{noOrdersMessage}</p>
+				<GoBackMessage content={noOrdersMessage} />
 			)}
 		</div>
 	);

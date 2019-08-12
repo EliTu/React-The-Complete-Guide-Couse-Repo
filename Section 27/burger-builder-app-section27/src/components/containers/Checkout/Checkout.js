@@ -7,16 +7,12 @@ import styles from './Checkout.module.css';
 import PropTypes from 'prop-types';
 
 export const Checkout = ({ ingredients, history, match }) => {
-	const handleCancelClick = () => {
-		return history.goBack();
-	};
-
-	const handleCheckoutClick = () => {
-		return history.replace('/checkout/contact-data');
-	};
-
 	// CSS Modules styles:
 	const { Checkout, CheckoutHeader } = styles;
+
+	const handleCancelClick = () => history.goBack();
+
+	const handleCheckoutClick = () => history.replace('/checkout/contact-data');
 
 	return (
 		<>

@@ -2,13 +2,11 @@
 
 .CheckoutSummary {
     box-sizing: border-box;
-    width: 80%;
+    width: 90%;
     text-align: center;
     margin: auto;
     padding: 1rem;
     border-radius: 7px;
-    background-color: var(--primary-background-light);
-    box-shadow: var(--shadow-light)
 }
 
 .BurgerDisplay {
@@ -17,6 +15,7 @@
     margin: auto;
     padding: 0.2rem 0;
     border: 2px solid var(--coloring-opaque-dark);
+    box-shadow: var(--shadow-light);
 }
 
 .CheckoutSummary button {
@@ -25,22 +24,9 @@
     margin: 0.8rem 0.6rem;
 }
 
-.errorMessageStyle {
-    color: var(--invalid-red-dark);
-    font-size: 1.2rem;
-    padding: 0.5rem;
-}
-
 .Price {
     margin-left: 0.3rem;
     font-size: 1.3rem;
     font-weight: bold;
     color: var(--glow-green-darker);
-}
-
-/* medium screen */
-@media screen and (min-width: 600px) {
-    .CheckoutSummary {
-        width: 50%;
-    }
 }

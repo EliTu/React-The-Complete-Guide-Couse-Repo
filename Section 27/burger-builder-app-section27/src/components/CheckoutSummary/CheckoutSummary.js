@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Burger from '../Burger/Burger';
 import Button from '../UI/Button/Button';
+import GoBackMessage from '../UI/GoBackMessage/GoBackMessage';
 import styles from './CheckoutSummary.module.css';
 import PropTypes from 'prop-types';
 
@@ -15,21 +16,20 @@ const CheckoutSummary = ({
 	...props
 }) => {
 	// CSS Modules styles:
-	const { CheckoutSummary, BurgerDisplay, errorMessageStyle, Price } = styles;
+	const { CheckoutSummary, BurgerDisplay, Price } = styles;
 
 	// Check if ingredients were selected in the BurgerBuilder
 	const areIngredientsSelected = ingredients
 		? ingredients.some(ingredient => ingredient.quantity > 0)
 		: null;
 
-	const errorMessage = !isLoggedIn
-		? 'Please sign in to checkout an order'
-		: 'It seems like no ingredients were selected! Please select burger ingredients in order to checkout';
+	const message =
+		'It seems like no ingredients were selected! Please select burger ingredients in order to checkout';
 
 	return (
 		<div className={CheckoutSummary}>
-			<div className={BurgerDisplay}>
-				{areIngredientsSelected && isLoggedIn ? (
+			{areIngredientsSelected && isLoggedIn ? (
+				<div className={BurgerDisplay}>
 					<>
 						<p>
 							Total price:
@@ -39,15 +39,10 @@ const CheckoutSummary = ({
 						</p>
 						<Burger ingredients={ingredients} />
 					</>
-				) : (
-					<>
-						<p className={errorMessageStyle}>{errorMessage}</p>
-						<Button handleClick={cancelClick} type="Danger">
-							Go back
-						</Button>
-					</>
-				)}
-			</div>
+				</div>
+			) : (
+				<GoBackMessage content={message} />
+			)}
 			{areIngredientsSelected && isLoggedIn && (
 				<>
 					<Button handleClick={checkoutClick} type="Confirm">

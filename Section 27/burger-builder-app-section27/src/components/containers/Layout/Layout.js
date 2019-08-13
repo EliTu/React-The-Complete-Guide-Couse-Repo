@@ -26,9 +26,12 @@ const Layout = ({ children, isSignInDisplayed }) => {
 		setIsSideDrawerOpen(true);
 	};
 
+	// Check if the current screen size is a small screen:
+	const smallScreenMode = window.innerWidth <= '500';
+
 	return (
 		<>
-			<Backdrop show={isSignInDisplayed} />
+			<Backdrop show={isSignInDisplayed && smallScreenMode} />
 			<Toolbar clicked={handleDrawerButtonClick} />
 			<SideDrawer
 				isVisible={isSideDrawerVisible}

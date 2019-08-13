@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Burger from '../Burger/Burger';
 import Button from '../UI/Button/Button';
 import GoBackMessage from '../UI/GoBackMessage/GoBackMessage';
+import { areIngredientsSelected } from '../../utilities/helpers/helpers';
 import styles from './CheckoutSummary.module.css';
 import PropTypes from 'prop-types';
 
@@ -13,22 +14,18 @@ const CheckoutSummary = ({
 	ingredients,
 	totalPrice,
 	isLoggedIn,
-	...props
 }) => {
 	// CSS Modules styles:
 	const { CheckoutSummary, BurgerDisplay, Price } = styles;
 
-	// Check if ingredients were selected in the BurgerBuilder
-	const areIngredientsSelected = ingredients
-		? ingredients.some(ingredient => ingredient.quantity > 0)
-		: null;
+	const areIngredientsAvailable = areIngredientsSelected(ingredients);
 
 	const message =
 		'It seems like no ingredients were selected! Please select burger ingredients in order to checkout';
 
 	return (
 		<div className={CheckoutSummary}>
-			{areIngredientsSelected && isLoggedIn ? (
+			{areIngredientsAvailable && isLoggedIn ? (
 				<div className={BurgerDisplay}>
 					<>
 						<p>
@@ -43,7 +40,7 @@ const CheckoutSummary = ({
 			) : (
 				<GoBackMessage content={message} />
 			)}
-			{areIngredientsSelected && isLoggedIn && (
+			{areIngredientsAvailable && isLoggedIn && (
 				<>
 					<Button handleClick={checkoutClick} type="Confirm">
 						Continue

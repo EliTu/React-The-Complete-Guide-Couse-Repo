@@ -8,6 +8,7 @@ import OrderFormTemplate from './OrderFormTemplate/OrderFormTemplate';
 import axiosInstance from '../../../axios/axios-orders';
 import requestMessageComponent from '../../hoc/requestMessageComponent/requestMessageComponent';
 import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
+import { areIngredientsSelected } from '../../../utilities/helpers/helpers';
 import useForm from '../../../utilities/custom-hooks/useForm';
 import styles from './ContactData.module.css';
 import PropTypes from 'prop-types';
@@ -74,42 +75,48 @@ export const ContactData = ({
 		onOrderClick(order, history.replace, idToken);
 	};
 
+	const areIngredientsAvailable = areIngredientsSelected(ingredients);
+
 	// CSS Modules styles:
 	const { ContactData } = styles;
 
 	return (
-		<div className={ContactData}>
-			<h3>Enter your contact information:</h3>
-			{isLoadingRequest && isFormValid ? (
-				<Spinner />
-			) : (
-				<form action="post" onSubmit={handleOrderSubmitClick}>
-					{inputs.map((form, i) => (
-						<Input
-							key={form.data}
-							focused={i === 0}
-							elementType={form.elementType}
-							elementConfig={form.elementConfig}
-							validation={{ ...form.validation }}
-							value={form.value}
-							handleChange={event =>
-								handleFormChange(event, form.data)
-							}
-							handleEnterPress={handleOrderSubmitClick}
-						/>
-					))}
-				</form>
+		<>
+			{isLoggedIn && areIngredientsAvailable && (
+				<div className={ContactData}>
+					<h3>Enter your contact information:</h3>
+					{isLoadingRequest && isFormValid ? (
+						<Spinner />
+					) : (
+						<form action="post" onSubmit={handleOrderSubmitClick}>
+							{inputs.map((form, i) => (
+								<Input
+									key={form.data}
+									focused={i === 0}
+									elementType={form.elementType}
+									elementConfig={form.elementConfig}
+									validation={{ ...form.validation }}
+									value={form.value}
+									handleChange={event =>
+										handleFormChange(event, form.data)
+									}
+									handleEnterPress={handleOrderSubmitClick}
+								/>
+							))}
+						</form>
+					)}
+					<Button
+						type={showFormInvalidMessage ? 'Danger' : 'Confirm'}
+						handleClick={handleOrderSubmitClick}
+					>
+						Confirm Order
+					</Button>
+					{showFormInvalidMessage && (
+						<FormErrorMessage errorType="emptyFields" />
+					)}
+				</div>
 			)}
-			<Button
-				type={showFormInvalidMessage ? 'Danger' : 'Confirm'}
-				handleClick={handleOrderSubmitClick}
-			>
-				Confirm Order
-			</Button>
-			{showFormInvalidMessage && (
-				<FormErrorMessage errorType="emptyFields" />
-			)}
-		</div>
+		</>
 	);
 };
 

@@ -4,7 +4,7 @@
 
 <!-- - Add dates to the each Order component in the Orders component. -->
 
-- Accordion UI for each Order component.
+<!-- - Accordion UI for each Order component. *Split Order into OrderCard and OrderData -->
 
 <!-- - Sort Orders by placing the most recent order on the top of the Orders stack. -->
 

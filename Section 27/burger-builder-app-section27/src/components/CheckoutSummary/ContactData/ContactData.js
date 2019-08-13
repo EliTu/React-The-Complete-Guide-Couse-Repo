@@ -29,10 +29,11 @@ export const ContactData = ({
 	const [price] = useState(totalPrice);
 	const [showFormInvalidMessage, setShowFormInvalidMessage] = useState(false);
 
+	// Form fields & validation data from useForm custom hook:
 	const [inputs, , isFormValid, , handleFormChange] = useForm(
 		OrderFormTemplate
 	);
-
+	
 	// If a user is logged in, set the email value to the user email by default
 	const setEmailIfLoggedIn = () => {
 		if (isLoggedIn && email) {

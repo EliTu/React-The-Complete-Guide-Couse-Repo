@@ -14,6 +14,7 @@ const CheckoutSummary = ({
 	ingredients,
 	totalPrice,
 	isLoggedIn,
+	history,
 }) => {
 	// CSS Modules styles:
 	const { CheckoutSummary, BurgerDisplay, Price } = styles;
@@ -22,6 +23,8 @@ const CheckoutSummary = ({
 
 	const message =
 		'It seems like no ingredients were selected! Please select burger ingredients in order to checkout';
+
+	const { pathname } = history.location;
 
 	return (
 		<div className={CheckoutSummary}>
@@ -42,9 +45,11 @@ const CheckoutSummary = ({
 			)}
 			{areIngredientsAvailable && isLoggedIn && (
 				<>
-					<Button handleClick={checkoutClick} type="Confirm">
-						Continue
-					</Button>
+					{pathname !== '/checkout/contact-data' && (
+						<Button handleClick={checkoutClick} type="Confirm">
+							Continue
+						</Button>
+					)}
 					<Button handleClick={cancelClick} type="Danger">
 						Cancel
 					</Button>
@@ -60,6 +65,7 @@ CheckoutSummary.propTypes = {
 	checkoutClick: PropTypes.func,
 	location: PropTypes.object,
 	isLoggedIn: PropTypes.bool,
+	history: PropTypes.object,
 };
 
 // Redux setup:

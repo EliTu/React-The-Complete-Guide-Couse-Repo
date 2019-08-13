@@ -1,6 +1,7 @@
 import React, { useEffect, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import NotificationBox from './components/containers/NotificationBox/NotificationBox';
 import Layout from './components/containers/Layout/Layout';
 import BurgerBuilder from './components/containers/BurgerBuilder/BurgerBuilder';
 import SignIn from './components/containers/Authentication/SignIn/SignIn';
@@ -57,6 +58,7 @@ function App({ tryAutoSignIn, isLoggedIn }) {
 							/>
 							<Route path="/" component={BurgerBuilder} />
 						</Switch>
+						<NotificationBox />
 					</div>
 					<Footer />
 				</Layout>

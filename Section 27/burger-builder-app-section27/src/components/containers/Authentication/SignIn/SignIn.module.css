@@ -1,7 +1,6 @@
 @import '../../../../variables.css';
 
 .SignIn {
-    box-sizing: border-box;
     width: 20%;
     position: absolute;
     top: 5.4%;

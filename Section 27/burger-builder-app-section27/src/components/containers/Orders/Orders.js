@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import Order from './Order/Order';
+import OrderCard from './OrderCard/OrderCard';
 import Spinner from '../../UI/Spinner/Spinner';
 import GoBackMessage from '../../UI/GoBackMessage/GoBackMessage';
 import { fetchOrdersFromDatabase } from './store/actions';
@@ -36,7 +36,7 @@ export const Orders = ({
 				orders
 					.map(order => {
 						return order.id && order.ingredients && order.price ? (
-							<Order
+							<OrderCard
 								key={order.id}
 								orderId={order.id}
 								date={order.date}

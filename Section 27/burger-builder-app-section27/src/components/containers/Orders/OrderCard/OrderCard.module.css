@@ -1,0 +1,54 @@
+@import '../../../../variables.css';
+
+.OrderCard {
+    width: 90%;
+    background-color: var(--primary-background-light);
+    box-shadow: var(--shadow-light);
+    padding: 0.7rem;
+    margin: 1rem auto;
+    box-sizing: border-box;
+    color: var(--coloring-dark);
+    text-align: center;
+}
+
+.dateStyle {
+
+    font-size: 0.8rem;
+}
+
+.toggleButton {
+    width: 10%;
+    margin: 0.3rem auto;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    outline-color: rgba(255, 0, 0, 0);
+    background-color: rgba(255, 222, 173, 0);
+}
+
+.toggleButton:hover {
+    background-color: var(--coloring-light);
+}
+
+/* Medium screens */
+@media screen and (max-width: 900px) {
+    .OrderCard {
+        width: 80%
+    }
+}
+
+/* Small screens */
+@media screen and (max-width: 500px) {
+    .OrderCard {
+        width: 80%
+    }
+
+    .OrderId {
+        font-size: 0.95rem;
+    }
+
+    .Order p {
+        width: 100%;
+    }
+}

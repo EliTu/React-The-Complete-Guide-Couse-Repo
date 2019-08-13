@@ -25,7 +25,7 @@ export const Orders = ({
 	const noOrdersMessage =
 		!isLoggedIn && !isLoadingRequest
 			? `The Orders area is for members only! in order to review your previous orders, please sign in as a member first`
-			: `No previous orders found!`;
+			: `No previous orders found.`;
 
 	return (
 		<div className={Orders}>

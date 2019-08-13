@@ -12,6 +12,10 @@
     border-radius: 7px;
 }
 
+.GoBackMessage button {
+    margin: 0.7rem 0;
+}
+
 /* Small screen */
 @media only screen and (max-width: 500px) {
     .GoBackMessage {

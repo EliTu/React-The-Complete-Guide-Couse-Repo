@@ -13,13 +13,12 @@
     z-index: 5;
     padding: 0.6rem 0.5rem;
     margin: 0.3rem auto;
-    border: 1px solid var(--coloring-bright-light);
     color: var(--coloring-dark);
     background-color: rgb(245, 245, 245);
     border-top: none;
-    border-right: 1px solid var(--coloring-opaque-dark);
-    border-left: 1px solid var(--coloring-opaque-dark);
-    border-bottom: 1px solid var(--coloring-opaque-dark);
+    border-right: 2px solid var(--coloring-opaque-light);
+    border-left: 2px solid var(--coloring-opaque-light);
+    border-bottom: 2px solid var(--coloring-opaque-light);
     box-shadow: var(--shadow-light);
     border-radius: 7px;
     border-top-left-radius: 0;
@@ -65,7 +64,7 @@
         top: 20%;
         right: 10%;
         z-index: 110;
-        border: none;
+        border: 1px solid var(--coloring-bright-light);
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
         box-shadow: var(--shadow-light)

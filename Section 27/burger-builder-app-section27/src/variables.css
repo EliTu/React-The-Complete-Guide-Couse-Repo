@@ -27,6 +27,7 @@
     --coloring-opaque-dark: rgba(44, 39, 39, 0.507);
     --coloring-light: rgba(218, 214, 214, 0.938);
     --coloring-bright-light: rgba(255, 255, 255, 0.884);
+    --coloring-opaque-light: rgba(167, 164, 164, 0.788);
 
     /* Button colors */
     --confirmation-green: rgba(16, 151, 4, 0.781);

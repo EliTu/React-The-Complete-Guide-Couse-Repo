@@ -3,25 +3,22 @@ import styles from './BuildControls.module.css';
 import Controller from './Controller/Controller';
 import PropTypes from 'prop-types';
 
-const controls = [
+const CONTROLS = [
 	{ label: 'Meat', type: 'meat', position: 0 },
 	{ label: 'Salad', type: 'salad', position: 1 },
 	{ label: 'Cheese', type: 'cheese', position: 2 },
 	{ label: 'Bacon', type: 'bacon', position: 3 },
 ];
 
-const BuildControls = props => {
-	// props:
-	const {
-		price,
-		addIngredient,
-		removeIngredient,
-		disableRemove,
-		purchasable,
-		setPurchaseMode,
-		ingredients,
-	} = props;
-
+const BuildControls = ({
+	price,
+	addIngredient,
+	removeIngredient,
+	disableRemove,
+	purchasable,
+	setPurchaseMode,
+	ingredients,
+}) => {
 	// CSS Modules styles:
 	const { BuildControls, Price, Sum, OrderButton } = styles;
 
@@ -31,7 +28,7 @@ const BuildControls = props => {
 				Total Price:
 				<span className={Sum}>${price.toFixed(2)}</span>
 			</p>
-			{controls.map(control => (
+			{CONTROLS.map(control => (
 				<Controller
 					key={control.label}
 					label={control.label}

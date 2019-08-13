@@ -7,17 +7,15 @@
 }
 
 .SignUp {
-    background-color: var(--primary-background-light);
+    border: 2px solid var(--coloring-opaque-light);
     color: var(--coloring-dark);
     margin: 3rem auto;
     width: 40%;
     text-align: center;
     border-radius: 7px;
-    box-shadow: var(--shadow-dark);
+    box-shadow: var(--shadow-light);
     padding: 1rem;
     box-sizing: border-box;
-    outline: 2px solid var(--coloring-opaque-dark);
-    outline-offset: -0.6rem;
 }
 
 .SignUp h2 {

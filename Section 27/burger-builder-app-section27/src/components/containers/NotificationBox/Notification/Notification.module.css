@@ -1,0 +1,19 @@
+@import '../../../../variables.css';
+
+.Notification {
+    width: 100%;
+    height: 80%;
+    margin: 0.3rem auto;
+    display: flex;
+    justify-items: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Success svg {
+    color: var(--confirmation-green);
+}
+
+.Fail svg {
+    color: var(--danger-red);
+}

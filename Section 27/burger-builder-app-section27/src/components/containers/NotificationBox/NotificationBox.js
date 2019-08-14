@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Notification from './Notification/Notification';
 import { connect } from 'react-redux';
 import styles from './NotificationBox.module.css';
 import PropTypes from 'prop-types';
@@ -19,6 +20,10 @@ const NotificationBox = ({
 
 	useEffect(() => {
 		setIsDisplayed(true);
+		const autoCloseBox = setTimeout(() => {
+			setIsDisplayed(false);
+		}, 5000);
+		return () => clearTimeout(autoCloseBox);
 	}, [isLoggedIn, isErrorOnMount, isLoadingRequest]);
 
 	return (
@@ -26,7 +31,7 @@ const NotificationBox = ({
 			className={[NotificationBox, displayStatus].join(' ')}
 			onClick={() => setIsDisplayed(false)}
 		>
-			<p>Test</p>
+			<Notification authType={authType} />
 		</div>
 	);
 };

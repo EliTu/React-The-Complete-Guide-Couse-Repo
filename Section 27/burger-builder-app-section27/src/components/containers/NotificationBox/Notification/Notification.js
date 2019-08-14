@@ -6,13 +6,24 @@ import {
 	faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
-const Notification = () => {
+const Notification = ({ type, sign }) => {
 	const { Notification, Success, Fail } = styles;
 	return (
-		<div className={Notification}>
-			<p>Test</p>
-			<Icon iconType={faExclamationCircle} size="3x" className={Fail} />
-		</div>
+		<>
+			{type && (
+				<div className={Notification}>
+					<p>{type}</p>
+					<Icon
+						iconType={
+							sign === 'success'
+								? faCheckCircle
+								: faExclamationCircle
+						}
+						size="3x"
+					/>
+				</div>
+			)}
+		</>
 	);
 };
 

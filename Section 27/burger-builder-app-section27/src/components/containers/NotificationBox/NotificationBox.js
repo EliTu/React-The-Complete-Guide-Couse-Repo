@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import Notification from './Notification/Notification';
 import { connect } from 'react-redux';
 import styles from './NotificationBox.module.css';
@@ -16,6 +16,25 @@ const NotificationBox = ({
 	// Local state hooks:
 	const [isDisplayed, setIsDisplayed] = useState(false);
 
+	// Notifications type reducer:
+	const notificationReducer = (state = '', action) => {
+		switch (action.type) {
+			case 'INIT':
+				return state;
+			case 'LOGIN_SUCCESS':
+				return state;
+			case 'LOGOUT':
+				return state;
+			case 'ERROR_ON_MOUNT':
+				return state;
+			case 'LOADING_ORDERS':
+				return state;
+			default:
+				return state;
+		}
+	};
+	const [notificationType, dispatch] = useReducer(notificationReducer, '');
+
 	const displayStatus = isDisplayed ? Open : Closed;
 
 	useEffect(() => {
@@ -31,7 +50,7 @@ const NotificationBox = ({
 			className={[NotificationBox, displayStatus].join(' ')}
 			onClick={() => setIsDisplayed(false)}
 		>
-			<Notification authType={authType} />
+			<Notification type={notificationType} />
 		</div>
 	);
 };

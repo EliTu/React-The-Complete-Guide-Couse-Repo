@@ -1,10 +1,10 @@
 .NotificationBox {
-    width: 15%;
+    width: 20%;
     height: 110px;
     border: 1px solid black;
     position: absolute;
     top: 5.4%;
-    right: 45%;
+    right: 40%;
     display: flex;
     text-align: center;
     flex-flow: column;
@@ -26,7 +26,7 @@
     transition: all 0.5s ease-in-out;
 }
 
-.Closed {
+/* .Closed {
     opacity: 0;
     transform: translateY(-150%);
 }
@@ -34,4 +34,23 @@
 .Open {
     opacity: 1;
     transform: translateY(0);
+} */
+
+/* Small screen */
+@media only screen and (max-width: 500px) {
+    .NotificationBox {
+        width: 60%;
+        top: 12%;
+        right: 20%;
+    }
+
+    .Closed {
+        opacity: 0;
+        transform: translatex(-150%);
+    }
+
+    .Open {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

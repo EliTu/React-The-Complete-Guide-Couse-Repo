@@ -62,16 +62,16 @@ const NotificationBox = ({
 
 	useEffect(() => {
 		const messageType =
-			prevToken && prevUserId && prevSignInStatus
+			isLoggedIn && authType === 'signin'
 				? 'LOGIN_SUCCESS'
 				: !prevToken && !prevUserId && authType === 'signOut'
 				? 'LOGOUT'
 				: isErrorOnMount
 				? 'ERROR_ON_MOUNT'
-				: '';
+				: 'LOGOUT';
 		console.log(messageType);
-		setIsDisplayed(true);
 		dispatch({ type: messageType });
+		setIsDisplayed(true);
 
 		// Make sure to close the NotificationBox after 5 seconds:
 		const autoCloseBox = setTimeout(() => {

@@ -1,7 +1,8 @@
 @import '../../../../variables.css';
 
 .Notification {
-    width: 100%;
+    display: flex;
+    width: auto;
     height: 80%;
     margin: 0.3rem auto;
     display: flex;
@@ -10,10 +11,28 @@
     align-items: center;
 }
 
+.Notification p {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 85px;
+    width: 80%;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
 .Success svg {
     color: var(--confirmation-green);
 }
 
 .Fail svg {
     color: var(--danger-red);
+}
+
+/* Small screen */
+@media only screen and (max-width: 500px) {
+    .Notification p {
+        font-size: 0.9rem;
+    }
 }

@@ -30,7 +30,7 @@ const Item = ({
 	// Handle loging user out upon click on 'Log out':
 	const handleLogOutClick = event => {
 		event.preventDefault();
-		signOutClicked();
+		signOutClicked('signOut');
 	};
 
 	// Set Sign in tab custom styles:
@@ -82,7 +82,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		toggleSignIn: () => dispatch(signInToggleClick()),
-		signOutClicked: () => dispatch(authSignout()),
+		signOutClicked: signOut => dispatch(authSignout(signOut)),
 	};
 };
 

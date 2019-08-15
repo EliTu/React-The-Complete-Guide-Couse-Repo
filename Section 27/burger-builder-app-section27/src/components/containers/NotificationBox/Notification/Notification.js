@@ -7,23 +7,20 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Notification = ({ type, sign }) => {
-	const { Notification, Success, Fail } = styles;
+	const { Notification, Success, Fail, iconWrapper } = styles;
+	const setColors = sign === 'success' ? Success : Fail;
 	return (
-		<>
-			{type && (
-				<div className={Notification}>
-					<p>{type}</p>
-					<Icon
-						iconType={
-							sign === 'success'
-								? faCheckCircle
-								: faExclamationCircle
-						}
-						size="3x"
-					/>
-				</div>
-			)}
-		</>
+		<div className={[Notification, setColors].join(' ')}>
+			<p>{type}</p>
+			<div className={iconWrapper}>
+				<Icon
+					iconType={
+						sign === 'success' ? faCheckCircle : faExclamationCircle
+					}
+					size="3x"
+				/>
+			</div>
+		</div>
 	);
 };
 

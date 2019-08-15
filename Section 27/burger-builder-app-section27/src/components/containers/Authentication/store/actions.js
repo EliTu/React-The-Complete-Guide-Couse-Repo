@@ -6,6 +6,7 @@ import {
 	REDIRECTED_TO_AUTH_PAGE,
 } from './constants';
 import axiosAuth from '../../../../axios/axios-auth';
+import { authKey as key } from './keys';
 
 export const authInit = authType => {
 	return {
@@ -52,8 +53,8 @@ export const confirmAuth = (email, password, authType) => {
 
 		let targetUrl =
 			authType === 'signin'
-				? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M'
-				: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M';
+				? `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`
+				: `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${key}`;
 
 		const authData = {
 			email: email,

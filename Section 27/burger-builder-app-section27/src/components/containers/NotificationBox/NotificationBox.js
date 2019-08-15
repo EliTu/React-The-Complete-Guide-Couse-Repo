@@ -6,9 +6,13 @@ import PropTypes from 'prop-types';
 
 const NotificationBox = ({
 	isLoggedIn,
+	isSignInLoading,
 	authType,
 	isErrorOnMount,
-	isLoadingOrders,
+	orders,
+	areOrdersLoading,
+	idToken,
+	userId,
 }) => {
 	// CSS Modules styles:
 	const { NotificationBox, Open, Closed } = styles;
@@ -20,53 +24,71 @@ const NotificationBox = ({
 	const notificationReducer = (state, action) => {
 		switch (action.type) {
 			case 'INIT':
-				return { type: 'Welcome to React Burger!', sign: 'success' };
+				return {
+					message: 'Welcome to React Burger!',
+					sign: 'success',
+				};
 			case 'LOGIN_SUCCESS':
 				return {
-					type: `You've successfully logged in`,
+					message: `You've successfully logged in`,
 					sign: 'success',
 				};
 			case 'LOGOUT':
 				return {
-					type: `You've successfully logged out`,
+					message: `You've successfully logged out`,
 					sign: 'danger',
 				};
 			case 'ERROR_ON_MOUNT':
 				return {
-					type: `Oops...could not fetch ingredients`,
+					message: `Oops...could not fetch ingredients`,
 					sign: 'danger',
 				};
-			case 'LOADING_ORDERS':
-				return state;
+			case 'FETCH_ORDERS':
+				return { message: 'Previous Orders Ready', sign: 'success' };
 			default:
 				return state;
 		}
 	};
 	const [notificationData, dispatch] = useReducer(notificationReducer, {
-		type: '',
+		message: '',
 		sign: '',
 	});
 
 	const displayStatus = isDisplayed ? Open : Closed;
 
 	useEffect(() => {
+		let type;
 		setIsDisplayed(false);
-		dispatch({ type: 'INIT' });
 		setIsDisplayed(true);
-		if (authType === 'signin' && isLoggedIn)
-			dispatch({ type: 'LOGIN_SUCCESS' });
-		if (authType === 'signOut' && !isLoggedIn) dispatch({ type: 'LOGOUT' });
-		if (isErrorOnMount) dispatch({ type: 'ERROR_ON_MOUNT' });
-		dispatch({ type: 'LOGIN_SUCCESS' });
-		if (authType === 'signin' && isLoggedIn)
-			dispatch({ type: 'LOGIN_SUCCESS' });
+		// dispatch({ type: 'INIT' });
+		const messageType =
+			idToken && userId && !areOrdersLoading
+				? (type = 'LOGIN_SUCCESS')
+				: !idToken && !userId && authType === 'signOut'
+				? (type = 'LOGOUT')
+				: isErrorOnMount
+				? (type = 'ERROR_ON_MOUNT')
+				: orders && areOrdersLoading
+				? (type = 'FETCH_ORDERS')
+				: null;
+		dispatch({ type: messageType });
 
+		// Make sure to close the NotificationBox after 5 seconds:
 		const autoCloseBox = setTimeout(() => {
 			setIsDisplayed(false);
 		}, 5000);
 
 		return () => clearTimeout(autoCloseBox);
-	}, [isLoggedIn, isErrorOnMount, isLoadingOrders, authType]);
+	}, [
+		isLoggedIn,
+		isErrorOnMount,
+		orders,
+		authType,
+		isSignInLoading,
+		areOrdersLoading,
+		idToken,
+		userId,
+	]);
 
 	return (
 		<div
@@ -74,7 +96,7 @@ const NotificationBox = ({
 			onClick={() => setIsDisplayed(false)}
 		>
 			<Notification
-				type={notificationData.type}
+				type={notificationData.message}
 				sign={notificationData.sign}
 			/>
 		</div>
@@ -85,16 +107,24 @@ NotificationBox.propTypes = {
 	authType: PropTypes.string,
 	isLoggedIn: PropTypes.bool,
 	isErrorOnMount: PropTypes.bool,
-	isLoadingOrders: PropTypes.bool,
+	areOrdersAvailable: PropTypes.bool,
+	isSignInLoading: PropTypes.bool,
+	orders: PropTypes.array,
+	userId: PropTypes.string,
+	idToken: PropTypes.string,
 };
 
 // Redux setup:
 const mapStateToProps = state => {
 	return {
+		isSignInLoading: state.auth.isSignInLoading,
 		isLoggedIn: state.auth.isLoggedIn,
 		authType: state.auth.authType,
 		isErrorOnMount: state.burgerBuilder.isErrorOnMount,
-		isLoadingOrders: state.orderForm.isLoading,
+		orders: state.orderForm.orders,
+		areOrdersLoading: state.orderForm.isLoading,
+		idToken: state.auth.idToken,
+		userId: state.auth.userId,
 	};
 };
 

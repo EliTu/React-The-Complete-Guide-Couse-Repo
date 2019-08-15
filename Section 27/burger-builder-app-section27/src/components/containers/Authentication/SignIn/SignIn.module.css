@@ -44,11 +44,6 @@
     transform: translateY(0);
 }
 
-.SuccessMessage {
-    color: var(--glow-light-blue);
-    font-size: 1.2rem;
-}
-
 /* Medium screen */
 @media screen and (max-width: 1250px) {
     .SignIn {

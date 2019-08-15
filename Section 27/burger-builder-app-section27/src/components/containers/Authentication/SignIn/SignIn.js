@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import signInForm from './signInForm/signInForm';
@@ -29,7 +29,7 @@ const SignIn = ({
 	...props
 }) => {
 	// CSS Modules styles:
-	const { SignIn, Open, Closed, SuccessMessage } = styles;
+	const { SignIn, Open, Closed } = styles;
 
 	// State hooks:
 	const [showFormInvalidMessage, setShowFormInvalidMessage] = useState(false);
@@ -67,6 +67,10 @@ const SignIn = ({
 		history.push,
 		'/checkout'
 	);
+
+	useEffect(() => {
+		closeSignIn();
+	}, [closeSignIn, isLoggedIn]);
 
 	return (
 		<div
@@ -117,9 +121,7 @@ const SignIn = ({
 							</Button>
 						</>
 					)
-				) : (
-					<p className={SuccessMessage}>Sign in success!</p>
-				)}
+				) : null}
 			</>
 		</div>
 	);

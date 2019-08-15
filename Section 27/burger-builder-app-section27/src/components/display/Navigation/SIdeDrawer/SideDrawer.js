@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Logo from '../../../Logo/Logo';
 import NavItems from '../NavItems/NavItems';
 import AuthItems from '../AuthItems/AuthItems';
@@ -33,4 +33,4 @@ SideDrawer.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
 };
 
-export default React.memo(SideDrawer);
+export default memo(SideDrawer);

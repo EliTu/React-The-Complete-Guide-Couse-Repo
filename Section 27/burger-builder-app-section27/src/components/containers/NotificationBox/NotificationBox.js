@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import Notification from './Notification/Notification';
+import usePreviousValue from '../../../utilities/custom-hooks/usePreviousValue';
 import { connect } from 'react-redux';
 import styles from './NotificationBox.module.css';
 import PropTypes from 'prop-types';
@@ -19,6 +20,11 @@ const NotificationBox = ({
 
 	// Local state hooks:
 	const [isDisplayed, setIsDisplayed] = useState(false);
+
+	// Prev state values:
+	const prevToken = usePreviousValue(idToken);
+	const prevUserId = usePreviousValue(userId);
+	const prevSignInStatus = usePreviousValue(isLoggedIn);
 
 	// Notifications type reducer:
 	const notificationReducer = (state, action) => {
@@ -43,10 +49,8 @@ const NotificationBox = ({
 					message: `Oops...could not fetch ingredients`,
 					sign: 'danger',
 				};
-			case 'FETCH_ORDERS':
-				return { message: 'Previous Orders Ready', sign: 'success' };
 			default:
-				return state;
+				return '';
 		}
 	};
 	const [notificationData, dispatch] = useReducer(notificationReducer, {
@@ -57,20 +61,16 @@ const NotificationBox = ({
 	const displayStatus = isDisplayed ? Open : Closed;
 
 	useEffect(() => {
-		let type;
-		setIsDisplayed(false);
-		setIsDisplayed(true);
-		// dispatch({ type: 'INIT' });
 		const messageType =
-			idToken && userId && !areOrdersLoading
-				? (type = 'LOGIN_SUCCESS')
-				: !idToken && !userId && authType === 'signOut'
-				? (type = 'LOGOUT')
+			prevToken && prevUserId && prevSignInStatus
+				? 'LOGIN_SUCCESS'
+				: !prevToken && !prevUserId && authType === 'signOut'
+				? 'LOGOUT'
 				: isErrorOnMount
-				? (type = 'ERROR_ON_MOUNT')
-				: orders && areOrdersLoading
-				? (type = 'FETCH_ORDERS')
-				: null;
+				? 'ERROR_ON_MOUNT'
+				: '';
+		console.log(messageType);
+		setIsDisplayed(true);
 		dispatch({ type: messageType });
 
 		// Make sure to close the NotificationBox after 5 seconds:
@@ -80,26 +80,28 @@ const NotificationBox = ({
 
 		return () => clearTimeout(autoCloseBox);
 	}, [
-		isLoggedIn,
-		isErrorOnMount,
-		orders,
 		authType,
-		isSignInLoading,
-		areOrdersLoading,
-		idToken,
-		userId,
+		isErrorOnMount,
+		isLoggedIn,
+		prevSignInStatus,
+		prevToken,
+		prevUserId,
 	]);
 
 	return (
-		<div
-			className={[NotificationBox, displayStatus].join(' ')}
-			onClick={() => setIsDisplayed(false)}
-		>
-			<Notification
-				type={notificationData.message}
-				sign={notificationData.sign}
-			/>
-		</div>
+		<>
+			{notificationData && (
+				<div
+					className={[NotificationBox, displayStatus].join(' ')}
+					onClick={() => setIsDisplayed(false)}
+				>
+					<Notification
+						type={notificationData.message}
+						sign={notificationData.sign}
+					/>
+				</div>
+			)}
+		</>
 	);
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import OrderCard from './OrderCard/OrderCard';
 import Spinner from '../../UI/Spinner/Spinner';
@@ -85,4 +85,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Orders);
+)(memo(Orders));

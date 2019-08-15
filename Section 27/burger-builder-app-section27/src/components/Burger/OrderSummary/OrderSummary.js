@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Button from '../../UI/Button/Button';
@@ -116,4 +116,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(React.memo(withRouter(OrderSummary)));
+)(memo(withRouter(OrderSummary)));

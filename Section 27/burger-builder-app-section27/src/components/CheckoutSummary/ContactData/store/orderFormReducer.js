@@ -23,6 +23,7 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				isLoading: true,
 				isOrderSuccessful: false,
+				isFetchSuccessful: false,
 			};
 		case PURCHASE_BURGER_SUCCESS:
 			const newOrder = {
@@ -47,6 +48,7 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				isLoading: true,
 				isFetchSuccessful: false,
+				isOrderSuccessful: false,
 			};
 
 		case FETCH_ORDERS_SUCCESS:

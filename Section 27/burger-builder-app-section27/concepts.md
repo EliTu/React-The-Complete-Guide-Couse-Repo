@@ -1,6 +1,6 @@
 # Things to do and more ideas
 
-- Handle the ContactData action redirect - Instead of immediately redirect to the BurgerBuilder page upon receiving a response from the server, should redirect after receiving the confirmation message in the modal.
+<!-- - Handle the ContactData action redirect - Instead of immediately redirect to the BurgerBuilder page upon receiving a response from the server, should redirect after receiving the confirmation message in the modal. *Happens with the NotificationBox-->
 
 <!-- - Add dates to the each Order component in the Orders component. -->
 
@@ -12,6 +12,11 @@
 
 - Can delete an Order component.
 
+- Container box for the Orders:
+  - Sort options for the orders: Newest, Oldest.
+  - Search box for searching orders by number or ID.
+  - Pagination (10 orders per time).
+
 - More functionality and options for the builder:
   - How would you like it made? Well done, Medium well, Medium, Medium rare, rare.
   - Sauces: Ketchup, Mayonnaise, Thousand islands etc.
@@ -21,6 +26,6 @@
 
 - Populate the About Component.
 
-- Global messages component: a little box that sits off screen when not prompt, and whenever an 'important' event (i.e: sign up, sign in, sign out ,order received, etc) happend in the app it is prompt to the screen from the top announcing event success (or failure).
+<!-- - Global messages component: a little box that sits off screen when not prompt, and whenever an 'important' event (i.e: sign up, sign in, sign out ,order received, etc) happend in the app it is prompt to the screen from the top announcing event success (or failure). -->
 
-- More UI upgrades.
+<!-- - More UI upgrades. -->

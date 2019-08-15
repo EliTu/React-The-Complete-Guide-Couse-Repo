@@ -107,6 +107,7 @@ const NotificationBox = ({
 	useEffect(() => {
 		if (isFetchSuccessful) dispatch({ type: 'FETCH_ORDERS' });
 		if (isOrderSuccessful) dispatch({ type: 'ORDER_SUCCESS' });
+		setIsDisplayed(true);
 	}, [isFetchSuccessful, isOrderSuccessful]);
 
 	// Display app init message:

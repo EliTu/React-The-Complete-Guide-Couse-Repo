@@ -9,6 +9,7 @@ import {
 const Notification = ({ type, sign }) => {
 	const { Notification, Success, Fail, iconWrapper } = styles;
 	const setColors = sign === 'success' ? Success : Fail;
+
 	return (
 		<div className={[Notification, setColors].join(' ')}>
 			<p>{type}</p>

@@ -30,7 +30,7 @@ export const postPurchasedBurger = (order, redirectOnSuccess, idToken) => {
 		try {
 			await axiosInstance.post(`/orders.json?auth=${idToken}`, order);
 			dispatch(purchaseBurgerSuccess(order));
-			redirectOnSuccess('/orders');
+			redirectOnSuccess('/');
 		} catch (error) {
 			dispatch(purchaseBurgerFail(error));
 		}

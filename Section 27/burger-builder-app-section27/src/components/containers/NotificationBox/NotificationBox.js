@@ -10,11 +10,13 @@ const NotificationBox = ({
 	authType,
 	isErrorOnMount,
 	orders,
-	areOrdersLoading,
 	idToken,
 	userId,
 	ingredients,
 	isBuilding,
+	isBurgerPurchaseLoading,
+	isOrderSuccessful,
+	isFetchSuccessful,
 }) => {
 	// CSS Modules styles:
 	const { NotificationBox, Open, Closed } = styles;
@@ -27,13 +29,11 @@ const NotificationBox = ({
 	const prevUserId = usePreviousValue(userId);
 	const prevSignInStatus = usePreviousValue(isLoggedIn);
 	const prevIngredients = usePreviousValue(ingredients);
-	const prevOrders = usePreviousValue(orders);
 
 	// Notifications type reducer:
 	const notificationReducer = (state, action) => {
 		switch (action.type) {
 			case 'INIT':
-				console.log(action.type);
 				return {
 					message: 'Welcome to React Burger!',
 					sign: 'success',
@@ -54,8 +54,15 @@ const NotificationBox = ({
 					sign: 'danger',
 				};
 			case 'FETCH_ORDERS':
+				console.log(action.type);
 				return {
 					message: 'Previous Orders are available',
+					sign: 'success',
+				};
+			case 'ORDER_SUCCESS':
+				console.log(action.type);
+				return {
+					message: 'Order received successfully',
 					sign: 'success',
 				};
 			default:
@@ -96,12 +103,15 @@ const NotificationBox = ({
 		prevUserId,
 	]);
 
-	// Handle orders available message:
-	useEffect(() => {
-		if (prevOrders !== orders) dispatch({ type: 'FETCH_ORDERS' });
-	}, [orders, prevOrders]);
+	// Display successful order message:
 
-	// Handle app init message:
+	// Handle order list available message:
+	useEffect(() => {
+		if (isFetchSuccessful) dispatch({ type: 'FETCH_ORDERS' });
+		if (isOrderSuccessful) dispatch({ type: 'ORDER_SUCCESS' });
+	}, [isFetchSuccessful, isOrderSuccessful]);
+
+	// Display app init message:
 	useEffect(() => {
 		if (prevIngredients !== ingredients && !isBuilding)
 			dispatch({ type: 'INIT' });
@@ -109,6 +119,7 @@ const NotificationBox = ({
 
 	const displayStatusStyle = isDisplayed ? Open : Closed;
 
+	console.log(notificationData.message);
 	return (
 		<>
 			{notificationData && (
@@ -130,10 +141,14 @@ NotificationBox.propTypes = {
 	authType: PropTypes.string,
 	isLoggedIn: PropTypes.bool,
 	isErrorOnMount: PropTypes.bool,
-	areOrdersLoading: PropTypes.bool,
 	orders: PropTypes.array,
-	userId: PropTypes.string,
 	idToken: PropTypes.string,
+	userId: PropTypes.string,
+	ingredients: PropTypes.array,
+	isBuilding: PropTypes.bool,
+	isBurgerPurchaseLoading: PropTypes.bool,
+	isOrderSuccessful: PropTypes.bool,
+	isFetchSuccessful: PropTypes.bool,
 };
 
 // Redux setup:
@@ -143,11 +158,13 @@ const mapStateToProps = state => {
 		authType: state.auth.authType,
 		isErrorOnMount: state.burgerBuilder.isErrorOnMount,
 		orders: state.orderForm.orders,
-		areOrdersLoading: state.orderForm.isLoading,
 		idToken: state.auth.idToken,
 		userId: state.auth.userId,
 		ingredients: state.burgerBuilder.ingredients,
 		isBuilding: state.burgerBuilder.isBuilding,
+		isBurgerPurchaseLoading: state.orderForm.isLoading,
+		isOrderSuccessful: state.orderForm.isOrderSuccessful,
+		isFetchSuccessful: state.orderForm.isFetchSuccessful,
 	};
 };
 

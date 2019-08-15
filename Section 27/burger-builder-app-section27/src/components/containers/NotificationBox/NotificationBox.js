@@ -103,9 +103,7 @@ const NotificationBox = ({
 		prevUserId,
 	]);
 
-	// Display successful order message:
-
-	// Handle order list available message:
+	// Handle order related messages:
 	useEffect(() => {
 		if (isFetchSuccessful) dispatch({ type: 'FETCH_ORDERS' });
 		if (isOrderSuccessful) dispatch({ type: 'ORDER_SUCCESS' });

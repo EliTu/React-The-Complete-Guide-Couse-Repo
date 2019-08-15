@@ -26,7 +26,7 @@
     transition: all 0.5s ease-in-out;
 }
 
-/* .Closed {
+.Closed {
     opacity: 0;
     transform: translateY(-150%);
 }
@@ -34,7 +34,7 @@
 .Open {
     opacity: 1;
     transform: translateY(0);
-} */
+}
 
 /* Small screen */
 @media only screen and (max-width: 500px) {

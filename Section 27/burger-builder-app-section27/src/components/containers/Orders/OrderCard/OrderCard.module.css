@@ -22,8 +22,7 @@
     cursor: pointer;
     border: none;
     border-radius: 50px;
-    outline-color: rgba(255, 0, 0, 0);
-    background-color: rgba(255, 222, 173, 0);
+    background: transparent
 }
 
 .toggleButton:hover {
@@ -49,5 +48,9 @@
 
     .Order p {
         width: 100%;
+    }
+
+    .Order svg {
+        margin: 0;
     }
 }

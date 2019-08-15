@@ -68,7 +68,7 @@ const NotificationBox = ({
 				? 'LOGOUT'
 				: isErrorOnMount
 				? 'ERROR_ON_MOUNT'
-				: 'LOGOUT';
+				: '';
 		console.log(messageType);
 		dispatch({ type: messageType });
 		setIsDisplayed(true);

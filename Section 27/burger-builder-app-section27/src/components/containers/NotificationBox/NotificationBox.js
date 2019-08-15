@@ -7,13 +7,14 @@ import PropTypes from 'prop-types';
 
 const NotificationBox = ({
 	isLoggedIn,
-	isSignInLoading,
 	authType,
 	isErrorOnMount,
 	orders,
 	areOrdersLoading,
 	idToken,
 	userId,
+	ingredients,
+	isBuilding,
 }) => {
 	// CSS Modules styles:
 	const { NotificationBox, Open, Closed } = styles;
@@ -25,11 +26,14 @@ const NotificationBox = ({
 	const prevToken = usePreviousValue(idToken);
 	const prevUserId = usePreviousValue(userId);
 	const prevSignInStatus = usePreviousValue(isLoggedIn);
+	const prevIngredients = usePreviousValue(ingredients);
+	const prevOrders = usePreviousValue(orders);
 
 	// Notifications type reducer:
 	const notificationReducer = (state, action) => {
 		switch (action.type) {
 			case 'INIT':
+				console.log(action.type);
 				return {
 					message: 'Welcome to React Burger!',
 					sign: 'success',
@@ -49,6 +53,11 @@ const NotificationBox = ({
 					message: `Oops...could not fetch ingredients`,
 					sign: 'danger',
 				};
+			case 'FETCH_ORDERS':
+				return {
+					message: 'Previous Orders are available',
+					sign: 'success',
+				};
 			default:
 				return '';
 		}
@@ -58,8 +67,7 @@ const NotificationBox = ({
 		sign: '',
 	});
 
-	const displayStatus = isDisplayed ? Open : Closed;
-
+	// Handle Login/logout messages:
 	useEffect(() => {
 		const messageType =
 			isLoggedIn && authType === 'signin'
@@ -69,6 +77,7 @@ const NotificationBox = ({
 				: isErrorOnMount
 				? 'ERROR_ON_MOUNT'
 				: '';
+
 		console.log(messageType);
 		dispatch({ type: messageType });
 		setIsDisplayed(true);
@@ -77,7 +86,6 @@ const NotificationBox = ({
 		const autoCloseBox = setTimeout(() => {
 			setIsDisplayed(false);
 		}, 5000);
-
 		return () => clearTimeout(autoCloseBox);
 	}, [
 		authType,
@@ -88,11 +96,24 @@ const NotificationBox = ({
 		prevUserId,
 	]);
 
+	// Handle orders available message:
+	useEffect(() => {
+		if (prevOrders !== orders) dispatch({ type: 'FETCH_ORDERS' });
+	}, [orders, prevOrders]);
+
+	// Handle app init message:
+	useEffect(() => {
+		if (prevIngredients !== ingredients && !isBuilding)
+			dispatch({ type: 'INIT' });
+	}, [ingredients, isBuilding, prevIngredients]);
+
+	const displayStatusStyle = isDisplayed ? Open : Closed;
+
 	return (
 		<>
 			{notificationData && (
 				<div
-					className={[NotificationBox, displayStatus].join(' ')}
+					className={[NotificationBox, displayStatusStyle].join(' ')}
 					onClick={() => setIsDisplayed(false)}
 				>
 					<Notification
@@ -109,8 +130,7 @@ NotificationBox.propTypes = {
 	authType: PropTypes.string,
 	isLoggedIn: PropTypes.bool,
 	isErrorOnMount: PropTypes.bool,
-	areOrdersAvailable: PropTypes.bool,
-	isSignInLoading: PropTypes.bool,
+	areOrdersLoading: PropTypes.bool,
 	orders: PropTypes.array,
 	userId: PropTypes.string,
 	idToken: PropTypes.string,
@@ -119,7 +139,6 @@ NotificationBox.propTypes = {
 // Redux setup:
 const mapStateToProps = state => {
 	return {
-		isSignInLoading: state.auth.isSignInLoading,
 		isLoggedIn: state.auth.isLoggedIn,
 		authType: state.auth.authType,
 		isErrorOnMount: state.burgerBuilder.isErrorOnMount,
@@ -127,6 +146,8 @@ const mapStateToProps = state => {
 		areOrdersLoading: state.orderForm.isLoading,
 		idToken: state.auth.idToken,
 		userId: state.auth.userId,
+		ingredients: state.burgerBuilder.ingredients,
+		isBuilding: state.burgerBuilder.isBuilding,
 	};
 };
 

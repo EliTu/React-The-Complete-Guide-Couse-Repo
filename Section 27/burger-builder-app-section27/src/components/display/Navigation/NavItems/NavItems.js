@@ -24,7 +24,8 @@ export const NavItems = ({ isLoggedIn }) => {
 			</Item>
 			{isLoggedIn && (
 				<Item link="/checkout">
-					<Icon iconType={faShoppingCart} /> Checkout
+					<Icon iconType={faShoppingCart} />
+					Checkout
 				</Item>
 			)}
 			<Item link="/orders">
@@ -32,6 +33,7 @@ export const NavItems = ({ isLoggedIn }) => {
 				<Icon iconType={faList}> </Icon>Orders
 			</Item>
 			<Item link="/about">
+				{' '}
 				<Icon iconType={faBookmark} />
 				About
 			</Item>

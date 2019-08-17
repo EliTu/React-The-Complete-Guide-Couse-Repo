@@ -41,7 +41,33 @@ export const Orders = ({
 		setControlsTemplate(controlFormCopy);
 	};
 
+	const sortOrdersReducer = (state, action) => {
+		switch (action.type) {
+			case 'NEWEST':
+				return state.sort((a, b) => a.date - b.date);
+			case 'OLDEST':
+				return state.sort((a, b) => b.date - a.date);
+			case 'PRICE':
+				return state.sort((a, b) => a.price - b.price);
+			case 'DELIVERY':
+				return state.sort(
+					(a, b) => a.deliveryMethod - b.deliveryMethod
+				);
+			default:
+				return state;
+		}
+	};
+
+	const [sortedOrders, dispatch] = useReducer(sortOrdersReducer, orders);
+	useEffect(() => {}, [orders]);
+
+	useEffect(() => {
+		dispatch({ type: value });
+	}, [value]);
+
+	console.log(orders);
 	console.log(value);
+	console.log(sortedOrders);
 
 	// CSS Modules styles:
 	const { Orders, OrdersContainer } = styles;

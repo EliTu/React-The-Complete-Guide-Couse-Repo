@@ -4,16 +4,16 @@ const ordersControlForm = {
 	elementConfig: {
 		options: [
 			{
-				value: 'newest',
+				value: 'NEWEST',
 				displayValue: 'Newest',
 			},
-			{ value: 'oldest', displayValue: 'Oldest' },
-			{ value: 'price', displayValue: 'Price' },
-			{ value: 'delivery', displayValue: 'Delivery method' },
+			{ value: 'OLDEST', displayValue: 'Oldest' },
+			{ value: 'PRICE', displayValue: 'Price' },
+			{ value: 'DELIVERY', displayValue: 'Delivery method' },
 		],
 		label: 'Sort orders by:',
 	},
-	value: 'newest',
+	value: 'NEWEST',
 	validation: {
 		required: true,
 		valid: true,

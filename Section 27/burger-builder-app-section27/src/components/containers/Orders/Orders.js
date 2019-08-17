@@ -44,44 +44,37 @@ export const Orders = ({
 
 	// useEffect(() => {
 	// 	setFetchedOrders(orders);
-	// }, [orders]);
+	// }, [orders, value, setControlsTemplate]);
+
+	const setSortType = (type, arr) => {
+		switch (type) {
+			case 'NEWEST':
+				console.log('1');
+				return arr.sort((a, b) => new Date(b.date) - new Date(a.date));
+			case 'OLDEST':
+				console.log('2');
+				return arr.sort((a, b) => new Date(a.date) - new Date(b.date));
+			case 'PRICE':
+				console.log('3');
+				return arr.sort((a, b) => {
+					console.log(a.price, b.price);
+					return b.price - a.price;
+				});
+			case 'DELIVERY':
+				console.log('4');
+				return arr.sort((a, b) =>
+					a.deliveryMethod.localeCompare(b.deliveryMethod)
+				);
+			default:
+				return arr;
+		}
+	};
+	const sortedOrders = setSortType(value, orders);
+	console.log(sortedOrders);
 
 	useEffect(() => {
-		const setSortType = (type, arr) => {
-			switch (type) {
-				case 'NEWEST':
-					console.log('1');
-					return arr.sort(
-						(a, b) => new Date(a.date) - new Date(b.date)
-					);
-				case 'OLDEST':
-					console.log('2');
-					return arr.sort(
-						(a, b) => new Date(b.date) - new Date(a.date)
-					);
-				case 'PRICE':
-					console.log('3');
-					return arr.sort((a, b) => {
-						console.log(a.price, b.price);
-						return b.price - a.price;
-					});
-				case 'DELIVERY':
-					console.log('4');
-					return arr.sort((a, b) => {
-						return (
-							a.deliveryMethod.substr(1) -
-							b.deliveryMethod.substr(1)
-						);
-					});
-				default:
-					return arr;
-			}
-		};
-		const sortedOrders = setSortType(value, orders);
-		console.log(sortedOrders);
-
 		setFetchedOrders(sortedOrders);
-	}, [fetchedOrders, orders, value]);
+	}, [sortedOrders]);
 
 	console.log(fetchedOrders);
 	console.log(value);

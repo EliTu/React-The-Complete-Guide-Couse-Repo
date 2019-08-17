@@ -13,7 +13,7 @@ const ordersControlForm = {
 		],
 		label: 'Sort orders by:',
 	},
-	value: 'NEWEST',
+	value: '',
 	validation: {
 		required: true,
 		valid: true,

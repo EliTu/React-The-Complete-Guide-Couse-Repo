@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect, useReducer } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import OrderCard from './OrderCard/OrderCard';
 import Spinner from '../../UI/Spinner/Spinner';
@@ -22,6 +22,7 @@ export const Orders = ({
 		{ data, elementType, elementConfig, value, validation },
 		setControlsTemplate,
 	] = useState(ordersControlForm);
+	const [fetchedOrders, setFetchedOrders] = useState([]);
 
 	// Fetch orders:
 	useEffect(() => {
@@ -41,33 +42,49 @@ export const Orders = ({
 		setControlsTemplate(controlFormCopy);
 	};
 
-	const sortOrdersReducer = (state, action) => {
-		switch (action.type) {
-			case 'NEWEST':
-				return state.sort((a, b) => a.date - b.date);
-			case 'OLDEST':
-				return state.sort((a, b) => b.date - a.date);
-			case 'PRICE':
-				return state.sort((a, b) => a.price - b.price);
-			case 'DELIVERY':
-				return state.sort(
-					(a, b) => a.deliveryMethod - b.deliveryMethod
-				);
-			default:
-				return state;
-		}
-	};
-
-	const [sortedOrders, dispatch] = useReducer(sortOrdersReducer, orders);
-	useEffect(() => {}, [orders]);
+	// useEffect(() => {
+	// 	setFetchedOrders(orders);
+	// }, [orders]);
 
 	useEffect(() => {
-		dispatch({ type: value });
-	}, [value]);
+		const setSortType = (type, arr) => {
+			switch (type) {
+				case 'NEWEST':
+					console.log('1');
+					return arr.sort(
+						(a, b) => new Date(a.date) - new Date(b.date)
+					);
+				case 'OLDEST':
+					console.log('2');
+					return arr.sort(
+						(a, b) => new Date(b.date) - new Date(a.date)
+					);
+				case 'PRICE':
+					console.log('3');
+					return arr.sort((a, b) => {
+						console.log(a.price, b.price);
+						return b.price - a.price;
+					});
+				case 'DELIVERY':
+					console.log('4');
+					return arr.sort((a, b) => {
+						return (
+							a.deliveryMethod.substr(1) -
+							b.deliveryMethod.substr(1)
+						);
+					});
+				default:
+					return arr;
+			}
+		};
+		const sortedOrders = setSortType(value, orders);
+		console.log(sortedOrders);
 
-	console.log(orders);
+		setFetchedOrders(sortedOrders);
+	}, [fetchedOrders, orders, value]);
+
+	console.log(fetchedOrders);
 	console.log(value);
-	console.log(sortedOrders);
 
 	// CSS Modules styles:
 	const { Orders, OrdersContainer } = styles;
@@ -92,23 +109,19 @@ export const Orders = ({
 				{isLoadingRequest ? (
 					<Spinner />
 				) : !isLoadingRequest && orders.length > 0 && isLoggedIn ? (
-					orders
-						.map(order => {
-							return order.id &&
-								order.ingredients &&
-								order.price ? (
-								<OrderCard
-									key={order.id}
-									orderId={order.id}
-									date={order.date}
-									ingredients={order.ingredients}
-									contact={order.customer}
-									delivery={order.deliveryMethod}
-									price={order.price.toFixed(2)}
-								/>
-							) : null;
-						})
-						.reverse() // To render the latest order first
+					fetchedOrders.map(order => {
+						return order.id && order.ingredients && order.price ? (
+							<OrderCard
+								key={order.id}
+								orderId={order.id}
+								date={order.date}
+								ingredients={order.ingredients}
+								contact={order.customer}
+								delivery={order.deliveryMethod}
+								price={order.price.toFixed(2)}
+							/>
+						) : null;
+					})
 				) : (
 					<GoBackMessage content={noOrdersMessage} />
 				)}

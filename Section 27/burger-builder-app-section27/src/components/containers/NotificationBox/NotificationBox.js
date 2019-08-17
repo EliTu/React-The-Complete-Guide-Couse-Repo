@@ -54,13 +54,11 @@ const NotificationBox = ({
 					sign: 'danger',
 				};
 			case 'FETCH_ORDERS':
-				console.log(action.type);
 				return {
 					message: 'Previous Orders are available',
 					sign: 'success',
 				};
 			case 'ORDER_SUCCESS':
-				console.log(action.type);
 				return {
 					message: 'Order received successfully',
 					sign: 'success',
@@ -84,8 +82,7 @@ const NotificationBox = ({
 				: isErrorOnMount
 				? 'ERROR_ON_MOUNT'
 				: '';
-
-		console.log(messageType);
+				
 		dispatch({ type: messageType });
 		setIsDisplayed(true);
 
@@ -118,7 +115,6 @@ const NotificationBox = ({
 
 	const displayStatusStyle = isDisplayed ? Open : Closed;
 
-	console.log(notificationData.message);
 	return (
 		<>
 			{notificationData && (

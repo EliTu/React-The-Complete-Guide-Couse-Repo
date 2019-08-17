@@ -1,8 +1,16 @@
 @import '../../../variables.css';
 
 .Orders {
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
+}
+
+.OrdersContainer {
+    width: 70%;
+    margin: 1rem auto;
+    padding: 2rem 0;
+    border: 2px solid var(--coloring-opaque-dark);
+    box-shadow: var(--shadow-light);
 }
 
 .Orders h1 {

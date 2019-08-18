@@ -20,7 +20,7 @@ const BuildControls = ({
 	ingredients,
 }) => {
 	// CSS Modules styles:
-	const { BuildControls, Price, Sum, OrderButton } = styles;
+	const { BuildControls, Price, Sum, OrderButton, } = styles;
 
 	return (
 		<div className={BuildControls}>

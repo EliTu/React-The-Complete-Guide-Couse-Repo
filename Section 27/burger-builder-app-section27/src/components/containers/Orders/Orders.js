@@ -27,14 +27,14 @@ export const Orders = ({
 		onFetchOrders(idToken, userId);
 	}, [idToken, onFetchOrders, userId, isLoggedIn]);
 
-	// Handle input change
+	// Handle select input change
 	const handleSortOrdersChange = event => {
 		const controlFormCopy = { ...sortByControls };
 		controlFormCopy.value = event.target.value;
 		setSortByControls(controlFormCopy);
 	};
 
-	// Handle input change
+	// Handle search input change
 	const handleSearchOrdersChange = event => {
 		const controlFormCopy = { ...searchControls };
 		controlFormCopy.value = event.target.value;
@@ -59,15 +59,28 @@ export const Orders = ({
 		}
 	};
 	const sortedOrders = setSortedOrders(sortByControls.value, orders);
-	console.log(sortedOrders);
 
 	// Set the sorted array as the array to be rendered to the UI:
 	useEffect(() => {
 		setDisplayedOrders(sortedOrders);
+		console.log(sortedOrders);
 	}, [sortedOrders]);
 
-	console.log(displayedOrders);
-	console.log(sortByControls.value);
+	useEffect(() => {
+		const matchSearchResults = (matchValue, orders) => {
+			const regex = new RegExp(matchValue, 'gi');
+			return orders.filter(el => {
+				console.log(el.id.match(regex));
+				return matchValue !== '' ? el.id.match(regex) : el.id;
+			});
+		};
+		const matchedOrders = matchSearchResults(searchControls.value, orders);
+		console.log(matchedOrders);
+		setDisplayedOrders(matchedOrders);
+	}, [orders, searchControls.value]);
+
+	// console.log(displayedOrders);
+	// console.log(sortByControls.value);
 
 	// CSS Modules styles:
 	const { Orders, OrdersContainer } = styles;
@@ -90,6 +103,7 @@ export const Orders = ({
 					handleChange={event => handleSortOrdersChange(event)}
 				/>
 				<Input
+					data={searchControls.data}
 					elementType={searchControls.elementType}
 					elementConfig={{ ...searchControls.elementConfig }}
 					value={searchControls.value}

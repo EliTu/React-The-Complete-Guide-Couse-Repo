@@ -12,6 +12,7 @@ const Input = props => {
 		focused,
 		handleChange,
 		handleEnterPress,
+		data,
 	} = props;
 
 	// CSS Modules styles:
@@ -24,8 +25,8 @@ const Input = props => {
 	);
 
 	// Listen to keyboard enter click to submit form:
-	const enterPressCallback = (event, func) => {
-		if (event.key === 'Enter') func(event);
+	const enterPressCallback = (data, event, func) => {
+		if (event.key === 'Enter' && data !== 'search') func(event);
 	};
 
 	// Focus the first input field upon component mount
@@ -53,7 +54,7 @@ const Input = props => {
 					value={value}
 					onChange={handleChange}
 					onKeyPress={event =>
-						enterPressCallback(event, handleEnterPress)
+						enterPressCallback(data, event, handleEnterPress)
 					}
 				/>
 			);

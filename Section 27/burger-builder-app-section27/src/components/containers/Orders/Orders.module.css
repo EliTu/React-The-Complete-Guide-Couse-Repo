@@ -20,6 +20,10 @@
     margin: 0 auto;
 }
 
+.hl {
+    background: #ffc600;
+}
+
 @media screen and (max-width: 500px) {
     .Orders {
         width: 100%;

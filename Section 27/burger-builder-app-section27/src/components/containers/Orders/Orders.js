@@ -63,24 +63,18 @@ export const Orders = ({
 	// Set the sorted array as the array to be rendered to the UI:
 	useEffect(() => {
 		setDisplayedOrders(sortedOrders);
-		console.log(sortedOrders);
-	}, [sortedOrders]);
+	}, [orders, sortByControls.value, sortedOrders]);
 
+	// Search the orders array for matches with the value of the search input field:
 	useEffect(() => {
 		const matchSearchResults = (matchValue, orders) => {
 			const regex = new RegExp(matchValue, 'gi');
-			return orders.filter(el => {
-				console.log(el.id.match(regex));
-				return matchValue !== '' ? el.id.match(regex) : el.id;
-			});
+			return orders.filter(el => el.id.match(regex));
 		};
 		const matchedOrders = matchSearchResults(searchControls.value, orders);
 		console.log(matchedOrders);
 		setDisplayedOrders(matchedOrders);
 	}, [orders, searchControls.value]);
-
-	// console.log(displayedOrders);
-	// console.log(sortByControls.value);
 
 	// CSS Modules styles:
 	const { Orders, OrdersContainer } = styles;

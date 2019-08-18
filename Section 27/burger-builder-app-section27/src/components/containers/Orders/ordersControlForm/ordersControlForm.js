@@ -21,7 +21,7 @@ const ordersControlForm = [
 		},
 		value: '',
 		validation: {
-			required: true,
+			required: false,
 			valid: true,
 			errorMessage: '',
 		},

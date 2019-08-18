@@ -18,10 +18,8 @@ export const Orders = ({
 	onFetchOrders,
 }) => {
 	// Local state hooks:
-	const [
-		{ data, elementType, elementConfig, value, validation },
-		setControlsTemplate,
-	] = useState(ordersControlForm);
+	const [sortByControls, setSortByControls] = useState(ordersControlForm[0]);
+	const [searchControls, setSearchControls] = useState(ordersControlForm[1]);
 	const [displayedOrders, setDisplayedOrders] = useState([]);
 
 	// Fetch orders:
@@ -31,15 +29,16 @@ export const Orders = ({
 
 	// Handle input change
 	const handleSortOrdersChange = event => {
-		const controlFormCopy = {
-			data,
-			elementType,
-			elementConfig,
-			value,
-			validation,
-		};
+		const controlFormCopy = { ...sortByControls };
 		controlFormCopy.value = event.target.value;
-		setControlsTemplate(controlFormCopy);
+		setSortByControls(controlFormCopy);
+	};
+
+	// Handle input change
+	const handleSearchOrdersChange = event => {
+		const controlFormCopy = { ...searchControls };
+		controlFormCopy.value = event.target.value;
+		setSearchControls(controlFormCopy);
 	};
 
 	// Switch statement to return a sorted array of orders by type or sort:
@@ -59,7 +58,7 @@ export const Orders = ({
 				return arr;
 		}
 	};
-	const sortedOrders = setSortedOrders(value, orders);
+	const sortedOrders = setSortedOrders(sortByControls.value, orders);
 	console.log(sortedOrders);
 
 	// Set the sorted array as the array to be rendered to the UI:
@@ -68,7 +67,7 @@ export const Orders = ({
 	}, [sortedOrders]);
 
 	console.log(displayedOrders);
-	console.log(value);
+	console.log(sortByControls.value);
 
 	// CSS Modules styles:
 	const { Orders, OrdersContainer } = styles;
@@ -83,12 +82,20 @@ export const Orders = ({
 			<h1>Your orders:</h1>
 			<div className={OrdersContainer}>
 				<Input
-					elementType={elementType}
-					elementConfig={{ ...elementConfig }}
-					value={value}
-					key={data}
-					validation={{ ...validation }}
+					elementType={sortByControls.elementType}
+					elementConfig={{ ...sortByControls.elementConfig }}
+					value={sortByControls.value}
+					key={sortByControls.data}
+					validation={{ ...sortByControls.validation }}
 					handleChange={event => handleSortOrdersChange(event)}
+				/>
+				<Input
+					elementType={searchControls.elementType}
+					elementConfig={{ ...searchControls.elementConfig }}
+					value={searchControls.value}
+					key={searchControls.data}
+					validation={{ ...searchControls.validation }}
+					handleChange={event => handleSearchOrdersChange(event)}
 				/>
 				{isLoadingRequest ? (
 					<Spinner />

@@ -22,7 +22,7 @@ export const Orders = ({
 		{ data, elementType, elementConfig, value, validation },
 		setControlsTemplate,
 	] = useState(ordersControlForm);
-	const [fetchedOrders, setFetchedOrders] = useState([]);
+	const [displayedOrders, setDisplayedOrders] = useState([]);
 
 	// Fetch orders:
 	useEffect(() => {
@@ -42,26 +42,16 @@ export const Orders = ({
 		setControlsTemplate(controlFormCopy);
 	};
 
-	// useEffect(() => {
-	// 	setFetchedOrders(orders);
-	// }, [orders, value, setControlsTemplate]);
-
-	const setSortType = (type, arr) => {
+	// Switch statement to return a sorted array of orders by type or sort:
+	const setSortedOrders = (type, arr) => {
 		switch (type) {
 			case 'NEWEST':
-				console.log('1');
 				return arr.sort((a, b) => new Date(b.date) - new Date(a.date));
 			case 'OLDEST':
-				console.log('2');
 				return arr.sort((a, b) => new Date(a.date) - new Date(b.date));
 			case 'PRICE':
-				console.log('3');
-				return arr.sort((a, b) => {
-					console.log(a.price, b.price);
-					return b.price - a.price;
-				});
+				return arr.sort((a, b) => b.price - a.price);
 			case 'DELIVERY':
-				console.log('4');
 				return arr.sort((a, b) =>
 					a.deliveryMethod.localeCompare(b.deliveryMethod)
 				);
@@ -69,14 +59,15 @@ export const Orders = ({
 				return arr;
 		}
 	};
-	const sortedOrders = setSortType(value, orders);
+	const sortedOrders = setSortedOrders(value, orders);
 	console.log(sortedOrders);
 
+	// Set the sorted array as the array to be rendered to the UI:
 	useEffect(() => {
-		setFetchedOrders(sortedOrders);
+		setDisplayedOrders(sortedOrders);
 	}, [sortedOrders]);
 
-	console.log(fetchedOrders);
+	console.log(displayedOrders);
 	console.log(value);
 
 	// CSS Modules styles:
@@ -102,18 +93,22 @@ export const Orders = ({
 				{isLoadingRequest ? (
 					<Spinner />
 				) : !isLoadingRequest && orders.length > 0 && isLoggedIn ? (
-					fetchedOrders.map(order => {
-						return order.id && order.ingredients && order.price ? (
-							<OrderCard
-								key={order.id}
-								orderId={order.id}
-								date={order.date}
-								ingredients={order.ingredients}
-								contact={order.customer}
-								delivery={order.deliveryMethod}
-								price={order.price.toFixed(2)}
-							/>
-						) : null;
+					displayedOrders.map(order => {
+						return (
+							order.id &&
+							order.ingredients &&
+							order.price && (
+								<OrderCard
+									key={order.id}
+									orderId={order.id}
+									date={order.date}
+									ingredients={order.ingredients}
+									contact={order.customer}
+									delivery={order.deliveryMethod}
+									price={order.price.toFixed(2)}
+								/>
+							)
+						);
 					})
 				) : (
 					<GoBackMessage content={noOrdersMessage} />

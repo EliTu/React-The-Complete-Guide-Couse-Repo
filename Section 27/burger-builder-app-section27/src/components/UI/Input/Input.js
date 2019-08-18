@@ -76,7 +76,11 @@ const Input = props => {
 			inputElement = (
 				<select value={value} onChange={handleChange}>
 					{elementConfig.options.map(option => (
-						<option value={option.value} key={option.value}>
+						<option
+							value={option.value}
+							key={option.value}
+							disabled={option.disabled}
+						>
 							{option.displayValue}
 						</option>
 					))}

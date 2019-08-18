@@ -39,7 +39,7 @@
 /* Small screens */
 @media screen and (max-width: 500px) {
     .OrderCard {
-        width: 80%
+        width: 90%
     }
 
     .OrderId {
@@ -52,5 +52,9 @@
 
     .Order svg {
         margin: 0;
+    }
+
+    .toggleButton {
+        width: 20%;
     }
 }

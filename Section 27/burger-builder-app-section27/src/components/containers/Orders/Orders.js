@@ -77,7 +77,7 @@ export const Orders = ({
 	}, [orders, searchControls.value]);
 
 	// CSS Modules styles:
-	const { Orders, OrdersContainer } = styles;
+	const { Orders, OrdersContainer, ControlsContainer } = styles;
 
 	const noOrdersMessage =
 		!isLoggedIn && !isLoadingRequest
@@ -88,23 +88,25 @@ export const Orders = ({
 		<div className={Orders}>
 			<h1>Your orders:</h1>
 			<div className={OrdersContainer}>
-				<Input
-					elementType={sortByControls.elementType}
-					elementConfig={{ ...sortByControls.elementConfig }}
-					value={sortByControls.value}
-					key={sortByControls.data}
-					validation={{ ...sortByControls.validation }}
-					handleChange={event => handleSortOrdersChange(event)}
-				/>
-				<Input
-					data={searchControls.data}
-					elementType={searchControls.elementType}
-					elementConfig={{ ...searchControls.elementConfig }}
-					value={searchControls.value}
-					key={searchControls.data}
-					validation={{ ...searchControls.validation }}
-					handleChange={event => handleSearchOrdersChange(event)}
-				/>
+				<div className={ControlsContainer}>
+					<Input
+						elementType={sortByControls.elementType}
+						elementConfig={{ ...sortByControls.elementConfig }}
+						value={sortByControls.value}
+						key={sortByControls.data}
+						validation={{ ...sortByControls.validation }}
+						handleChange={event => handleSortOrdersChange(event)}
+					/>
+					<Input
+						data={searchControls.data}
+						elementType={searchControls.elementType}
+						elementConfig={{ ...searchControls.elementConfig }}
+						value={searchControls.value}
+						key={searchControls.data}
+						validation={{ ...searchControls.validation }}
+						handleChange={event => handleSearchOrdersChange(event)}
+					/>
+				</div>
 				{isLoadingRequest ? (
 					<Spinner />
 				) : !isLoadingRequest && orders.length > 0 && isLoggedIn ? (

@@ -13,8 +13,8 @@
 - Can delete an Order component.
 
 - Container box for the Orders:
-  - Sort options for the orders: Newest, Oldest.
-  - Search box for searching orders by number or ID.
+  <!-- - Sort options for the orders: Newest, Oldest.
+  - Search box for searching orders by number or ID. -->
   - Pagination (10 orders per time).
 
 - More functionality and options for the builder:

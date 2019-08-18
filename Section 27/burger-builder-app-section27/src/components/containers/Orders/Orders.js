@@ -87,50 +87,59 @@ export const Orders = ({
 	return (
 		<div className={Orders}>
 			<h1>Your orders:</h1>
-			<div className={OrdersContainer}>
-				<div className={ControlsContainer}>
-					<Input
-						elementType={sortByControls.elementType}
-						elementConfig={{ ...sortByControls.elementConfig }}
-						value={sortByControls.value}
-						key={sortByControls.data}
-						validation={{ ...sortByControls.validation }}
-						handleChange={event => handleSortOrdersChange(event)}
-					/>
-					<Input
-						data={searchControls.data}
-						elementType={searchControls.elementType}
-						elementConfig={{ ...searchControls.elementConfig }}
-						value={searchControls.value}
-						key={searchControls.data}
-						validation={{ ...searchControls.validation }}
-						handleChange={event => handleSearchOrdersChange(event)}
-					/>
-				</div>
-				{isLoadingRequest ? (
-					<Spinner />
-				) : !isLoadingRequest && orders.length > 0 && isLoggedIn ? (
-					displayedOrders.map(order => {
-						return (
-							order.id &&
-							order.ingredients &&
-							order.price && (
-								<OrderCard
-									key={order.id}
-									orderId={order.id}
-									date={order.date}
-									ingredients={order.ingredients}
-									contact={order.customer}
-									delivery={order.deliveryMethod}
-									price={order.price.toFixed(2)}
-								/>
-							)
-						);
-					})
-				) : (
-					<GoBackMessage content={noOrdersMessage} />
-				)}
-			</div>
+			{isLoadingRequest ? (
+				<Spinner />
+			) : !isLoadingRequest && orders.length > 0 && isLoggedIn ? (
+				<>
+					<div className={OrdersContainer}>
+						<div className={ControlsContainer}>
+							<Input
+								elementType={sortByControls.elementType}
+								elementConfig={{
+									...sortByControls.elementConfig,
+								}}
+								value={sortByControls.value}
+								key={sortByControls.data}
+								validation={{ ...sortByControls.validation }}
+								handleChange={event =>
+									handleSortOrdersChange(event)
+								}
+							/>
+							<Input
+								data={searchControls.data}
+								elementType={searchControls.elementType}
+								elementConfig={{
+									...searchControls.elementConfig,
+								}}
+								value={searchControls.value}
+								key={searchControls.data}
+								validation={{ ...searchControls.validation }}
+								handleChange={event =>
+									handleSearchOrdersChange(event)
+								}
+							/>
+						</div>
+						{displayedOrders.map(
+							order =>
+								order.id &&
+								order.ingredients &&
+								order.price && (
+									<OrderCard
+										key={order.id}
+										orderId={order.id}
+										date={order.date}
+										ingredients={order.ingredients}
+										contact={order.customer}
+										delivery={order.deliveryMethod}
+										price={order.price.toFixed(2)}
+									/>
+								)
+						)}
+					</div>
+				</>
+			) : (
+				<GoBackMessage content={noOrdersMessage} />
+			)}
 		</div>
 	);
 };

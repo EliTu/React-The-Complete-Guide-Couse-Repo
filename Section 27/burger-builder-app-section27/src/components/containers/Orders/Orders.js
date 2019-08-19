@@ -24,7 +24,7 @@ export const Orders = ({
 	// Local state hooks:
 	const [sortByControls, setSortByControls] = useState(ordersControlForm[0]);
 	const [searchControls, setSearchControls] = useState(ordersControlForm[1]);
-	const [ordersPerPage, setOrdersPerPage] = useState(5);
+	const [ordersPerPage] = useState(5);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPageNumbers, setTotalPageNumbers] = useState([]);
 	const [displayedOrders, setDisplayedOrders] = useState([]);
@@ -87,6 +87,7 @@ export const Orders = ({
 		setDisplayedOrders(matchedOrders);
 	}, [orders, searchControls.value]);
 
+	// Set pagination display and page numbers:[]
 	useEffect(() => {
 		const setPaginationOrdersDisplay = () => {
 			const lastOrderIndex = currentPage * ordersPerPage;
@@ -98,17 +99,18 @@ export const Orders = ({
 
 		const setPageNumbers = () => {
 			let numbersArr = [];
+			console.log(orders);
 			for (
-				let i = 0;
-				i <= Math.ceil(displayedOrders.length / ordersPerPage);
+				let i = 1;
+				i <= Math.ceil(orders.length / ordersPerPage);
 				i++
 			) {
-				numbersArr.push(i + 1);
+				numbersArr.push(i);
 				setTotalPageNumbers(numbersArr);
 			}
 		};
 		setPageNumbers();
-	}, [currentPage, displayedOrders.length, orders, ordersPerPage]);
+	}, [currentPage, orders, orders.length, ordersPerPage]);
 
 	// If no orders are available and/or user is signed out:
 	const noOrdersMessage =

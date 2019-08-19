@@ -9,9 +9,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
-const OrdersPaginationPanel = ({ pages, pagesNumberClick }) => {
+const OrdersPaginationPanel = ({ pages, pageNumberClick }) => {
 	// CSS Modules styles:
-	const { OrderPaginationPanel } = styles;
+	const { OrderPaginationPanel, pageContainer } = styles;
 
 	return (
 		<div className={OrderPaginationPanel}>
@@ -21,11 +21,17 @@ const OrdersPaginationPanel = ({ pages, pagesNumberClick }) => {
 			<button>
 				<Icon iconType={faAngleLeft} size="2x" />
 			</button>
-			<ul>
+			<div className={pageContainer}>
 				{pages.map(page => (
-					<li key={page}>{page}</li>
+					<button
+						key={page}
+						id={page}
+						onClick={event => pageNumberClick(event)}
+					>
+						{page}
+					</button>
 				))}
-			</ul>
+			</div>
 			<button>
 				<Icon iconType={faAngleRight} size="2x" />
 			</button>

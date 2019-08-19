@@ -1,8 +1,8 @@
 @import '../../../../variables.css';
 
 .OrderPaginationPanel {
-    width: 20%;
-    margin: 1rem auto;
+    width: 40%;
+    margin: 2rem auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,6 @@
 }
 
 .OrderPaginationPanel button {
-    width: 100%;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -22,18 +21,21 @@
     background-color: var(--coloring-light);
 }
 
-.OrderPaginationPanel ul {
-    width: 100%;
+.OrderPaginationPanel .pageContainer {
+    width: 50%;
     display: flex;
     justify-content: center;
     align-content: center;
     justify-items: center;
 }
 
-.OrderPaginationPanel li {
+.OrderPaginationPanel .pageContainer button {
     cursor: pointer;
-    padding: 0.3rem;
+    font-size: 1rem;
+    padding: 0.4rem;
+    margin: auto 0.1rem;
     list-style: none;
+    border: 2px solid var(--coloring-opaque-dark);
 }
 
 .OrderPaginationPanel li:hover {
@@ -44,7 +46,7 @@
     background-color: var(--coloring-opaque-dark);
 }
 
-.OrderPaginationPanel li::before {
+/* .OrderPaginationPanel li::before {
     content: '|';
     margin: 0 0.2rem;
 }
@@ -52,4 +54,4 @@
 .OrderPaginationPanel li::after {
     content: '|';
     margin: 0 0.2rem;
-}
+} */

@@ -1,0 +1,23 @@
+@import '../../../../variables.css';
+
+.OrderPaginationPanel {
+    width: 20%;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.OrderPaginationPanel button {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    box-shadow: var(--shadow-light);
+    margin: 0 auto;
+}
+
+.OrderPaginationPanel button:hover {
+    background-color: var(--coloring-light);
+}

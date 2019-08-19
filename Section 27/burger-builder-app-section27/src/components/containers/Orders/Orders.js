@@ -1,6 +1,7 @@
 import React, { useState, memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import OrderCard from './OrderCard/OrderCard';
+import OrderPaginationPanel from './OrdersPaginationPanel/OrdersPaginationPanel';
 import Spinner from '../../UI/Spinner/Spinner';
 import Input from '../../UI/Input/Input';
 import GoBackMessage from '../../UI/GoBackMessage/GoBackMessage';
@@ -72,7 +73,7 @@ export const Orders = ({
 			return orders.filter(el => el.id.match(regex));
 		};
 		const matchedOrders = matchSearchResults(searchControls.value, orders);
-		console.log(matchedOrders);
+
 		setDisplayedOrders(matchedOrders);
 	}, [orders, searchControls.value]);
 
@@ -119,6 +120,7 @@ export const Orders = ({
 								}
 							/>
 						</div>
+						<OrderPaginationPanel />
 						{displayedOrders.map(
 							order =>
 								order.id &&

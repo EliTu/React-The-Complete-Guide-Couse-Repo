@@ -12,10 +12,10 @@
 
 - Can delete an Order component.
 
-- Container box for the Orders:
-  <!-- - Sort options for the orders: Newest, Oldest.
-  - Search box for searching orders by number or ID. -->
-  - Pagination (10 orders per time).
+<!-- - Container box for the Orders:
+  - Sort options for the orders: Newest, Oldest.
+  - Search box for searching orders by number or ID.
+  - Pagination (10 orders per time). *Set to 5 per page -->
 
 - More functionality and options for the builder:
   - How would you like it made? Well done, Medium well, Medium, Medium rare, rare.

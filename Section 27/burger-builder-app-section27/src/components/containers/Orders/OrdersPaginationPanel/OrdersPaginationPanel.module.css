@@ -54,3 +54,14 @@
 .OrderPaginationPanel button:active {
     background-color: var(--coloring-opaque-dark);
 }
+
+/* Small screen */
+@media only screen and (max-width: 500px) {
+    .OrderPaginationPanel {
+        width: 90%;
+    }
+
+    .OrderPaginationPanel button {
+        margin: 0 0.3rem;
+    }
+}

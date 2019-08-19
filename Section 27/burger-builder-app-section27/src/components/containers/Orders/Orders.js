@@ -52,16 +52,16 @@ export const Orders = ({
 	const handlePageNumberClick = event => setCurrentPage(+event.target.id);
 
 	// Handle pagination pangel buttons click:
-	const handleNextPageClick = () => setCurrentPage(currentPage + 1);
+	const handleNextPageClick = () =>
+		currentPage < +totalPageNumbers.length &&
+		setCurrentPage(currentPage + 1);
 
-	const handlePreviousPageClick = () => setCurrentPage(currentPage - 1);
+	const handlePreviousPageClick = () =>
+		currentPage > 1 && setCurrentPage(currentPage - 1);
 
 	const handleFirstPageClick = () => setCurrentPage(1);
 
-	const handleLastPageClick = () => {
-		console.log(totalPageNumbers.length - 1);
-		setCurrentPage(+totalPageNumbers.length);
-	};
+	const handleLastPageClick = () => setCurrentPage(totalPageNumbers.length);
 
 	// Switch statement to return a sorted array of orders by type or sort:
 	const setSortedOrders = (type, arr) => {
@@ -89,11 +89,11 @@ export const Orders = ({
 
 	// Search the orders array for matches with the value of the search input field:
 	useEffect(() => {
-		const matchSearchResults = (matchValue, orders) => {
+		const matchSearchResults = matchValue => {
 			const regex = new RegExp(matchValue, 'gi');
-			return orders.filter(el => el.id.match(regex));
+			return orders.filter(el => (el.id ? el.id.match(regex) : orders));
 		};
-		const matchedOrders = matchSearchResults(searchControls.value, orders);
+		const matchedOrders = matchSearchResults(searchControls.value);
 
 		setDisplayedOrders(matchedOrders);
 	}, [orders, searchControls.value]);
@@ -108,12 +108,12 @@ export const Orders = ({
 		};
 		setPaginationOrdersDisplay();
 
+		// Calculate the total pages number:
 		const setPageNumbers = () => {
 			let numbersArr = [];
-			console.log(orders);
 			for (
 				let i = 1;
-				i <= Math.ceil(orders.length / ordersPerPage) + 5;
+				i <= Math.ceil(orders.length / ordersPerPage);
 				i++
 			) {
 				numbersArr.push(i);

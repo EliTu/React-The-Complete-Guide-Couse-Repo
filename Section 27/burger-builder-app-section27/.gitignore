@@ -19,7 +19,7 @@
 .env.production.local
 
 # Firebase API key:
-/src/components/containers/Authentication/store/keys.js
+# /src/components/containers/Authentication/store/keys.js
 
 npm-debug.log*
 yarn-debug.log*

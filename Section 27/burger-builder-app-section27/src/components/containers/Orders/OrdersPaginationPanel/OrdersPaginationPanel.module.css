@@ -17,6 +17,10 @@
     margin: 0 auto;
 }
 
+.OrderPaginationPanel svg {
+    color: var(--coloring-dark);
+}
+
 .OrderPaginationPanel button:hover {
     background-color: var(--coloring-light);
 }
@@ -30,12 +34,13 @@
 }
 
 .OrderPaginationPanel .pageContainer button {
+    color: var(--coloring-dark);
     cursor: pointer;
     font-size: 1rem;
     padding: 0.4rem;
     margin: auto 0.1rem;
     list-style: none;
-    border: 2px solid var(--coloring-opaque-dark);
+    border: 1px solid var(--coloring-opaque-dark);
 }
 
 .OrderPaginationPanel li:hover {

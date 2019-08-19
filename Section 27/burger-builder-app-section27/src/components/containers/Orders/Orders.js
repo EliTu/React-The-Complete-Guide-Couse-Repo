@@ -49,8 +49,19 @@ export const Orders = ({
 	};
 
 	// Handle clicking on a specific page number:
-	const handlePageNumberClick = event =>
-		setCurrentPage(Number(event.target.id));
+	const handlePageNumberClick = event => setCurrentPage(+event.target.id);
+
+	// Handle pagination pangel buttons click:
+	const handleNextPageClick = () => setCurrentPage(currentPage + 1);
+
+	const handlePreviousPageClick = () => setCurrentPage(currentPage - 1);
+
+	const handleFirstPageClick = () => setCurrentPage(1);
+
+	const handleLastPageClick = () => {
+		console.log(totalPageNumbers.length - 1);
+		setCurrentPage(+totalPageNumbers.length);
+	};
 
 	// Switch statement to return a sorted array of orders by type or sort:
 	const setSortedOrders = (type, arr) => {
@@ -87,7 +98,7 @@ export const Orders = ({
 		setDisplayedOrders(matchedOrders);
 	}, [orders, searchControls.value]);
 
-	// Set pagination display and page numbers:[]
+	// Set pagination display and page numbers:
 	useEffect(() => {
 		const setPaginationOrdersDisplay = () => {
 			const lastOrderIndex = currentPage * ordersPerPage;
@@ -102,7 +113,7 @@ export const Orders = ({
 			console.log(orders);
 			for (
 				let i = 1;
-				i <= Math.ceil(orders.length / ordersPerPage);
+				i <= Math.ceil(orders.length / ordersPerPage) + 5;
 				i++
 			) {
 				numbersArr.push(i);
@@ -155,7 +166,12 @@ export const Orders = ({
 						</div>
 						<OrderPaginationPanel
 							pages={totalPageNumbers}
+								currentPage={currentPage}
 							pageNumberClick={handlePageNumberClick}
+							nextPageClick={handleNextPageClick}
+							previousPageClick={handlePreviousPageClick}
+							firstPageClick={handleFirstPageClick}
+							lastPageClick={handleLastPageClick}
 						/>
 						{displayedOrders.map(
 							order =>

@@ -18,9 +18,15 @@ export const Orders = ({
 	userId,
 	onFetchOrders,
 }) => {
+	// CSS Modules styles:
+	const { Orders, OrdersContainer, ControlsContainer } = styles;
+
 	// Local state hooks:
 	const [sortByControls, setSortByControls] = useState(ordersControlForm[0]);
 	const [searchControls, setSearchControls] = useState(ordersControlForm[1]);
+	const [ordersPerPage, setOrdersPerPage] = useState(5);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [totalPageNumbers, setTotalPageNumbers] = useState([]);
 	const [displayedOrders, setDisplayedOrders] = useState([]);
 
 	// Fetch orders:
@@ -28,19 +34,23 @@ export const Orders = ({
 		onFetchOrders(idToken, userId);
 	}, [idToken, onFetchOrders, userId, isLoggedIn]);
 
-	// Handle select input change
+	// Handle select input change:
 	const handleSortOrdersChange = event => {
 		const controlFormCopy = { ...sortByControls };
 		controlFormCopy.value = event.target.value;
 		setSortByControls(controlFormCopy);
 	};
 
-	// Handle search input change
+	// Handle search input change:
 	const handleSearchOrdersChange = event => {
 		const controlFormCopy = { ...searchControls };
 		controlFormCopy.value = event.target.value;
 		setSearchControls(controlFormCopy);
 	};
+
+	// Handle clicking on a specific page number:
+	const handlePageNumberClick = event =>
+		setCurrentPage(Number(event.target.id));
 
 	// Switch statement to return a sorted array of orders by type or sort:
 	const setSortedOrders = (type, arr) => {
@@ -77,9 +87,30 @@ export const Orders = ({
 		setDisplayedOrders(matchedOrders);
 	}, [orders, searchControls.value]);
 
-	// CSS Modules styles:
-	const { Orders, OrdersContainer, ControlsContainer } = styles;
+	useEffect(() => {
+		const setPaginationOrdersDisplay = () => {
+			const lastOrderIndex = currentPage * ordersPerPage;
+			const firstOrderIndex = lastOrderIndex - ordersPerPage;
 
+			setDisplayedOrders(orders.slice(firstOrderIndex, lastOrderIndex));
+		};
+		setPaginationOrdersDisplay();
+
+		const setPageNumbers = () => {
+			let numbersArr = [];
+			for (
+				let i = 0;
+				i <= Math.ceil(displayedOrders.length / ordersPerPage);
+				i++
+			) {
+				numbersArr.push(i + 1);
+				setTotalPageNumbers(numbersArr);
+			}
+		};
+		setPageNumbers();
+	}, [currentPage, displayedOrders.length, orders, ordersPerPage]);
+
+	// If no orders are available and/or user is signed out:
 	const noOrdersMessage =
 		!isLoggedIn && !isLoadingRequest
 			? `The Orders area is for members only! in order to review your previous orders, please sign in as a member first`
@@ -120,7 +151,10 @@ export const Orders = ({
 								}
 							/>
 						</div>
-						<OrderPaginationPanel />
+						<OrderPaginationPanel
+							pages={totalPageNumbers}
+							pageNumberClick={handlePageNumberClick}
+						/>
 						{displayedOrders.map(
 							order =>
 								order.id &&

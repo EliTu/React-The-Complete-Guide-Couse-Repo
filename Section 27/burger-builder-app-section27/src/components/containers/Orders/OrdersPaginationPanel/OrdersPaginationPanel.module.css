@@ -21,3 +21,35 @@
 .OrderPaginationPanel button:hover {
     background-color: var(--coloring-light);
 }
+
+.OrderPaginationPanel ul {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+}
+
+.OrderPaginationPanel li {
+    cursor: pointer;
+    padding: 0.3rem;
+    list-style: none;
+}
+
+.OrderPaginationPanel li:hover {
+    background-color: var(--coloring-light);
+}
+
+.OrderPaginationPanel li:active {
+    background-color: var(--coloring-opaque-dark);
+}
+
+.OrderPaginationPanel li::before {
+    content: '|';
+    margin: 0 0.2rem;
+}
+
+.OrderPaginationPanel li::after {
+    content: '|';
+    margin: 0 0.2rem;
+}

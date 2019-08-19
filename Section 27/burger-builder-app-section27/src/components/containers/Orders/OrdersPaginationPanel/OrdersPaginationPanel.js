@@ -7,8 +7,9 @@ import {
 	faAngleDoubleRight,
 	faAngleDoubleLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
-const OrdersPaginationPanel = ({ children }) => {
+const OrdersPaginationPanel = ({ pages, pagesNumberClick }) => {
 	// CSS Modules styles:
 	const { OrderPaginationPanel } = styles;
 
@@ -20,7 +21,11 @@ const OrdersPaginationPanel = ({ children }) => {
 			<button>
 				<Icon iconType={faAngleLeft} size="2x" />
 			</button>
-			{children}
+			<ul>
+				{pages.map(page => (
+					<li key={page}>{page}</li>
+				))}
+			</ul>
 			<button>
 				<Icon iconType={faAngleRight} size="2x" />
 			</button>
@@ -29,6 +34,11 @@ const OrdersPaginationPanel = ({ children }) => {
 			</button>
 		</div>
 	);
+};
+
+OrdersPaginationPanel.propTypes = {
+	pages: PropTypes.array,
+	pagesNumberClick: PropTypes.func,
 };
 
 export default OrdersPaginationPanel;

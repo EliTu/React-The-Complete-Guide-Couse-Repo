@@ -19,7 +19,7 @@ const OrdersPaginationPanel = ({
 	currentPage,
 }) => {
 	// CSS Modules styles:
-	const { OrderPaginationPanel, pageContainer } = styles;
+	const { OrderPaginationPanel, pageContainer, activePageStyle } = styles;
 
 	return (
 		<div className={OrderPaginationPanel}>
@@ -32,6 +32,9 @@ const OrdersPaginationPanel = ({
 			<div className={pageContainer}>
 				{pages.map(page => (
 					<button
+						className={
+							page === currentPage ? activePageStyle : null
+						}
 						key={page}
 						id={page}
 						onClick={event => pageNumberClick(event)}

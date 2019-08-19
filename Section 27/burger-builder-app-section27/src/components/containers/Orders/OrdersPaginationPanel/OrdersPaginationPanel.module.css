@@ -11,7 +11,7 @@
 
 .OrderPaginationPanel button {
     cursor: pointer;
-    background: transparent;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     box-shadow: var(--shadow-light);
     margin: 0 auto;
@@ -43,20 +43,14 @@
     border: 1px solid var(--coloring-opaque-dark);
 }
 
-.OrderPaginationPanel li:hover {
+.activePageStyle {
+    background-color: var(--glow-light-blue) !important;
+}
+
+.OrderPaginationPanel button:hover {
     background-color: var(--coloring-light);
 }
 
-.OrderPaginationPanel li:active {
+.OrderPaginationPanel button:active {
     background-color: var(--coloring-opaque-dark);
 }
-
-/* .OrderPaginationPanel li::before {
-    content: '|';
-    margin: 0 0.2rem;
-}
-
-.OrderPaginationPanel li::after {
-    content: '|';
-    margin: 0 0.2rem;
-} */

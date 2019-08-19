@@ -166,7 +166,7 @@ export const Orders = ({
 						</div>
 						<OrderPaginationPanel
 							pages={totalPageNumbers}
-								currentPage={currentPage}
+							currentPage={currentPage}
 							pageNumberClick={handlePageNumberClick}
 							nextPageClick={handleNextPageClick}
 							previousPageClick={handlePreviousPageClick}

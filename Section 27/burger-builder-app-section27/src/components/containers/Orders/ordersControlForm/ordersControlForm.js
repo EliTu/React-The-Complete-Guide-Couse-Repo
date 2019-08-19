@@ -33,7 +33,7 @@ const ordersControlForm = [
 		elementConfig: {
 			type: 'text',
 			placeholder: 'Enter anything here',
-			label: 'Search orders:',
+			label: 'Search an order ID:',
 		},
 		value: '',
 		validation: {

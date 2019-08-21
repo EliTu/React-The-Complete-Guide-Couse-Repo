@@ -1,39 +1,36 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import { AuthItems } from './AuthItems';
 import Item from '../Item/Item';
 
-configure({ adapter: new Adapter() });
-
 describe('AuthItems', () => {
-	let wrapper;
+	let component;
 	beforeEach(() => {
-		wrapper = shallow(<AuthItems />);
+		component = shallow(<AuthItems />);
 	});
 
 	it('Should render 2 <Item> if the user is not signed in', () => {
-		wrapper.setProps({ isLoggedIn: false });
+		component.setProps({ isLoggedIn: false });
 
-		expect(wrapper.find(Item)).toHaveLength(2);
-		expect(wrapper.find(Item)).not.toHaveLength(3);
-		expect(wrapper.find(Item)).not.toBeFalsy();
+		expect(component.find(Item)).toHaveLength(2);
+		expect(component.find(Item)).not.toHaveLength(3);
+		expect(component.find(Item)).not.toBeFalsy();
 	});
 
 	it('should render 1 <Item></Item> and if user is signed in ', () => {
-		wrapper.setProps({ isLoggedIn: true });
+		component.setProps({ isLoggedIn: true });
 
-		expect(wrapper.find(Item)).toHaveLength(1);
-		expect(wrapper.find(Item)).not.toHaveLength(2);
-		expect(wrapper.find(Item)).not.toBeFalsy();
+		expect(component.find(Item)).toHaveLength(1);
+		expect(component.find(Item)).not.toHaveLength(2);
+		expect(component.find(Item)).not.toBeFalsy();
 	});
 
 	it('should contain an <Item>Log out</Item> if the user is authenticated and logged in', () => {
-		wrapper.setProps({ isLoggedIn: true });
+		component.setProps({ isLoggedIn: true });
 
-		expect(wrapper.find(Item)).toBeTruthy();
+		expect(component.find(Item)).toBeTruthy();
 		expect(
-			wrapper.contains(
+			component.contains(
 				<Item signOutItem link="">
 					Log out
 				</Item>

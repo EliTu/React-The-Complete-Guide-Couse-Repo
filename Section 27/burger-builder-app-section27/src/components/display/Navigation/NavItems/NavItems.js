@@ -1,7 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Item from '../Item/Item';
+import Icon from '../../../UI/Icon/Icon';
 import styles from './NavItems.module.css';
+import {
+	faStream,
+	faList,
+	faShoppingCart,
+	faBookmark,
+} from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
 export const NavItems = ({ isLoggedIn }) => {
@@ -10,10 +17,26 @@ export const NavItems = ({ isLoggedIn }) => {
 
 	return (
 		<div className={NavItems}>
-			<Item link="/">Burger Builder</Item>
-			{isLoggedIn && <Item link="/checkout">Checkout</Item>}
-			<Item link="/orders">Orders</Item>
-			<Item link="/about">About</Item>
+			<Item link="/">
+				{' '}
+				<Icon iconType={faStream} />
+				Burger Builder
+			</Item>
+			{isLoggedIn && (
+				<Item link="/checkout">
+					<Icon iconType={faShoppingCart} />
+					Checkout
+				</Item>
+			)}
+			<Item link="/orders">
+				{' '}
+				<Icon iconType={faList}> </Icon>Orders
+			</Item>
+			<Item link="/about">
+				{' '}
+				<Icon iconType={faBookmark} />
+				About
+			</Item>
 		</div>
 	);
 };

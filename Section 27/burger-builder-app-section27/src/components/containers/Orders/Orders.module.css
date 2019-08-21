@@ -1,18 +1,40 @@
-.Orders {}
+@import '../../../variables.css';
+
+.Orders {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.OrdersContainer {
+    width: 70%;
+    margin: 1rem auto;
+    padding: 2rem 0;
+    border: 2px solid var(--coloring-opaque-dark);
+    box-shadow: var(--shadow-light);
+}
+
+.ControlsContainer {
+    width: 85%;
+    margin: 0 auto;
+}
 
 .Orders h1 {
     margin: 3rem auto;
     text-align: center;
-    color: rgba(27, 24, 24, 0.904);
+    color: var(--coloring-dark);
     margin: 0 auto;
 }
 
-.noOrders {
-    font-size: 1.2rem;
-    width: 40%;
-    margin: 3rem auto;
-    padding: 3rem;
-    text-align: center;
-    border: 2px solid black;
-    border-radius: 7px;
+@media screen and (max-width: 500px) {
+    .Orders {
+        width: 100%;
+    }
+
+    .OrdersContainer {
+        width: 95%;
+    }
+
+    .ControlsContainer {
+        width: 95%;
+    }
 }

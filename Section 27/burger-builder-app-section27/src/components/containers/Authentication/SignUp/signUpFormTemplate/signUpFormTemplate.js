@@ -1,4 +1,4 @@
-const signUpForm = [
+const signUpFormTemplate = [
 	{
 		data: 'email',
 		elementType: 'input',
@@ -58,4 +58,4 @@ const signUpForm = [
 	},
 ];
 
-export default signUpForm;
+export default signUpFormTemplate;

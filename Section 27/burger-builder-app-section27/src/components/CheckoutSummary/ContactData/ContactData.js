@@ -1,159 +1,125 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { postPurchasedBurger } from './store/actions';
 import Button from '../../UI/Button/Button';
 import Spinner from '../../UI/Spinner/Spinner';
 import Input from '../../UI/Input/Input';
-import OrderFormData from './OrderFormData/OrderFormData';
+import OrderFormTemplate from './OrderFormTemplate/OrderFormTemplate';
 import axiosInstance from '../../../axios/axios-orders';
 import requestMessageComponent from '../../hoc/requestMessageComponent/requestMessageComponent';
 import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
+import { areIngredientsSelected } from '../../../utilities/helpers/helpers';
+import useForm from '../../../utilities/custom-hooks/useForm';
 import styles from './ContactData.module.css';
 import PropTypes from 'prop-types';
 
-export class ContactData extends Component {
-	state = {
-		ingredients: this.props.ingredients,
-		totalPrice: this.props.totalPrice,
-		orderForm: OrderFormData,
-		isFormValid: false,
-		showFormInvalidMessage: false,
-	};
+export const ContactData = ({
+	ingredients,
+	totalPrice,
+	isLoadingRequest,
+	email,
+	isLoggedIn,
+	userId,
+	idToken,
+	onOrderClick,
+	history,
+}) => {
+	// Local state hooks:
+	const [ingredientsArr] = useState(ingredients);
+	const [price] = useState(totalPrice);
+	const [showFormInvalidMessage, setShowFormInvalidMessage] = useState(false);
 
-	componentDidMount() {
-		// If a user is logged in, set the email value to the user email by default
-		if (this.props.isLoggedIn && this.props.email) {
-			const orderFormCopy = [...this.state.orderForm];
-			orderFormCopy[2].value = this.props.email;
-			orderFormCopy[2].validation.valid = true;
-			orderFormCopy[2].validation.hasUserInput = true;
+	// Form fields & validation data from useForm custom hook:
+	const [inputs, , isFormValid, , handleFormChange] = useForm(
+		OrderFormTemplate
+	);
 
-			this.setState({
-				orderForm: orderFormCopy,
-			});
+	// If a user is logged in, set the email value to the user email by default
+	const setEmailIfLoggedIn = () => {
+		if (isLoggedIn && email) {
+			const orderorderFormCopy = [...inputs];
+			orderorderFormCopy[2].value = email;
+			orderorderFormCopy[2].validation.valid = true;
+			orderorderFormCopy[2].validation.hasUserInput = true;
 		}
-	}
+	};
+	setEmailIfLoggedIn();
 
-	handleOrderSubmitClick = async event => {
+	const handleOrderSubmitClick = async event => {
 		event.preventDefault();
 
-		if (!this.state.isFormValid) {
-			this.setState({
-				showFormInvalidMessage: true,
-			});
+		if (!isFormValid) {
+			setShowFormInvalidMessage(true);
 			return;
 		}
 
-		const orderData = [...this.state.orderForm];
+		const dateString = new Date().toDateString();
+		const hourStrig = new Date().toLocaleTimeString();
+
+		const orderorderFormCopy = [...inputs];
 		const order = {
-			userId: this.props.userId,
-			ingredients: this.state.ingredients,
-			price: this.state.totalPrice,
+			date: `${dateString}, ${hourStrig}`,
+			userId: userId,
+			ingredients: ingredientsArr,
+			price: price,
 			customer: {
-				name: orderData[0].value,
-				phone: orderData[1].value,
-				email: orderData[2].value,
-				address: orderData[3].value,
-				postal: orderData[4].value,
-				requests: orderData[6].value,
+				name: orderorderFormCopy[0].value,
+				phone: orderorderFormCopy[1].value,
+				email: orderorderFormCopy[2].value,
+				address: orderorderFormCopy[3].value,
+				postal: orderorderFormCopy[4].value,
+				requests: orderorderFormCopy[6].value,
 			},
-			deliveryMethod: orderData[5].value,
+			deliveryMethod: orderorderFormCopy[5].value,
 		};
 
-		this.props.onOrderClick(
-			order,
-			this.props.history.replace,
-			this.props.idToken
-		);
+		onOrderClick(order, history.replace, idToken);
 	};
 
-	handleFormChange = (event, data) => {
-		let updatedForm = [...this.state.orderForm];
-		let updatedFormData = updatedForm.forEach(el =>
-			el.data === data
-				? ((el.value = event.target.value),
-				  (el.validation.valid = this.checkInputValidation(
-						el.value,
-						el.validation,
-						el.data
-				  )),
-				  (el.validation.hasUserInput = true))
-				: el
-		);
-		updatedForm.value = updatedFormData;
+	const areIngredientsAvailable = areIngredientsSelected(ingredients);
 
-		this.setState({
-			orderForm: updatedForm,
-		});
-	};
+	// CSS Modules styles:
+	const { ContactData } = styles;
 
-	checkFormValidation = () => {
-		const formCopy = [...this.state.orderForm];
-		const checkValid = formCopy.every(el => el.validation.valid);
-
-		this.setState({
-			isFormValid: checkValid,
-		});
-	};
-
-	checkInputValidation = (value, validation, type) => {
-		let isValid = true;
-		if (validation.required) isValid = value.trim() !== '' && isValid;
-
-		// Check the email field specifically:
-		if (validation.required && type === 'email')
-			isValid = validation.emailValidationRegExp.test(value);
-
-		this.checkFormValidation();
-		return isValid;
-	};
-
-	render() {
-		// local state:
-		const { orderForm, isFormValid, showFormInvalidMessage } = this.state;
-
-		// props (from redux):
-		const { isLoadingRequest } = this.props;
-
-		// CSS Modules styles:
-		const { ContactData } = styles;
-
-		return (
-			<div className={ContactData}>
-				<h3>Enter your contact information:</h3>
-				{isLoadingRequest && isFormValid ? (
-					<Spinner />
-				) : (
-					<form action="post" onSubmit={this.handleOrderSubmitClick}>
-						{orderForm.map((form, i) => (
-							<Input
-								key={form.data}
-								focused={i === 0}
-								elementType={form.elementType}
-								elementConfig={form.elementConfig}
-								validation={{ ...form.validation }}
-								value={form.value}
-								handleChange={event =>
-									this.handleFormChange(event, form.data)
-								}
-								handleEnterPress={this.handleOrderSubmitClick}
-							/>
-						))}
-					</form>
-				)}
-				<Button
-					type={showFormInvalidMessage ? 'Danger' : 'Confirm'}
-					handleClick={this.handleOrderSubmitClick}
-				>
-					Confirm Order
-				</Button>
-				{showFormInvalidMessage ? (
-					<FormErrorMessage errorType="emptyFields" />
-				) : null}
-			</div>
-		);
-	}
-}
+	return (
+		<>
+			{isLoggedIn && areIngredientsAvailable && (
+				<div className={ContactData}>
+					<h3>Enter your contact information:</h3>
+					{isLoadingRequest && isFormValid ? (
+						<Spinner />
+					) : (
+						<form action="post" onSubmit={handleOrderSubmitClick}>
+							{inputs.map((form, i) => (
+								<Input
+									key={form.data}
+									focused={i === 0}
+									elementType={form.elementType}
+									elementConfig={form.elementConfig}
+									validation={{ ...form.validation }}
+									value={form.value}
+									handleChange={event =>
+										handleFormChange(event, form.data)
+									}
+									handleEnterPress={handleOrderSubmitClick}
+								/>
+							))}
+						</form>
+					)}
+					<Button
+						type={showFormInvalidMessage ? 'Danger' : 'Confirm'}
+						handleClick={handleOrderSubmitClick}
+					>
+						Confirm Order
+					</Button>
+					{showFormInvalidMessage && (
+						<FormErrorMessage errorType="emptyFields" />
+					)}
+				</div>
+			)}
+		</>
+	);
+};
 
 ContactData.propTypes = {
 	ingredients: PropTypes.array,

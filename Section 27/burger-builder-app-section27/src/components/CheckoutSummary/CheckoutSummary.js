@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Burger from '../Burger/Burger';
 import Button from '../UI/Button/Button';
+import GoBackMessage from '../UI/GoBackMessage/GoBackMessage';
+import { areIngredientsSelected } from '../../utilities/helpers/helpers';
 import styles from './CheckoutSummary.module.css';
 import PropTypes from 'prop-types';
 
@@ -12,24 +14,22 @@ const CheckoutSummary = ({
 	ingredients,
 	totalPrice,
 	isLoggedIn,
-	...props
+	history,
 }) => {
 	// CSS Modules styles:
-	const { CheckoutSummary, BurgerDisplay, errorMessageStyle, Price } = styles;
+	const { CheckoutSummary, BurgerDisplay, Price } = styles;
 
-	// Check if ingredients were selected in the BurgerBuilder
-	const areIngredientsSelected = ingredients
-		? ingredients.some(ingredient => ingredient.quantity > 0)
-		: null;
+	const areIngredientsAvailable = areIngredientsSelected(ingredients);
 
-	const errorMessage = !isLoggedIn
-		? 'Please sign in to checkout an order'
-		: 'It seems like no ingredients were selected! Please select burger ingredients in order to checkout';
+	const message =
+		'It seems like no ingredients were selected! Please select burger ingredients in order to checkout';
+
+	const { pathname } = history.location;
 
 	return (
 		<div className={CheckoutSummary}>
-			<div className={BurgerDisplay}>
-				{areIngredientsSelected && isLoggedIn ? (
+			{areIngredientsAvailable && isLoggedIn ? (
+				<div className={BurgerDisplay}>
 					<>
 						<p>
 							Total price:
@@ -39,20 +39,17 @@ const CheckoutSummary = ({
 						</p>
 						<Burger ingredients={ingredients} />
 					</>
-				) : (
-					<>
-						<p className={errorMessageStyle}>{errorMessage}</p>
-						<Button handleClick={cancelClick} type="Danger">
-							Go back
-						</Button>
-					</>
-				)}
-			</div>
-			{areIngredientsSelected && isLoggedIn && (
+				</div>
+			) : (
+				<GoBackMessage content={message} />
+			)}
+			{areIngredientsAvailable && isLoggedIn && (
 				<>
-					<Button handleClick={checkoutClick} type="Confirm">
-						Continue
-					</Button>
+					{pathname !== '/checkout/contact-data' && (
+						<Button handleClick={checkoutClick} type="Confirm">
+							Continue
+						</Button>
+					)}
 					<Button handleClick={cancelClick} type="Danger">
 						Cancel
 					</Button>
@@ -68,6 +65,7 @@ CheckoutSummary.propTypes = {
 	checkoutClick: PropTypes.func,
 	location: PropTypes.object,
 	isLoggedIn: PropTypes.bool,
+	history: PropTypes.object,
 };
 
 // Redux setup:

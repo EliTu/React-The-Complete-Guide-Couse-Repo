@@ -2,7 +2,7 @@
 
 .Input {
     width: 100%;
-    padding: 0.4rem;
+    padding: 0.2rem;
     box-sizing: border-box;
     font-family: inherit;
 }
@@ -13,13 +13,13 @@
     background-color: rgba(241, 238, 238, 0);
     color: var(--coloring-dark);
     font-size: 0.9rem;
-    width: 55%;
-    outline: none;
+    width: 60%;
     border: none;
-    border-bottom: 2px solid var(--coloring-opaque-dark);
-    margin: 1rem auto;
-    display: block;
-    text-align: center;
+    border-radius: 2px;
+    border: 2px solid var(--coloring-opaque-dark);
+    padding: 0.3rem 0.7rem;
+    margin: 0.7rem auto;
+    display: inline-block;
     transition: all 0.5s;
 }
 
@@ -31,19 +31,22 @@
 }
 
 .Input textarea {
-    border: 1px solid var(--coloring-opaque-dark);
+    border: 2px solid var(--coloring-opaque-dark);
     overflow: auto;
     resize: none;
     text-align: start;
-    margin: 1rem auto;
-    height: 50%;
+    margin: 0.5rem auto;
+    height: 3rem;
     width: 75%;
+    height: 5rem;
 }
 
 .Input label {
+    width: 35%;
     font-weight: 700;
-    display: block;
-    margin-bottom: 1rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    text-align: center;
 }
 
 .Input select option {
@@ -52,19 +55,26 @@
     color: var(--coloring-dark);
 }
 
-.Input input:focus {
-    width: 70%;
+.Input input:focus,
+.Input select:focus {
+    border: 2px solid var(--glow-light-blue);
+}
+
+.Input textarea:focus {
+    border: 2px solid var(--glow-light-blue);
 }
 
 .Input .ValidStyle {
-    border-bottom: 2px solid var(--glow-green-opaque-lighter);
+    border: 2px solid var(--glow-green-opaque-lighter);
 }
 
 .Input .InvalidStyle {
-    border-bottom: 2px solid var(--invalid-red-dark);
+    border: 2px solid var(--invalid-red-dark);
 }
 
 .errorMessageStyle {
+    margin: 0.1rem;
+
     font-size: 0.8rem;
     color: var(--invalid-red-light);
 }
@@ -73,8 +83,25 @@
     color: var(--coloring-opaque-dark);
 }
 
+/* Small screen */
 @media screen and (max-width: 800px) {
-    .Input input {
-        width: 60%;
+
+    .Input input,
+    .Input textarea,
+    .Input select {
+        font-size: 0.9rem;
+        width: 70%;
+        display: block;
+    }
+
+    .Input textarea {
+        width: 85%;
+        height: 5rem;
+
+    }
+
+    .Input label {
+        width: 100%;
+        display: block;
     }
 }

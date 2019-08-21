@@ -12,6 +12,8 @@ import {
 const INITIAL_STATE = {
 	orders: [],
 	isLoading: false,
+	isOrderSuccessful: false,
+	isFetchSuccessful: false,
 };
 
 const orderFormReducer = (state = INITIAL_STATE, action) => {
@@ -20,6 +22,8 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				isLoading: true,
+				isOrderSuccessful: false,
+				isFetchSuccessful: false,
 			};
 		case PURCHASE_BURGER_SUCCESS:
 			const newOrder = {
@@ -29,18 +33,22 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				isLoading: false,
 				orders: state.orders.concat(newOrder),
+				isOrderSuccessful: true,
 			};
 
 		case PURCHASE_BURGER_FAIL:
 			return {
 				...state,
 				isLoading: false,
+				isOrderSuccessful: false,
 			};
 
 		case FETCH_ORDERS_INIT:
 			return {
 				...state,
 				isLoading: true,
+				isFetchSuccessful: false,
+				isOrderSuccessful: false,
 			};
 
 		case FETCH_ORDERS_SUCCESS:
@@ -48,12 +56,14 @@ const orderFormReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				orders: action.orders,
 				isLoading: false,
+				isFetchSuccessful: true,
 			};
 
 		case FETCH_ORDERS_FAIL:
 			return {
 				...state,
 				isLoading: false,
+				isFetchSuccessful: false,
 			};
 
 		default:

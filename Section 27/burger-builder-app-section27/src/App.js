@@ -1,9 +1,11 @@
 import React, { useEffect, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import NotificationBox from './components/containers/NotificationBox/NotificationBox';
 import Layout from './components/containers/Layout/Layout';
 import BurgerBuilder from './components/containers/BurgerBuilder/BurgerBuilder';
 import SignIn from './components/containers/Authentication/SignIn/SignIn';
+import Footer from './components/display/Footer/Footer';
 import { authCheckLoginState } from './components/containers/Authentication/store/actions';
 import LazyLoader from './components/hoc/LazyLoader/LazyLoader';
 import PropTypes from 'prop-types';
@@ -29,18 +31,36 @@ function App({ tryAutoSignIn, isLoggedIn }) {
 			<Router>
 				<Layout>
 					<SignIn />
-					<Switch>
-						{isLoggedIn && (
+					<div
+						className="wrapper"
+						style={{
+							minHeight: 'calc(100vh - 122px)',
+						}}
+					>
+						<Switch>
+							{isLoggedIn && (
+								<Route
+									path="/checkout"
+									component={LazyLoader(Checkout)}
+								/>
+							)}
 							<Route
-								path="/checkout"
-								component={LazyLoader(Checkout)}
+								path="/orders"
+								component={LazyLoader(Orders)}
 							/>
-						)}
-						<Route path="/orders" component={LazyLoader(Orders)} />
-						<Route path="/about" component={LazyLoader(About)} />
-						<Route path="/signup" component={LazyLoader(SignUp)} />
-						<Route path="/" component={BurgerBuilder} />
-					</Switch>
+							<Route
+								path="/about"
+								component={LazyLoader(About)}
+							/>
+							<Route
+								path="/signup"
+								component={LazyLoader(SignUp)}
+							/>
+							<Route path="/" component={BurgerBuilder} />
+						</Switch>
+						<NotificationBox />
+					</div>
+					<Footer />
 				</Layout>
 			</Router>
 		</div>

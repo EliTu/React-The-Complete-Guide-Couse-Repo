@@ -1,25 +1,25 @@
+@import '../../../../variables.css';
+
 .MainHeader {
     margin: 3rem auto;
     text-align: center;
-    color: rgba(27, 24, 24, 0.904);
+    color: var(--coloring-dark);
 }
 
 .SignUp {
-    background-image: linear-gradient(180deg, rgba(59, 58, 58, 0.925), rgba(56, 56, 56, 0.945) 70%);
-    color: rgb(236, 235, 235);
+    border: 2px solid var(--coloring-opaque-light);
+    color: var(--coloring-dark);
     margin: 3rem auto;
-    width: 30%;
+    width: 40%;
     text-align: center;
     border-radius: 7px;
-    box-shadow: 0px 1px 3px black;
+    box-shadow: var(--shadow-light);
     padding: 1rem;
     box-sizing: border-box;
-    outline: 2px solid rgba(212, 208, 208, 0.904);
-    outline-offset: -0.6rem;
 }
 
 .SignUp h2 {
-    color: rgb(236, 235, 235);
+    color: var(--coloring-dark);
     margin: 0.8rem auto;
     padding: 1rem 0;
     text-align: center;
@@ -31,17 +31,24 @@
 }
 
 .SuccessMessage {
-    color: rgba(105, 241, 105, 0.808);
+    color: var(--light-blue);
     font-size: 1.2rem;
 }
 
 @media only screen and (max-width: 960px) {
     .SignUp {
+        width: 65%;
+    }
+}
+
+/* Medium screen */
+@media only screen and (max-width: 1250px) {
+    .SignUp {
         width: 70%;
     }
 }
 
-/* Mobile */
+/* Small screen */
 @media only screen and (max-width: 500px) {
     .SignUp {
         width: 90%;

@@ -1,3 +1,5 @@
+@import '../../../variables.css';
+
 p {
     font-size: 1.1rem;
 }
@@ -7,8 +9,8 @@ p {
     padding: 0.4rem;
     width: 50%;
     list-style: none;
-    border-left: 2px dashed rgb(209, 207, 205);
-    border-right: 2px dashed rgb(209, 207, 205);
+    border-left: 2px dashed var(--coloring-opaque-dark);
+    border-right: 2px dashed var(--coloring-opaque-dark);
 }
 
 .IngredientStyle {
@@ -18,7 +20,7 @@ p {
 h3 {
     margin: 1rem auto;
     font-size: 1.5rem;
-    border-bottom: 2px solid rgb(209, 207, 205);
+    border-bottom: 2px solid var(--coloring-opaque-dark);
     border-radius: 7px;
 }
 
@@ -26,7 +28,7 @@ h3 {
     margin-left: 0.3rem;
     font-size: 1.3rem;
     font-weight: bold;
-    color: rgba(84, 243, 84, 0.925);
+    color: var(--glow-green-darker);
 }
 
 a {

@@ -1,11 +1,13 @@
+@import '../../../variables.css';
+
 .Checkout {
-    display: block;
+    display: flex;
 }
 
 .CheckoutHeader {
     margin: 3rem auto;
     text-align: center;
-    color: rgba(27, 24, 24, 0.904);
+    color: var(--coloring-dark);
     margin: 1rem auto;
 }
 

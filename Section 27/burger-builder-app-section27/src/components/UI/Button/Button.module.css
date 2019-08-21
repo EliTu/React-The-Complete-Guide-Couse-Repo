@@ -1,7 +1,7 @@
 @import '../../../variables.css';
 
 .Button {
-    width: 60%;
+    width: 95%;
     font-size: 1.15rem;
     align-self: baseline;
     margin: 0.5rem auto;
@@ -35,7 +35,7 @@
 }
 
 .Neutral {
-    color: var(--coloring-light);
+    color: var(--coloring-opaque-dark);
     border: 2px solid var(--disabled-dark);
 }
 

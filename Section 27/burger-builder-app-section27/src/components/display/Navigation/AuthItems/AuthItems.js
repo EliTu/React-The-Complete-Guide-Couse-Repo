@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Item from '../Item/Item';
 import styles from './AuthItems.module.css';
 import PropTypes from 'prop-types';
+import Icon from '../../../UI/Icon/Icon';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 export const AuthItems = ({ isLoggedIn, email }) => {
 	// CSS Modules style:
@@ -15,7 +17,11 @@ export const AuthItems = ({ isLoggedIn, email }) => {
 					<Item signInItem link="">
 						Sign in
 					</Item>
-					<Item link="/signup">Sign up</Item>
+					<Item link="/signup">
+						{' '}
+						<Icon iconType={faUserPlus} />
+						Sign up
+					</Item>
 				</>
 			) : (
 				<>

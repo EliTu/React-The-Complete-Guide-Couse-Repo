@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Logo from '../../../Logo/Logo';
 import NavItems from '../NavItems/NavItems';
 import AuthItems from '../AuthItems/AuthItems';
@@ -8,7 +8,7 @@ import styles from './SIdeDrawer.module.css';
 
 const SideDrawer = ({ handleVisibility, isVisible }) => {
 	// CSS Modules styles:
-	const { SideDrawer, LogoHeight, Close, Open, StyledHorizontal } = styles;
+	const { SideDrawer, Close, Open, StyledHorizontal } = styles;
 
 	let attachedClasses = [SideDrawer, Close];
 	if (isVisible) attachedClasses = [SideDrawer, Open];
@@ -17,10 +17,8 @@ const SideDrawer = ({ handleVisibility, isVisible }) => {
 		<>
 			<Backdrop show={isVisible} removeBackdrop={handleVisibility} />
 			<div className={attachedClasses.join(' ')}>
-				<div className={LogoHeight}>
-					<Logo />
-				</div>
-				<nav>
+				<Logo size="8x" />
+				<nav onClick={handleVisibility}>
 					<AuthItems />
 					<div className={StyledHorizontal} />
 					<NavItems />
@@ -35,4 +33,4 @@ SideDrawer.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
 };
 
-export default SideDrawer;
+export default memo(SideDrawer);

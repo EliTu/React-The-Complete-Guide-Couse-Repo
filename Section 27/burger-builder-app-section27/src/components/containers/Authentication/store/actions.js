@@ -6,6 +6,7 @@ import {
 	REDIRECTED_TO_AUTH_PAGE,
 } from './constants';
 import axiosAuth from '../../../../axios/axios-auth';
+import { authKey as key } from './keys';
 
 export const authInit = authType => {
 	return {
@@ -30,13 +31,13 @@ export const authFail = error => {
 	};
 };
 
-export const authSignout = () => {
+export const authSignout = setSignOutType => {
 	// When logging out, remove the saved auth data in the local storage
 	localStorage.clear();
 
 	return {
 		type: AUTH_SIGNOUT,
-		authType: 'signOut',
+		authType: setSignOutType,
 	};
 };
 
@@ -52,8 +53,8 @@ export const confirmAuth = (email, password, authType) => {
 
 		let targetUrl =
 			authType === 'signin'
-				? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M'
-				: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCOcUCI2YMZXtVJkuOcYMAttj8XXDMyR7M';
+				? `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`
+				: `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${key}`;
 
 		const authData = {
 			email: email,
@@ -91,7 +92,7 @@ export const confirmAuth = (email, password, authType) => {
 export const logOutWhenTokenExpires = expireTime => {
 	return async dispatch => {
 		setTimeout(() => {
-			dispatch(authSignout());
+			dispatch(authSignout('signOut'));
 		}, expireTime * 1000);
 	};
 };

@@ -1,34 +1,25 @@
 import React from 'react';
-import styles from './Order.module.css';
+import styles from './OrderData.module.css';
 import PropTypes from 'prop-types';
 
-const Order = props => {
-	// props:
-	const { ingredients, price, orderId, contact, delivery } = props;
-
-	// CSS Modules styles:
-	const { Order, Price, DataHeader, Category, OrderId } = styles;
-
-	let mappedContactInfo = [];
-	for (let key in contact) {
-		mappedContactInfo.push({ [key]: contact[key] });
-	}
-
+const OrderData = ({ ingredients, contactData, delivery, price }) => {
+	// CSS modules styles:
+	const { Price, DataHeader, Category } = styles;
 	return (
-		<div className={Order}>
-			<p className={OrderId}>Order id: {orderId}</p>
+		<>
 			<div className={DataHeader}>
 				Ingredients:
 				<ul>
-					{ingredients.map(el =>
-						el.quantity > 0 ? (
-							<li key={el.ingredient}>
-								<span className={Category}>
-									{el.ingredient}
-								</span>
-								x {el.quantity}
-							</li>
-						) : null
+					{ingredients.map(
+						el =>
+							el.quantity > 0 && (
+								<li key={el.ingredient}>
+									<span className={Category}>
+										{el.ingredient}
+									</span>
+									x {el.quantity}
+								</li>
+							)
 					)}
 				</ul>
 			</div>
@@ -36,7 +27,7 @@ const Order = props => {
 			<div className={DataHeader}>
 				Contact information:
 				<ul>
-					{mappedContactInfo.map(el => {
+					{contactData.map(el => {
 						const entries = Object.entries(el);
 						const key = entries[0][0];
 						const value = entries[0][1];
@@ -49,31 +40,28 @@ const Order = props => {
 					})}
 				</ul>
 			</div>
-
 			<p className={DataHeader}>
 				<span className={Category}>Delivery method: </span>
 				{delivery}
 			</p>
-
 			<p className={DataHeader}>
 				Total price:<span className={Price}>${price}</span>
 			</p>
-		</div>
+		</>
 	);
 };
 
-Order.propTypes = {
+OrderData.propTypes = {
 	ingredients: PropTypes.array,
-	price: PropTypes.string,
-	orderId: PropTypes.string,
-	contact: PropTypes.object,
+	contactData: PropTypes.array,
 	delivery: PropTypes.string,
+	price: PropTypes.string,
 };
 
-Order.defaultProps = {
+OrderData.defaultProps = {
 	ingredients: [{ ingredient: 'N/A', quantity: 'N/A' }],
 	price: 'N/A',
 	orderId: 'N/A',
 };
 
-export default Order;
+export default OrderData;

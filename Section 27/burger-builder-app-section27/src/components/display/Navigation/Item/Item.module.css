@@ -23,15 +23,16 @@
 }
 
 .Item a:hover {
-	border-bottom: 5px solid var(--light-cyan);
+	border-bottom: 5px solid var(--coloring-bright-light);
+	background-color: rgba(219, 221, 219, 0.144);
 }
 
 .Item a:active,
 .Item a.active {
 	background-color: rgba(0, 0, 0, 0);
-	/* border-bottom: 10px solid var(--glow-green-darker); */
-	border-bottom: 10px solid var(--light-cyan);
+	border-bottom: 10px solid var(--coloring-bright-light);
 	color: var(--coloring-bright-light);
+	background-color: rgba(219, 221, 219, 0.144);
 }
 
 /* Large screen */
@@ -56,18 +57,31 @@
 		text-align: center;
 		padding: 0.9rem 1rem;
 		border-bottom: 4px solid transparent;
-		display: block;
 		border-radius: 0;
 	}
 
 	.Item .SigninActive {
 		color: rgb(99, 248, 99);
-		border-bottom: 10px solid rgba(71, 219, 71, 0.89);
+		border-bottom: 10px solid var(--coloring-bright-light);
 	}
 }
 
-/* Medium screen */
-@media screen and (max-width: 710px) {
+/*  Medium screne */
+@media only screen and (max-width: 850px) {
+	.Item a {
+		font-size: 0.9rem;
+		width: 100%;
+		padding: 0.9rem 0.4rem;
+	}
+}
+
+/* small screen */
+@media screen and (max-width: 550px) {
+	.Item a {
+		font-size: 1rem;
+		width: 100%;
+		padding: 0.9rem 0.4rem;
+	}
 
 	.Item a:active,
 	.Item a.active {

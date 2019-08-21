@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import signInForm from './signInForm/signInForm';
@@ -9,12 +9,16 @@ import FormErrorMessage from '../../../UI/FormErrorMessage/FormErrorMessage';
 import AuthErrorMessage from '../../../UI/AuthErrorMessage/AuthErrorMessage';
 import { signInOutsideCloseClick } from '../../../display/Navigation/AuthItems/store/actions';
 import { confirmAuth } from '../store/actions';
+import useForm from '../../../../utilities/custom-hooks/useForm';
+import useClickOutside from '../../../../utilities/custom-hooks/useClickOutside';
+import useRedirect from '../../../../utilities/custom-hooks/useRedirect';
 import styles from './SignIn.module.css';
 import PropTypes from 'prop-types';
 
 const SignIn = ({
 	isSignInDisplayed,
 	isLoading,
+	history,
 	error,
 	authType,
 	sentAuthForm,
@@ -25,71 +29,19 @@ const SignIn = ({
 	...props
 }) => {
 	// CSS Modules styles:
-	const { SignIn, Open, Closed, SuccessMessage } = styles;
+	const { SignIn, Open, Closed } = styles;
 
 	// State hooks:
-	const [fields, setFields] = useState(signInForm);
-	const [isFormValid, setIsFormValid] = useState(false);
 	const [showFormInvalidMessage, setShowFormInvalidMessage] = useState(false);
-	const [checkMinMax, setCheckMinMax] = useState(false);
+
+	// Form fields & validation data from useForm custom hook:
+	const [inputs, , isFormValid, , handleFormChange] = useForm(signInForm);
 
 	// Toggle component display upon clicking the navbar link
 	const setDisplayStyle = isSignInDisplayed ? Open : Closed;
 
-	// Handle changes upon typing in the input fields
-	const handleFormChange = (event, data) => {
-		let updatedForm = [...fields];
-		let updatedFormData = updatedForm.forEach(el =>
-			el.data === data
-				? ((el.value = event.target.value),
-				  (el.validation.valid = checkInputValidation(
-						el.value,
-						el.validation,
-						el.data
-				  )),
-				  (el.validation.hasUserInput = true))
-				: el
-		);
-		updatedForm.value = updatedFormData;
-		setFields([...updatedForm]);
-	};
-
-	// Check form validation upon changes to fields and minMax requirements
-	useEffect(() => {
-		const checkFormValidation = () => {
-			const formCopy = [...fields];
-			const checkValid = formCopy.every(el => {
-				return el.validation.valid;
-			});
-
-			setIsFormValid(checkValid);
-		};
-		checkFormValidation();
-	}, [checkMinMax, fields]);
-
-	// Check requirements for the input fields for validations
-	const checkInputValidation = (value, validation, type) => {
-		let isValid = true;
-
-		// General validation & empty field:
-		if (validation.required) isValid = value.trim() !== '' && isValid;
-
-		// Check the email regexp:
-		if (validation.required && type === 'email')
-			isValid = validation.emailValidationRegExp.test(value);
-
-		// Check min-max characters requirement:
-		if (validation.minLength && validation.maxLength)
-			isValid =
-				value.length + 1 >= validation.minLength &&
-				value.length + 1 <= validation.maxLength;
-
-		setCheckMinMax(isValid);
-		return isValid;
-	};
-
 	// Handle form submittion
-	const handleSubmitFormClick = event => {
+	const handleFormSubmitEvent = event => {
 		event.preventDefault();
 
 		if (!isFormValid) {
@@ -99,39 +51,32 @@ const SignIn = ({
 
 		// If all fields are valid
 		if (isFormValid) {
-			sentAuthForm(fields[0].value, fields[1].value, 'signin');
+			sentAuthForm(inputs[0].value, inputs[1].value, 'signin');
 			setShowFormInvalidMessage(false);
 		}
 	};
 
 	// Handle clicks on elements outside of the component to close it
-	const myRef = useRef();
-	const handleOutsideClick = useCallback(
-		event => {
-			if (isSignInDisplayed && !myRef.current.contains(event.target)) {
-				closeSignIn();
-			}
-		},
-		[closeSignIn, isSignInDisplayed]
+	const outsideClickRef = useClickOutside(isSignInDisplayed, closeSignIn);
+
+	// Check if should be redirecting to checkout upon a sign in:
+	useRedirect(
+		isLoggedIn,
+		isBuilding,
+		isRedirectedToAuth,
+		history.push,
+		'/checkout'
 	);
 
 	useEffect(() => {
-		document.addEventListener('click', handleOutsideClick);
-		return () => document.removeEventListener('click', handleOutsideClick);
-	}, [handleOutsideClick]);
-
-	// Check if should be redirecting to checkout upon a sign in:
-	const redirectToCheckout = useCallback(() => {
-		if (isLoggedIn && isBuilding && isRedirectedToAuth)
-			props.history.push('/checkout');
-	}, [isBuilding, isLoggedIn, isRedirectedToAuth, props.history]);
-
-	useEffect(() => {
-		redirectToCheckout();
-	}, [redirectToCheckout]);
+		closeSignIn();
+	}, [closeSignIn, isLoggedIn]);
 
 	return (
-		<div className={[SignIn, setDisplayStyle].join(' ')} ref={myRef}>
+		<div
+			className={[SignIn, setDisplayStyle].join(' ')}
+			ref={outsideClickRef}
+		>
 			<>
 				{!isLoggedIn ? (
 					isLoading ? (
@@ -141,9 +86,9 @@ const SignIn = ({
 							<h2>Members Login</h2>
 							<form
 								action="post"
-								onSubmit={handleSubmitFormClick}
+								onSubmit={handleFormSubmitEvent}
 							>
-								{fields.map((field, i) => (
+								{inputs.map((field, i) => (
 									<Input
 										key={field.data}
 										focused={i === 0 && isSignInDisplayed}
@@ -154,31 +99,29 @@ const SignIn = ({
 										handleChange={event =>
 											handleFormChange(event, field.data)
 										}
-										handleEnterPress={handleSubmitFormClick}
+										handleEnterPress={handleFormSubmitEvent}
 									/>
 								))}
 							</form>
-							{showFormInvalidMessage ? (
+							{showFormInvalidMessage && (
 								<FormErrorMessage errorType="emptyFields" />
-							) : null}
-							{error && authType === 'signin' ? (
+							)}
+							{error && authType === 'signin' && (
 								<AuthErrorMessage
 									errorMessage={
 										error.response.data.error.message
 									}
 								/>
-							) : null}
+							)}
 							<Button
 								type="Confirm"
-								handleClick={handleSubmitFormClick}
+								handleClick={handleFormSubmitEvent}
 							>
 								Login
 							</Button>
 						</>
 					)
-				) : (
-					<p className={SuccessMessage}>Sign in success!</p>
-				)}
+				) : null}
 			</>
 		</div>
 	);
@@ -220,4 +163,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(withRouter(SignIn));
+)(withRouter(memo(SignIn)));

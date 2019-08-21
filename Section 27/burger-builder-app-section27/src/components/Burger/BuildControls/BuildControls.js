@@ -3,26 +3,24 @@ import styles from './BuildControls.module.css';
 import Controller from './Controller/Controller';
 import PropTypes from 'prop-types';
 
-const controls = [
+const CONTROLS = [
 	{ label: 'Meat', type: 'meat', position: 0 },
 	{ label: 'Salad', type: 'salad', position: 1 },
 	{ label: 'Cheese', type: 'cheese', position: 2 },
 	{ label: 'Bacon', type: 'bacon', position: 3 },
 ];
 
-const BuildControls = props => {
-	// props:
-	const {
-		price,
-		addIngredient,
-		removeIngredient,
-		disableRemove,
-		purchasable,
-		setPurchaseMode,
-	} = props;
-
+const BuildControls = ({
+	price,
+	addIngredient,
+	removeIngredient,
+	disableRemove,
+	purchasable,
+	setPurchaseMode,
+	ingredients,
+}) => {
 	// CSS Modules styles:
-	const { BuildControls, Price, Sum, OrderButton } = styles;
+	const { BuildControls, Price, Sum, OrderButton, } = styles;
 
 	return (
 		<div className={BuildControls}>
@@ -30,12 +28,14 @@ const BuildControls = props => {
 				Total Price:
 				<span className={Sum}>${price.toFixed(2)}</span>
 			</p>
-			{controls.map(control => (
+			{CONTROLS.map(control => (
 				<Controller
 					key={control.label}
 					label={control.label}
-					clickAdd={() => addIngredient(control.type)}
-					clickRemove={() => removeIngredient(control.type)}
+					clickAdd={() => addIngredient(control.type, ingredients)}
+					clickRemove={() =>
+						removeIngredient(control.type, ingredients)
+					}
 					DisableRemoveButton={disableRemove[control.position]}
 				/>
 			))}
@@ -57,6 +57,7 @@ BuildControls.propTypes = {
 	disableRemove: PropTypes.array,
 	purchasable: PropTypes.bool,
 	setPurchaseMode: PropTypes.func,
+	ingredients: PropTypes.array,
 };
 
 export default BuildControls;

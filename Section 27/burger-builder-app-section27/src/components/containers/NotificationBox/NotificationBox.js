@@ -58,6 +58,11 @@ const NotificationBox = ({
 					message: 'Previous Orders are available',
 					sign: 'success',
 				};
+			case 'NO_ORDERS':
+				return {
+					message: 'No previous orders available',
+					sign: 'danger',
+				};
 			case 'ORDER_SUCCESS':
 				return {
 					message: 'Order received successfully',
@@ -82,7 +87,7 @@ const NotificationBox = ({
 				: isErrorOnMount
 				? 'ERROR_ON_MOUNT'
 				: '';
-				
+
 		dispatch({ type: messageType });
 		setIsDisplayed(true);
 
@@ -103,15 +108,21 @@ const NotificationBox = ({
 	// Handle order related messages:
 	useEffect(() => {
 		if (isFetchSuccessful) dispatch({ type: 'FETCH_ORDERS' });
+		if (isFetchSuccessful && orders.length <= 0)
+			dispatch({ type: 'NO_ORDERS' });
 		if (isOrderSuccessful) dispatch({ type: 'ORDER_SUCCESS' });
 		setIsDisplayed(true);
-	}, [isFetchSuccessful, isOrderSuccessful]);
+	}, [isFetchSuccessful, isOrderSuccessful, orders.length]);
 
 	// Display app init message:
 	useEffect(() => {
-		if (prevIngredients !== ingredients && !isBuilding)
+		if (
+			prevIngredients !== ingredients &&
+			!isBuilding &&
+			!isFetchSuccessful
+		)
 			dispatch({ type: 'INIT' });
-	}, [ingredients, isBuilding, prevIngredients]);
+	}, [ingredients, isBuilding, isFetchSuccessful, prevIngredients]);
 
 	const displayStatusStyle = isDisplayed ? Open : Closed;
 

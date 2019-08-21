@@ -31,7 +31,7 @@ export const Orders = ({
 
 	// Fetch orders:
 	useEffect(() => {
-		onFetchOrders(idToken, userId);
+		if (isLoggedIn) onFetchOrders(idToken, userId);
 	}, [idToken, onFetchOrders, userId, isLoggedIn]);
 
 	// Handle select input change:

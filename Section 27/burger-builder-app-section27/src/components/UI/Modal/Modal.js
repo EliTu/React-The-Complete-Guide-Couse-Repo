@@ -16,6 +16,7 @@ const Modal = ({ children, show, closeModalHandler }) => {
 			<Backdrop show={show} removeBackdrop={closeModalHandler} />
 			<div
 				className={Modal}
+				data-test="wrapper-div"
 				style={{
 					transform: translateModal,
 					opacity: adjustOpacity,

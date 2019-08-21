@@ -41,6 +41,7 @@
     margin: auto 0.1rem;
     list-style: none;
     border: 1px solid var(--coloring-opaque-dark);
+    border-radius: 4px;
 }
 
 .activePageStyle {

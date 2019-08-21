@@ -15,7 +15,6 @@ const NotificationBox = ({
 	email,
 	ingredients,
 	isBuilding,
-	isBurgerPurchaseLoading,
 	isOrderSuccessful,
 	isFetchSuccessful,
 }) => {
@@ -162,7 +161,6 @@ NotificationBox.propTypes = {
 	email: PropTypes.string,
 	ingredients: PropTypes.array,
 	isBuilding: PropTypes.bool,
-	isBurgerPurchaseLoading: PropTypes.bool,
 	isOrderSuccessful: PropTypes.bool,
 	isFetchSuccessful: PropTypes.bool,
 };
@@ -179,7 +177,6 @@ const mapStateToProps = state => {
 		email: state.auth.email,
 		ingredients: state.burgerBuilder.ingredients,
 		isBuilding: state.burgerBuilder.isBuilding,
-		isBurgerPurchaseLoading: state.orderForm.isLoading,
 		isOrderSuccessful: state.orderForm.isOrderSuccessful,
 		isFetchSuccessful: state.orderForm.isFetchSuccessful,
 	};

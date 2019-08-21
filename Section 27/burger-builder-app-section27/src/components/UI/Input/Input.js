@@ -2,19 +2,16 @@ import React, { useRef, useEffect } from 'react';
 import styles from './Input.module.css';
 import PropTypes from 'prop-types';
 
-const Input = props => {
-	// props:
-	const {
-		elementType,
-		elementConfig,
-		value,
-		validation,
-		focused,
-		handleChange,
-		handleEnterPress,
-		data,
-	} = props;
-
+const Input = ({
+	elementType,
+	elementConfig,
+	value,
+	validation,
+	focused,
+	handleChange,
+	handleEnterPress,
+	data,
+}) => {
 	// CSS Modules styles:
 	const { Input, InvalidStyle, errorMessageStyle, ValidStyle } = styles;
 
@@ -56,6 +53,7 @@ const Input = props => {
 					onKeyPress={event =>
 						enterPressCallback(data, event, handleEnterPress)
 					}
+					data-test="input-test"
 				/>
 			);
 			break;

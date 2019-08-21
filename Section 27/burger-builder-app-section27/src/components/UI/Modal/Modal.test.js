@@ -2,7 +2,6 @@ import React from 'react';
 import Backdrop from '../Backdrop/Backdrop';
 import { findByTestAttr } from '../../../utilities/test-utilities/findByTestAttr';
 import { shallow } from 'enzyme';
-
 import Modal from './Modal';
 
 describe('<Modal />', () => {

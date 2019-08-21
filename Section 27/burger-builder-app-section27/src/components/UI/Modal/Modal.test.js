@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import Modal from './Modal';
 
-describe('Name of the group', () => {
+describe('<Modal />', () => {
 	// const component = setShallowAsComponent(<Modal />);
 	let component;
 	beforeEach(() => {
@@ -24,6 +24,7 @@ describe('Name of the group', () => {
 	});
 
 	it('should render the children props without errors', () => {
-		expect(component.find()).toEqual(true);
+		expect(component.children()).toBeTruthy();
+		expect(component.children()).not.toHaveLength(0);
 	});
 });

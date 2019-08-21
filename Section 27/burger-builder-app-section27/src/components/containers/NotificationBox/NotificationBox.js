@@ -12,6 +12,7 @@ const NotificationBox = ({
 	orders,
 	idToken,
 	userId,
+	email,
 	ingredients,
 	isBuilding,
 	isBurgerPurchaseLoading,
@@ -31,16 +32,21 @@ const NotificationBox = ({
 	const prevIngredients = usePreviousValue(ingredients);
 
 	// Notifications type reducer:
-	const notificationReducer = (state, action) => {
-		switch (action.type) {
+	const notificationReducer = (state, { type, email }) => {
+		switch (type) {
 			case 'INIT':
 				return {
-					message: 'Welcome to React Burger!',
+					message: `Welcome to React Burger ${email || ''}!`,
 					sign: 'success',
 				};
 			case 'LOGIN_SUCCESS':
 				return {
-					message: `You've successfully logged in`,
+					message: `Signin success! Welcome back, ${email}`,
+					sign: 'success',
+				};
+			case 'SIGNUP_SUCCESS':
+				return {
+					message: `Signed up new user, welcome ${email}`,
 					sign: 'success',
 				};
 			case 'LOGOUT':
@@ -82,22 +88,25 @@ const NotificationBox = ({
 		const messageType =
 			isLoggedIn && authType === 'signin'
 				? 'LOGIN_SUCCESS'
+				: isLoggedIn && authType === 'signUp'
+				? 'SIGNUP_SUCCESS'
 				: !prevToken && !prevUserId && authType === 'signOut'
 				? 'LOGOUT'
 				: isErrorOnMount
 				? 'ERROR_ON_MOUNT'
 				: '';
 
-		dispatch({ type: messageType });
+		dispatch({ type: messageType, email: email });
 		setIsDisplayed(true);
 
-		// Make sure to close the NotificationBox after 5 seconds:
+		// Make sure to self close the NotificationBox after 5 seconds:
 		const autoCloseBox = setTimeout(() => {
 			setIsDisplayed(false);
 		}, 5000);
 		return () => clearTimeout(autoCloseBox);
 	}, [
 		authType,
+		email,
 		isErrorOnMount,
 		isLoggedIn,
 		prevSignInStatus,
@@ -121,8 +130,8 @@ const NotificationBox = ({
 			!isBuilding &&
 			!isFetchSuccessful
 		)
-			dispatch({ type: 'INIT' });
-	}, [ingredients, isBuilding, isFetchSuccessful, prevIngredients]);
+			dispatch({ type: 'INIT', email: email });
+	}, [email, ingredients, isBuilding, isFetchSuccessful, prevIngredients]);
 
 	const displayStatusStyle = isDisplayed ? Open : Closed;
 
@@ -150,6 +159,7 @@ NotificationBox.propTypes = {
 	orders: PropTypes.array,
 	idToken: PropTypes.string,
 	userId: PropTypes.string,
+	email: PropTypes.string,
 	ingredients: PropTypes.array,
 	isBuilding: PropTypes.bool,
 	isBurgerPurchaseLoading: PropTypes.bool,
@@ -166,6 +176,7 @@ const mapStateToProps = state => {
 		orders: state.orderForm.orders,
 		idToken: state.auth.idToken,
 		userId: state.auth.userId,
+		email: state.auth.email,
 		ingredients: state.burgerBuilder.ingredients,
 		isBuilding: state.burgerBuilder.isBuilding,
 		isBurgerPurchaseLoading: state.orderForm.isLoading,

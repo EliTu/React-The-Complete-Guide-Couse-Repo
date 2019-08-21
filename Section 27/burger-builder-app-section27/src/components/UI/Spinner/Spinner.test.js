@@ -9,6 +9,7 @@ describe('<Spinner/>', () => {
 	});
 
 	it('should render without errors', () => {
+		expect(component).toBeTruthy();
 		expect(component.length).toBe(1);
 		expect(component.length).not.toBe(2);
 	});

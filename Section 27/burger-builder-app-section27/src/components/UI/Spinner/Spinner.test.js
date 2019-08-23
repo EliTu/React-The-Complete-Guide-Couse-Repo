@@ -14,4 +14,8 @@ describe('<Spinner/>', () => {
 		expect(component.length).toBe(1);
 		expect(component.length).not.toBe(2);
 	});
+
+	it('should have a div with loading text', () => {
+		expect(component.find('.Loader').text()).toEqual('Loading...');
+	});
 });

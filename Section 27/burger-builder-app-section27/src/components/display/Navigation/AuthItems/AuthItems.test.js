@@ -12,6 +12,7 @@ describe('AuthItems', () => {
 	it('Should render 2 <Item> if the user is not signed in', () => {
 		component.setProps({ isLoggedIn: false });
 
+		expect(component).toMatchSnapshot();
 		expect(component.find(Item)).toHaveLength(2);
 		expect(component.find(Item)).not.toHaveLength(3);
 		expect(component.find(Item)).not.toBeFalsy();
@@ -20,6 +21,7 @@ describe('AuthItems', () => {
 	it('should render 1 <Item></Item> and if user is signed in ', () => {
 		component.setProps({ isLoggedIn: true });
 
+		expect(component).toMatchSnapshot();
 		expect(component.find(Item)).toHaveLength(1);
 		expect(component.find(Item)).not.toHaveLength(2);
 		expect(component.find(Item)).not.toBeFalsy();
@@ -28,6 +30,7 @@ describe('AuthItems', () => {
 	it('should contain an <Item>Log out</Item> if the user is authenticated and logged in', () => {
 		component.setProps({ isLoggedIn: true });
 
+		expect(component).toMatchSnapshot();
 		expect(component.find(Item)).toBeTruthy();
 		expect(
 			component.contains(

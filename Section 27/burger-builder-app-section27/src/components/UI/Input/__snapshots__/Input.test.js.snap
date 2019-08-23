@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input/> Component (not testing the input fields) should render an Input component withot errors 1`] = `
+<div
+  className="Input"
+>
+  <label>
+    abc
+  </label>
+  <input
+    className=""
+    data-test="input-test"
+    label="abc"
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    placeholder="abc"
+    type="text"
+    value="abc"
+  />
+</div>
+`;
+
+exports[`<Input/> Type: input="text" test should not render if elementType is not input  1`] = `
+<div
+  className="Input"
+>
+  <label>
+    abc
+  </label>
+  <input
+    className={null}
+    label="abc"
+    onKeyPress={[Function]}
+    placeholder="abc"
+    type="text"
+    value="abc"
+  />
+</div>
+`;
+
+exports[`<Input/> Type: input="text" test should render without errors 1`] = `
+<div
+  className="Input"
+>
+  <label>
+    abc
+  </label>
+  <input
+    className=""
+    data-test="input-test"
+    label="abc"
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    placeholder="abc"
+    type="text"
+    value="abc"
+  />
+</div>
+`;

@@ -33,11 +33,14 @@ const setComponent = (props = {}) => {
 
 describe('<Input/>', () => {
 	describe('Component (not testing the input fields)', () => {
-		let props = setComponentProps('input', 'text', 'abc', true);
-		let component = setComponent(props);
-		expect(component).toBeTruthy();
-		expect(component.length).toBe(1);
-		expect(component.length).not.toBe(2);
+		it('should render an Input component withot errors', () => {
+			let props = setComponentProps('input', 'text', 'abc', true);
+			let component = setComponent(props);
+			expect(component).toMatchSnapshot();
+			expect(component).toBeTruthy();
+			expect(component.length).toBe(1);
+			expect(component.length).not.toBe(2);
+		});
 	});
 
 	describe('Type: input="text" test', () => {
@@ -45,13 +48,16 @@ describe('<Input/>', () => {
 			let props = setComponentProps('input', 'text', 'abc', true);
 			let component = setComponent(props);
 			let input = findByTestAttr(component, 'input-test');
+			expect(component).toMatchSnapshot();
 			expect(input.length).toBe(1);
 		});
-		
+
 		it('should not render if elementType is not input ', () => {
 			let props = setComponentProps('password', 'text', 'abc', true);
 			let component = setComponent(props);
 			let input = findByTestAttr(component, 'input-test');
+
+			expect(component).toMatchSnapshot();
 			expect(input.length).toBe(0);
 		});
 	});

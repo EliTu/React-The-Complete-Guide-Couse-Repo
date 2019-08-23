@@ -47,6 +47,7 @@ describe('<Input/>', () => {
 			let input = findByTestAttr(component, 'input-test');
 			expect(input.length).toBe(1);
 		});
+		
 		it('should not render if elementType is not input ', () => {
 			let props = setComponentProps('password', 'text', 'abc', true);
 			let component = setComponent(props);

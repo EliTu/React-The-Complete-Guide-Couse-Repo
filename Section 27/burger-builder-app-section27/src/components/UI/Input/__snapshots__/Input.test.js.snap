@@ -57,3 +57,22 @@ exports[`<Input/> Type: input="text" test should render without errors 1`] = `
   />
 </div>
 `;
+
+exports[`<Input/> Type: input="textarea" test should render without errors 1`] = `
+<div
+  className="Input"
+>
+  <label>
+    abc
+  </label>
+  <textarea
+    data-test="textarea-test"
+    label="abc"
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    placeholder="abc"
+    type=""
+    value="abc"
+  />
+</div>
+`;

@@ -49,27 +49,28 @@ describe('<Input/>', () => {
 	});
 
 	describe('Type: input="text" test', () => {
+		let props = setComponentProps('input', 'text', 'abc', true);
+		let component = setComponent(props);
+		let input = findByTestAttr(component, 'input-test');
+
 		it('should render without errors', () => {
-			let props = setComponentProps('input', 'text', 'abc', true);
-			let component = setComponent(props);
-			let input = findByTestAttr(component, 'input-test');
 			expect(component).toMatchSnapshot();
 			expect(input.length).toBe(1);
 		});
 
 		it('should not render if elementType is not input ', () => {
-			let props = setComponentProps('password', 'text', 'abc', true);
-			let component = setComponent(props);
-			let input = findByTestAttr(component, 'input-test');
+			props = setComponentProps('password', 'text', 'abc', true);
+			component = setComponent(props);
+			input = findByTestAttr(component, 'input-test');
 
 			expect(component).toMatchSnapshot();
 			expect(input.length).toBe(0);
 		});
 
 		it('should call the onChange event callback function on user input', () => {
-			let props = setComponentProps('input', 'text', '', true);
-			let component = setComponent(props, onChange);
-			let input = findByTestAttr(component, 'input-test');
+			props = setComponentProps('input', 'text', '', true);
+			component = setComponent(props, onChange);
+			input = findByTestAttr(component, 'input-test');
 
 			input.simulate('change', {
 				target: { value: 'abc' },
@@ -79,9 +80,9 @@ describe('<Input/>', () => {
 		});
 
 		it('should call the onKeyPress event callback function on user press enter', () => {
-			let props = setComponentProps('input', 'text', 'abc', true);
-			let component = setComponent(props, null, onEnterPress);
-			let input = findByTestAttr(component, 'input-test');
+			props = setComponentProps('input', 'text', 'abc', true);
+			component = setComponent(props, null, onEnterPress);
+			input = findByTestAttr(component, 'input-test');
 
 			input.simulate('keypress', { key: 'Enter' });
 
@@ -90,6 +91,21 @@ describe('<Input/>', () => {
 	});
 
 	describe('Type: input="textarea" test', () => {
-		it('should render without errors', () => {});
+		let props = setComponentProps('textarea', '', 'abc', true);
+		let component = setComponent(props);
+		let textarea = findByTestAttr(component, 'textarea-test');
+		it('should render without errors', () => {
+			expect(component).toMatchSnapshot();
+			expect(textarea.length).toBe(1);
+			expect(textarea.length).not.toBe(2);
+		});
+
+		it('should call the onKeyPress event callback function on user press enter', () => {
+			component = setComponent(props, null, onEnterPress);
+
+			textarea.simulate('keypress', { key: 'Enter' });
+
+			expect(onEnterPress).toHaveBeenCalled();
+		});
 	});
 });

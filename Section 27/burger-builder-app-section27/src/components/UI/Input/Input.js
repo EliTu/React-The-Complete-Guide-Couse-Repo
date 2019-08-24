@@ -67,6 +67,7 @@ const Input = ({
 					onKeyPress={event =>
 						enterPressCallback(event, handleEnterPress)
 					}
+					data-test="textarea-test"
 				/>
 			);
 			break;

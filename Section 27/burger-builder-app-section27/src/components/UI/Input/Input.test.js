@@ -31,7 +31,7 @@ const setComponentProps = (elemType, configType, value, isValid) => {
 
 const setComponent = (props = {}, changeFn = () => {}, enterFn = () => {}) => {
 	const component = shallow(
-		<Input {...props} handleChange={changeFn} handleEnter={enterFn} />
+		<Input {...props} handleChange={changeFn} handleEnterPress={enterFn} />
 	);
 	return component;
 };
@@ -66,15 +66,26 @@ describe('<Input/>', () => {
 			expect(input.length).toBe(0);
 		});
 
-		it('should call the callback function on user input', () => {
+		it('should call the onChange event callback function on user input', () => {
 			let props = setComponentProps('input', 'text', '', true);
 			let component = setComponent(props, onChange);
+			let input = findByTestAttr(component, 'input-test');
 
-			component.find('input').simulate('change', {
+			input.simulate('change', {
 				target: { value: 'abc' },
 			});
 
 			expect(onChange).toHaveBeenCalled();
+		});
+
+		it('should call the onKeyPress event callback function on user press enter', () => {
+			let props = setComponentProps('input', 'text', 'abc', true);
+			let component = setComponent(props, null, onEnterPress);
+			let input = findByTestAttr(component, 'input-test');
+
+			input.simulate('keypress', { key: 'Enter' });
+
+			expect(onEnterPress).toHaveBeenCalled();
 		});
 	});
 

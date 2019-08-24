@@ -6,31 +6,35 @@ const AuthErrorMessage = ({ errorMessage }) => {
 	// CSS Modules Styles
 	const { AuthErrorMessage } = styles;
 
-	const customErrorMessage = () => {
-		switch (errorMessage) {
-			case 'EMAIL_EXISTS':
-				return `The email you've provided is already taken. Please provide a different email address`;
+	let message;
+	switch (errorMessage) {
+		case 'EMAIL_EXISTS':
+			message = `The email you've provided is already taken. Please provide a different email address`;
+			break;
 
-			case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-				return 'Too many attempts. Please try again later';
+		case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+			message = 'Too many attempts. Please try again later';
+			break;
 
-			case 'EMAIL_NOT_FOUND':
-				return `The email you've provided does not exist. Please try signing in with a different email or register a new user with the unused email`;
+		case 'EMAIL_NOT_FOUND':
+			message = `The email you've provided does not exist. Please try signing in with a different email or register a new user with the unused email`;
+			break;
 
-			case 'INVALID_PASSWORD':
-				return 'Wrong password. Please try again';
+		case 'INVALID_PASSWORD':
+			message = 'Wrong password. Please try again';
+			break;
 
-			case 'USER_DISABLED':
-				return `The account you're trying to sign in to has been disabled`;
+		case 'USER_DISABLED':
+			message = `The account you're trying to sign in to has been disabled`;
+			break;
 
-			default:
-				return 'Oops! an Unexpected error has occurred!';
-		}
-	};
+		default:
+			message = 'Oops! an Unexpected error has occurred!';
+	}
 
 	return (
 		<>
-			<p className={AuthErrorMessage}>{customErrorMessage()}</p>
+			<p className={AuthErrorMessage}>{message}</p>
 		</>
 	);
 };

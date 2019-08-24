@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import styles from './GoBackMessage.module.css';
 import { withRouter } from 'react-router';
 
-const GoBackMessage = ({ content, history }) => {
+export const GoBackMessage = ({ content, history }) => {
 	// CSS Modules styles:
 	const { GoBackMessage } = styles;
 

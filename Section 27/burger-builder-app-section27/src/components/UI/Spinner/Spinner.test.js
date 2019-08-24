@@ -11,7 +11,7 @@ describe('<Spinner/>', () => {
 	it('should render without errors', () => {
 		expect(component).toMatchSnapshot();
 		expect(component).toBeTruthy();
-		expect(component.length).toBe(1);s
+		expect(component.length).toBe(1);
 		expect(component.length).not.toBe(2);
 	});
 

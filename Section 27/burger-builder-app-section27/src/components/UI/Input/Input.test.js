@@ -3,6 +3,9 @@ import Input from './Input';
 import { shallow } from 'enzyme';
 import { findByTestAttr } from '../../../utilities/test-utilities/findByTestAttr';
 
+const onChange = jest.fn();
+const onEnterPress = jest.fn();
+
 const setComponentProps = (elemType, configType, value, isValid) => {
 	const props = {
 		elementType: `${elemType}`,
@@ -19,15 +22,17 @@ const setComponentProps = (elemType, configType, value, isValid) => {
 			errorMessage: 'abc',
 		},
 		focused: true,
-		handleChange: () => [],
-		handleEnterPress: () => [],
+		handleChange: () => {},
+		handleEnterPress: () => {},
 		data: 'abc',
 	};
 	return props;
 };
 
-const setComponent = (props = {}) => {
-	const component = shallow(<Input {...props} />);
+const setComponent = (props = {}, changeFn = () => {}, enterFn = () => {}) => {
+	const component = shallow(
+		<Input {...props} handleChange={changeFn} handleEnter={enterFn} />
+	);
 	return component;
 };
 
@@ -60,5 +65,20 @@ describe('<Input/>', () => {
 			expect(component).toMatchSnapshot();
 			expect(input.length).toBe(0);
 		});
+
+		it('should call the callback function on user input', () => {
+			let props = setComponentProps('input', 'text', '', true);
+			let component = setComponent(props, onChange);
+
+			component.find('input').simulate('change', {
+				target: { value: 'abc' },
+			});
+
+			expect(onChange).toHaveBeenCalled();
+		});
+	});
+
+	describe('Type: input="textarea" test', () => {
+		it('should render without errors', () => {});
 	});
 });

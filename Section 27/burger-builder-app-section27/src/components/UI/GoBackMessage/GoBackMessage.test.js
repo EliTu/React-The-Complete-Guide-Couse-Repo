@@ -7,7 +7,7 @@ describe('<GoBackMessage>', () => {
 	let component = shallow(<GoBackMessage content="abc" history />);
 	let buttonComp = component.find(Button);
 
-	it('should render without errors', () => {
+	it('should render the component without errors', () => {
 		expect(component).toMatchSnapshot();
 		expect(component.length).toBe(1);
 		expect(component.length).not.toBe(2);

@@ -67,7 +67,7 @@ describe('<Input/>', () => {
 		let component = setComponent(props);
 		let input = findByTestAttr(component, 'input-test');
 
-		it('should render without errors', () => {
+		it('should render the component without errors', () => {
 			expect(component).toMatchSnapshot();
 			expect(input.length).toBe(1);
 		});
@@ -140,4 +140,3 @@ describe('<Input/>', () => {
 		});
 	});
 });
-	

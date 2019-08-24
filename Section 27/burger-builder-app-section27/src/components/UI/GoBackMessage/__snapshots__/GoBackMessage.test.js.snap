@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GoBackMessage> should render without errors 1`] = `
+exports[`<GoBackMessage> should render the component without errors 1`] = `
 <div
   className="GoBackMessage"
 >

@@ -6,28 +6,29 @@ const FormErrorMessage = ({ errorType }) => {
 	// CSS Modules styles:
 	const { FormErrorMessage } = styles;
 
-	const displayErrorMessage = () => {
-		switch (errorType) {
-			case 'noMatch':
-				return (
-					<p>
-						The passwords you entered did not match! please try
-						again.
-					</p>
-				);
-			case 'emptyFields':
-				return (
-					<p>
-						Please properly fill out all the required fields before
-						submitting.
-					</p>
-				);
-			default:
-				return '';
-		}
-	};
+	let errorMessage;
+	switch (errorType) {
+		case 'noMatch':
+			errorMessage = (
+				<p>
+					The passwords you entered did not match! please try again.
+				</p>
+			);
+			break;
+		case 'emptyFields':
+			errorMessage = (
+				<p>
+					Please properly fill out all the required fields before
+					submitting.
+				</p>
+			);
+			break;
+		default:
+			errorMessage = '';
+			break;
+	}
 
-	return <div className={FormErrorMessage}>{displayErrorMessage()}</div>;
+	return <div className={FormErrorMessage}>{errorMessage}</div>;
 };
 
 FormErrorMessage.propTypes = {

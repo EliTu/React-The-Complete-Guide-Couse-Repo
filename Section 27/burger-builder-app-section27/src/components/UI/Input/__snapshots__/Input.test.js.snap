@@ -94,7 +94,7 @@ exports[`<Input/> Type: input="text" test should not render if elementType is no
 </div>
 `;
 
-exports[`<Input/> Type: input="text" test should render without errors 1`] = `
+exports[`<Input/> Type: input="text" test should render the component without errors 1`] = `
 <div
   className="Input"
 >

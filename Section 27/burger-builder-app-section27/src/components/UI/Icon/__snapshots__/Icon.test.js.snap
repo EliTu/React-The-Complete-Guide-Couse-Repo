@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Icon> should render without errors 1`] = `
+exports[`<Icon> should render the component without errors 1`] = `
 <span
   className="Icon"
 >

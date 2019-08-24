@@ -2,10 +2,7 @@ import React from 'react';
 import styles from './Button.module.css';
 import PropTypes from 'prop-types';
 
-const Button = props => {
-	// props:
-	const { children, handleClick, type, toolBarButton } = props;
-
+const Button = ({ children, handleClick, type, toolBarButton }) => {
 	// CSS Modules styles:
 	const { Button } = styles;
 

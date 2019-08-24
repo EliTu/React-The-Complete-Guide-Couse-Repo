@@ -74,7 +74,11 @@ const Input = ({
 
 		case 'select':
 			inputElement = (
-				<select value={value} onChange={handleChange}>
+				<select
+					value={value}
+					onChange={handleChange}
+					data-test="select-test"
+				>
 					{elementConfig.options.map(option => (
 						<option
 							value={option.value}

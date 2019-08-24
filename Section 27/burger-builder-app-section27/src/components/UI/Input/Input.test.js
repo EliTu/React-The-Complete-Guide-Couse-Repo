@@ -6,13 +6,27 @@ import { findByTestAttr } from '../../../utilities/test-utilities/findByTestAttr
 const onChange = jest.fn();
 const onEnterPress = jest.fn();
 
-const setComponentProps = (elemType, configType, value, isValid) => {
+const setComponentProps = (
+	elemType,
+	configType = 'text',
+	value = 'abc',
+	isValid = true,
+	options = []
+) => {
 	const props = {
 		elementType: `${elemType}`,
 		elementConfig: {
 			type: `${configType}`,
 			placeholder: 'abc',
 			label: 'abc',
+			options: [
+				{
+					value: 'fastest',
+					displayValue: 'Fastest',
+					key: '1',
+				},
+				{ value: 'cheapest', displayValue: 'Cheapest', key: '2' },
+			],
 		},
 		value: `${value}`,
 		validation: {
@@ -49,7 +63,7 @@ describe('<Input/>', () => {
 	});
 
 	describe('Type: input="text" test', () => {
-		let props = setComponentProps('input', 'text', 'abc', true);
+		let props = setComponentProps('input');
 		let component = setComponent(props);
 		let input = findByTestAttr(component, 'input-test');
 
@@ -59,7 +73,7 @@ describe('<Input/>', () => {
 		});
 
 		it('should not render if elementType is not input ', () => {
-			props = setComponentProps('password', 'text', 'abc', true);
+			props = setComponentProps('password');
 			component = setComponent(props);
 			input = findByTestAttr(component, 'input-test');
 
@@ -68,7 +82,7 @@ describe('<Input/>', () => {
 		});
 
 		it('should call the onChange event callback function on user input', () => {
-			props = setComponentProps('input', 'text', '', true);
+			props = setComponentProps('input', null, '');
 			component = setComponent(props, onChange);
 			input = findByTestAttr(component, 'input-test');
 
@@ -80,7 +94,7 @@ describe('<Input/>', () => {
 		});
 
 		it('should call the onKeyPress event callback function on user press enter', () => {
-			props = setComponentProps('input', 'text', 'abc', true);
+			props = setComponentProps('input');
 			component = setComponent(props, null, onEnterPress);
 			input = findByTestAttr(component, 'input-test');
 
@@ -91,7 +105,7 @@ describe('<Input/>', () => {
 	});
 
 	describe('Type: input="textarea" test', () => {
-		let props = setComponentProps('textarea', '', 'abc', true);
+		let props = setComponentProps('textarea', '');
 		let component = setComponent(props);
 		let textarea = findByTestAttr(component, 'textarea-test');
 		it('should render without errors', () => {
@@ -106,6 +120,23 @@ describe('<Input/>', () => {
 			textarea.simulate('keypress', { key: 'Enter' });
 
 			expect(onEnterPress).toHaveBeenCalled();
+		});
+	});
+
+	describe('Type: input="select" test', () => {
+		let props = setComponentProps('select');
+		let component = setComponent(props);
+		let select = findByTestAttr(component, 'select-test');
+
+		it('should render without errors', () => {
+			expect(component).toMatchSnapshot();
+			expect(select.length).toBe(1);
+			expect(select.find('option').length).toBe(2);
+		});
+
+		it('should call the onChange event callback function on user change option', () => {
+			select.simulate('change', { target: { value: 'efg' } });
+			expect(onChange).toHaveBeenCalled();
 		});
 	});
 });

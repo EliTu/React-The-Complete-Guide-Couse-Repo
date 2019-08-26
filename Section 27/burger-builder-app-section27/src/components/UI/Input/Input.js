@@ -36,9 +36,9 @@ const Input = ({
 	let validationStyles = [];
 	validationStyles =
 		!validation.valid && validation.hasUserInput
-			? [...validationStyles, InvalidStyle]
+			? InvalidStyle
 			: validation.valid && validation.hasUserInput && value !== ''
-			? [...validationStyles, ValidStyle]
+			? ValidStyle
 			: [];
 
 	switch (elementType) {
@@ -46,7 +46,7 @@ const Input = ({
 			inputElement = (
 				<input
 					ref={focusRef}
-					className={validationStyles.join(' ')}
+					className={validationStyles}
 					{...elementConfig}
 					value={value}
 					onChange={handleChange}

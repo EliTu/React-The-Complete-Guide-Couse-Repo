@@ -10,7 +10,8 @@ const setComponentProps = (
 	elemType,
 	configType = 'text',
 	value = 'abc',
-	isValid = true,
+	isValid = false,
+	hasInput = true,
 	options = []
 ) => {
 	const props = {
@@ -31,7 +32,7 @@ const setComponentProps = (
 		value: `${value}`,
 		validation: {
 			required: true,
-			hasUserInput: false,
+			hasUserInput: `${hasInput}`,
 			valid: `${isValid}`,
 			errorMessage: 'abc',
 		},
@@ -43,7 +44,7 @@ const setComponentProps = (
 	return props;
 };
 
-const setComponent = (props = {}, changeFn = () => {}, enterFn = () => {}) => {
+const setComponent = (props, changeFn = () => {}, enterFn = () => {}) => {
 	const component = shallow(
 		<Input {...props} handleChange={changeFn} handleEnterPress={enterFn} />
 	);
@@ -57,6 +58,7 @@ describe('<Input/>', () => {
 			let component = setComponent(props);
 			expect(component).toMatchSnapshot();
 			expect(component).toBeTruthy();
+			expect(component.hasClass('Input')).toBe(true);
 			expect(component.length).toBe(1);
 			expect(component.length).not.toBe(2);
 		});

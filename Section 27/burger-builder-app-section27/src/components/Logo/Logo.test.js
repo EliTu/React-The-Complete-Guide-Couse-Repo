@@ -1,6 +1,5 @@
 import React from 'react';
 import Logo from './Logo';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { shallow } from 'enzyme';
 
 describe('<Logo>', () => {

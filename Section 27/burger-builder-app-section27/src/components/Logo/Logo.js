@@ -3,7 +3,7 @@ import styles from './Logo.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHamburger } from '@fortawesome/free-solid-svg-icons';
 
-const Logo = ({ size }) => {
+const Logo = ({ size = '1x' }) => {
 	// CSS Modules styles:
 	const { Logo } = styles;
 

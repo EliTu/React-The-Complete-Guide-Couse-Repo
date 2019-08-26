@@ -9,6 +9,7 @@ describe('areIngredientsSelected', () => {
 	let testFn = areIngredientsSelected(ingredients);
 	it('should return true if some ingredients have a quantity greater than 0', () => {
 		expect(testFn).toBe(true);
+		expect(testFn).not.toBeFalsy();
 	});
 
 	it('should return false if no ingredient have a quantity greater than 0', () => {
@@ -20,5 +21,6 @@ describe('areIngredientsSelected', () => {
 		testFn = areIngredientsSelected(ingredients);
 
 		expect(testFn).toBe(false);
+		expect(testFn).not.toBeTruthy();
 	});
 });

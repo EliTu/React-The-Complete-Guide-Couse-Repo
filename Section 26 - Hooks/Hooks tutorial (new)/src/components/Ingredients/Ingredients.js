@@ -34,6 +34,7 @@ function Ingredients() {
 			body: JSON.stringify(ingredient),
 			headers: { 'Content-Type': 'application/json' },
 		}).then(data => data.json());
+
 		if (firebaseId)
 			setIngredients(prevIngredients => [
 				...prevIngredients,
@@ -46,12 +47,15 @@ function Ingredients() {
 			prevIngredients.filter(el => id !== el.id)
 		);
 
+	const handleListFilter = filteredIngredients =>
+		setIngredients(filteredIngredients);
+
 	return (
 		<div className="App">
 			<IngredientForm onIngredientsChange={handleAddIngredient} />
 
 			<section>
-				<Search />
+				<Search onSearch={handleListFilter} />
 				<IngredientList
 					ingredients={ingredients}
 					id={ingredients.id}

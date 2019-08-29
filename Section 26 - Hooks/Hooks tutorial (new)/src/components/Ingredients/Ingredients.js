@@ -13,7 +13,9 @@ function Ingredients() {
 		]);
 
 	const handleRemoveIngredient = id =>
-		setIngredients(ingredients.filter(el => id !== el.id));
+		setIngredients(prevIngredients =>
+			prevIngredients.filter(el => id !== el.id)
+		);
 
 	return (
 		<div className="App">

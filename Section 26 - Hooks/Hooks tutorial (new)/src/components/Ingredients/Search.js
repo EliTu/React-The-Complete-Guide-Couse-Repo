@@ -10,7 +10,6 @@ const Search = React.memo(({ onSearch }) => {
 		const fetchIngredients = async () => {
 			const query =
 				input.length === 0 ? '' : `?orderBy="title"&equalTo="${input}"`;
-
 			const response = await fetch(
 				`${url}/ingredients.json` + query
 			).then(data => data.json());
@@ -24,7 +23,7 @@ const Search = React.memo(({ onSearch }) => {
 						amount: ingredientData.amount,
 					});
 				}
-				// onSearch(fetchedArr);
+				onSearch(fetchedArr);
 			}
 		};
 		fetchIngredients();

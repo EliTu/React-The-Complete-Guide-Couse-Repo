@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import IngredientList from './IngredientList';
 import IngredientForm from './IngredientForm';
 import Search from './Search';
@@ -6,27 +6,6 @@ import Search from './Search';
 function Ingredients() {
 	const [ingredients, setIngredients] = useState([]);
 	const url = 'https://react-hooks-intro-940a4.firebaseio.com';
-
-	useEffect(() => {
-		const fetchIngredients = async () => {
-			const response = await fetch(`${url}/ingredients.json`).then(data =>
-				data.json()
-			);
-
-			if (response) {
-				let fetchedArr = [];
-				for (let [id, ingredientData] of Object.entries(response)) {
-					fetchedArr.push({
-						id: id,
-						title: ingredientData.title,
-						amount: ingredientData.amount,
-					});
-				}
-				setIngredients(fetchedArr);
-			}
-		};
-		fetchIngredients();
-	}, []);
 
 	const handleAddIngredient = async ingredient => {
 		const { name: firebaseId } = await fetch(`${url}/ingredients.json`, {
@@ -47,8 +26,10 @@ function Ingredients() {
 			prevIngredients.filter(el => id !== el.id)
 		);
 
-	const handleListFilter = filteredIngredients =>
-		setIngredients(filteredIngredients);
+	const handleListFilter = useCallback(
+		filteredIngredients => setIngredients(filteredIngredients),
+		[]
+	);
 
 	return (
 		<div className="App">

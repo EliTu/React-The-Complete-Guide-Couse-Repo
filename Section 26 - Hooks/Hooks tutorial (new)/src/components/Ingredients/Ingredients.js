@@ -5,12 +5,24 @@ import Search from './Search';
 
 function Ingredients() {
 	const [ingredients, setIngredients] = useState([]);
+	// const url = 'https://react-hooks-intro-940a4.firebaseio.com';
 
-	const handleAddIngredient = ingredient =>
-		setIngredients(prevIngredients => [
-			...prevIngredients,
-			{ id: (Math.random() * 50).toString(), ...ingredient },
-		]);
+	const handleAddIngredient = async ingredient => {
+		const { name: firebaseId } = await fetch(
+			`https://react-hooks-intro-940a4.firebaseio.com/ingredients.json`,
+			{
+				method: 'POST',
+				body: JSON.stringify({ ingredient }),
+				headers: { 'Content-Type': 'application/json' },
+			}
+		).then(data => data.json());
+
+		if (firebaseId)
+			setIngredients(prevIngredients => [
+				...prevIngredients,
+				{ id: firebaseId, ...ingredient },
+			]);
+	};
 
 	const handleRemoveIngredient = id =>
 		setIngredients(prevIngredients =>

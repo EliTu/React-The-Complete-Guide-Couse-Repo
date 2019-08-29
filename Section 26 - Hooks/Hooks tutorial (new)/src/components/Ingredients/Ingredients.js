@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import IngredientList from './IngredientList';
 import IngredientForm from './IngredientForm';
 import Search from './Search';
@@ -6,6 +6,25 @@ import Search from './Search';
 function Ingredients() {
 	const [ingredients, setIngredients] = useState([]);
 	const url = 'https://react-hooks-intro-940a4.firebaseio.com';
+
+	useEffect(() => {
+		const fetchIngredients = async () => {
+			const response = await fetch(`${url}/ingredients.json`).then(data =>
+				data.json()
+			);
+
+			let fetchedArr = [];
+			for (let key in response) {
+				fetchedArr.push({
+					id: key,
+					title: response[key].ingredient.title,
+					amount: response[key].ingredient.amount,
+				});
+			}
+			setIngredients(fetchedArr);
+		};
+		fetchIngredients();
+	}, []);
 
 	const handleAddIngredient = async ingredient => {
 		const { name: firebaseId } = await fetch(`${url}/ingredients.json`, {

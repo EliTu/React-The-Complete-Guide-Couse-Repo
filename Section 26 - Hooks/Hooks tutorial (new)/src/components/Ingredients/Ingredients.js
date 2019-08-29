@@ -13,15 +13,17 @@ function Ingredients() {
 				data.json()
 			);
 
-			let fetchedArr = [];
-			for (let key in response) {
-				fetchedArr.push({
-					id: key,
-					title: response[key].ingredient.title,
-					amount: response[key].ingredient.amount,
-				});
+			if (response) {
+				let fetchedArr = [];
+				for (let [id, ingredientData] of Object.entries(response)) {
+					fetchedArr.push({
+						id: id,
+						title: ingredientData.title,
+						amount: ingredientData.amount,
+					});
+				}
+				setIngredients(fetchedArr);
 			}
-			setIngredients(fetchedArr);
 		};
 		fetchIngredients();
 	}, []);
@@ -29,10 +31,9 @@ function Ingredients() {
 	const handleAddIngredient = async ingredient => {
 		const { name: firebaseId } = await fetch(`${url}/ingredients.json`, {
 			method: 'POST',
-			body: JSON.stringify({ ingredient }),
+			body: JSON.stringify(ingredient),
 			headers: { 'Content-Type': 'application/json' },
 		}).then(data => data.json());
-
 		if (firebaseId)
 			setIngredients(prevIngredients => [
 				...prevIngredients,

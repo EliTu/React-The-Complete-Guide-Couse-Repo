@@ -1,33 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Card from '../UI/Card';
 import './Search.css';
 
 const Search = React.memo(({ onSearch }) => {
 	const [input, setInput] = useState('');
+	const inputRef = useRef();
 	const url = 'https://react-hooks-intro-940a4.firebaseio.com';
 
 	useEffect(() => {
-		const fetchIngredients = async () => {
-			const query =
-				input.length === 0 ? '' : `?orderBy="title"&equalTo="${input}"`;
-			const response = await fetch(
-				`${url}/ingredients.json` + query
-			).then(data => data.json());
+		setTimeout(() => {
+			if (input === inputRef.current.value) {
+				const fetchIngredients = async () => {
+					const query =
+						input.length === 0
+							? ''
+							: `?orderBy="title"&equalTo="${input}"`;
+					const response = await fetch(
+						`${url}/ingredients.json` + query
+					).then(data => data.json());
 
-			if (response) {
-				let fetchedArr = [];
-				for (let [id, ingredientData] of Object.entries(response)) {
-					fetchedArr.push({
-						id: id,
-						title: ingredientData.title,
-						amount: ingredientData.amount,
-					});
-				}
-				onSearch(fetchedArr);
+					if (response) {
+						let fetchedArr = [];
+						for (let [id, ingredientData] of Object.entries(
+							response
+						)) {
+							fetchedArr.push({
+								id: id,
+								title: ingredientData.title,
+								amount: ingredientData.amount,
+							});
+						}
+						onSearch(fetchedArr);
+					}
+				};
+				fetchIngredients();
 			}
-		};
-		fetchIngredients();
-	}, [input, onSearch]);
+		}, 500);
+	}, [input, onSearch, inputRef]);
 
 	return (
 		<section className="search">
@@ -38,6 +47,7 @@ const Search = React.memo(({ onSearch }) => {
 						type="text"
 						onChange={event => setInput(event.target.value)}
 						value={input}
+						ref={inputRef}
 					/>
 				</div>
 			</Card>

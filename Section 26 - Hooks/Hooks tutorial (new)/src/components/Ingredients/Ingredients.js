@@ -21,10 +21,15 @@ function Ingredients() {
 			]);
 	};
 
-	const handleRemoveIngredient = id =>
-		setIngredients(prevIngredients =>
-			prevIngredients.filter(el => id !== el.id)
+	const handleRemoveIngredient = async id => {
+		await fetch(`${url}/ingredients/${id}.json`, {
+			method: 'DELETE',
+		}).then(data =>
+			setIngredients(prevIngredients =>
+				prevIngredients.filter(el => id !== el.id)
+			)
 		);
+	};
 
 	const handleListFilter = useCallback(
 		filteredIngredients => setIngredients(filteredIngredients),

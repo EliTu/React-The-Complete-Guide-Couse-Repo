@@ -8,7 +8,7 @@ const Search = React.memo(({ onSearch }) => {
 	const url = 'https://react-hooks-intro-940a4.firebaseio.com';
 
 	useEffect(() => {
-		setTimeout(() => {
+		const keyStrokeTImer = setTimeout(() => {
 			if (input === inputRef.current.value) {
 				const fetchIngredients = async () => {
 					const query =
@@ -36,6 +36,8 @@ const Search = React.memo(({ onSearch }) => {
 				fetchIngredients();
 			}
 		}, 500);
+
+		return () => clearTimeout(keyStrokeTImer);
 	}, [input, onSearch, inputRef]);
 
 	return (

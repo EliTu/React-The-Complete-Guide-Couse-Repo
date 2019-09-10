@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import IngredientList from './IngredientList';
 import IngredientForm from './IngredientForm';
+import LoadingIndicator from '../UI/LoadingIndicator';
 import Search from './Search';
 
 function Ingredients() {
@@ -10,14 +11,13 @@ function Ingredients() {
 
 	const handleAddIngredient = async ingredient => {
 		setIsLoading(() => true);
-
 		const { name: firebaseId } = await fetch(`${url}/ingredients.json`, {
 			method: 'POST',
 			body: JSON.stringify(ingredient),
 			headers: { 'Content-Type': 'application/json' },
 		}).then(data => {
 			setIsLoading(() => false);
-			data.json();
+			return data.json();
 		});
 
 		if (firebaseId) {
@@ -32,11 +32,12 @@ function Ingredients() {
 		setIsLoading(() => true);
 		await fetch(`${url}/ingredients/${id}.json`, {
 			method: 'DELETE',
-		}).then(data =>
+		}).then(data => {
+			setIsLoading(() => false);
 			setIngredients(prevIngredients =>
 				prevIngredients.filter(el => id !== el.id)
-			)
-		);
+			);
+		});
 	};
 
 	const handleListFilter = useCallback(
@@ -46,16 +47,25 @@ function Ingredients() {
 
 	return (
 		<div className="App">
-			<IngredientForm onIngredientsChange={handleAddIngredient} />
-
-			<section>
-				<Search onSearch={handleListFilter} />
-				<IngredientList
-					ingredients={ingredients}
-					id={ingredients.id}
-					onRemoveItem={handleRemoveIngredient}
-				/>
-			</section>
+			{isLoading ? (
+				<LoadingIndicator />
+			) : (
+				<>
+					<IngredientForm onIngredientsChange={handleAddIngredient} />
+					<section>
+						<Search onSearch={handleListFilter} />
+						{ingredients.length === 0 ? (
+							<LoadingIndicator />
+						) : (
+							<IngredientList
+								ingredients={ingredients}
+								id={ingredients.id}
+								onRemoveItem={handleRemoveIngredient}
+							/>
+						)}
+					</section>
+				</>
+			)}
 		</div>
 	);
 }

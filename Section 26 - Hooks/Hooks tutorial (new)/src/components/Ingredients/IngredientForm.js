@@ -10,6 +10,8 @@ const IngredientForm = React.memo(({ onIngredientsChange, loading }) => {
 	const submitHandler = event => {
 		event.preventDefault();
 		onIngredientsChange({ title: title, amount: number });
+		setTitle('');
+		setNumber('');
 	};
 
 	return (

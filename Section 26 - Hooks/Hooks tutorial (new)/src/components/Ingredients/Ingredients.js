@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useReducer } from 'react';
 import IngredientList from './IngredientList';
 import IngredientForm from './IngredientForm';
 import LoadingIndicator from '../UI/LoadingIndicator';
@@ -6,7 +6,21 @@ import ErrorModal from '../UI/ErrorModal';
 import Search from './Search';
 
 function Ingredients() {
-	const [ingredients, setIngredients] = useState([]);
+	const ingredientsReducer = (currentIngredients, action) => {
+		switch (action.type) {
+			case 'SET':
+				return action.ingredients;
+			case 'ADD':
+				return [...currentIngredients, action.newIngredient];
+			case 'DELETE':
+				return currentIngredients.filter(el => el.id !== action.id);
+			default:
+				throw new Error('Should not be called!');
+		}
+	};
+	const [ingredients, dispatch] = useReducer(ingredientsReducer, []);
+
+	// const [ingredients, setIngredients] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
@@ -29,10 +43,15 @@ function Ingredients() {
 			});
 
 			if (firebaseId) {
-				setIngredients(prevIngredients => [
-					...prevIngredients,
-					{ id: firebaseId, ...ingredient },
-				]);
+				// setIngredients(prevIngredients => [
+				// 	...prevIngredients,
+				// 	{ id: firebaseId, ...ingredient },
+				// ]);
+
+				dispatch({
+					type: 'ADD',
+					newIngredient: { id: firebaseId, ...ingredient },
+				});
 			}
 		} catch (error) {
 			setIsLoading(false);
@@ -49,9 +68,10 @@ function Ingredients() {
 				method: 'DELETE',
 			}).then(data => {
 				setIsLoading(() => false);
-				setIngredients(prevIngredients =>
-					prevIngredients.filter(el => id !== el.id)
-				);
+				// setIngredients(prevIngredients =>
+				// 	prevIngredients.filter(el => id !== el.id)
+				// );
+				dispatch({ type: 'DELETE', id: id });
 			});
 		} catch (error) {
 			setIsLoading(false);
@@ -61,7 +81,10 @@ function Ingredients() {
 	};
 
 	const handleListFilter = useCallback(
-		filteredIngredients => setIngredients(filteredIngredients),
+		// filteredIngredients => setIngredients(filteredIngredients),
+		// []
+		filteredIngredients =>
+			dispatch({ type: 'SET', ingredients: filteredIngredients }),
 		[]
 	);
 

@@ -4,8 +4,8 @@ import Card from './UI/Card';
 import './Auth.css';
 
 const Auth = props => {
-  const context = useContext(AuthContext);
-  
+	const context = useContext(AuthContext);
+
 	const loginHandler = () => context.login();
 
 	return (

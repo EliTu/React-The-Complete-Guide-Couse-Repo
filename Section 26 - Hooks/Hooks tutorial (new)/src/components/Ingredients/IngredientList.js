@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import './IngredientList.css';
 
-const IngredientList = ({ ingredients, onRemoveItem }) => {
+const IngredientList = memo(({ ingredients, onRemoveItem }) => {
 	return (
 		<section className="ingredient-list">
 			<h2>Loaded Ingredients</h2>
@@ -16,6 +16,6 @@ const IngredientList = ({ ingredients, onRemoveItem }) => {
 			</ul>
 		</section>
 	);
-};
+});
 
 export default IngredientList;

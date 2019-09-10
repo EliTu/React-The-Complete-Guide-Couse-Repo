@@ -27,7 +27,7 @@ function Ingredients() {
 
 	const url = 'https://react-hooks-intro-940a4.firebaseio.com';
 
-	const handleAddIngredient = async ingredient => {
+	const handleAddIngredient = useCallback(async ingredient => {
 		setIsLoading(true);
 		try {
 			const { name: firebaseId } = await fetch(
@@ -58,9 +58,9 @@ function Ingredients() {
 			error && setIsError(true);
 			setErrorMessage('Server error!');
 		}
-	};
+	}, []);
 
-	const handleRemoveIngredient = async id => {
+	const handleRemoveIngredient = useCallback(async id => {
 		setIsLoading(true);
 
 		try {
@@ -78,7 +78,7 @@ function Ingredients() {
 			error && setIsError(true);
 			setErrorMessage('Server error!');
 		}
-	};
+	}, []);
 
 	const handleListFilter = useCallback(
 		// filteredIngredients => setIngredients(filteredIngredients),

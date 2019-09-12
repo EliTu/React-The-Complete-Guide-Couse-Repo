@@ -5,30 +5,26 @@ const useHttp = () => {
 	const [isError, setIsError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 
-	const handleHttpRequest = useCallback(
-		async (url, httpVerb, httpBody, ing, dispatchFn) => {
-			setIsLoading(true);
-			try {
-				const { name: firebaseId } = await fetch(url, {
-					method: `${httpVerb}`,
-					body: httpBody,
-					headers: { 'Content-Type': 'application/json' },
-				}).then(response => {
-					setIsLoading(false);
-					console.log(response);
-					return response.json();
-				});
-
-				return firebaseId;
-			} catch (error) {
-				console.log(error);
+	const handleHttpRequest = useCallback(async (url, httpVerb, httpBody) => {
+		setIsLoading(true);
+		try {
+			const dbData = await fetch(url, {
+				method: `${httpVerb}`,
+				body: httpBody,
+				headers: { 'Content-Type': 'application/json' },
+			}).then(response => {
 				setIsLoading(false);
-				error && setIsError(true);
-				setErrorMessage('Server error!');
-			}
-		},
-		[]
-	);
+				if (httpVerb === 'DELETE') return;
+				return response.json();
+			});
+
+			return dbData;
+		} catch (error) {
+			setIsLoading(false);
+			error && setIsError(true);
+			setErrorMessage(error);
+		}
+	}, []);
 
 	const handleErrorClear = () => {
 		setIsError(false);

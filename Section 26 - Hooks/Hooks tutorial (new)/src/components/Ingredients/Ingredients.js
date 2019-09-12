@@ -36,8 +36,7 @@ function Ingredients() {
 			handleHttpRequest(
 				`${url}/ingredients.json`,
 				'POST',
-				JSON.stringify(ingredient),
-				ingredient
+				JSON.stringify(ingredient)
 			).then(id =>
 				dispatch({
 					type: 'ADD',
@@ -49,8 +48,10 @@ function Ingredients() {
 	);
 
 	const handleRemoveIngredient = useCallback(
-		id =>
-			handleHttpRequest(`${url}/ingredients/${id}.json`, 'DELETE', ''),
+		id => {
+			handleHttpRequest(`${url}/ingredients/${id}.json`, 'DELETE');
+			dispatch({ type: 'DELETE', id: id });
+		},
 		[handleHttpRequest]
 	);
 

@@ -37,10 +37,10 @@ function Ingredients() {
 				`${url}/ingredients.json`,
 				'POST',
 				JSON.stringify(ingredient)
-			).then(id =>
+			).then(firebaseId =>
 				dispatch({
 					type: 'ADD',
-					newIngredient: { id: id, ...ingredient },
+					newIngredient: { id: firebaseId.name, ...ingredient },
 				})
 			);
 		},
@@ -49,6 +49,7 @@ function Ingredients() {
 
 	const handleRemoveIngredient = useCallback(
 		id => {
+			console.log(id);
 			handleHttpRequest(`${url}/ingredients/${id}.json`, 'DELETE');
 			dispatch({ type: 'DELETE', id: id });
 		},

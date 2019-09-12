@@ -1,24 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useHttp from '../../hooks/useHttp';
 import Card from '../UI/Card';
 import './Search.css';
 
 const Search = React.memo(({ onSearch }) => {
 	const [input, setInput] = useState('');
 	const inputRef = useRef();
+	const [, , , handleHttpRequest] = useHttp();
 	const url = 'https://react-hooks-intro-940a4.firebaseio.com';
 
 	useEffect(() => {
 		const keyStrokeTImer = setTimeout(() => {
 			if (input === inputRef.current.value) {
-				const fetchIngredients = async () => {
-					const query =
-						input.length === 0
-							? ''
-							: `?orderBy="title"&equalTo="${input}"`;
-					const response = await fetch(
-						`${url}/ingredients.json` + query
-					).then(data => data.json());
+				const query =
+					input.length === 0
+						? ''
+						: `?orderBy="title"&equalTo="${input}"`;
 
+				handleHttpRequest(
+					`${url}/ingredients.json` + query,
+					'GET'
+				).then(response => {
 					if (response) {
 						let fetchedArr = [];
 						for (let [id, ingredientData] of Object.entries(
@@ -32,13 +34,12 @@ const Search = React.memo(({ onSearch }) => {
 						}
 						onSearch(fetchedArr);
 					}
-				};
-				fetchIngredients();
+				});
 			}
 		}, 500);
 
 		return () => clearTimeout(keyStrokeTImer);
-	}, [input, onSearch, inputRef]);
+	}, [input, onSearch, inputRef, handleHttpRequest]);
 
 	return (
 		<section className="search">

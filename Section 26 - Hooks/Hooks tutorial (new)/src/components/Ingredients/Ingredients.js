@@ -32,19 +32,25 @@ function Ingredients() {
 	const url = 'https://react-hooks-intro-940a4.firebaseio.com';
 
 	const handleAddIngredient = useCallback(
-		ingredient =>
+		ingredient => {
 			handleHttpRequest(
 				`${url}/ingredients.json`,
 				'POST',
 				JSON.stringify(ingredient),
 				ingredient
-			),
+			).then(id =>
+				dispatch({
+					type: 'ADD',
+					newIngredient: { id: id, ...ingredient },
+				})
+			);
+		},
 		[handleHttpRequest]
 	);
 
 	const handleRemoveIngredient = useCallback(
 		id =>
-			handleHttpRequest(`${url}/ingredients/${id}.json`, 'DELETE', null),
+			handleHttpRequest(`${url}/ingredients/${id}.json`, 'DELETE', ''),
 		[handleHttpRequest]
 	);
 

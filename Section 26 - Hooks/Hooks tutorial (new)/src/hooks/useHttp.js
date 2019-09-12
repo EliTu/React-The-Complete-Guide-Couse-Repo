@@ -19,13 +19,9 @@ const useHttp = () => {
 					return response.json();
 				});
 
-				if (firebaseId) {
-					dispatchFn({
-						type: 'ADD',
-						newIngredient: { id: firebaseId, ...ing },
-					});
-				}
+				return firebaseId;
 			} catch (error) {
+				console.log(error);
 				setIsLoading(false);
 				error && setIsError(true);
 				setErrorMessage('Server error!');

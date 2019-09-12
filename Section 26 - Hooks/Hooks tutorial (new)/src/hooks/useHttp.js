@@ -22,7 +22,7 @@ const useHttp = () => {
 		} catch (error) {
 			setIsLoading(false);
 			error && setIsError(true);
-			setErrorMessage(error);
+			setErrorMessage(error.message);
 		}
 	}, []);
 

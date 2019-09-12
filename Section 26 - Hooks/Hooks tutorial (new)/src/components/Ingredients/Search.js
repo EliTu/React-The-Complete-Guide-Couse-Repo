@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useHttp from '../../hooks/useHttp';
 import Card from '../UI/Card';
+import ErrorModal from '../UI/ErrorModal';
+
 import './Search.css';
 
 const Search = React.memo(({ onSearch }) => {
 	const [input, setInput] = useState('');
 	const inputRef = useRef();
-	const [, , , handleHttpRequest] = useHttp();
+	const [
+		isLoading,
+		isError,
+		errorMessage,
+		handleHttpRequest,
+		handleErrorClear,
+	] = useHttp();
 	const url = 'https://react-hooks-intro-940a4.firebaseio.com';
 
 	useEffect(() => {
@@ -43,9 +51,15 @@ const Search = React.memo(({ onSearch }) => {
 
 	return (
 		<section className="search">
+			{isError && (
+				<ErrorModal onClose={handleErrorClear}>
+					{errorMessage}
+				</ErrorModal>
+			)}
 			<Card>
 				<div className="search-input">
 					<label>Filter by Title</label>
+					{isLoading && <span>Searching...</span>}
 					<input
 						type="text"
 						onChange={event => setInput(event.target.value)}
